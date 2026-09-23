@@ -237,6 +237,19 @@
     .specs-box ul { padding-inline-start: 20px; margin-top: 5px; }
     .specs-box li { margin-bottom: 4px; font-weight: 700; color: var(--text-muted); }
 
+    /* تصميم جديد ومحسن لأزرار المقاسات داخل نافذة التفاصيل */
+    .size-btn-group { display: flex; gap: 8px; margin-top: 5px; }
+    .size-btn {
+      flex: 1; padding: 8px 12px; background: #ffffff; border: 2px solid var(--border);
+      border-radius: 10px; font-weight: 800; font-size: 0.9rem; color: var(--primary);
+      cursor: pointer; transition: all 0.2s ease; text-align: center;
+    }
+    .size-btn:hover { border-color: var(--gold); background: var(--gold-light); }
+    .size-btn.active {
+      background: var(--primary); color: #ffffff; border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(31, 41, 55, 0.2);
+    }
+
     .qty-modal-row {
       display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px;
     }
@@ -414,7 +427,7 @@
     </div>
   </section>
 
-  <!-- التبويبات الرئيسية (متضمنة أحواض البورسلين) -->
+  <!-- التبويبات الرئيسية -->
   <div class="master-switch-wrap">
     <div class="master-switch">
       <button class="switch-btn active" id="tabUnits" onclick="setMainMode('units')">🗄️ <span id="textTabUnits">وحدات الحمام</span></button>
@@ -709,7 +722,7 @@
         <ul>
           <li><a href="https://wa.me/201039727479" target="_blank" style="color:#25d366; font-weight:800;" id="fNavWhatsApp">💬 واتساب خدمة العملاء</a></li>
           <li><a href="https://www.instagram.com/storastore2007?igsh=MTFnZ2Fkenp1OGlqag==" target="_blank">Instagram</a></li>
-          <li><a href="https://www.facebook.com/search/top?q=stora%20store%20-%20%D9%83%D8%A8%D8%A7%D8%A6%D9%86%20%D8%B4%D8%A7%D9%88%D8%B1%20%D9%88%D9%88%D8%AD%D8%AF%D8%A7%D8%AA%20%D8%A3%D8%AD%D9%88%D8%A7%D8%B6&__stsd__=eyJwcmltYXJ5Ijp7InR5cGUiOiJUWVBFQUhFQUR_UEVPUExFX0VOVElUSUVTIn19" target="_blank">Facebook</a></li>
+          <li><a href="https://www.facebook.com/search/top?q=stora%20store%20-%20%D9%83%D8%A8%D8%A7%D8%A6%D9%86%20%D8%B4%D8%A7%D8%B8%D8%B1%20%D9%88%D9%88%D8%AD%D8%AF%D8%A7%D8%AA%20%D8%A3%D8%AD%D9%88%D8%A7%D8%B6&__stsd__=eyJwcmltYXJ5Ijp7InR5cGUiOiJUWVBFQUhFQUR_UEVPUExFX0VOVElUSUVTIn19" target="_blank">Facebook</a></li>
         </ul>
       </div>
     </div>
@@ -824,7 +837,7 @@
         fNav1: "الرئيسية",
         fNav2: "الأقسام",
         fNav3: "جميع المنتجات",
-        fNavAbout: "من نحن?",
+        fNavAbout: "من نحن؟",
         fNavWhy: "لماذا Stora Store؟",
         fNavTerms: "الشروط والأحكام",
         fNavShipping: "سياسة الشحن",
@@ -1427,7 +1440,7 @@
         const sizes = item.sizes || [60, 80, 100];
         sizeSec.innerHTML = `
           <div style="font-size:0.82rem; font-weight:700; color:var(--text-muted); margin-bottom:5px;">${t.sizeLabel}</div>
-          <div style="display:flex; gap:6px;">
+          <div class="size-btn-group">
             ${sizes.map(sz => `
               <button class="size-btn ${modalSelectedSize === sz ? 'active' : ''}" onclick="setModalSize(${sz})">${sz}${t.sizeUnit}</button>
             `).join('')}
