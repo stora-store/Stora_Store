@@ -43,14 +43,26 @@
     .policy-link { color: var(--gold); text-decoration: none; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }
     .policy-link:hover { opacity: 0.8; text-decoration: underline; }
 
-    /* زر الدردشة العائم (واتساب) */
+    /* زر عائم بشكل أيقونة واتساب دائرية رسمية مع نبض تفاعلي */
     .floating-whatsapp {
-      position: fixed; bottom: 25px; left: 25px; background-color: #25d366; color: white;
-      width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      font-size: 1.8rem; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); z-index: 2000; text-decoration: none; transition: transform 0.2s;
+      position: fixed; bottom: 25px; left: 25px; width: 60px; height: 60px;
+      z-index: 2000; text-decoration: none; display: flex; align-items: center; justify-content: center;
+      animation: whatsappPulse 2s infinite; border-radius: 50%;
     }
     [dir="ltr"] .floating-whatsapp { left: auto; right: 25px; }
-    .floating-whatsapp:hover { transform: scale(1.1); }
+    
+    .floating-whatsapp img {
+      width: 100%; height: 100%; object-fit: contain; border-radius: 50%;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+      transition: transform 0.3s ease;
+    }
+    .floating-whatsapp:hover img { transform: scale(1.1); }
+
+    @keyframes whatsappPulse {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
+      70% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
 
     header {
       background: #ffffff; box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04); position: sticky; top: 0; z-index: 100;
@@ -237,7 +249,6 @@
     .specs-box ul { padding-inline-start: 20px; margin-top: 5px; }
     .specs-box li { margin-bottom: 4px; font-weight: 700; color: var(--text-muted); }
 
-    /* تصميم جديد ومحسن لأزرار المقاسات داخل نافذة التفاصيل */
     .size-btn-group { display: flex; gap: 8px; margin-top: 5px; }
     .size-btn {
       flex: 1; padding: 8px 12px; background: #ffffff; border: 2px solid var(--border);
@@ -355,8 +366,10 @@
 </head>
 <body oncontextmenu="return false;">
 
-  <!-- زر الدردشة العائم (واتساب) -->
-  <a href="https://wa.me/201039727479" target="_blank" class="floating-whatsapp" title="تواصل عبر واتساب">💬</a>
+  <!-- زر عائم لشعار واتساب الرسمي بتصميم دقيق ونبض تفاعلي -->
+  <a href="https://wa.me/201039727479" target="_blank" class="floating-whatsapp" title="تواصل عبر واتساب">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  </a>
 
   <div class="top-bar">
     <div class="top-bar-inner">
@@ -722,7 +735,7 @@
         <ul>
           <li><a href="https://wa.me/201039727479" target="_blank" style="color:#25d366; font-weight:800;" id="fNavWhatsApp">💬 واتساب خدمة العملاء</a></li>
           <li><a href="https://www.instagram.com/storastore2007?igsh=MTFnZ2Fkenp1OGlqag==" target="_blank">Instagram</a></li>
-          <li><a href="https://www.facebook.com/search/top?q=stora%20store%20-%20%D9%83%D8%A8%D8%A7%D8%A6%D9%86%20%D8%B4%D8%A7%D8%B8%D8%B1%20%D9%88%D9%88%D8%AD%D8%AF%D8%A7%D8%AA%20%D8%A3%D8%AD%D9%88%D8%A7%D8%B6&__stsd__=eyJwcmltYXJ5Ijp7InR5cGUiOiJUWVBFQUhFQUR_UEVPUExFX0VOVElUSUVTIn19" target="_blank">Facebook</a></li>
+          <li><a href="https://www.facebook.com/search/top?q=stora%20store%20-%20%D9%83%D8%A8%D8%A7%D8%A6%D9%86%20%D8%B4%D8%A7%D9%88%D8%B1%20%D9%88%D9%88%D8%AD%D8%AF%D8%A7%D8%AA%20%D8%A3%D8%AD%D9%88%D8%A7%D8%B6&__stsd__=eyJwcmltYXJ5Ijp7InR5cGUiOiJUWVBFQUhFQUR_UEVPUExFX0VOVElUSUVTIn19" target="_blank">Facebook</a></li>
         </ul>
       </div>
     </div>
