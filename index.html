@@ -414,11 +414,12 @@
     </div>
   </section>
 
-  <!-- التبويبات الرئيسية -->
+  <!-- التبويبات الرئيسية (متضمنة أحواض البورسلين) -->
   <div class="master-switch-wrap">
     <div class="master-switch">
       <button class="switch-btn active" id="tabUnits" onclick="setMainMode('units')">🗄️ <span id="textTabUnits">وحدات الحمام</span></button>
       <button class="switch-btn" id="tabBasins" onclick="setMainMode('basins')">✨ <span id="textTabBasins">أحواض ديكور</span></button>
+      <button class="switch-btn" id="tabPorcelain" onclick="setMainMode('porcelain')">🍽️ <span id="textTabPorcelain">أحواض بورسلين</span></button>
       <button class="switch-btn" id="tabShowers" onclick="setMainMode('showers')">🚿 <span id="textTabShowers">كبائن شاور</span></button>
       <button class="switch-btn" id="tabToilets" onclick="setMainMode('toilets')">🚽 <span id="textTabToilets">قواعد تواليت</span></button>
       <button class="switch-btn" id="tabMirrors" onclick="setMainMode('mirrors')">🪞 <span id="textTabMirrors">مرايا ليد</span></button>
@@ -440,6 +441,7 @@
     </div>
 
     <div class="filter-pills" id="basinsFilterBar" style="display: none;"><button class="filter-btn active" id="filterBasinAll" onclick="filterCatalog('basin-all', this)">عرض كل الأحواض الديكورية</button></div>
+    <div class="filter-pills" id="porcelainFilterBar" style="display: none;"><button class="filter-btn active" id="filterPorcelainAll" onclick="filterCatalog('porcelain-all', this)">جميع أحواض البورسلين الفاخرة</button></div>
     <div class="filter-pills" id="showersFilterBar" style="display: none;"><button class="filter-btn active" id="filterShowerAll" onclick="filterCatalog('shower-all', this)">جميع كبائن الشاور والبانيوهات</button></div>
     <div class="filter-pills" id="toiletsFilterBar" style="display: none;"><button class="filter-btn active" id="filterToiletAll" onclick="filterCatalog('toilet-all', this)">جميع قواعد التواليت الفاخرة</button></div>
     <div class="filter-pills" id="mirrorsFilterBar" style="display: none;"><button class="filter-btn active" id="filterMirrorAll" onclick="filterCatalog('mirror-all', this)">جميع المرايا الديكورية والليد</button></div>
@@ -532,12 +534,23 @@
           <select id="newCategoryMode" onchange="toggleAdminSizeInputs()">
             <option value="unit">وحدات الحمام (Unit - متعدد المقاسات)</option>
             <option value="basin">أحواض ديكور (Basin)</option>
+            <option value="porcelain">أحواض بورسلين (Porcelain Basin)</option>
             <option value="shower">كبائن شاور (Shower)</option>
             <option value="toilet">قواعد تواليت (Toilet)</option>
             <option value="mirror">مرايا ليد (Mirror)</option>
             <option value="mixer">خلاطات مياه (Mixer)</option>
             <option value="accessory">إكسسوارات (Accessory)</option>
             <option value="stainless">أحواض ستانلس (Stainless)</option>
+          </select>
+        </div>
+
+        <!-- اختيار التصنيف الفرعي لوحدات الحمام (خشبي، رخامي، ألوان) -->
+        <div class="admin-form-group" id="unitSubCategoryGroup">
+          <label>التصنيف الفرعي للوحدة:</label>
+          <select id="newUnitSubCategory">
+            <option value="wood">🪵 الخشبيات (Wood)</option>
+            <option value="marble">🏛️ الرخاميات (Marble)</option>
+            <option value="colors">🎨 الألوان (Colors)</option>
           </select>
         </div>
 
@@ -663,7 +676,7 @@
     </div>
   </div>
 
-  <!-- الفوتر (مع ربط روابط فيسبوك وإنستجرام الحقيقية) -->
+  <!-- الفوتر -->
   <footer>
     <div class="footer-container">
       <div class="footer-col">
@@ -727,6 +740,7 @@
       { id: "BS-OV-01", type: "basin", category: "basin-all", titleAr: "حوض ديكور بيضاوي فوق الرخام #1", titleEn: "Oval Countertop Basin #1", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1788830757/Gemini_Generated_Image_d4nrg5d4nrg5d4nr.jpg", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1788830757/Gemini_Generated_Image_d4nrg5d4nrg5d4nr.jpg"], price: 1850, specTag: "حوض ديكور مفرد فوق الرخام", specTagEn: "Single Vessel Basin", badge: "bestseller", customSpecs: "سيراميك عالي اللمعان\nمقاوم للاتساخ وسهل التنظيف" }
     ];
 
+    let porcelainProducts = JSON.parse(localStorage.getItem('stora_porcelain')) || [];
     let showerProducts = JSON.parse(localStorage.getItem('stora_showers')) || [
       { id: "SH-80-LOW", type: "shower", category: "shower-all", titleAr: "كابينة شاور سيكوريت (80×80 سم)", titleEn: "Security Glass Shower Cabin (80x80 cm)", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1789045384/80_80_Low.jpg", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1789045384/80_80_Low.jpg"], price: 9400, specTag: "80×80 سم | قاعدة قدم فلات", specTagEn: "80x80 cm | Flat Tray", badge: "none", customSpecs: "زجاج سيكوريت مقسى سمك 10 مم\nإكسسوارات ستانلس مقاومة للصدأ" }
     ];
@@ -745,6 +759,7 @@
         cartBtn: "🛒 العربة",
         tabUnits: "وحدات الحمام",
         tabBasins: "أحواض ديكور",
+        tabPorcelain: "أحواض بورسلين",
         tabShowers: "كبائن شاور",
         tabToilets: "قواعد تواليت",
         tabMirrors: "مرايا ليد",
@@ -755,6 +770,8 @@
         secDescUnits: "اختر التصنيف المفضل، ثم اضغط على المنتج لمعاينة التفاصيل والأسعار",
         secTitleBasins: "أحواض ديكورية مفردة",
         secDescBasins: "أرقى تشكيلة أحواض ديكور مفردة توضع فوق الرخام",
+        secTitlePorcelain: "أحواض بورسلين فاخرة",
+        secDescPorcelain: "أرقى تشكيلة أحواض بورسلين بتصميمات عصرية أنيقة",
         secTitleShowers: "كبائن شاور والبانيوهات وقواعد القدم الأكريليك",
         secDescShowers: "أحدث تصميمات كبائن الشاور وبانيوهات القدم",
         secTitleToilets: "قواعد تواليت سيراميك فاخرة",
@@ -775,6 +792,7 @@
         qtyLabel: "الكمية المطلوبة:",
         sizeUnit: "سم",
         basinCategory: "حوض ديكور",
+        porcelainCategory: "حوض بورسلين",
         showerCategory: "كبائن شاور",
         toiletCategory: "قاعدة تواليت",
         mirrorCategory: "مرآة ليد",
@@ -806,7 +824,7 @@
         fNav1: "الرئيسية",
         fNav2: "الأقسام",
         fNav3: "جميع المنتجات",
-        fNavAbout: "من نحن؟",
+        fNavAbout: "من نحن?",
         fNavWhy: "لماذا Stora Store؟",
         fNavTerms: "الشروط والأحكام",
         fNavShipping: "سياسة الشحن",
@@ -823,6 +841,7 @@
         cartBtn: "🛒 Cart",
         tabUnits: "Vanity Units",
         tabBasins: "Countertop Basins",
+        tabPorcelain: "Porcelain Basins",
         tabShowers: "Shower Cabins",
         tabToilets: "Toilets",
         tabMirrors: "LED Mirrors",
@@ -833,6 +852,8 @@
         secDescUnits: "Select category, then click on any product to view details and prices",
         secTitleBasins: "Luxury Countertop Basins",
         secDescBasins: "Exquisite decorative vessel basins",
+        secTitlePorcelain: "Luxury Porcelain Basins",
+        secDescPorcelain: "Exquisite porcelain basins with modern elegant design",
         secTitleShowers: "Shower Cabins & Bathtubs",
         secDescShowers: "Modern glass shower enclosures and trays",
         secTitleToilets: "Luxury Ceramic Toilets",
@@ -853,6 +874,7 @@
         qtyLabel: "Quantity:",
         sizeUnit: "cm",
         basinCategory: "Vessel Basin",
+        porcelainCategory: "Porcelain Basin",
         showerCategory: "Shower Cabin",
         toiletCategory: "Toilet",
         mirrorCategory: "LED Mirror",
@@ -902,6 +924,7 @@
       return text
         .replace(/وحدة حمام/g, "Bathroom Unit")
         .replace(/حوض ديكور/g, "Decorative Basin")
+        .replace(/حوض بورسلين/g, "Porcelain Basin")
         .replace(/كابينة شاور/g, "Shower Cabin")
         .replace(/قاعدة تواليت/g, "Toilet Bowl")
         .replace(/مرآة ليد/g, "LED Mirror")
@@ -921,7 +944,7 @@
       if (!track) return;
 
       const allProducts = [
-        ...unitProducts, ...basinProducts, ...showerProducts, 
+        ...unitProducts, ...basinProducts, ...porcelainProducts, ...showerProducts, 
         ...toiletProducts, ...mirrorProducts, ...mixerProducts, 
         ...accessoryProducts, ...stainlessProducts
       ];
@@ -976,6 +999,7 @@
       document.getElementById('cartBtnText').innerText = t.cartBtn;
       document.getElementById('textTabUnits').innerText = t.tabUnits;
       document.getElementById('textTabBasins').innerText = t.tabBasins;
+      document.getElementById('textTabPorcelain').innerText = t.tabPorcelain;
       document.getElementById('textTabShowers').innerText = t.tabShowers;
       document.getElementById('textTabToilets').innerText = t.tabToilets;
       document.getElementById('textTabMirrors').innerText = t.tabMirrors;
@@ -1086,6 +1110,7 @@
       document.getElementById('newTitleAr').value = "";
       document.getElementById('newBadgeStatus').value = "bestseller";
       document.getElementById('newCategoryMode').value = "unit";
+      document.getElementById('newUnitSubCategory').value = "wood";
       document.getElementById('price60').value = "";
       document.getElementById('price80').value = "";
       document.getElementById('price100').value = "";
@@ -1105,12 +1130,15 @@
 
     function toggleAdminSizeInputs() {
       const mode = document.getElementById('newCategoryMode').value;
+      const subCatGroup = document.getElementById('unitSubCategoryGroup');
       if (mode === 'unit') {
         document.getElementById('adminPricesBox').style.display = 'block';
         document.getElementById('adminSinglePriceBox').style.display = 'none';
+        subCatGroup.style.display = 'block';
       } else {
         document.getElementById('adminPricesBox').style.display = 'none';
         document.getElementById('adminSinglePriceBox').style.display = 'block';
+        subCatGroup.style.display = 'none';
       }
     }
 
@@ -1119,6 +1147,7 @@
       const allProducts = [
         { type: 'unit', arr: unitProducts, key: 'stora_units' },
         { type: 'basin', arr: basinProducts, key: 'stora_basins' },
+        { type: 'porcelain', arr: porcelainProducts, key: 'stora_porcelain' },
         { type: 'shower', arr: showerProducts, key: 'stora_showers' },
         { type: 'toilet', arr: toiletProducts, key: 'stora_toilets' },
         { type: 'mirror', arr: mirrorProducts, key: 'stora_mirrors' },
@@ -1163,6 +1192,7 @@
       toggleAdminSizeInputs();
 
       if (prod.type === 'unit') {
+        document.getElementById('newUnitSubCategory').value = prod.category || "wood";
         document.getElementById('price60').value = prod.prices?.[60] || "";
         document.getElementById('price80').value = prod.prices?.[80] || "";
         document.getElementById('price100').value = prod.prices?.[100] || "";
@@ -1195,6 +1225,7 @@
     function syncArraysFromStorage() {
       unitProducts = JSON.parse(localStorage.getItem('stora_units')) || unitProducts;
       basinProducts = JSON.parse(localStorage.getItem('stora_basins')) || basinProducts;
+      porcelainProducts = JSON.parse(localStorage.getItem('stora_porcelain')) || porcelainProducts;
       showerProducts = JSON.parse(localStorage.getItem('stora_showers')) || showerProducts;
       toiletProducts = JSON.parse(localStorage.getItem('stora_toilets')) || toiletProducts;
       mirrorProducts = JSON.parse(localStorage.getItem('stora_mirrors')) || mirrorProducts;
@@ -1211,6 +1242,7 @@
       const title = document.getElementById('newTitleAr').value.trim();
       const badge = document.getElementById('newBadgeStatus').value;
       const mode = document.getElementById('newCategoryMode').value;
+      const subCat = document.getElementById('newUnitSubCategory').value;
       const img = document.getElementById('newImage').value.trim();
       const extraImgsInput = document.getElementById('newExtraImages').value.trim();
       const customSpecs = document.getElementById('newSpecs').value.trim();
@@ -1230,7 +1262,7 @@
       let newItem = {
         id: newId,
         type: mode,
-        category: mode === 'unit' ? 'wood' : mode + '-all',
+        category: mode === 'unit' ? subCat : mode + '-all',
         titleAr: title,
         titleEn: autoTranslate(title),
         image: img,
@@ -1238,7 +1270,7 @@
         specTag: "مقاسات متعددة وتشطيبات فاخرة",
         specTagEn: "Multiple sizes & luxury finishes",
         badge: badge,
-        customSpecs: customSpecs || "الخامة: خشب معالج مقاوم للماء\nالضمان: 5 سنوات"
+        customSpecs: customSpecs || "الخامة: بورسلين عالي الجودة\nالضمان: 5 سنوات"
       };
 
       if (mode === 'unit') {
@@ -1259,6 +1291,7 @@
 
       let targetKey = 'stora_units';
       if (mode === 'basin') targetKey = 'stora_basins';
+      else if (mode === 'porcelain') targetKey = 'stora_porcelain';
       else if (mode === 'shower') targetKey = 'stora_showers';
       else if (mode === 'toilet') targetKey = 'stora_toilets';
       else if (mode === 'mirror') targetKey = 'stora_mirrors';
@@ -1292,7 +1325,7 @@
       let item = null;
       if (mode === 'unit') item = unitProducts.find(p => p.id === id);
       else {
-        const allOther = [...basinProducts, ...showerProducts, ...toiletProducts, ...mirrorProducts, ...mixerProducts, ...accessoryProducts, ...stainlessProducts];
+        const allOther = [...basinProducts, ...porcelainProducts, ...showerProducts, ...toiletProducts, ...mirrorProducts, ...mixerProducts, ...accessoryProducts, ...stainlessProducts];
         item = allOther.find(p => p.id === id);
       }
       if (!item) return;
@@ -1492,12 +1525,12 @@
       mainMode = mode;
       const t = translations[currentLang];
 
-      ['tabUnits', 'tabBasins', 'tabShowers', 'tabToilets', 'tabMirrors', 'tabMixers', 'tabAccessories', 'tabStainless'].forEach(id => {
+      ['tabUnits', 'tabBasins', 'tabPorcelain', 'tabShowers', 'tabToilets', 'tabMirrors', 'tabMixers', 'tabAccessories', 'tabStainless'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.classList.remove('active');
       });
 
-      ['unitsFilterBar', 'basinsFilterBar', 'showersFilterBar', 'toiletsFilterBar', 'mirrorsFilterBar', 'mixersFilterBar', 'accessoriesFilterBar', 'stainlessFilterBar'].forEach(id => {
+      ['unitsFilterBar', 'basinsFilterBar', 'porcelainFilterBar', 'showersFilterBar', 'toiletsFilterBar', 'mirrorsFilterBar', 'mixersFilterBar', 'accessoriesFilterBar', 'stainlessFilterBar'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = 'none';
       });
@@ -1515,6 +1548,11 @@
         document.getElementById('basinsFilterBar').style.display = 'flex';
         document.getElementById('sectionTitle').innerText = t.secTitleBasins;
         document.getElementById('sectionDesc').innerText = t.secDescBasins;
+      } else if (mode === 'porcelain') {
+        document.getElementById('tabPorcelain').classList.add('active');
+        document.getElementById('porcelainFilterBar').style.display = 'flex';
+        document.getElementById('sectionTitle').innerText = t.secTitlePorcelain;
+        document.getElementById('sectionDesc').innerText = t.secDescPorcelain;
       } else if (mode === 'showers') {
         document.getElementById('tabShowers').classList.add('active');
         document.getElementById('showersFilterBar').style.display = 'flex';
@@ -1573,6 +1611,7 @@
           : unitProducts.filter(p => p.category === currentFilter);
       } else {
         if (mainMode === 'basins') listToDisplay = basinProducts;
+        else if (mainMode === 'porcelain') listToDisplay = porcelainProducts;
         else if (mainMode === 'showers') listToDisplay = showerProducts;
         else if (mainMode === 'toilets') listToDisplay = toiletProducts;
         else if (mainMode === 'mirrors') listToDisplay = mirrorProducts;
@@ -1582,7 +1621,7 @@
       }
 
       if (searchQuery !== '') {
-        const allProducts = [...unitProducts, ...basinProducts, ...showerProducts, ...toiletProducts, ...mirrorProducts, ...mixerProducts, ...accessoryProducts, ...stainlessProducts];
+        const allProducts = [...unitProducts, ...basinProducts, ...porcelainProducts, ...showerProducts, ...toiletProducts, ...mirrorProducts, ...mixerProducts, ...accessoryProducts, ...stainlessProducts];
         listToDisplay = allProducts.filter(item => 
           item.titleAr.toLowerCase().includes(searchQuery) || 
           item.titleEn.toLowerCase().includes(searchQuery) ||
@@ -1620,6 +1659,7 @@
           if (item.category === 'colors') categoryLabel = t.txtColors;
         } else {
           if (item.type === 'basin') categoryLabel = t.basinCategory;
+          else if (item.type === 'porcelain') categoryLabel = t.porcelainCategory;
           else if (item.type === 'shower') categoryLabel = t.showerCategory;
           else if (item.type === 'toilet') categoryLabel = t.toiletCategory;
           else if (item.type === 'mirror') categoryLabel = t.mirrorCategory;
