@@ -43,7 +43,7 @@
     .policy-link { color: var(--gold); text-decoration: none; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }
     .policy-link:hover { opacity: 0.8; text-decoration: underline; }
 
-    /* زر عائم بشكل أيقونة واتساب دائرية رسمية مع نبض تفاعلي */
+    /* زر عائم لشعار واتساب الرسمي بتصميم دقيق ونبض تفاعلي */
     .floating-whatsapp {
       position: fixed; bottom: 25px; left: 25px; width: 60px; height: 60px;
       z-index: 2000; text-decoration: none; display: flex; align-items: center; justify-content: center;
@@ -186,12 +186,20 @@
     }
     [dir="ltr"] .category-tag { right: auto; left: 10px; }
 
+    /* شريط تنويه الخصم في زاوية الكارت (Corner Ribbon) */
+    .discount-corner-badge {
+      position: absolute; top: 12px; left: -35px; background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff;
+      font-size: 0.68rem; font-weight: 900; padding: 4px 35px; transform: rotate(-45deg); z-index: 3;
+      box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4); text-align: center;
+    }
+    [dir="ltr"] .discount-corner-badge { left: auto; right: -35px; transform: rotate(45deg); }
+
     .bestseller-badge {
-      position: absolute; top: 10px; left: 10px; background: #f59e0b; color: #fff;
+      position: absolute; top: 10px; right: 10px; background: #f59e0b; color: #fff;
       font-size: 0.7rem; padding: 3px 10px; border-radius: 20px; font-weight: 800; z-index: 2;
       box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
     }
-    [dir="ltr"] .bestseller-badge { left: auto; right: 10px; }
+    [dir="ltr"] .bestseller-badge { right: auto; left: 10px; }
 
     .soldout-badge {
       position: absolute; top: 10px; left: 10px; background: #ef4444; color: #fff;
@@ -213,8 +221,11 @@
       margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
     }
+    .price-container { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .price-value { font-size: 1.2rem; font-weight: 900; color: #059669; }
-    .currency { font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-inline-start: 4px; }
+    .old-price { font-size: 0.9rem; font-weight: 700; color: #ef4444; text-decoration: line-through; }
+    .currency { font-size: 0.75rem; color: var(--text-muted); font-weight: 700; }
+    
     .view-details-btn {
       background: var(--primary); color: white; border: none; padding: 8px 14px; border-radius: 8px;
       cursor: pointer; font-weight: 700; font-size: 0.85rem; transition: background 0.2s;
@@ -242,7 +253,7 @@
     .detail-thumbs img { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid var(--border); }
     .detail-thumbs img.active { border-color: var(--gold); }
     .detail-info h2 { font-size: 1.3rem; font-weight: 800; color: var(--primary); margin-bottom: 8px; }
-    .detail-info .price-value { font-size: 1.4rem; font-weight: 900; color: #059669; display: block; margin-bottom: 10px; }
+    .detail-info .price-container { margin-bottom: 10px; }
     .stock-cue { font-size: 0.82rem; font-weight: 800; color: #dc2626; margin-bottom: 12px; background: #ffeeec; padding: 5px 10px; border-radius: 6px; display: inline-block; }
     
     .specs-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 12px; font-size: 0.85rem; margin-bottom: 15px; }
@@ -268,7 +279,7 @@
     .qty-controls { display: flex; align-items: center; gap: 10px; }
     .qty-btn {
       width: 30px; height: 30px; background: #ffffff; border: 1px solid var(--border); border-radius: 6px;
-      font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1rem;
+      font-weight: 800; cursor: display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1rem;
     }
     .qty-btn:hover { border-color: var(--gold); background: var(--gold-light); }
     .qty-display { font-size: 1rem; font-weight: 800; min-width: 25px; text-align: center; }
@@ -492,7 +503,7 @@
       </div>
       <div class="detail-info">
         <h2 id="modalTitle"></h2>
-        <span class="price-value" id="modalPrice"></span>
+        <div class="price-container" id="modalPriceContainer"></div>
         <div id="modalStockCue" class="stock-cue" style="display:none;"></div>
         <div class="specs-box" id="modalSpecs"></div>
         <div id="modalSizeSection" style="margin-bottom: 12px;"></div>
@@ -517,8 +528,20 @@
   <div class="admin-modal" id="adminModal">
     <div class="admin-content">
       <button class="info-modal-close" onclick="closeAdminModal()">&times;</button>
-      <h3 class="info-modal-title" id="adminModalTitle">⚙️ لوحة تحكم الأدمن (إضافة / تعديل / كلمة المرور)</h3>
+      <h3 class="info-modal-title" id="adminModalTitle">⚙️ لوحة تحكم الأدمن (إضافة / تعديل / الخصومات العامة)</h3>
       
+      <!-- قسم إدارة الخصومات والزيادات الجماعية -->
+      <div style="background:#fef3c7; padding:15px; border-radius:12px; border:1px solid #f59e0b; margin-bottom:20px;">
+        <h4 style="font-size:0.95rem; font-weight:900; margin-bottom:8px; color:#b45309;">🏷️ إدارة الأسعار والخصومات الجماعية (لكل المتجر)</h4>
+        <p style="font-size:0.8rem; color:#78350f; margin-bottom:10px;">تعديل الأسعار بدقة مع الحفاظ على السعر الأسبق مشطوباً وتطبيقه تلقائياً على أي منتج جديد يضاف وقت الخصم.</p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <input type="number" id="globalPercent" placeholder="النسبة % (مثال: 15)" style="flex:1; min-width:140px; padding:8px 12px; border:1px solid var(--border); border-radius:8px; font-size:0.9rem;">
+          <button onclick="applyGlobalDiscount()" style="background:#ef4444; color:#fff; border:none; padding:8px 14px; border-radius:8px; font-weight:800; cursor:pointer; font-size:0.85rem;">📉 تطبيق خصم عام</button>
+          <button onclick="applyGlobalMarkup()" style="background:#2563eb; color:#fff; border:none; padding:8px 14px; border-radius:8px; font-weight:800; cursor:pointer; font-size:0.85rem;">📈 زيادة الأسعار</button>
+          <button onclick="removeGlobalDiscount()" style="background:#64748b; color:#fff; border:none; padding:8px 14px; border-radius:8px; font-weight:800; cursor:pointer; font-size:0.85rem;">🔄 إلغاء الخصم (الأصل)</button>
+        </div>
+      </div>
+
       <!-- قسم تغيير كلمة المرور للأدمن -->
       <div style="background:#fffbeb; padding:12px; border-radius:10px; border:1px solid #fde68a; margin-bottom:15px;">
         <h4 style="font-size:0.9rem; font-weight:900; margin-bottom:8px; color:#92400e;">🔑 تغيير كلمة مرور الأدمن</h4>
@@ -702,7 +725,7 @@
     </div>
   </div>
 
-  <!-- الفوتر (مع ربط صفحة الفيسبوك وإنستجرام الرسمية) -->
+  <!-- الفوتر -->
   <footer>
     <div class="footer-container">
       <div class="footer-col">
@@ -758,24 +781,91 @@
     let modalSelectedSize = 60;
     let modalQuantity = 1;
 
-    let unitProducts = JSON.parse(localStorage.getItem('stora_units')) || [
-      { id: "UN-WD-01", type: "unit", category: "wood", titleAr: "وحدة حمام خشبي كلاسيك #1", titleEn: "Classic Wooden Bathroom Unit #1", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1788810476/WhatsApp_Image_2026-08-31_at_15.17.43_4.jpg", sizeImages: { 60: "", 80: "", 100: "" }, extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1788810476/WhatsApp_Image_2026-08-31_at_15.17.43_4.jpg"], sizes: [60, 80, 100], prices: { 60: 4600, 80: 5350, 100: 6100 }, selectedSize: 60, specTag: "مقاس 60-80-100 سم", specTagEn: "Size 60-80-100 cm", badge: "bestseller", customSpecs: "خامة خشب معالج ضد الرطوبة\nمقاوم للماء بنسبة 100%\nضمان 5 سنوات" }
+    // الموديلات الافتراضية
+    const defaultUnits = [
+      { id: "UN-WD-01", type: "unit", category: "wood", titleAr: "وحدة حمام خشبي كلاسيك #1", titleEn: "Classic Wooden Bathroom Unit #1", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1788810476/WhatsApp_Image_2026-08-31_at_15.17.43_4.jpg", sizeImages: { 60: "", 80: "", 100: "" }, extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1788810476/WhatsApp_Image_2026-08-31_at_15.17.43_4.jpg"], sizes: [60, 80, 100], prices: { 60: 4600, 80: 5350, 100: 6100 }, origPrices: { 60: 4600, 80: 5350, 100: 6100 }, selectedSize: 60, specTag: "مقاس 60-80-100 سم", specTagEn: "Size 60-80-100 cm", badge: "bestseller", customSpecs: "خامة خشب معالج ضد الرطوبة\nمقاوم للماء بنسبة 100%\nضمان 5 سنوات" }
     ];
 
-    let basinProducts = JSON.parse(localStorage.getItem('stora_basins')) || [
-      { id: "BS-OV-01", type: "basin", category: "basin-all", titleAr: "حوض ديكور بيضاوي فوق الرخام #1", titleEn: "Oval Countertop Basin #1", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1788830757/Gemini_Generated_Image_d4nrg5d4nrg5d4nr.jpg", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1788830757/Gemini_Generated_Image_d4nrg5d4nrg5d4nr.jpg"], price: 1850, specTag: "حوض ديكور مفرد فوق الرخام", specTagEn: "Single Vessel Basin", badge: "bestseller", customSpecs: "سيراميك عالي اللمعان\nمقاوم للاتساخ وسهل التنظيف" }
+    const defaultBasins = [
+      { id: "BS-OV-04", type: "basin", category: "basin-all", titleAr: "حوض ديكور بيضاوي فوق الرخام BS-OV-04", titleEn: "Oval Countertop Basin ID_BS-OV-04", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790249819/ID_BS-OV-04.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790249819/ID_BS-OV-04.png"], price: 1850, origPrice: 1850, specTag: "حوض ديكور مفرد فوق الرخام", specTagEn: "Single Vessel Basin", badge: "bestseller", customSpecs: "سيراميك عالي اللمعان\nمقاوم للاتساخ وسهل التنظيف" },
+      { id: "BS-OV-08", type: "basin", category: "basin-all", titleAr: "حوض ديكور بيضاوي فوق الرخام BS-OV-08", titleEn: "Oval Countertop Basin ID_BS-OV-08", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790249772/ID_BS-OV-08.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790249772/ID_BS-OV-08.png"], price: 1900, origPrice: 1900, specTag: "حوض ديكور مفرد فوق الرخام", specTagEn: "Single Vessel Basin", badge: "none", customSpecs: "سيراميك عالي اللمعان\nمقاوم للاتساخ وسهل التنظيف" },
+      { id: "BS-OV-02", type: "basin", category: "basin-all", titleAr: "حوض ديكور بيضاوي فوق الرخام BS-OV-02", titleEn: "Oval Countertop Basin ID_BS-OV-02", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790249740/ID_BS-OV-02.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790249740/ID_BS-OV-02.png"], price: 1750, origPrice: 1750, specTag: "حوض ديكور مفرد فوق الرخام", specTagEn: "Single Vessel Basin", badge: "none", customSpecs: "سيراميك عالي اللمعان\nمقاوم للاتساخ وسهل التنظيف" },
+      { id: "BS-OV-07", type: "basin", category: "basin-all", titleAr: "حوض ديكور بيضاوي فوق الرخام BS-OV-07", titleEn: "Oval Countertop Basin ID_BS-OV-07", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790249735/ID_BS-OV-07.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790249735/ID_BS-OV-07.png"], price: 1850, origPrice: 1850, specTag: "حوض ديكور مفرد فوق الرخام", specTagEn: "Single Vessel Basin", badge: "bestseller", customSpecs: "سيراميك عالي اللمعان\nمقاوم للاتساخ وسهل التنظيف" },
+      { id: "BS-OV-01", type: "basin", category: "basin-all", titleAr: "حوض ديكور بيضاوي فوق الرخام BS-OV-01", titleEn: "Oval Countertop Basin ID_BS-OV-01", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790249704/ID_BS-OV-01.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790249704/ID_BS-OV-01.png"], price: 1800, origPrice: 1800, specTag: "حوض ديكور مفرد فوق الرخام", specTagEn: "Single Vessel Basin", badge: "none", customSpecs: "سيراميك عالي اللمعان\nمقاوم للاتساخ وسهل التنظيف" },
+      { id: "BS-OV-06", type: "basin", category: "basin-all", titleAr: "حوض ديكور بيضاوي فوق الرخام BS-OV-06", titleEn: "Oval Countertop Basin ID_BS-OV-06", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790249697/ID_BS-OV-06.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790249697/ID_BS-OV-06.png"], price: 1950, origPrice: 1950, specTag: "حوض ديكور مفرد فوق الرخام", specTagEn: "Single Vessel Basin", badge: "none", customSpecs: "سيراميك عالي اللمعان\nمقاوم للاتساخ وسهل التنظيف" },
+      { id: "BS-OV-10", type: "basin", category: "basin-all", titleAr: "حوض ديكور بيضاوي فوق الرخام BS-OV-10", titleEn: "Oval Countertop Basin ID_BS-OV-10", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790249841/ID_BS-OV-10.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790249841/ID_BS-OV-10.png"], price: 2100, origPrice: 2100, specTag: "حوض ديكور مفرد فوق الرخام", specTagEn: "Single Vessel Basin", badge: "bestseller", customSpecs: "سيراميك عالي اللمعان\nمقاوم للاتساخ وسهل التنظيف" },
+      { id: "BS-OV-05", type: "basin", category: "basin-all", titleAr: "حوض ديكور بيضاوي فوق الرخام BS-OV-05", titleEn: "Oval Countertop Basin ID_BS-OV-05", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790249833/ID_BS-OV-05.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790249833/ID_BS-OV-05.png"], price: 1850, origPrice: 1850, specTag: "حوض ديكور مفرد فوق الرخام", specTagEn: "Single Vessel Basin", badge: "none", customSpecs: "سيراميك عالي اللمعان\nمقاوم للاتساخ وسهل التنظيف" },
+      { id: "BS-OV-09", type: "basin", category: "basin-all", titleAr: "حوض ديكور بيضاوي فوق الرخام BS-OV-09", titleEn: "Oval Countertop Basin ID_BS-OV-09", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790249828/ID_BS-OV-09.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790249828/ID_BS-OV-09.png"], price: 2000, origPrice: 2000, specTag: "حوض ديكور مفرد فوق الرخام", specTagEn: "Single Vessel Basin", badge: "none", customSpecs: "سيراميك عالي اللمعان\nمقاوم للاتساخ وسهل التنظيف" },
+      { id: "BS-OV-03", type: "basin", category: "basin-all", titleAr: "حوض ديكور بيضاوي فوق الرخام BS-OV-03", titleEn: "Oval Countertop Basin ID_BS-OV-03", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790249695/ID_BS-OV-03.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790249695/ID_BS-OV-03.png"], price: 1700, origPrice: 1700, specTag: "حوض ديكور مفرد فوق الرخام", specTagEn: "Single Vessel Basin", badge: "none", customSpecs: "سيراميك عالي اللمعان\nمقاوم للاتساخ وسهل التنظيف" }
     ];
 
+    const defaultShowers = [
+      { id: "SH-80-BAN", type: "shower", category: "shower-all", titleAr: "كابينة شاور بقاعدة بانيو منخفض (80×80 سم)", titleEn: "Security Glass Shower Cabin with Low Tray (80x80 cm)", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1789644886/80x80_Banio_low_.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1789644886/80x80_Banio_low_.png"], price: 9500, origPrice: 9500, specTag: "80×80 سم | بانيو منخفض", specTagEn: "80x80 cm | Low Tray", badge: "bestseller", customSpecs: "زجاج سيكوريت مقسى سمك 10 مم\nإكسسوارات ستانلس مقاومة للصدأ" },
+      { id: "SH-90-BAN", type: "shower", category: "shower-all", titleAr: "كابينة شاور بقاعدة بانيو منخفض (90×90 سم)", titleEn: "Security Glass Shower Cabin with Low Tray (90x90 cm)", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1789644872/90x90_Banio_low_.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1789644872/90x90_Banio_low_.png"], price: 10200, origPrice: 10200, specTag: "90×90 سم | بانيو منخفض", specTagEn: "90x90 cm | Low Tray", badge: "none", customSpecs: "زجاج سيكوريت مقسى سمك 10 مم\nإكسسوارات ستانلس مقاومة للصدأ" },
+      { id: "SH-90-HIGH", type: "shower", category: "shower-all", titleAr: "كابينة شاور بقاعدة بانيو عالي (90×90 سم)", titleEn: "Security Glass Shower Cabin with High Tray (90x90 cm)", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1789644838/90x90_Banio_high_.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1789644838/90x90_Banio_high_.png"], price: 10800, origPrice: 10800, specTag: "90×90 سم | بانيو عالي", specTagEn: "90x90 cm | High Tray", badge: "bestseller", customSpecs: "زجاج سيكوريت مقسى سمك 10 مم\nإكسسوارات ستانلس مقاومة للصدأ" }
+    ];
+
+    const defaultMixers = [
+      { id: "MX-BAT-13", type: "mixer", category: "mixer-all", titleAr: "خلاط مياه فاخر MX-BAT-13", titleEn: "Luxury Faucet ID_MX-BAT-13", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790255683/ID_MX-BAT-13.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790255683/ID_MX-BAT-13.png"], price: 2400, origPrice: 2400, specTag: "خلاط نحاس بقلب سيراميك", specTagEn: "Solid Brass Faucet", badge: "bestseller", customSpecs: "نحاس نقي 100%\nضمان 5 سنوات ضد عيوب الصناعة" },
+      { id: "MX-BAT-10", type: "mixer", category: "mixer-all", titleAr: "خلاط مياه فاخر MX-BAT-10", titleEn: "Luxury Faucet ID_MX-BAT-10", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790255663/ID_MX-BAT-10.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790255663/ID_MX-BAT-10.png"], price: 2200, origPrice: 2200, specTag: "خلاط نحاس بقلب سيراميك", specTagEn: "Solid Brass Faucet", badge: "none", customSpecs: "نحاس نقي 100%\nضمان 5 سنوات ضد عيوب الصناعة" },
+      { id: "MX-BAT-14", type: "mixer", category: "mixer-all", titleAr: "خلاط مياه فاخر MX-BAT-14", titleEn: "Luxury Faucet ID_MX-BAT-14", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790255662/ID_MX-BAT-14.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790255662/ID_MX-BAT-14.png"], price: 2500, origPrice: 2500, specTag: "خلاط نحاس بقلب سيراميك", specTagEn: "Solid Brass Faucet", badge: "none", customSpecs: "نحاس نقي 100%\nضمان 5 سنوات ضد عيوب الصناعة" },
+      { id: "MX-BAT-09", type: "mixer", category: "mixer-all", titleAr: "خلاط مياه فاخر MX-BAT-09", titleEn: "Luxury Faucet ID_MX-BAT-09", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790255662/ID_MX-BAT-09.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790255662/ID_MX-BAT-09.png"], price: 2150, origPrice: 2150, specTag: "خلاط نحاس بقلب سيراميك", specTagEn: "Solid Brass Faucet", badge: "none", customSpecs: "نحاس نقي 100%\nضمان 5 سنوات ضد عيوب الصناعة" },
+      { id: "MX-BAT-08", type: "mixer", category: "mixer-all", titleAr: "خلاط مياه فاخر MX-BAT-08", titleEn: "Luxury Faucet ID_MX-BAT-08", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790255648/ID_MX-BAT-08.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790255648/ID_MX-BAT-08.png"], price: 2100, origPrice: 2100, specTag: "خلاط نحاس بقلب سيراميك", specTagEn: "Solid Brass Faucet", badge: "none", customSpecs: "نحاس نقي 100%\nضمان 5 سنوات ضد عيوب الصناعة" },
+      { id: "MX-BAT-11", type: "mixer", category: "mixer-all", titleAr: "خلاط مياه فاخر MX-BAT-11", titleEn: "Luxury Faucet ID_MX-BAT-11", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790255616/ID_MX-BAT-11.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790255616/ID_MX-BAT-11.png"], price: 2300, origPrice: 2300, specTag: "خلاط نحاس بقلب سيراميك", specTagEn: "Solid Brass Faucet", badge: "none", customSpecs: "نحاس نقي 100%\nضمان 5 سنوات ضد عيوب الصناعة" },
+      { id: "MX-BAT-05", type: "mixer", category: "mixer-all", titleAr: "خلاط مياه فاخر MX-BAT-05", titleEn: "Luxury Faucet ID_MX-BAT-05", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790255445/ID_MX-BAT-05.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790255445/ID_MX-BAT-05.png"], price: 1950, origPrice: 1950, specTag: "خلاط نحاس بقلب سيراميك", specTagEn: "Solid Brass Faucet", badge: "none", customSpecs: "نحاس نقي 100%\nضمان 5 سنوات ضد عيوب الصناعة" },
+      { id: "MX-BAT-02", type: "mixer", category: "mixer-all", titleAr: "خلاط مياه فاخر MX-BAT-02", titleEn: "Luxury Faucet ID_MX-BAT-02", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790255444/ID_MX-BAT-02.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790255444/ID_MX-BAT-02.png"], price: 1850, origPrice: 1850, specTag: "خلاط نحاس بقلب سيراميك", specTagEn: "Solid Brass Faucet", badge: "none", customSpecs: "نحاس نقي 100%\nضمان 5 سنوات ضد عيوب الصناعة" },
+      { id: "MX-BAT-03", type: "mixer", category: "mixer-all", titleAr: "خلاط مياه فاخر MX-BAT-03", titleEn: "Luxury Faucet ID_MX-BAT-03", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790255419/ID_MX-BAT-03.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790255419/ID_MX-BAT-03.png"], price: 1900, origPrice: 1900, specTag: "خلاط نحاس بقلب سيراميك", specTagEn: "Solid Brass Faucet", badge: "none", customSpecs: "نحاس نقي 100%\nضمان 5 سنوات ضد عيوب الصناعة" },
+      { id: "MX-BAT-04", type: "mixer", category: "mixer-all", titleAr: "خلاط مياه فاخر MX-BAT-04", titleEn: "Luxury Faucet ID_MX-BAT-04", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790255405/ID_MX-BAT-04.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790255405/ID_MX-BAT-04.png"], price: 1950, origPrice: 1950, specTag: "خلاط نحاس بقلب سيراميك", specTagEn: "Solid Brass Faucet", badge: "none", customSpecs: "نحاس نقي 100%\nضمان 5 سنوات ضد عيوب الصناعة" },
+      { id: "MX-BAT-06", type: "mixer", category: "mixer-all", titleAr: "خلاط مياه فاخر MX-BAT-06", titleEn: "Luxury Faucet ID_MX-BAT-06", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790255422/ID_MX-BAT-06.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790255422/ID_MX-BAT-06.png"], price: 2050, origPrice: 2050, specTag: "خلاط نحاس بقلب سيراميك", specTagEn: "Solid Brass Faucet", badge: "none", customSpecs: "نحاس نقي 100%\nضمان 5 سنوات ضد عيوب الصناعة" }
+    ];
+
+    const defaultStainless = [
+      { id: "SS-304-07", type: "stainless", category: "stainless-all", titleAr: "حوض ستانلس 304 فاخر SS-304-07", titleEn: "Stainless Steel Basin ID_SS-304-07", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790253301/ID_SS-304-07.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790253301/ID_SS-304-07.png"], price: 3200, origPrice: 3200, specTag: "ستانلس 304 مقاوم للخدوش", specTagEn: "304 Stainless Steel", badge: "bestseller", customSpecs: "ستانلس ستيل 304 نقي\nمقاوم للصدأ والخدوش بنسبة 100%" },
+      { id: "SS-304-04", type: "stainless", category: "stainless-all", titleAr: "حوض ستانلس 304 فاخر SS-304-04", titleEn: "Stainless Steel Basin ID_SS-304-04", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790253292/ID_SS-304-04.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790253292/ID_SS-304-04.png"], price: 3100, origPrice: 3100, specTag: "ستانلس 304 مقاوم للخدوش", specTagEn: "304 Stainless Steel", badge: "none", customSpecs: "ستانلس ستيل 304 نقي\nمقاوم للصدأ والخدوش بنسبة 100%" },
+      { id: "SS-304-02", type: "stainless", category: "stainless-all", titleAr: "حوض ستانلس 304 فاخر SS-304-02", titleEn: "Stainless Steel Basin ID_SS-304-02", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790253276/ID_SS-304-02.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790253276/ID_SS-304-02.png"], price: 2950, origPrice: 2950, specTag: "ستانلس 304 مقاوم للخدوش", specTagEn: "304 Stainless Steel", badge: "none", customSpecs: "ستانلس ستيل 304 نقي\nمقاوم للصدأ والخدوش بنسبة 100%" },
+      { id: "SS-304-06", type: "stainless", category: "stainless-all", titleAr: "حوض ستانلس 304 فاخر SS-304-06", titleEn: "Stainless Steel Basin ID_SS-304-06", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790253273/ID_SS-304-06.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790253273/ID_SS-304-06.png"], price: 3150, origPrice: 3150, specTag: "ستانلس 304 مقاوم للخدوش", specTagEn: "304 Stainless Steel", badge: "none", customSpecs: "ستانلس ستيل 304 نقي\nمقاوم للصدأ والخدوش بنسبة 100%" },
+      { id: "SS-304-03", type: "stainless", category: "stainless-all", titleAr: "حوض ستانلس 304 فاخر SS-304-03", titleEn: "Stainless Steel Basin ID_SS-304-03", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790253207/ID_SS-304-03.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790253207/ID_SS-304-03.png"], price: 3000, origPrice: 3000, specTag: "ستانلس 304 مقاوم للخدوش", specTagEn: "304 Stainless Steel", badge: "none", customSpecs: "ستانلس ستيل 304 نقي\nمقاوم للصدأ والخدوش بنسبة 100%" },
+      { id: "SS-304-05", type: "stainless", category: "stainless-all", titleAr: "حوض ستانلس 304 فاخر SS-304-05", titleEn: "Stainless Steel Basin ID_SS-304-05", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790253208/ID_SS-304-05.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790253208/ID_SS-304-05.png"], price: 3100, origPrice: 3100, specTag: "ستانلس 304 مقاوم للخدوش", specTagEn: "304 Stainless Steel", badge: "none", customSpecs: "ستانلس ستيل 304 نقي\nمقاوم للصدأ والخدوش بنسبة 100%" },
+      { id: "SS-304-01", type: "stainless", category: "stainless-all", titleAr: "حوض ستانلس 304 فاخر SS-304-01", titleEn: "Stainless Steel Basin ID_SS-304-01", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790253160/ID_SS-304-01.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790253160/ID_SS-304-01.png"], price: 2900, origPrice: 2900, specTag: "ستانلس 304 مقاوم للخدوش", specTagEn: "304 Stainless Steel", badge: "bestseller", customSpecs: "ستانلس ستيل 304 نقي\nمقاوم للصدأ والخدوش بنسبة 100%" }
+    ];
+
+    let unitProducts = JSON.parse(localStorage.getItem('stora_units')) || defaultUnits;
+    let basinProducts = JSON.parse(localStorage.getItem('stora_basins')) || defaultBasins;
     let porcelainProducts = JSON.parse(localStorage.getItem('stora_porcelain')) || [];
-    let showerProducts = JSON.parse(localStorage.getItem('stora_showers')) || [
-      { id: "SH-80-LOW", type: "shower", category: "shower-all", titleAr: "كابينة شاور سيكوريت (80×80 سم)", titleEn: "Security Glass Shower Cabin (80x80 cm)", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1789045384/80_80_Low.jpg", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1789045384/80_80_Low.jpg"], price: 9400, specTag: "80×80 سم | قاعدة قدم فلات", specTagEn: "80x80 cm | Flat Tray", badge: "none", customSpecs: "زجاج سيكوريت مقسى سمك 10 مم\nإكسسوارات ستانلس مقاومة للصدأ" }
-    ];
-
+    let showerProducts = JSON.parse(localStorage.getItem('stora_showers')) || defaultShowers;
     let toiletProducts = JSON.parse(localStorage.getItem('stora_toilets')) || [];
     let mirrorProducts = JSON.parse(localStorage.getItem('stora_mirrors')) || [];
-    let mixerProducts = JSON.parse(localStorage.getItem('stora_mixers')) || [];
+    let mixerProducts = JSON.parse(localStorage.getItem('stora_mixers')) || defaultMixers;
     let accessoryProducts = JSON.parse(localStorage.getItem('stora_accessories')) || [];
-    let stainlessProducts = JSON.parse(localStorage.getItem('stora_stainless')) || [];
+    let stainlessProducts = JSON.parse(localStorage.getItem('stora_stainless')) || defaultStainless;
+
+    if (basinProducts.length <= 1) basinProducts = defaultBasins;
+    if (showerProducts.length <= 1) showerProducts = defaultShowers;
+    if (mixerProducts.length <= 1) mixerProducts = defaultMixers;
+    if (stainlessProducts.length <= 1) stainlessProducts = defaultStainless;
+
+    // إصلاح جذري: ضبط ومطابقة خاصية السعر القديم لجميع الموديلات تلقائياً لمنع أي تداخل
+    [unitProducts, basinProducts, porcelainProducts, showerProducts, toiletProducts, mirrorProducts, mixerProducts, accessoryProducts, stainlessProducts].forEach(arr => {
+      arr.forEach(prod => {
+        if (prod.type === 'unit') {
+          if (!prod.origPrices && prod.prices) prod.origPrices = { ...prod.prices };
+        } else {
+          if (!prod.origPrice && prod.price) prod.origPrice = prod.price;
+        }
+      });
+    });
+
+    function saveAllDataToStorage() {
+      localStorage.setItem('stora_units', JSON.stringify(unitProducts));
+      localStorage.setItem('stora_basins', JSON.stringify(basinProducts));
+      localStorage.setItem('stora_porcelain', JSON.stringify(porcelainProducts));
+      localStorage.setItem('stora_showers', JSON.stringify(showerProducts));
+      localStorage.setItem('stora_toilets', JSON.stringify(toiletProducts));
+      localStorage.setItem('stora_mirrors', JSON.stringify(mirrorProducts));
+      localStorage.setItem('stora_mixers', JSON.stringify(mixerProducts));
+      localStorage.setItem('stora_accessories', JSON.stringify(accessoryProducts));
+      localStorage.setItem('stora_stainless', JSON.stringify(stainlessProducts));
+    }
 
     const translations = {
       ar: {
@@ -1068,6 +1158,122 @@
       setMainMode(mainMode);
     }
 
+    // دوال إدارة الخصومات والزيادات الجماعية مع حفظ نسبة الخصم لتطبيقها على أي موديل جديد
+    function applyGlobalDiscount() {
+      const pct = parseFloat(document.getElementById('globalPercent').value);
+      if (!pct || pct <= 0 || pct >= 100) {
+        alert("يرجى إدخال نسبة خصم صحيحة بين 1 و 99");
+        return;
+      }
+      localStorage.setItem('stora_active_discount', pct);
+      processGlobalPriceChange(pct, 'discount');
+      alert(`تم تطبيق خصم عام بنسبة ${pct}% وعرض السعر القديم مشطوباً بنجاح!`);
+      closeAdminModal();
+    }
+
+    function applyGlobalMarkup() {
+      const pct = parseFloat(document.getElementById('globalPercent').value);
+      if (!pct || pct <= 0) {
+        alert("يرجى إدخال نسبة زيادة صحيحة");
+        return;
+      }
+      localStorage.removeItem('stora_active_discount');
+      processGlobalPriceChange(pct, 'markup');
+      alert(`تم تطبيق زيادة بنسبة ${pct}% وحفظ التغييرات بنجاح!`);
+      closeAdminModal();
+    }
+
+    function removeGlobalDiscount() {
+      localStorage.removeItem('stora_active_discount');
+      unitProducts.forEach(prod => {
+        if (prod.origPrices) {
+          prod.prices = { ...prod.origPrices };
+        }
+        prod.discountBadge = null;
+      });
+
+      const keysGroups = [
+        { arr: basinProducts },
+        { arr: porcelainProducts },
+        { arr: showerProducts },
+        { arr: toiletProducts },
+        { arr: mirrorProducts },
+        { arr: mixerProducts },
+        { arr: accessoryProducts },
+        { arr: stainlessProducts }
+      ];
+
+      keysGroups.forEach(grp => {
+        grp.arr.forEach(prod => {
+          if (prod.origPrice) {
+            prod.price = prod.origPrice;
+          }
+          prod.discountBadge = null;
+        });
+      });
+
+      saveAllDataToStorage();
+      renderCatalog();
+      alert("تم إزالة الخصومات وإعادة الأسعار الأصلية تماماً!");
+      closeAdminModal();
+    }
+
+    function processGlobalPriceChange(pct, type) {
+      unitProducts.forEach(prod => {
+        if (!prod.origPrices) {
+          prod.origPrices = { ...prod.prices };
+        }
+        let newPrices = {};
+        for (let sz in prod.prices) {
+          let currentP = prod.prices[sz];
+          if (!prod.origPrices[sz] || prod.origPrices[sz] <= currentP) {
+            prod.origPrices[sz] = currentP;
+          }
+          if (type === 'discount') {
+            newPrices[sz] = Math.round(currentP * (1 - pct / 100));
+          } else {
+            newPrices[sz] = Math.round(currentP * (1 + pct / 100));
+            prod.origPrices[sz] = newPrices[sz];
+          }
+        }
+        prod.prices = newPrices;
+        prod.discountBadge = type === 'discount' ? `خصم ${pct}%` : null;
+      });
+
+      const keysGroups = [
+        { arr: basinProducts },
+        { arr: porcelainProducts },
+        { arr: showerProducts },
+        { arr: toiletProducts },
+        { arr: mirrorProducts },
+        { arr: mixerProducts },
+        { arr: accessoryProducts },
+        { arr: stainlessProducts }
+      ];
+
+      keysGroups.forEach(grp => {
+        grp.arr.forEach(prod => {
+          if (!prod.origPrice) {
+            prod.origPrice = prod.price;
+          }
+          let currentP = prod.price;
+          if (!prod.origPrice || prod.origPrice <= currentP) {
+            prod.origPrice = currentP;
+          }
+          if (type === 'discount') {
+            prod.price = Math.round(currentP * (1 - pct / 100));
+          } else {
+            prod.price = Math.round(currentP * (1 + pct / 100));
+            prod.origPrice = prod.price;
+          }
+          prod.discountBadge = type === 'discount' ? `خصم ${pct}%` : null;
+        });
+      });
+
+      saveAllDataToStorage();
+      renderCatalog();
+    }
+
     // تفعيل تغيير كلمة المرور للأدمن
     function changeAdminPassword() {
       const oldP = document.getElementById('oldPass').value;
@@ -1096,7 +1302,7 @@
       document.getElementById('confirmPass').value = "";
     }
 
-    // الضغط مطولاً على F1 لمدة ثانية لفتح لوحة الأدمن
+    // الضغط مطولاً على F1 لفتح لوحة الأدمن
     let f1Timer = null;
     document.addEventListener('keydown', function(e) {
       if (e.key === 'F1') {
@@ -1201,8 +1407,22 @@
       listContainer.innerHTML = html || '<p style="text-align:center; color:var(--text-muted);">لا توجد منتجات حالياً</p>';
     }
 
+    // دالة التعديل المصححة تماماً لمعالجة كل قسم
     function startEditProduct(storageKey, index) {
-      let arr = JSON.parse(localStorage.getItem(storageKey)) || [];
+      let arrMap = {
+        'stora_units': unitProducts,
+        'stora_basins': basinProducts,
+        'stora_porcelain': porcelainProducts,
+        'stora_showers': showerProducts,
+        'stora_toilets': toiletProducts,
+        'stora_mirrors': mirrorProducts,
+        'stora_mixers': mixerProducts,
+        'stora_accessories': accessoryProducts,
+        'stora_stainless': stainlessProducts
+      };
+
+      let arr = arrMap[storageKey];
+      if (!arr) return;
       const prod = arr[index];
       if (!prod) return;
 
@@ -1219,45 +1439,45 @@
 
       if (prod.type === 'unit') {
         document.getElementById('newUnitSubCategory').value = prod.category || "wood";
-        document.getElementById('price60').value = prod.prices?.[60] || "";
-        document.getElementById('price80').value = prod.prices?.[80] || "";
-        document.getElementById('price100').value = prod.prices?.[100] || "";
-        document.getElementById('img60').value = prod.sizeImages?.[60] || "";
-        document.getElementById('img80').value = prod.sizeImages?.[80] || "";
-        document.getElementById('img100').value = prod.sizeImages?.[100] || "";
+        document.getElementById('price60').value = prod.origPrices?.[60] || prod.prices?.[60] || "";
+        document.getElementById('price80').value = prod.origPrices?.[80] || prod.prices?.[80] || "";
+        document.getElementById('price100').value = prod.origPrices?.[100] || prod.prices?.[100] || "";
       } else {
-        document.getElementById('singlePrice').value = prod.price || "";
+        document.getElementById('singlePrice').value = prod.origPrice || prod.price || "";
       }
 
       document.getElementById('newImage').value = prod.image || "";
       document.getElementById('newExtraImages').value = prod.extraImages ? prod.extraImages.slice(1).join(', ') : "";
       document.getElementById('newSpecs').value = prod.customSpecs || "";
+      
+      document.querySelector('.admin-content').scrollTop = 0;
     }
 
+    // دالة الحذف المصححة تماماً لمعالجة كل قسم
     function deleteProduct(storageKey, index) {
-      if (confirm("هل أنت متأكد من حذف هذا المنتج؟")) {
-        let arr = JSON.parse(localStorage.getItem(storageKey)) || [];
-        arr.splice(index, 1);
-        localStorage.setItem(storageKey, JSON.stringify(arr));
-        
-        syncArraysFromStorage();
-        renderAdminProductsList();
-        initDynamicSliderImages();
-        renderCatalog();
-        alert("تم الحذف بنجاح!");
-      }
-    }
+      if (confirm("هل أنت متأكد من حذف هذا المنتج نهائياً؟")) {
+        let arrMap = {
+          'stora_units': unitProducts,
+          'stora_basins': basinProducts,
+          'stora_porcelain': porcelainProducts,
+          'stora_showers': showerProducts,
+          'stora_toilets': toiletProducts,
+          'stora_mirrors': mirrorProducts,
+          'stora_mixers': mixerProducts,
+          'stora_accessories': accessoryProducts,
+          'stora_stainless': stainlessProducts
+        };
 
-    function syncArraysFromStorage() {
-      unitProducts = JSON.parse(localStorage.getItem('stora_units')) || unitProducts;
-      basinProducts = JSON.parse(localStorage.getItem('stora_basins')) || basinProducts;
-      porcelainProducts = JSON.parse(localStorage.getItem('stora_porcelain')) || porcelainProducts;
-      showerProducts = JSON.parse(localStorage.getItem('stora_showers')) || showerProducts;
-      toiletProducts = JSON.parse(localStorage.getItem('stora_toilets')) || toiletProducts;
-      mirrorProducts = JSON.parse(localStorage.getItem('stora_mirrors')) || mirrorProducts;
-      mixerProducts = JSON.parse(localStorage.getItem('stora_mixers')) || mixerProducts;
-      accessoryProducts = JSON.parse(localStorage.getItem('stora_accessories')) || accessoryProducts;
-      stainlessProducts = JSON.parse(localStorage.getItem('stora_stainless')) || stainlessProducts;
+        let arr = arrMap[storageKey];
+        if (arr && arr[index]) {
+          arr.splice(index, 1);
+          saveAllDataToStorage();
+          renderAdminProductsList();
+          initDynamicSliderImages();
+          renderCatalog();
+          alert("تم الحذف بنجاح!");
+        }
+      }
     }
 
     function saveProductFromAdmin() {
@@ -1285,6 +1505,21 @@
       }
 
       const newId = customId || ("PRD-" + Math.floor(1000 + Math.random() * 9000));
+      
+      let targetKey = 'stora_units';
+      let targetArr = unitProducts;
+      if (mode === 'basin') { targetKey = 'stora_basins'; targetArr = basinProducts; }
+      else if (mode === 'porcelain') { targetKey = 'stora_porcelain'; targetArr = porcelainProducts; }
+      else if (mode === 'shower') { targetKey = 'stora_showers'; targetArr = showerProducts; }
+      else if (mode === 'toilet') { targetKey = 'stora_toilets'; targetArr = toiletProducts; }
+      else if (mode === 'mirror') { targetKey = 'stora_mirrors'; targetArr = mirrorProducts; }
+      else if (mode === 'mixer') { targetKey = 'stora_mixers'; targetArr = mixerProducts; }
+      else if (mode === 'accessory') { targetKey = 'stora_accessories'; targetArr = accessoryProducts; }
+      else if (mode === 'stainless') { targetKey = 'stora_stainless'; targetArr = stainlessProducts; }
+
+      // قراءة نسبة الخصم النشطة حالياً إن وجدت
+      const activeDiscount = parseFloat(localStorage.getItem('stora_active_discount')) || 0;
+
       let newItem = {
         id: newId,
         type: mode,
@@ -1293,54 +1528,55 @@
         titleEn: autoTranslate(title),
         image: img,
         extraImages: extraImagesArr,
-        specTag: "مقاسات متعددة وتشطيبات فاخرة",
-        specTagEn: "Multiple sizes & luxury finishes",
+        specTag: "تشطيبات فاخرة",
+        specTagEn: "Luxury finishes",
         badge: badge,
-        customSpecs: customSpecs || "الخامة: بورسلين عالي الجودة\nالضمان: 5 سنوات"
+        discountBadge: activeDiscount > 0 ? `خصم ${activeDiscount}%` : null,
+        customSpecs: customSpecs || "الخامة عالية الجودة\nالضمان: 5 سنوات"
       };
 
       if (mode === 'unit') {
         const p60 = parseFloat(document.getElementById('price60').value) || 4500;
         const p80 = parseFloat(document.getElementById('price80').value) || 5200;
         const p100 = parseFloat(document.getElementById('price100').value) || 5900;
-        const i60 = document.getElementById('img60').value.trim();
-        const i80 = document.getElementById('img80').value.trim();
-        const i100 = document.getElementById('img100').value.trim();
-
         newItem.sizes = [60, 80, 100];
-        newItem.prices = { 60: p60, 80: p80, 100: p100 };
-        newItem.sizeImages = { 60: i60, 80: i80, 100: i100 };
+        newItem.origPrices = { 60: p60, 80: p80, 100: p100 };
+        if (activeDiscount > 0) {
+          newItem.prices = {
+            60: Math.round(p60 * (1 - activeDiscount / 100)),
+            80: Math.round(p80 * (1 - activeDiscount / 100)),
+            100: Math.round(p100 * (1 - activeDiscount / 100))
+          };
+        } else {
+          newItem.prices = { 60: p60, 80: p80, 100: p100 };
+        }
         newItem.selectedSize = 60;
       } else {
-        newItem.price = parseFloat(document.getElementById('singlePrice').value) || 2000;
+        const sp = parseFloat(document.getElementById('singlePrice').value) || 2000;
+        newItem.origPrice = sp;
+        if (activeDiscount > 0) {
+          newItem.price = Math.round(sp * (1 - activeDiscount / 100));
+        } else {
+          newItem.price = sp;
+        }
       }
-
-      let targetKey = 'stora_units';
-      if (mode === 'basin') targetKey = 'stora_basins';
-      else if (mode === 'porcelain') targetKey = 'stora_porcelain';
-      else if (mode === 'shower') targetKey = 'stora_showers';
-      else if (mode === 'toilet') targetKey = 'stora_toilets';
-      else if (mode === 'mirror') targetKey = 'stora_mirrors';
-      else if (mode === 'mixer') targetKey = 'stora_mixers';
-      else if (mode === 'accessory') targetKey = 'stora_accessories';
-      else if (mode === 'stainless') targetKey = 'stora_stainless';
-
-      let targetArr = JSON.parse(localStorage.getItem(targetKey)) || [];
 
       if (editIdx >= 0 && editKey === targetKey) {
         targetArr[editIdx] = newItem;
       } else {
         if (editIdx >= 0 && editKey !== targetKey) {
-          let oldArr = JSON.parse(localStorage.getItem(editKey)) || [];
-          oldArr.splice(editIdx, 1);
-          localStorage.setItem(editKey, JSON.stringify(oldArr));
+          let oldArrMap = {
+            'stora_units': unitProducts, 'stora_basins': basinProducts, 'stora_porcelain': porcelainProducts,
+            'stora_showers': showerProducts, 'stora_toilets': toiletProducts, 'stora_mirrors': mirrorProducts,
+            'stora_mixers': mixerProducts, 'stora_accessories': accessoryProducts, 'stora_stainless': stainlessProducts
+          };
+          let oldArr = oldArrMap[editKey];
+          if (oldArr) oldArr.splice(editIdx, 1);
         }
         targetArr.unshift(newItem);
       }
 
-      localStorage.setItem(targetKey, JSON.stringify(targetArr));
-      syncArraysFromStorage();
-
+      saveAllDataToStorage();
       alert("تم حفظ المنتج بنجاح وتحديث المتجر فوراً!");
       closeAdminModal();
       initDynamicSliderImages();
@@ -1349,11 +1585,8 @@
 
     function openProductModal(id, mode) {
       let item = null;
-      if (mode === 'unit') item = unitProducts.find(p => p.id === id);
-      else {
-        const allOther = [...basinProducts, ...porcelainProducts, ...showerProducts, ...toiletProducts, ...mirrorProducts, ...mixerProducts, ...accessoryProducts, ...stainlessProducts];
-        item = allOther.find(p => p.id === id);
-      }
+      const allOther = [...unitProducts, ...basinProducts, ...porcelainProducts, ...showerProducts, ...toiletProducts, ...mirrorProducts, ...mixerProducts, ...accessoryProducts, ...stainlessProducts];
+      item = allOther.find(p => p.id === id);
       if (!item) return;
 
       currentModalProduct = { ...item, mode };
@@ -1398,14 +1631,26 @@
       const t = translations[currentLang];
       
       let rawPrice = 0;
-      if (item.mode === 'unit' && item.prices) {
-        rawPrice = item.prices[modalSelectedSize] || item.prices[60] || 4600;
+      let rawOrig = 0;
+      if (item.mode === 'unit') {
+        rawPrice = item.prices?.[modalSelectedSize] || item.prices?.[60] || 4600;
+        rawOrig = item.origPrices?.[modalSelectedSize] || item.origPrices?.[60] || rawPrice;
       } else {
         rawPrice = item.price || 2000;
+        rawOrig = item.origPrice || rawPrice;
       }
 
       const formatted = formatPrice(rawPrice);
-      document.getElementById('modalPrice').innerText = `${formatted.value} ${formatted.symbol}`;
+      const formattedOrig = formatPrice(rawOrig);
+      
+      let priceHtml = `<span class="price-value">${formatted.value}</span> <span class="currency">${formatted.symbol}</span>`;
+      if (rawPrice < rawOrig) {
+        priceHtml = `
+          <span class="price-value">${formatted.value}</span> <span class="currency">${formatted.symbol}</span>
+          <span class="old-price">${formattedOrig.value} ${formattedOrig.symbol}</span>
+        `;
+      }
+      document.getElementById('modalPriceContainer').innerHTML = priceHtml;
 
       const stockEl = document.getElementById('modalStockCue');
       const actionArea = document.getElementById('modalActionArea');
@@ -1675,8 +1920,25 @@
           statusBadge = `<span class="soldout-badge">${t.soldOutBadgeText}</span>`;
         }
 
-        const rawPrice = item.type === 'unit' ? (item.prices ? item.prices[60] : 4600) : item.price;
+        let discountCornerHtml = '';
+        if (item.discountBadge) {
+          discountCornerHtml = `<span class="discount-corner-badge">${item.discountBadge}</span>`;
+        }
+
+        let rawPrice = item.type === 'unit' ? (item.prices ? item.prices[60] : 4600) : item.price;
+        let rawOrig = item.type === 'unit' ? (item.origPrices ? item.origPrices[60] : rawPrice) : (item.origPrice || rawPrice);
+        
         const formatted = formatPrice(rawPrice);
+        const formattedOrig = formatPrice(rawOrig);
+        
+        let priceHtml = `<span class="price-value">${formatted.value}</span> <span class="currency">${formatted.symbol}</span>`;
+        if (rawPrice < rawOrig) {
+          priceHtml = `
+            <span class="price-value">${formatted.value}</span> <span class="currency">${formatted.symbol}</span>
+            <span class="old-price">${formattedOrig.value} ${formattedOrig.symbol}</span>
+          `;
+        }
+
         const specText = currentLang === 'ar' ? item.specTag : item.specTagEn;
 
         let categoryLabel = t.txtWood;
@@ -1699,6 +1961,7 @@
         card.innerHTML = `
           <div class="card-img-wrapper" onclick="openProductModal('${item.id}', '${item.type === 'unit' ? 'unit' : item.type}')">
             <span class="category-tag">${categoryLabel}</span>
+            ${discountCornerHtml}
             ${statusBadge}
             <img src="${item.image}" alt="${title}" class="card-img" onerror="this.src='https://res.cloudinary.com/rh20s5aa/image/upload/f_auto,q_auto/Intro'">
           </div>
@@ -1708,9 +1971,8 @@
             <div class="badge-info">${specText}</div>
 
             <div class="card-footer">
-              <div>
-                <span class="price-value">${formatted.value}</span>
-                <span class="currency">${formatted.symbol}</span>
+              <div class="price-container">
+                ${priceHtml}
               </div>
               <button class="view-details-btn" onclick="openProductModal('${item.id}', '${item.type === 'unit' ? 'unit' : item.type}')">${t.viewDetailsBtn}</button>
             </div>
@@ -1819,7 +2081,6 @@
         text += `   - ${currentLang === 'ar' ? 'الكمية' : 'Quantity'}: ${item.qty}\n`;
         text += `   - ${currentLang === 'ar' ? 'السعر الإجمالي' : 'Total Price'}: ${totalItemFormatted.value} ${totalItemFormatted.symbol}\n`;
         text += `   - ${currentLang === 'ar' ? 'صورة الموديل' : 'Image'}: ${item.image}\n\n`;
-        totalEgp += itemTotalEgp;
       });
 
       const totalFormatted = formatPrice(totalEgp);
