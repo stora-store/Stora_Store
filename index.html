@@ -542,14 +542,14 @@
       <button class="filter-btn" id="btnFilterAll" onclick="filterCatalog('all', this)"><span id="txtAllUnits">عرض كل الوحدات</span></button>
     </div>
 
-    <div class="filter-pills" id="basinsFilterBar" style="display: none;"><button class="filter-btn active" id="filterBasinAll" onclick="filterCatalog('basin-all', this)">عرض كل الأحواض الديكورية</button></div>
-    <div class="filter-pills" id="porcelainFilterBar" style="display: none;"><button class="filter-btn active" id="filterPorcelainAll" onclick="filterCatalog('porcelain-all', this)">جميع أحواض البورسلين الفاخرة</button></div>
-    <div class="filter-pills" id="showersFilterBar" style="display: none;"><button class="filter-btn active" id="filterShowerAll" onclick="filterCatalog('shower-all', this)">جميع كبائن الشاور والبانيوهات</button></div>
-    <div class="filter-pills" id="toiletsFilterBar" style="display: none;"><button class="filter-btn active" id="filterToiletAll" onclick="filterCatalog('toilet-all', this)">جميع قواعد التواليت الفاخرة</button></div>
-    <div class="filter-pills" id="mirrorsFilterBar" style="display: none;"><button class="filter-btn active" id="filterMirrorAll" onclick="filterCatalog('mirror-all', this)">جميع المرايا الديكورية والليد</button></div>
-    <div class="filter-pills" id="mixersFilterBar" style="display: none;"><button class="filter-btn active" id="filterMixerAll" onclick="filterCatalog('mixer-all', this)">جميع خلاطات المياه</button></div>
-    <div class="filter-pills" id="accessoriesFilterBar" style="display: none;"><button class="filter-btn active" id="filterAccessoryAll" onclick="filterCatalog('accessory-all', this)">جميع إكسسوارات الحمام</button></div>
-    <div class="filter-pills" id="stainlessFilterBar" style="display: none;"><button class="filter-btn active" id="filterStainlessAll" onclick="filterCatalog('stainless-all', this)">جميع أحواض الستانلس</button></div>
+    <div class="filter-pills" id="basinsFilterBar" style="display: none;"><button class="filter-btn active" id="filterBasinAll" onclick="filterCatalog('basin-all', this)"><span id="txtBasinAll">عرض كل الأحواض الديكورية</span></button></div>
+    <div class="filter-pills" id="porcelainFilterBar" style="display: none;"><button class="filter-btn active" id="filterPorcelainAll" onclick="filterCatalog('porcelain-all', this)"><span id="txtPorcelainAll">جميع أحواض البورسلين الفاخرة</span></button></div>
+    <div class="filter-pills" id="showersFilterBar" style="display: none;"><button class="filter-btn active" id="filterShowerAll" onclick="filterCatalog('shower-all', this)"><span id="txtShowerAll">جميع كبائن الشاور والبانيوهات</span></button></div>
+    <div class="filter-pills" id="toiletsFilterBar" style="display: none;"><button class="filter-btn active" id="filterToiletAll" onclick="filterCatalog('toilet-all', this)"><span id="txtToiletAll">جميع قواعد التواليت الفاخرة</span></button></div>
+    <div class="filter-pills" id="mirrorsFilterBar" style="display: none;"><button class="filter-btn active" id="filterMirrorAll" onclick="filterCatalog('mirror-all', this)"><span id="txtMirrorAll">جميع المرايا الديكورية والليد</span></button></div>
+    <div class="filter-pills" id="mixersFilterBar" style="display: none;"><button class="filter-btn active" id="filterMixerAll" onclick="filterCatalog('mixer-all', this)"><span id="txtMixerAll">جميع خلاطات المياه</span></button></div>
+    <div class="filter-pills" id="accessoriesFilterBar" style="display: none;"><button class="filter-btn active" id="filterAccessoryAll" onclick="filterCatalog('accessory-all', this)"><span id="txtAccessoryAll">جميع إكسسوارات الحمام</span></button></div>
+    <div class="filter-pills" id="stainlessFilterBar" style="display: none;"><button class="filter-btn active" id="filterStainlessAll" onclick="filterCatalog('stainless-all', this)"><span id="txtStainlessAll">جميع أحواض الستانلس</span></button></div>
   </section>
 
   <main class="catalog-container">
@@ -874,14 +874,13 @@
     let modalSelectedSize = 60;
     let modalQuantity = 1;
 
-    // المواصفات الخاصة الافتراضية المطلوبة
+    // المواصفات الافتراضية
     const defaultSpecsText = `مصنوع من ألواح بورديوم عالية الكثافة ومقاومة تامة للمياه والرطوبة
 أدراج ومفصلات مزودة بنظام الإغلاق السلس والصامت (Soft Close).
 سطح خارجي مقاوم للخدوش وسهل التنظيف بمقابض ومستلزمات تثبيت مقاومة للصدأ.
 يشمل وحدة الحوض، الحوض الخزفي، ومستلزمات التركيب الكاملة.
 ضمان مدى الحياة ضد عيوب الصناعة.`;
 
-    // الموديلات الكاملة
     const defaultUnits = [
       { id: "UN-MB-27", type: "unit", category: "wood", titleAr: "وحدة حمام خشبية فاخرة #27", titleEn: "Luxury Wooden Unit #27", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png"], sizes: [60, 80, 100], prices: { 60: 6800, 80: 7900, 100: 10200 }, origPrices: { 60: 6800, 80: 7900, 100: 10200 }, selectedSize: 60, specTag: "مقاس 60-80-100 سم", specTagEn: "Size 60-80-100 cm", badge: "bestseller", customSpecs: defaultSpecsText },
       { id: "UN-MB-21", type: "unit", category: "wood", titleAr: "وحدة حمام خشبية فاخرة #21", titleEn: "Luxury Wooden Unit #21", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-21.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-21.png"], sizes: [60, 80, 100], prices: { 60: 6800, 80: 7900, 100: 10200 }, origPrices: { 60: 6800, 80: 7900, 100: 10200 }, selectedSize: 60, specTag: "مقاس 60-80-100 سم", specTagEn: "Size 60-80-100 cm", badge: "none", customSpecs: defaultSpecsText },
@@ -972,13 +971,6 @@
     ];
 
     let unitProducts = JSON.parse(localStorage.getItem('stora_units')) || defaultUnits;
-    
-    // فرض تحديث الوحدات بالمواصفات الجديدة المطلوبة تلقائياً
-    unitProducts.forEach(prod => {
-      prod.customSpecs = defaultSpecsText;
-    });
-    localStorage.setItem('stora_units', JSON.stringify(unitProducts));
-
     let basinProducts = JSON.parse(localStorage.getItem('stora_basins')) || defaultBasins;
     let porcelainProducts = JSON.parse(localStorage.getItem('stora_porcelain')) || [];
     let showerProducts = JSON.parse(localStorage.getItem('stora_showers')) || defaultShowers;
@@ -996,6 +988,7 @@
     [unitProducts, basinProducts, porcelainProducts, showerProducts, toiletProducts, mirrorProducts, mixerProducts, accessoryProducts, stainlessProducts].forEach(arr => {
       arr.forEach(prod => {
         if (!prod.customSpecs || prod.type === 'unit') prod.customSpecs = defaultSpecsText;
+        if (!prod.titleEn) prod.titleEn = autoTranslate(prod.titleAr);
         if (prod.type === 'unit') {
           if (!prod.origPrices && prod.prices) prod.origPrices = { ...prod.prices };
         } else {
@@ -1054,6 +1047,14 @@
         txtWood: "تصنيف الخشبيات",
         txtImported: "المستورد",
         txtAllUnits: "عرض كل الوحدات",
+        txtBasinAll: "عرض كل الأحواض الديكورية",
+        txtPorcelainAll: "جميع أحواض البورسلين الفاخرة",
+        txtShowerAll: "جميع كبائن الشاور والبانيوهات",
+        txtToiletAll: "جميع قواعد التواليت الفاخرة",
+        txtMirrorAll: "جميع المرايا الديكورية والليد",
+        txtMixerAll: "جميع خلاطات المياه",
+        txtAccessoryAll: "جميع إكسسوارات الحمام",
+        txtStainlessAll: "جميع أحواض الستانلس",
         sizeLabel: "اختر المقاس المطلوب:",
         qtyLabel: "الكمية المطلوبة:",
         sizeUnit: "سم",
@@ -1138,6 +1139,14 @@
         txtWood: "Wood",
         txtImported: "Imported",
         txtAllUnits: "All Units",
+        txtBasinAll: "View All Countertop Basins",
+        txtPorcelainAll: "All Luxury Porcelain Basins",
+        txtShowerAll: "All Shower Cabins & Trays",
+        txtToiletAll: "All Luxury Toilets",
+        txtMirrorAll: "All Decorative & LED Mirrors",
+        txtMixerAll: "All Water Faucets",
+        txtAccessoryAll: "All Bathroom Accessories",
+        txtStainlessAll: "All Stainless Basins",
         sizeLabel: "Select Size:",
         qtyLabel: "Quantity:",
         sizeUnit: "cm",
@@ -1190,24 +1199,39 @@
     function autoTranslate(text) {
       if (!text) return "";
       if (currentLang === 'ar') return text;
-      return text
-        .replace(/مصنوع من ألواح بورديوم عالية الكثافة ومقاومة تامة للمياه والرطوبة/g, "Made of high-density bordium panels with complete resistance to water and moisture.")
-        .replace(/أدراج ومفصلات مزودة بنظام الإغلاق السلس والصامت \(Soft Close\)\./g, "Drawers and hinges equipped with a Soft Close silent closing system.")
-        .replace(/سطح خارجي مقاوم للخدوش وسهل التنظيف بمقابض ومستلزمات تثبيت مقاومة للصدأ\./g, "Scratch-resistant, easy-to-clean exterior surface featuring rust-resistant handles and mounting hardware.")
-        .replace(/يشمل وحدة الحوض، الحوض الخزفي، ومستلزمات التركيب الكاملة\./g, "Includes the vanity unit, ceramic basin, and complete installation accessories.")
-        .replace(/ضمان مدى الحياة ضد عيوب الصناعة\./g, "Lifetime warranty against manufacturing defects.")
-        .replace(/وحدة حمام/g, "Bathroom Unit")
+      
+      let translated = text
+        .replace(/وحدة حمام بتصميم خشبي/g, "Wooden Vanity Unit")
+        .replace(/وحدة حمام رخامية/g, "Marble Vanity Unit")
+        .replace(/وحدة حمام ملونة/g, "Colored Vanity Unit")
+        .replace(/وحدة حمام مستوردة/g, "Imported Vanity Unit")
+        .replace(/وحدة حمام/g, "Bathroom Vanity Unit")
+        .replace(/حوض ديكور بيضاوي فوق الرخام/g, "Oval Countertop Basin")
         .replace(/حوض ديكور/g, "Decorative Basin")
         .replace(/حوض بورسلين/g, "Porcelain Basin")
+        .replace(/كابينة شاور بقاعدة بانيو منخفض/g, "Shower Cabin with Low Tray")
+        .replace(/كابينة شاور بقاعدة بانيو عالي/g, "Shower Cabin with High Tray")
         .replace(/كابينة شاور/g, "Shower Cabin")
         .replace(/قاعدة تواليت/g, "Toilet Bowl")
         .replace(/مرآة ليد/g, "LED Mirror")
+        .replace(/خلاط مياه فاخر/g, "Luxury Faucet")
         .replace(/خلاط مياه/g, "Water Faucet")
         .replace(/إكسسوار/g, "Accessory")
-        .replace(/ستانلس/g, "Stainless Steel")
+        .replace(/حوض ستانلس 304 فاخر/g, "Luxury 304 Stainless Steel Basin")
+        .replace(/حوض ستانلس/g, "Stainless Steel Basin")
         .replace(/رخام/g, "Marble")
         .replace(/خشبي/g, "Wooden")
-        .replace(/المستورد/g, "Imported");
+        .replace(/المستورد/g, "Imported")
+        .replace(/تصميم خشبي/g, "Wooden Design")
+        .replace(/تصميم رخامي/g, "Marble Design")
+        .replace(/فاخر/g, "Luxury")
+        .replace(/عصري/g, "Modern");
+
+      // إذا كانت الجملة لم تتغير كلياً أو أضيفت حديثاً ولم تطابق استبدالاً حرفياً، نولد ترجمة تلقائية ذكية نظيفة
+      if (translated === text && /[\u0600-\u06FF]/.test(text)) {
+        return "Modern Luxury Bathroom Model " + text.replace(/[^0-9#]/g, '');
+      }
+      return translated;
     }
 
     function initDynamicSliderImages() {
@@ -1284,6 +1308,16 @@
       document.getElementById('txtWood').innerText = t.txtWood;
       document.getElementById('txtImported').innerText = t.txtImported;
       document.getElementById('txtAllUnits').innerText = t.txtAllUnits;
+
+      document.getElementById('txtBasinAll').innerText = t.txtBasinAll;
+      document.getElementById('txtPorcelainAll').innerText = t.txtPorcelainAll;
+      document.getElementById('txtShowerAll').innerText = t.txtShowerAll;
+      document.getElementById('txtToiletAll').innerText = t.txtToiletAll;
+      document.getElementById('txtMirrorAll').innerText = t.txtMirrorAll;
+      document.getElementById('txtMixerAll').innerText = t.txtMixerAll;
+      document.getElementById('txtAccessoryAll').innerText = t.txtAccessoryAll;
+      document.getElementById('txtStainlessAll').innerText = t.txtStainlessAll;
+
       document.getElementById('bannerBrandTitle').innerText = t.bannerBrandTitle;
       document.getElementById('bannerDeliveryBadge').innerText = t.bannerDeliveryBadge;
 
@@ -1987,7 +2021,7 @@
         const allProducts = [...unitProducts, ...basinProducts, ...porcelainProducts, ...showerProducts, ...toiletProducts, ...mirrorProducts, ...mixerProducts, ...accessoryProducts, ...stainlessProducts];
         listToDisplay = allProducts.filter(item => 
           item.titleAr.toLowerCase().includes(searchQuery) || 
-          item.titleEn.toLowerCase().includes(searchQuery) ||
+          (item.titleEn && item.titleEn.toLowerCase().includes(searchQuery)) ||
           item.id.toLowerCase().includes(searchQuery)
         );
       }
