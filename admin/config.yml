@@ -1,13 +1,10 @@
 backend:
-  name: github
-  repo: stora-store/Stora_Store
-  branch: main
+  name: test-repo
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  # 1. قسم وحدات الحمام (أسعار ومقاسات متعددة)
   - name: "units"
     label: "🗄️ وحدات الحمام"
     folder: "data/units"
@@ -26,26 +23,9 @@ collections:
           - {label: "ألوان (Colors)", value: "colors"}
           - {label: "مستورد (Imported)", value: "imported"}
       - {label: "الصورة الرئيسية", name: "image", widget: "image"}
-      - label: "الأسعار حسب المقاس"
-        name: "prices"
-        widget: "object"
-        fields:
-          - {label: "سعر 60 سم", name: "60", widget: "number", required: false}
-          - {label: "سعر 80 سم", name: "80", widget: "number", required: false}
-          - {label: "سعر 100 سم", name: "100", widget: "number", required: false}
-      - label: "شارة المنتج (الحالة)"
-        name: "badge"
-        widget: "select"
-        options:
-          - {label: "بدون شارة", value: "none"}
-          - {label: "🔥 الأكثر طلباً", value: "bestseller"}
-          - {label: "🆕 جديد", value: "new"}
-          - {label: "❌ نفذ بالكامل", value: "soldout"}
-      - {label: "المواصفات الفنية", name: "customSpecs", widget: "text"}
 
-  # 2. قسم باقي المنتجات (سعر موحد)
   - name: "general_products"
-    label: "🛁 باقي المنتجات (أحواض، شاور، إلخ)"
+    label: "🛁 باقي المنتجات"
     folder: "data/products"
     create: true
     extension: "json"
@@ -53,26 +33,5 @@ collections:
     fields:
       - {label: "كود المنتج (ID)", name: "id", widget: "string"}
       - {label: "اسم المنتج (عربي)", name: "titleAr", widget: "string"}
-      - label: "القسم الرئيسي"
-        name: "type"
-        widget: "select"
-        options:
-          - {label: "أحواض ديكور", value: "basin"}
-          - {label: "أحواض بورسلين", value: "porcelain"}
-          - {label: "كبائن شاور", value: "shower"}
-          - {label: "قواعد تواليت", value: "toilet"}
-          - {label: "مرايا ليد", value: "mirror"}
-          - {label: "خلاطات مياه", value: "mixer"}
-          - {label: "إكسسوارات", value: "accessory"}
-          - {label: "أحواض ستانلس", value: "stainless"}
       - {label: "السعر", name: "price", widget: "number"}
       - {label: "الصورة الرئيسية", name: "image", widget: "image"}
-      - label: "شارة المنتج (الحالة)"
-        name: "badge"
-        widget: "select"
-        options:
-          - {label: "بدون شارة", value: "none"}
-          - {label: "🔥 الأكثر طلباً", value: "bestseller"}
-          - {label: "🆕 جديد", value: "new"}
-          - {label: "❌ نفذ بالكامل", value: "soldout"}
-      - {label: "المواصفات الفنية", name: "customSpecs", widget: "text"}
