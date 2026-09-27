@@ -1,14 +1,13 @@
 backend:
   name: github
-  repo: stora-store/Stora_Store  
+  repo: stora-store/Stora_Store
   branch: main
 
-# مكان حفظ الصور التي سترفعها من لوحة التحكم
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  # 1. قسم وحدات الحمام (لأن لها مقاسات وأسعار متعددة)
+  # 1. قسم وحدات الحمام (أسعار ومقاسات متعددة)
   - name: "units"
     label: "🗄️ وحدات الحمام"
     folder: "data/units"
@@ -44,7 +43,7 @@ collections:
           - {label: "❌ نفذ بالكامل", value: "soldout"}
       - {label: "المواصفات الفنية", name: "customSpecs", widget: "text"}
 
-  # 2. قسم باقي المنتجات (لها سعر موحد)
+  # 2. قسم باقي المنتجات (سعر موحد)
   - name: "general_products"
     label: "🛁 باقي المنتجات (أحواض، شاور، إلخ)"
     folder: "data/products"
