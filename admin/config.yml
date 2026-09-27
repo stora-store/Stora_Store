@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: stora-store/Stora_Store
+  repo: Stora_Store
   branch: main
 
 media_folder: "images/uploads"
