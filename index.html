@@ -579,7 +579,7 @@
   <div class="admin-modal" id="adminModal">
     <div class="admin-content">
       <button class="info-modal-close" onclick="closeAdminModal()">&times;</button>
-      <h3 class="info-modal-title" id="adminModalTitle">⚙️ لوحة تحكم الأدمن (سحابي)</h3>
+      <h3 class="info-modal-title" id="adminModalTitle">⚙️ لوحة تحكم الأدمن</h3>
       
       <div style="background:#fef3c7; padding:15px; border-radius:12px; border:1px solid #f59e0b; margin-bottom:20px;">
         <h4 style="font-size:0.95rem; font-weight:900; margin-bottom:8px; color:#b45309;">🏷️ إدارة الأسعار والخصومات الجماعية</h4>
@@ -617,9 +617,9 @@
       </div>
 
       <div style="background:#f8fafc; padding:15px; border-radius:12px; border:1px solid var(--border); margin-bottom:20px;">
-        <h4 id="adminFormHeader" style="font-size:1rem; font-weight:900; margin-bottom:10px; color:var(--primary);">➕ إضافة موديل جديد (السيرفر)</h4>
+        <h4 id="adminFormHeader" style="font-size:1rem; font-weight:900; margin-bottom:10px; color:var(--primary);">➕ إضافة موديل جديد</h4>
         
-        <input type="hidden" id="editDocId" value="">
+        <input type="hidden" id="editIndex" value="-1">
         <input type="hidden" id="editStorageKey" value="">
 
         <div class="admin-form-group">
@@ -730,13 +730,13 @@
 ضمان مدى الحياة ضد عيوب الصناعة.</textarea>
         </div>
         <div style="display: flex; gap: 10px;">
-          <button class="admin-submit-btn" id="adminSubmitBtn" onclick="saveProductFromAdmin()" style="flex:1;">💾 حفظ على السيرفر</button>
+          <button class="admin-submit-btn" id="adminSubmitBtn" onclick="saveProductFromAdmin()" style="flex:1;">💾 حفظ الموديل</button>
           <button type="button" onclick="clearAdminForm()" style="background:#64748b; color:#fff; border:none; padding:12px 18px; border-radius:8px; font-weight:800; cursor:pointer;">إلغاء</button>
         </div>
       </div>
 
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:10px;">
-        <h4 style="font-size:1rem; font-weight:900; color:var(--primary);">🗑️ قائمة المنتجات السحابية</h4>
+        <h4 style="font-size:1rem; font-weight:900; color:var(--primary);">🗑️ قائمة المنتجات (للتعديل أو الحذف)</h4>
         <div style="display:flex; align-items:center; gap:8px;">
           <label style="font-size:0.82rem; font-weight:800;">فلتر القسم:</label>
           <select id="adminFilterCategory" onchange="renderAdminProductsList()" style="padding:6px 10px; font-size:0.85rem; border:1px solid var(--border); border-radius:6px;">
@@ -861,36 +861,6 @@
     </div>
   </footer>
 
-  <!-- Firebase SDKs -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyB7XZt7O1_7K8g6m8DoJe3XTUOTsSS6aQk",
-      authDomain: "stora-store.firebaseapp.com",
-      projectId: "stora-store",
-      storageBucket: "stora-store.firebasestorage.app",
-      messagingSenderId: "1044396348379",
-      appId: "1:1044396348379:web:7bea6cfcf2dbfe4fdfcdfe",
-      measurementId: "G-6CMZ6GYSQP"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    window.db = db;
-    window.colCollection = collection;
-    window.getDocs = getDocs;
-    window.addDoc = addDoc;
-    window.updateDoc = updateDoc;
-    window.deleteDoc = deleteDoc;
-    window.doc = doc;
-    window.setDoc = setDoc;
-
-    window.dispatchEvent(new Event('firebase-ready'));
-  </script>
-
   <script>
     let currentLang = 'ar';
     let currentCurrency = 'EGP';
@@ -940,85 +910,41 @@
     ];
 
     const defaultMixers = [
-      { id: "MX-BAT-13", type: "mixer", category: "mixer-all", titleAr: "خلاط مياه فاخر MX-BAT-13", titleEn: "Luxury Faucet ID_MX-BAT-13", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790255683/ID_MX-BAT-13.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790255683/ID_MX-BAT-13.png"], price: 2400, origPrice: 2400, specTag: "خلاط نحاس بقلب سيراميك", specTagEn: "Solid Brass Faucet", badge: "bestseller", customSpecs: "نحاس نقي 100%\nضمان 5 سنوات ضد عيوب الصناعة" },
-      { id: "MX-BAT-10", type: "mixer", category: "mixer-all", titleAr: "خلاط مياه فاخر MX-BAT-10", titleEn: "Luxury Faucet ID_MX-BAT-10", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790255663/ID_MX-BAT-10.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790255663/ID_MX-BAT-10.png"], price: 2200, origPrice: 2200, specTag: "خلاط نحاس بقلب سيراميك", specTagEn: "Solid Brass Faucet", badge: "none", customSpecs: "نحاس نقي 100%\nضمان 5 سنوات ضد عيوب الصناعة" }
+      { id: "MX-BAT-13", type: "mixer", category: "mixer-all", titleAr: "خلاط مياه فاخر MX-BAT-13", titleEn: "Luxury Faucet ID_MX-BAT-13", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790255683/ID_MX-BAT-13.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790255683/ID_MX-BAT-13.png"], price: 2400, origPrice: 2400, specTag: "خلاط نحاس بقلب سيراميك", specTagEn: "Solid Brass Faucet", badge: "bestseller", customSpecs: "نحاس نقي 100%\nضمان 5 سنوات ضد عيوب الصناعة" }
     ];
 
     const defaultStainless = [
-      { id: "SS-304-07", type: "stainless", category: "stainless-all", titleAr: "حوض ستانلس 304 فاخر SS-304-07", titleEn: "Stainless Steel Basin ID_SS-304-07", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790253301/ID_SS-304-07.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790253301/ID_SS-304-07.png"], price: 3200, origPrice: 3200, specTag: "ستانلس 304 مقاوم للخدوش", specTagEn: "304 Stainless Steel", badge: "bestseller", customSpecs: "ستانلس ستيل 304 نقي\nمقاوم للصدأ والخدوش بنسبة 100%" },
-      { id: "SS-304-01", type: "stainless", category: "stainless-all", titleAr: "حوض ستانلس 304 فاخر SS-304-01", titleEn: "Stainless Steel Basin ID_SS-304-01", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790253160/ID_SS-304-01.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790253160/ID_SS-304-01.png"], price: 2900, origPrice: 2900, specTag: "ستانلس 304 مقاوم للخدوش", specTagEn: "304 Stainless Steel", badge: "bestseller", customSpecs: "ستانلس ستيل 304 نقي\nمقاوم للصدأ والخدوش بنسبة 100%" }
+      { id: "SS-304-07", type: "stainless", category: "stainless-all", titleAr: "حوض ستانلس 304 فاخر SS-304-07", titleEn: "Stainless Steel Basin ID_SS-304-07", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790253301/ID_SS-304-07.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790253301/ID_SS-304-07.png"], price: 3200, origPrice: 3200, specTag: "ستانلس 304 مقاوم للخدوش", specTagEn: "304 Stainless Steel", badge: "bestseller", customSpecs: "ستانلس ستيل 304 نقي\nمقاوم للصدأ والخدوش بنسبة 100%" }
     ];
 
-    let unitProducts = [];
-    let basinProducts = [];
-    let porcelainProducts = [];
-    let showerProducts = [];
-    let toiletProducts = [];
-    let mirrorProducts = [];
-    let mixerProducts = [];
-    let accessoryProducts = [];
-    let stainlessProducts = [];
+    let unitProducts = JSON.parse(localStorage.getItem('stora_units')) || defaultUnits;
+    let basinProducts = JSON.parse(localStorage.getItem('stora_basins')) || defaultBasins;
+    let porcelainProducts = JSON.parse(localStorage.getItem('stora_porcelain')) || defaultPorcelain;
+    let showerProducts = JSON.parse(localStorage.getItem('stora_showers')) || defaultShowers;
+    let toiletProducts = JSON.parse(localStorage.getItem('stora_toilets')) || [];
+    let mirrorProducts = JSON.parse(localStorage.getItem('stora_mirrors')) || [];
+    let mixerProducts = JSON.parse(localStorage.getItem('stora_mixers')) || defaultMixers;
+    let accessoryProducts = JSON.parse(localStorage.getItem('stora_accessories')) || [];
+    let stainlessProducts = JSON.parse(localStorage.getItem('stora_stainless')) || defaultStainless;
 
-    const categoryKeyMap = {
-      'stora_units': () => unitProducts,
-      'stora_basins': () => basinProducts,
-      'stora_porcelain': () => porcelainProducts,
-      'stora_showers': () => showerProducts,
-      'stora_toilets': () => toiletProducts,
-      'stora_mirrors': () => mirrorProducts,
-      'stora_mixers': () => mixerProducts,
-      'stora_accessories': () => accessoryProducts,
-      'stora_stainless': () => stainlessProducts
-    };
+    if (unitProducts.length === 0) unitProducts = defaultUnits;
+    if (basinProducts.length === 0) basinProducts = defaultBasins;
+    if (porcelainProducts.length === 0) porcelainProducts = defaultPorcelain;
+    if (showerProducts.length === 0) showerProducts = defaultShowers;
+    if (mixerProducts.length === 0) mixerProducts = defaultMixers;
+    if (stainlessProducts.length === 0) stainlessProducts = defaultStainless;
 
-    async function loadAllDataFromFirebase() {
-      try {
-        const collections = ['stora_units', 'stora_basins', 'stora_porcelain', 'stora_showers', 'stora_toilets', 'stora_mirrors', 'stora_mixers', 'stora_accessories', 'stora_stainless'];
-        
-        for (let colName of collections) {
-          const querySnapshot = await window.getDocs(window.colCollection(window.db, colName));
-          let items = [];
-          querySnapshot.forEach((docSnap) => {
-            items.push({ firebaseDocId: docSnap.id, ...docSnap.data() });
-          });
-
-          if (items.length === 0) {
-            if (colName === 'stora_units') items = defaultUnits;
-            if (colName === 'stora_basins') items = defaultBasins;
-            if (colName === 'stora_porcelain') items = defaultPorcelain;
-            if (colName === 'stora_showers') items = defaultShowers;
-            if (colName === 'stora_mixers') items = defaultMixers;
-            if (colName === 'stora_stainless') items = defaultStainless;
-            
-            for (let item of items) {
-              await window.addDoc(window.colCollection(window.db, colName), item);
-            }
-            const refetch = await window.getDocs(window.colCollection(window.db, colName));
-            items = [];
-            refetch.forEach(docSnap => items.push({ firebaseDocId: docSnap.id, ...docSnap.data() }));
-          }
-
-          if (colName === 'stora_units') unitProducts = items;
-          if (colName === 'stora_basins') basinProducts = items;
-          if (colName === 'stora_porcelain') porcelainProducts = items;
-          if (colName === 'stora_showers') showerProducts = items;
-          if (colName === 'stora_toilets') toiletProducts = items;
-          if (colName === 'stora_mirrors') mirrorProducts = items;
-          if (colName === 'stora_mixers') mixerProducts = items;
-          if (colName === 'stora_accessories') accessoryProducts = items;
-          if (colName === 'stora_stainless') stainlessProducts = items;
-        }
-
-        initDynamicSliderImages();
-        renderCatalog();
-      } catch (err) {
-        console.error("Error loading from Firestore:", err);
-      }
+    function saveAllDataToStorage() {
+      localStorage.setItem('stora_units', JSON.stringify(unitProducts));
+      localStorage.setItem('stora_basins', JSON.stringify(basinProducts));
+      localStorage.setItem('stora_porcelain', JSON.stringify(porcelainProducts));
+      localStorage.setItem('stora_showers', JSON.stringify(showerProducts));
+      localStorage.setItem('stora_toilets', JSON.stringify(toiletProducts));
+      localStorage.setItem('stora_mirrors', JSON.stringify(mirrorProducts));
+      localStorage.setItem('stora_mixers', JSON.stringify(mixerProducts));
+      localStorage.setItem('stora_accessories', JSON.stringify(accessoryProducts));
+      localStorage.setItem('stora_stainless', JSON.stringify(stainlessProducts));
     }
-
-    window.addEventListener('firebase-ready', () => {
-      loadAllDataFromFirebase();
-    });
 
     const translations = {
       ar: {
@@ -1247,10 +1173,10 @@
     });
 
     function clearAdminForm() {
-      document.getElementById('editDocId').value = "";
+      document.getElementById('editIndex').value = "-1";
       document.getElementById('editStorageKey').value = "";
-      document.getElementById('adminFormHeader').innerText = "➕ إضافة موديل جديد (السيرفر)";
-      document.getElementById('adminSubmitBtn').innerText = "💾 حفظ على السيرفر";
+      document.getElementById('adminFormHeader').innerText = "➕ إضافة موديل جديد";
+      document.getElementById('adminSubmitBtn').innerText = "💾 حفظ وإضافة المنتج للمتجر";
       document.getElementById('newId').value = "";
       document.getElementById('newTitleAr').value = "";
       document.getElementById('newTitleEn').value = "";
@@ -1315,7 +1241,7 @@
                 <span><strong>[${group.name}]</strong> [${prod.id}] ${prod.titleAr} (${badgeText})</span>
                 <div class="admin-btn-group">
                   <button class="admin-edit-btn" onclick="startEditProduct('${group.key}', ${idx})">تعديل</button>
-                  <button class="admin-del-btn" onclick="deleteProductFromFirebase('${group.key}', '${prod.firebaseDocId}')">حذف</button>
+                  <button class="admin-del-btn" onclick="deleteProduct('${group.key}', ${idx})">حذف</button>
                 </div>
               </div>
             `;
@@ -1327,15 +1253,21 @@
     }
 
     function startEditProduct(storageKey, index) {
-      let arr = categoryKeyMap[storageKey]();
+      let arrMap = {
+        'stora_units': unitProducts, 'stora_basins': basinProducts, 'stora_porcelain': porcelainProducts,
+        'stora_showers': showerProducts, 'stora_toilets': toiletProducts, 'stora_mirrors': mirrorProducts,
+        'stora_mixers': mixerProducts, 'stora_accessories': accessoryProducts, 'stora_stainless': stainlessProducts
+      };
+
+      let arr = arrMap[storageKey];
       if (!arr) return;
       const prod = arr[index];
       if (!prod) return;
 
-      document.getElementById('editDocId').value = prod.firebaseDocId;
+      document.getElementById('editIndex').value = index;
       document.getElementById('editStorageKey').value = storageKey;
-      document.getElementById('adminFormHeader').innerText = "✏️ تعديل المنتج السحابي: " + prod.titleAr;
-      document.getElementById('adminSubmitBtn').innerText = "💾 حفظ التعديلات بالسيرفر";
+      document.getElementById('adminFormHeader').innerText = "✏️ تعديل المنتج: " + prod.titleAr;
+      document.getElementById('adminSubmitBtn').innerText = "💾 حفظ التعديلات";
 
       document.getElementById('newId').value = prod.id || "";
       document.getElementById('newTitleAr').value = prod.titleAr || "";
@@ -1362,22 +1294,28 @@
       document.querySelector('.admin-content').scrollTop = 0;
     }
 
-    async function deleteProductFromFirebase(storageKey, docId) {
-      if (confirm("هل أنت متأكد من حذف هذا المنتج من السيرفر نهائياً؟")) {
-        try {
-          await window.deleteDoc(window.doc(window.db, storageKey, docId));
-          alert("تم الحذف من السيرفر بنجاح!");
-          loadAllDataFromFirebase();
+    function deleteProduct(storageKey, index) {
+      if (confirm("هل أنت متأكد من حذف هذا المنتج نهائياً؟")) {
+        let arrMap = {
+          'stora_units': unitProducts, 'stora_basins': basinProducts, 'stora_porcelain': porcelainProducts,
+          'stora_showers': showerProducts, 'stora_toilets': toiletProducts, 'stora_mirrors': mirrorProducts,
+          'stora_mixers': mixerProducts, 'stora_accessories': accessoryProducts, 'stora_stainless': stainlessProducts
+        };
+
+        let arr = arrMap[storageKey];
+        if (arr && arr[index]) {
+          arr.splice(index, 1);
+          saveAllDataToStorage();
           renderAdminProductsList();
-        } catch (e) {
-          console.error("Error deleting document: ", e);
-          alert("حدث خطأ أثناء الحذف");
+          initDynamicSliderImages();
+          renderCatalog();
+          alert("تم الحذف بنجاح!");
         }
       }
     }
 
-    async function saveProductFromAdmin() {
-      const editDocId = document.getElementById('editDocId').value;
+    function saveProductFromAdmin() {
+      const editIdx = parseInt(document.getElementById('editIndex').value);
       const editKey = document.getElementById('editStorageKey').value;
 
       const customId = document.getElementById('newId').value.trim();
@@ -1405,14 +1343,15 @@
       const newId = customId || ("PRD-" + Math.floor(1000 + Math.random() * 9000));
       
       let targetKey = 'stora_units';
-      if (mode === 'basin') targetKey = 'stora_basins';
-      else if (mode === 'porcelain') targetKey = 'stora_porcelain';
-      else if (mode === 'shower') targetKey = 'stora_showers';
-      else if (mode === 'toilet') targetKey = 'stora_toilets';
-      else if (mode === 'mirror') targetKey = 'stora_mirrors';
-      else if (mode === 'mixer') targetKey = 'stora_mixers';
-      else if (mode === 'accessory') targetKey = 'stora_accessories';
-      else if (mode === 'stainless') targetKey = 'stora_stainless';
+      let targetArr = unitProducts;
+      if (mode === 'basin') { targetKey = 'stora_basins'; targetArr = basinProducts; }
+      else if (mode === 'porcelain') { targetKey = 'stora_porcelain'; targetArr = porcelainProducts; }
+      else if (mode === 'shower') { targetKey = 'stora_showers'; targetArr = showerProducts; }
+      else if (mode === 'toilet') { targetKey = 'stora_toilets'; targetArr = toiletProducts; }
+      else if (mode === 'mirror') { targetKey = 'stora_mirrors'; targetArr = mirrorProducts; }
+      else if (mode === 'mixer') { targetKey = 'stora_mixers'; targetArr = mixerProducts; }
+      else if (mode === 'accessory') { targetKey = 'stora_accessories'; targetArr = accessoryProducts; }
+      else if (mode === 'stainless') { targetKey = 'stora_stainless'; targetArr = stainlessProducts; }
 
       let newItem = {
         id: newId,
@@ -1458,30 +1397,32 @@
         newItem.price = specificDisc > 0 ? Math.round(sp * (1 - specificDisc / 100)) : sp;
       }
 
-      try {
-        if (editDocId) {
-          if (editKey === targetKey) {
-            await window.updateDoc(window.doc(window.db, targetKey, editDocId), newItem);
-          } else {
-            await window.deleteDoc(window.doc(window.db, editKey, editDocId));
-            await window.addDoc(window.colCollection(window.db, targetKey), newItem);
-          }
-        } else {
-          await window.addDoc(window.colCollection(window.db, targetKey), newItem);
+      if (editIdx >= 0 && editKey === targetKey) {
+        targetArr[editIdx] = newItem;
+      } else {
+        if (editIdx >= 0 && editKey !== targetKey) {
+          let oldArrMap = {
+            'stora_units': unitProducts, 'stora_basins': basinProducts, 'stora_porcelain': porcelainProducts,
+            'stora_showers': showerProducts, 'stora_toilets': toiletProducts, 'stora_mirrors': mirrorProducts,
+            'stora_mixers': mixerProducts, 'stora_accessories': accessoryProducts, 'stora_stainless': stainlessProducts
+          };
+          let oldArr = oldArrMap[editKey];
+          if (oldArr) oldArr.splice(editIdx, 1);
         }
-
-        alert("تم الحفظ على السيرفر بنجاح وظهر على كل الأجهزة فوراً!");
-        closeAdminModal();
-        loadAllDataFromFirebase();
-      } catch (e) {
-        console.error("Error saving to Firestore:", e);
-        alert("حدث خطأ أثناء الحفظ بالسيرفر");
+        targetArr.unshift(newItem);
       }
+
+      saveAllDataToStorage();
+      alert("تم حفظ المنتج بنجاح وتحديث المتجر فوراً!");
+      closeAdminModal();
+      initDynamicSliderImages();
+      renderCatalog();
     }
 
     function openProductModal(id, mode) {
+      let item = null;
       const allOther = [...unitProducts, ...basinProducts, ...porcelainProducts, ...showerProducts, ...toiletProducts, ...mirrorProducts, ...mixerProducts, ...accessoryProducts, ...stainlessProducts];
-      let item = allOther.find(p => p.id === id);
+      item = allOther.find(p => p.id === id);
       if (!item) return;
 
       currentModalProduct = { ...item, mode };
@@ -1490,6 +1431,7 @@
 
       const title = currentLang === 'ar' ? item.titleAr : (item.titleEn || autoTranslate(item.titleAr));
       document.getElementById('modalTitle').innerText = title;
+      
       updateModalGalleryAndDetails();
       document.getElementById('productDetailModal').classList.add('open');
       document.body.style.overflow = 'hidden';
@@ -1498,14 +1440,19 @@
     function updateModalGalleryAndDetails() {
       const item = currentModalProduct;
       let activeImg = item.image;
+
       if (item.mode === 'unit' && item.sizeImages && item.sizeImages[modalSelectedSize]) {
         activeImg = item.sizeImages[modalSelectedSize];
       }
+
       document.getElementById('modalMainImg').src = activeImg;
+
       const images = item.extraImages || [item.image];
-      document.getElementById('modalThumbs').innerHTML = images.map((img, idx) => `
+      const thumbsContainer = document.getElementById('modalThumbs');
+      thumbsContainer.innerHTML = images.map((img, idx) => `
         <img src="${img}" class="${img === activeImg ? 'active' : ''}" onclick="changeModalMainImg('${img}', this)">
       `).join('');
+
       updateModalPriceAndSpecs();
     }
 
@@ -1518,15 +1465,26 @@
     function updateModalPriceAndSpecs() {
       const item = currentModalProduct;
       const t = translations[currentLang];
-      let rawPrice = item.mode === 'unit' ? (item.prices?.[modalSelectedSize] || 4600) : (item.price || 2000);
-      let rawOrig = item.mode === 'unit' ? (item.origPrices?.[modalSelectedSize] || rawPrice) : (item.origPrice || rawPrice);
+      
+      let rawPrice = 0;
+      let rawOrig = 0;
+      if (item.mode === 'unit') {
+        rawPrice = item.prices?.[modalSelectedSize] || item.prices?.[Object.keys(item.prices)[0]] || 4600;
+        rawOrig = item.origPrices?.[modalSelectedSize] || item.origPrices?.[Object.keys(item.origPrices)[0]] || rawPrice;
+      } else {
+        rawPrice = item.price || 2000;
+        rawOrig = item.origPrice || rawPrice;
+      }
 
       const formatted = formatPrice(rawPrice);
       const formattedOrig = formatPrice(rawOrig);
       
       let priceHtml = `<span class="price-value">${formatted.value}</span> <span class="currency">${formatted.symbol}</span>`;
       if (rawPrice < rawOrig) {
-        priceHtml = `<span class="price-value">${formatted.value}</span> <span class="currency">${formatted.symbol}</span> <span class="old-price">${formattedOrig.value} ${formattedOrig.symbol}</span>`;
+        priceHtml = `
+          <span class="price-value">${formatted.value}</span> <span class="currency">${formatted.symbol}</span>
+          <span class="old-price">${formattedOrig.value} ${formattedOrig.symbol}</span>
+        `;
       }
       document.getElementById('modalPriceContainer').innerHTML = priceHtml;
 
@@ -1536,34 +1494,63 @@
 
       if (item.badge === 'soldout') {
         stockEl.style.display = 'block';
+        stockEl.style.background = '#fee2e2';
+        stockEl.style.color = '#dc2626';
         stockEl.innerText = t.soldOutModalText;
         qtyRow.style.display = 'none';
-        const waText = encodeURIComponent(`مرحباً ستورا ستور، أود الاستفسار عن توفر هذا المنتج:\n- المنتج: ${item.titleAr}\n- الكود: ${item.id}`);
-        actionArea.innerHTML = `<a href="https://wa.me/201039727479?text=${waText}" target="_blank" class="whatsapp-inquire-btn">${t.whatsappInquireText}</a>`;
+
+        const waText = encodeURIComponent(`مرحباً ستورا ستور، أود الاستفسار عن توفر هذا المنتج أو حجزه:\n- المنتج: ${item.titleAr}\n- الكود: ${item.id}`);
+        actionArea.innerHTML = `
+          <a href="https://wa.me/201039727479?text=${waText}" target="_blank" class="whatsapp-inquire-btn">
+            ${t.whatsappInquireText}
+          </a>
+        `;
       } else {
         stockEl.style.display = 'block';
+        stockEl.style.background = '#ffeeec';
+        stockEl.style.color = '#dc2626';
         stockEl.innerText = currentLang === 'ar' ? `⚠️ متبقي 3 قطع فقط - سارع بالحجز!` : `⚠️ Only 3 pieces left - Book now!`;
         qtyRow.style.display = 'flex';
-        actionArea.innerHTML = `<button class="add-to-cart-modal-btn" onclick="addModalToCart()">${t.addBtn}</button>`;
+
+        actionArea.innerHTML = `
+          <button class="add-to-cart-modal-btn" id="modalAddBtn" onclick="addModalToCart()">${t.addBtn}</button>
+        `;
       }
 
       let rawSpecs = item.customSpecs || defaultSpecsText;
+      if (currentLang === 'en') {
+        rawSpecs = autoTranslate(rawSpecs);
+      }
       const specsLines = rawSpecs.split('\n').filter(l => l.trim().length > 0);
-      document.getElementById('modalSpecs').innerHTML = `<p style="margin-bottom:4px; font-weight:800;">${currentLang === 'ar' ? 'المواصفات الفنية:' : 'Specifications:'}</p><ul>${specsLines.map(l => `<li>${l}</li>`).join('')}</ul>`;
+      const specsHtmlList = specsLines.map(line => `<li>${line}</li>`).join('');
+
+      document.getElementById('modalSpecs').innerHTML = `
+        <p style="margin-bottom:4px; color:var(--primary); font-weight:800;">${currentLang === 'ar' ? 'المواصفات الفنية الخاصة:' : 'Specifications:'}</p>
+        <ul>${specsHtmlList}</ul>
+      `;
 
       const sizeSec = document.getElementById('modalSizeSection');
       if (item.mode === 'unit') {
         const sizes = item.sizes || [60, 80, 100];
-        sizeSec.innerHTML = `<div style="font-size:0.82rem; font-weight:700; color:var(--text-muted); margin-bottom:5px;">${t.sizeLabel}</div><div class="size-btn-group">${sizes.map(sz => `<button class="size-btn ${modalSelectedSize === sz ? 'active' : ''}" onclick="setModalSize(${sz})">${sz}${t.sizeUnit}</button>`).join('')}</div>`;
+        sizeSec.innerHTML = `
+          <div style="font-size:0.82rem; font-weight:700; color:var(--text-muted); margin-bottom:5px;">${t.sizeLabel}</div>
+          <div class="size-btn-group">
+            ${sizes.map(sz => `
+              <button class="size-btn ${modalSelectedSize === sz ? 'active' : ''}" onclick="setModalSize(${sz})">${sz}${t.sizeUnit}</button>
+            `).join('')}
+          </div>
+        `;
       } else {
         sizeSec.innerHTML = '';
       }
+
       document.getElementById('modalQtyVal').innerText = modalQuantity;
+      document.getElementById('modalQtyLabel').innerText = t.qtyLabel;
     }
 
     function setModalSize(sz) {
       modalSelectedSize = sz;
-      if (currentModalProduct.mode === 'unit' && currentModalProduct.sizeImages?.[sz]) {
+      if (currentModalProduct.mode === 'unit' && currentModalProduct.sizeImages && currentModalProduct.sizeImages[sz]) {
         document.getElementById('modalMainImg').src = currentModalProduct.sizeImages[sz];
       }
       updateModalGalleryAndDetails();
@@ -1577,23 +1564,52 @@
     function addModalToCart() {
       const item = currentModalProduct;
       if (item.badge === 'soldout') return;
-      const t = translations[currentLang];
-      let desc = item.mode === 'unit' ? `${t.sizeLabel} ${modalSelectedSize} ${t.sizeUnit}` : t.basinCategory;
-      let price = item.mode === 'unit' ? (item.prices?.[modalSelectedSize] || 4600) : item.price;
-      let activeImg = (item.mode === 'unit' && item.sizeImages?.[modalSelectedSize]) ? item.sizeImages[modalSelectedSize] : item.image;
-      const titleName = currentLang === 'ar' ? item.titleAr : (item.titleEn || autoTranslate(item.titleAr));
 
-      const existing = cart.find(ci => ci.title === titleName && ci.desc === desc);
-      if (existing) { existing.qty += modalQuantity; } else {
-        cart.push({ cartItemId: Date.now() + Math.random(), id: item.id, title: titleName, desc: desc, image: activeImg, priceEgp: price, qty: modalQuantity });
+      const t = translations[currentLang];
+      let desc = '';
+      let price = 0;
+
+      if (item.mode === 'unit') {
+        desc = `${t.sizeLabel} ${modalSelectedSize} ${t.sizeUnit}`;
+        price = item.prices ? (item.prices[modalSelectedSize] || item.prices[60]) : item.price;
+      } else {
+        desc = (currentLang === 'ar' ? item.specTag : item.specTagEn) || t.basinCategory;
+        price = item.price;
       }
+
+      let activeImg = item.image;
+      if (item.mode === 'unit' && item.sizeImages && item.sizeImages[modalSelectedSize]) {
+        activeImg = item.sizeImages[modalSelectedSize];
+      }
+
+      const titleName = currentLang === 'ar' ? item.titleAr : (item.titleEn || autoTranslate(item.titleAr));
+      const existing = cart.find(ci => ci.title === titleName && ci.desc === desc);
+      if (existing) {
+        existing.qty += modalQuantity;
+      } else {
+        cart.push({
+          cartItemId: Date.now() + Math.random(),
+          title: titleName,
+          desc: desc,
+          image: activeImg,
+          priceEgp: price,
+          qty: modalQuantity
+        });
+      }
+
       updateCart();
       closeProductModalDirect();
       toggleCart(true);
     }
 
-    function closeProductModal(e) { if (e.target.id === 'productDetailModal') closeProductModalDirect(); }
-    function closeProductModalDirect() { document.getElementById('productDetailModal').classList.remove('open'); document.body.style.overflow = 'auto'; }
+    function closeProductModal(e) {
+      if (e.target.id === 'productDetailModal') closeProductModalDirect();
+    }
+
+    function closeProductModalDirect() {
+      document.getElementById('productDetailModal').classList.remove('open');
+      document.body.style.overflow = 'auto';
+    }
 
     function handleSearch() {
       searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
@@ -1602,7 +1618,8 @@
 
     function formatPrice(egpAmount) {
       if (currentCurrency === 'USD') {
-        return { value: (egpAmount / USD_RATE).toFixed(0), symbol: translations[currentLang].currencyUSD };
+        const usd = (egpAmount / USD_RATE).toFixed(0);
+        return { value: usd, symbol: translations[currentLang].currencyUSD };
       }
       return { value: egpAmount.toLocaleString(), symbol: translations[currentLang].currencyEGP };
     }
@@ -1617,11 +1634,15 @@
     function setMainMode(mode) {
       mainMode = mode;
       const t = translations[currentLang];
+
       ['tabUnits', 'tabBasins', 'tabPorcelain', 'tabShowers', 'tabToilets', 'tabMirrors', 'tabMixers', 'tabAccessories', 'tabStainless'].forEach(id => {
-        document.getElementById(id)?.classList.remove('active');
+        const el = document.getElementById(id);
+        if (el) el.classList.remove('active');
       });
+
       ['unitsFilterBar', 'basinsFilterBar', 'porcelainFilterBar', 'showersFilterBar', 'toiletsFilterBar', 'mirrorsFilterBar', 'mixersFilterBar', 'accessoriesFilterBar', 'stainlessFilterBar'].forEach(id => {
-        document.getElementById(id).style.display = 'none';
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
       });
 
       if (mode === 'units') {
@@ -1630,6 +1651,8 @@
         document.getElementById('sectionTitle').innerText = t.secTitleUnits;
         document.getElementById('sectionDesc').innerText = t.secDescUnits;
         currentFilter = 'wood';
+        document.querySelectorAll('#unitsFilterBar .filter-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('btnFilterWood').classList.add('active');
       } else if (mode === 'basins') {
         document.getElementById('tabBasins').classList.add('active');
         document.getElementById('basinsFilterBar').style.display = 'flex';
@@ -1671,6 +1694,7 @@
         document.getElementById('sectionTitle').innerText = t.secTitleStainless;
         document.getElementById('sectionDesc').innerText = t.secDescStainless;
       }
+
       renderCatalog();
     }
 
@@ -1678,6 +1702,7 @@
       currentLang = currentLang === 'ar' ? 'en' : 'ar';
       document.documentElement.lang = currentLang;
       document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+
       updateStaticTexts();
       updateCart();
     }
@@ -1689,47 +1714,95 @@
       const t = translations[currentLang];
 
       let listToDisplay = [];
+
       if (mainMode === 'units') {
-        listToDisplay = currentFilter === 'all' ? unitProducts : unitProducts.filter(p => p.category === currentFilter);
-      } else if (mainMode === 'basins') listToDisplay = basinProducts;
-      else if (mainMode === 'porcelain') listToDisplay = porcelainProducts;
-      else if (mainMode === 'showers') listToDisplay = showerProducts;
-      else if (mainMode === 'toilets') listToDisplay = toiletProducts;
-      else if (mainMode === 'mirrors') listToDisplay = mirrorProducts;
-      else if (mainMode === 'mixers') listToDisplay = mixerProducts;
-      else if (mainMode === 'accessories') listToDisplay = accessoryProducts;
-      else if (mainMode === 'stainless') listToDisplay = stainlessProducts;
+        listToDisplay = currentFilter === 'all' 
+          ? unitProducts 
+          : unitProducts.filter(p => p.category === currentFilter);
+      } else {
+        if (mainMode === 'basins') listToDisplay = basinProducts;
+        else if (mainMode === 'porcelain') listToDisplay = porcelainProducts;
+        else if (mainMode === 'showers') listToDisplay = showerProducts;
+        else if (mainMode === 'toilets') listToDisplay = toiletProducts;
+        else if (mainMode === 'mirrors') listToDisplay = mirrorProducts;
+        else if (mainMode === 'mixers') listToDisplay = mixerProducts;
+        else if (mainMode === 'accessories') listToDisplay = accessoryProducts;
+        else if (mainMode === 'stainless') listToDisplay = stainlessProducts;
+      }
 
       if (searchQuery !== '') {
         const allProducts = [...unitProducts, ...basinProducts, ...porcelainProducts, ...showerProducts, ...toiletProducts, ...mirrorProducts, ...mixerProducts, ...accessoryProducts, ...stainlessProducts];
-        listToDisplay = allProducts.filter(item => item.titleAr.toLowerCase().includes(searchQuery) || (item.titleEn && item.titleEn.toLowerCase().includes(searchQuery)) || item.id.toLowerCase().includes(searchQuery));
+        listToDisplay = allProducts.filter(item => 
+          item.titleAr.toLowerCase().includes(searchQuery) || 
+          (item.titleEn && item.titleEn.toLowerCase().includes(searchQuery)) ||
+          item.id.toLowerCase().includes(searchQuery)
+        );
       }
 
       if (listToDisplay.length === 0) {
-        grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--text-muted); font-size: 1.1rem; font-weight: 700;"><span style="font-size: 2.2rem; display:block; margin-bottom:10px;">🔍</span><span>${t.emptySection}</span></div>`;
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--text-muted); font-size: 1.1rem; font-weight: 700;">
+            <span style="font-size: 2.2rem; display:block; margin-bottom:10px;">🔍</span>
+            <span>${t.emptySection}</span>
+          </div>
+        `;
         return;
       }
 
       listToDisplay.forEach(item => {
         const title = currentLang === 'ar' ? item.titleAr : (item.titleEn || autoTranslate(item.titleAr));
-        let statusBadge = item.badge === 'bestseller' ? `<span class="bestseller-badge">${t.bestSeller}</span>` : (item.badge === 'new' ? `<span class="new-badge">${t.newBadgeText}</span>` : (item.badge === 'soldout' ? `<span class="soldout-badge">${t.soldOutBadgeText}</span>` : ''));
-        let discountCornerHtml = item.discountBadge ? `<span class="discount-corner-badge">${item.discountBadge}</span>` : '';
+        
+        let statusBadge = '';
+        if (item.badge === 'bestseller') {
+          statusBadge = `<span class="bestseller-badge">${t.bestSeller}</span>`;
+        } else if (item.badge === 'new') {
+          statusBadge = `<span class="new-badge">${t.newBadgeText}</span>`;
+        } else if (item.badge === 'soldout') {
+          statusBadge = `<span class="soldout-badge">${t.soldOutBadgeText}</span>`;
+        }
+
+        let discountCornerHtml = '';
+        if (item.discountBadge) {
+          discountCornerHtml = `<span class="discount-corner-badge">${item.discountBadge}</span>`;
+        }
 
         const rawPrice = item.type === 'unit' ? (item.prices ? item.prices[Object.keys(item.prices)[0]] : 4600) : item.price;
         const rawOrig = item.type === 'unit' ? (item.origPrices ? item.origPrices[Object.keys(item.origPrices)[0]] : rawPrice) : (item.origPrice || rawPrice);
+        
         const formatted = formatPrice(rawPrice);
         const formattedOrig = formatPrice(rawOrig);
         
         let priceHtml = `<span class="price-value">${formatted.value}</span> <span class="currency">${formatted.symbol}</span>`;
         if (rawPrice < rawOrig) {
-          priceHtml = `<span class="price-value">${formatted.value}</span> <span class="currency">${formatted.symbol}</span> <span class="old-price">${formattedOrig.value} ${formattedOrig.symbol}</span>`;
+          priceHtml = `
+            <span class="price-value">${formatted.value}</span> <span class="currency">${formatted.symbol}</span>
+            <span class="old-price">${formattedOrig.value} ${formattedOrig.symbol}</span>
+          `;
+        }
+
+        const specText = currentLang === 'ar' ? item.specTag : item.specTagEn;
+
+        let categoryLabel = t.txtWood;
+        if (item.type === 'unit') {
+          if (item.category === 'marble') categoryLabel = t.txtMarble;
+          else if (item.category === 'colors') categoryLabel = t.txtColors;
+          else if (item.category === 'imported') categoryLabel = t.txtImported;
+        } else {
+          if (item.type === 'basin') categoryLabel = t.basinCategory;
+          else if (item.type === 'porcelain') categoryLabel = t.porcelainCategory;
+          else if (item.type === 'shower') categoryLabel = t.showerCategory;
+          else if (item.type === 'toilet') categoryLabel = t.toiletCategory;
+          else if (item.type === 'mirror') categoryLabel = t.mirrorCategory;
+          else if (item.type === 'mixer') categoryLabel = t.mixerCategory;
+          else if (item.type === 'accessory') categoryLabel = t.accessoryCategory;
+          else if (item.type === 'stainless') categoryLabel = t.stainlessCategory;
         }
 
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
           <div class="card-img-wrapper" onclick="openProductModal('${item.id}', '${item.type === 'unit' ? 'unit' : item.type}')">
-            <span class="category-tag">${item.type}</span>
+            <span class="category-tag">${categoryLabel}</span>
             ${discountCornerHtml}
             ${statusBadge}
             <img src="${item.image}" alt="${title}" class="card-img" onerror="this.src='https://res.cloudinary.com/rh20s5aa/image/upload/f_auto,q_auto/Intro'">
@@ -1737,9 +1810,12 @@
           <div class="card-body">
             <h3 class="product-title" onclick="openProductModal('${item.id}', '${item.type === 'unit' ? 'unit' : item.type}')">${title}</h3>
             <div style="font-size:0.75rem; color:var(--gold-dark); font-weight:800; margin-bottom:6px;">ID: ${item.id}</div>
-            <div class="badge-info">${item.specTag || 'تشطيبات فاخرة'}</div>
+            <div class="badge-info">${specText}</div>
+
             <div class="card-footer">
-              <div class="price-container">${priceHtml}</div>
+              <div class="price-container">
+                ${priceHtml}
+              </div>
               <button class="view-details-btn" onclick="openProductModal('${item.id}', '${item.type === 'unit' ? 'unit' : item.type}')">${t.viewDetailsBtn}</button>
             </div>
           </div>
@@ -1750,9 +1826,15 @@
 
     function filterCatalog(category, btn) {
       currentFilter = category;
-      btn.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      const parent = btn.parentElement;
+      parent.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       renderCatalog();
+    }
+
+    function removeFromCart(cartItemId) {
+      cart = cart.filter(i => i.cartItemId !== cartItemId);
+      updateCart();
     }
 
     function toggleCart(open = false) {
@@ -1769,7 +1851,8 @@
 
     function updateCart() {
       const t = translations[currentLang];
-      document.getElementById("cartBadge").innerText = cart.reduce((sum, item) => sum + item.qty, 0);
+      const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+      document.getElementById("cartBadge").innerText = totalCount;
       const container = document.getElementById("cartItemsContainer");
       const totalEl = document.getElementById("cartTotalPrice");
 
@@ -1781,6 +1864,7 @@
 
       container.innerHTML = "";
       let totalEgp = 0;
+
       cart.forEach(item => {
         const itemTotalEgp = item.priceEgp * item.qty;
         totalEgp += itemTotalEgp;
@@ -1807,22 +1891,23 @@
       totalEl.innerText = `${totalFormatted.value} ${totalFormatted.symbol}`;
     }
 
-    function removeFromCart(cartItemId) {
-      cart = cart.filter(i => i.cartItemId !== cartItemId);
-      updateCart();
-    }
-
     function submitOrder() {
-      if (cart.length === 0) return;
+      const t = translations[currentLang];
+      if (cart.length === 0) { alert(t.cartEmpty); return; }
+
       let text = "طلب جديد من *ستورا ستور*:\n\n";
       let totalEgp = 0;
+
       cart.forEach((item, index) => {
-        let itemTotalEgp = item.priceEgp * item.qty;
+        const itemTotalEgp = item.priceEgp * item.qty;
         totalEgp += itemTotalEgp;
-        text += `${index + 1}. *${item.title}* (ID: ${item.id})\n- التفاصيل: ${item.desc}\n- الكمية: ${item.qty}\n\n`;
+        const totalItemFormatted = formatPrice(itemTotalEgp);
+        text += `${index + 1}. *${item.title}* (ID: ${item.id || 'N/A'})\n   - التفاصيل: ${item.desc}\n   - الكمية: ${item.qty}\n   - الإجمالي: ${totalItemFormatted.value} ${totalItemFormatted.symbol}\n\n`;
       });
+
       const totalFormatted = formatPrice(totalEgp);
-      text += `الإجمالي الكلي: ${totalFormatted.value} ${totalFormatted.symbol}`;
+      text += `-------------------------\nالإجمالي الكلي: ${totalFormatted.value} ${totalFormatted.symbol}`;
+
       window.open(`https://wa.me/201039727479?text=${encodeURIComponent(text)}`, "_blank");
     }
 
@@ -1831,6 +1916,8 @@
 
     window.onload = function() {
       updateStaticTexts();
+      initDynamicSliderImages();
+      setMainMode('units');
       startSliderTimer();
     };
   </script>
