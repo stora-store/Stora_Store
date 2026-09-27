@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: stora-store/Stora_Store  # تأكد أن هذا هو اسم المستودع الخاص بك
+  repo: stora-store/Stora_Store  
   branch: main
 
 # مكان حفظ الصور التي سترفعها من لوحة التحكم
