@@ -1,27 +1,11 @@
-<!DOCTYPE html>
-<html lang="ar">
+<!doctype html>
+<html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>لوحة تحكم ستورا ستور - Stora Store</title>
-  <!-- سكربت Netlify Identity لتسجيل الدخول -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <title>لوحة تحكم ستورا ستور</title>
 </head>
 <body>
-  <!-- سكربت Decap CMS لتشغيل لوحة التحكم -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  
-  <!-- توجيه المستخدم بعد تسجيل الدخول -->
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
-  </script>
 </body>
 </html>
