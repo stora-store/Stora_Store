@@ -857,7 +857,7 @@
     const defaultSpecsText = `مصنوع من ألواح بورديوم عالية الكثافة ومقاومة تامة للمياه والرطوبة\nأدراج ومفصلات مزودة بنظام الإغلاق السلس والصامت (Soft Close).\nسطح خارجي مقاوم للخدوش وسهل التنظيف بمقابض ومستلزمات تثبيت مقاومة للصدأ.\nيشمل وحدة الحوض، الحوض الخزفي، ومستلزمات التركيب الكاملة.\nضمان مدى الحياة ضد عيوب الصناعة.`;
 
     const defaultUnits = [
-      { id: "UN-MB-27", type: "unit", category: "wood", titleAr: "وحدة حمام خشبية فاخرة #27", titleEn: "Luxury Wooden Unit #27", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png"], sizes: [60, 80, 100], prices: { 60: 6800, 80: 7900, 100: 10200 }, origPrices: { 60: 6800, 80: 7900, 100: 10200 }, selectedSize: 60, specTag: "مقاس 60-80-100 سم", specTagEn: "Size 60-80-100 cm", badge: "bestseller", customSpecs: defaultSpecsText },
+      { id: "UN-MB-30", type: "unit", category: "wood", titleAr: "وحدة حمام خشبية فاخرة #30", titleEn: "Luxury Wooden Unit #30", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790424241/ID_UN-MB-30.jpg", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790424241/ID_UN-MB-30.jpg"], sizes: [60, 80, 100], prices: { 60: 6800, 80: 7900, 100: 10200 }, origPrices: { 60: 6800, 80: 7900, 100: 10200 }, selectedSize: 60, specTag: "مقاس 60-80-100 سم", specTagEn: "Size 60-80-100 cm", badge: "bestseller", customSpecs: defaultSpecsText },
       { id: "UN-MB-21", type: "unit", category: "wood", titleAr: "وحدة حمام خشبية فاخرة #21", titleEn: "Luxury Wooden Unit #21", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-21.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-21.png"], sizes: [60, 80, 100], prices: { 60: 6800, 80: 7900, 100: 10200 }, origPrices: { 60: 6800, 80: 7900, 100: 10200 }, selectedSize: 60, specTag: "مقاس 60-80-100 سم", specTagEn: "Size 60-80-100 cm", badge: "none", customSpecs: defaultSpecsText },
       { id: "UN-MB-25", type: "unit", category: "wood", titleAr: "وحدة حمام خشبية فاخرة #25", titleEn: "Luxury Wooden Unit #25", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790347258/ID_UN-MB-25.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790347258/ID_UN-MB-25.png"], sizes: [60, 80, 100], prices: { 60: 6800, 80: 7900, 100: 10200 }, origPrices: { 60: 6800, 80: 7900, 100: 10200 }, selectedSize: 60, specTag: "مقاس 60-80-100 سم", specTagEn: "Size 60-80-100 cm", badge: "none", customSpecs: defaultSpecsText },
       { id: "UN-MB-20", type: "unit", category: "wood", titleAr: "وحدة حمام خشبية فاخرة #20", titleEn: "Luxury Wooden Unit #20", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790347042/ID_UN-MB-20.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790347042/ID_UN-MB-20.png"], sizes: [60, 80, 100], prices: { 60: 6800, 80: 7900, 100: 10200 }, origPrices: { 60: 6800, 80: 7900, 100: 10200 }, selectedSize: 60, specTag: "مقاس 60-80-100 سم", specTagEn: "Size 60-80-100 cm", badge: "none", customSpecs: defaultSpecsText },
@@ -945,41 +945,47 @@
       { id: "SS-304-01", type: "stainless", category: "stainless-all", titleAr: "حوض ستانلس 304 فاخر SS-304-01", titleEn: "Stainless Steel Basin ID_SS-304-01", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790253160/ID_SS-304-01.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790253160/ID_SS-304-01.png"], price: 2900, origPrice: 2900, specTag: "ستانلس 304 مقاوم للخدوش", specTagEn: "304 Stainless Steel", badge: "bestseller", customSpecs: "ستانلس ستيل 304 نقي\nمقاوم للصدأ والخدوش بنسبة 100%" }
     ];
 
-    function createDefaultProduct(type, category, titleAr, titleEn) {
-      return {
-        id: "MODEL-" + type.toUpperCase() + "-DEFAULT",
-        type: type,
-        category: category,
-        titleAr: titleAr,
-        titleEn: titleEn,
-        image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png",
-        extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png"],
-        price: 2500,
-        origPrice: 2500,
-        prices: { 60: 6500, 80: 7700, 100: 9900 },
-        origPrices: { 60: 6500, 80: 7700, 100: 9900 },
-        selectedSize: 60,
-        specTag: "قالب الموديل الافتراضي",
-        specTagEn: "Default Model Template",
-        badge: "new",
-        customSpecs: defaultSpecsText
-      };
-    }
+    const defaultPorcelain = [
+      { id: "BS-PR-06", type: "porcelain", category: "porcelain-all", titleAr: "حوض بورسلين فاخر BS-PR-06", titleEn: "Luxury Porcelain Basin ID_PR-POR-06", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790459986/ID_BS-PR-06.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790459986/ID_BS-PR-06.png"], price: 12000, origPrice: 12000, specTag: "بورسلين نقي عالي الجودة", specTagEn: "High Quality Porcelain", badge: "new", customSpecs: defaultSpecsText },
+      { id: "BS-PR-05", type: "porcelain", category: "porcelain-all", titleAr: "حوض بورسلين فاخر BS-PR-05", titleEn: "Luxury Porcelain Basin ID_PR-POR-05", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790459986/ID_BS-PR-05.png", extraImages: ["hhttps://res.cloudinary.com/rh20s5aa/image/upload/v1790459986/ID_BS-PR-05.png"], price: 12000, origPrice: 12000, specTag: "بورسلين نقي عالي الجودة", specTagEn: "High Quality Porcelain", badge: "new", customSpecs: defaultSpecsText },
+      { id: "BS-PR-10", type: "porcelain", category: "porcelain-all", titleAr: "حوض بورسلين فاخر BS-PR-10", titleEn: "Luxury Porcelain Basin ID_PR-POR-10", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790459943/ID_BS-PR-10.png", extraImages: ["hhttps://res.cloudinary.com/rh20s5aa/image/upload/v1790459943/ID_BS-PR-10.png"], price: 12000, origPrice: 12000, specTag: "بورسلين نقي عالي الجودة", specTagEn: "High Quality Porcelain", badge: "new", customSpecs: defaultSpecsText },
+      { id: "BS-PR-12", type: "porcelain", category: "porcelain-all", titleAr: "حوض بورسلين فاخر BS-PR-12", titleEn: "Luxury Porcelain Basin ID_PR-POR-12", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790459959/ID_BS-PR-12.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790459959/ID_BS-PR-12.png"], price: 12000, origPrice: 12000, specTag: "بورسلين نقي عالي الجودة", specTagEn: "High Quality Porcelain", badge: "new", customSpecs: defaultSpecsText },
+      { id: "BS-PR-11", type: "porcelain", category: "porcelain-all", titleAr: "حوض بورسلين فاخر BS-PR-11", titleEn: "Luxury Porcelain Basin ID_PR-POR-11", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790459935/ID_BS-PR-11.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790459935/ID_BS-PR-11.png"], price: 12000, origPrice: 12000, specTag: "بورسلين نقي عالي الجودة", specTagEn: "High Quality Porcelain", badge: "new", customSpecs: defaultSpecsText },
+      { id: "BS-PR-09", type: "porcelain", category: "porcelain-all", titleAr: "حوض بورسلين فاخر BS-PR-09", titleEn: "Luxury Porcelain Basin ID_PR-POR-09", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790459925/ID_BS-PR-09.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790459925/ID_BS-PR-09.png"], price: 12000, origPrice: 12000, specTag: "بورسلين نقي عالي الجودة", specTagEn: "High Quality Porcelain", badge: "new", customSpecs: defaultSpecsText },
+      { id: "BS-PR-02", type: "porcelain", category: "porcelain-all", titleAr: "حوض بورسلين فاخر BS-PR-02", titleEn: "Luxury Porcelain Basin ID_PR-POR-02", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790459873/ID_BS-PR-02.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790459873/ID_BS-PR-02.png"], price: 12000, origPrice: 12000, specTag: "بورسلين نقي عالي الجودة", specTagEn: "High Quality Porcelain", badge: "new", customSpecs: defaultSpecsText },
+      { id: "BS-PR-03", type: "porcelain", category: "porcelain-all", titleAr: "حوض بورسلين فاخر BS-PR-03", titleEn: "Luxury Porcelain Basin ID_PR-POR-03", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790459846/ID_BS-PR-03.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790459846/ID_BS-PR-03.png"], price: 12000, origPrice: 12000, specTag: "بورسلين نقي عالي الجودة", specTagEn: "High Quality Porcelain", badge: "new", customSpecs: defaultSpecsText },
+      { id: "BS-PR-08", type: "porcelain", category: "porcelain-all", titleAr: "حوض بورسلين فاخر BS-PR-08", titleEn: "Luxury Porcelain Basin ID_PR-POR-11", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790459824/ID_BS-PR-08.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790459824/ID_BS-PR-08.png"], price: 12000, origPrice: 12000, specTag: "بورسلين نقي عالي الجودة", specTagEn: "High Quality Porcelain", badge: "new", customSpecs: defaultSpecsText },
+      { id: "BS-PR-04", type: "porcelain", category: "porcelain-all", titleAr: "حوض بورسلين فاخر BS-PR-04", titleEn: "Luxury Porcelain Basin ID_PR-POR-09", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790459809/ID_BS-PR-04.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790459809/ID_BS-PR-04.png"], price: 12000, origPrice: 12000, specTag: "بورسلين نقي عالي الجودة", specTagEn: "High Quality Porcelain", badge: "new", customSpecs: defaultSpecsText },
+      { id: "BS-PR-07", type: "porcelain", category: "porcelain-all", titleAr: "حوض بورسلين فاخر BS-PR-07", titleEn: "Luxury Porcelain Basin ID_PR-POR-02", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790459808/ID_BS-PR-07.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790459808/ID_BS-PR-07.png"], price: 12000, origPrice: 12000, specTag: "بورسلين نقي عالي الجودة", specTagEn: "High Quality Porcelain", badge: "new", customSpecs: defaultSpecsText },
+      { id: "BS-PR-01", type: "porcelain", category: "porcelain-all", titleAr: "حوض بورسلين فاخر BS-PR-01", titleEn: "Luxury Porcelain Basin ID_PR-POR-03", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790459763/ID_BS-PR-01.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1790459763/ID_BS-PR-01.png"], price: 12000, origPrice: 12000, specTag: "بورسلين نقي عالي الجودة", specTagEn: "High Quality Porcelain", badge: "new", customSpecs: defaultSpecsText }
+    ];
+
+    const defaultToilets = [
+      { id: "TL-WCF-01", type: "toilet", category: "toilet-all", titleAr: "قاعدة تواليت سيراميك معلقة TL-WCF-01", titleEn: "Wall Hung Ceramic Toilet ID_TL-WCF-01", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png"], price: 4500, origPrice: 4500, specTag: "قاعدة معلقة بغطاء هيدروليك", specTagEn: "Wall Hung Toilet with Soft Close", badge: "new", customSpecs: defaultSpecsText }
+    ];
+
+    const defaultMirrors = [
+      { id: "MR-LED-01", type: "mirror", category: "mirror-all", titleAr: "مرآة ليد تاتش مضيئة MR-LED-01", titleEn: "Touch LED Mirror ID_MR-LED-01", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png"], price: 2200, origPrice: 2200, specTag: "مرآة ليد مقاومة للبخار", specTagEn: "Anti-Fog LED Mirror", badge: "new", customSpecs: defaultSpecsText }
+    ];
+
+    const defaultAccessories = [
+      { id: "AC-SET-01", type: "accessory", category: "accessory-all", titleAr: "طقم إكسسوارات حمام ستانلس AC-SET-01", titleEn: "Bathroom Accessory Set ID_AC-SET-01", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png", extraImages: ["https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png"], price: 1200, origPrice: 1200, specTag: "إكسسوارات ستانلس 304 متكاملة", specTagEn: "Complete Stainless Steel Set", badge: "new", customSpecs: defaultSpecsText }
+    ];
 
     let unitProducts = JSON.parse(localStorage.getItem('stora_units')) || defaultUnits;
     let basinProducts = JSON.parse(localStorage.getItem('stora_basins')) || defaultBasins;
-    let porcelainProducts = JSON.parse(localStorage.getItem('stora_porcelain')) || [];
+    let porcelainProducts = JSON.parse(localStorage.getItem('stora_porcelain')) || defaultPorcelain;
     let showerProducts = JSON.parse(localStorage.getItem('stora_showers')) || defaultShowers;
-    let toiletProducts = JSON.parse(localStorage.getItem('stora_toilets')) || [];
-    let mirrorProducts = JSON.parse(localStorage.getItem('stora_mirrors')) || [];
+    let toiletProducts = JSON.parse(localStorage.getItem('stora_toilets')) || defaultToilets;
+    let mirrorProducts = JSON.parse(localStorage.getItem('stora_mirrors')) || defaultMirrors;
     let mixerProducts = JSON.parse(localStorage.getItem('stora_mixers')) || defaultMixers;
-    let accessoryProducts = JSON.parse(localStorage.getItem('stora_accessories')) || [];
+    let accessoryProducts = JSON.parse(localStorage.getItem('stora_accessories')) || defaultAccessories;
     let stainlessProducts = JSON.parse(localStorage.getItem('stora_stainless')) || defaultStainless;
 
-    if (porcelainProducts.length === 0) porcelainProducts.push(createDefaultProduct('porcelain', 'porcelain-all', 'موديل افتراضي - أحواض بورسلين', 'Default Model - Porcelain Basins'));
-    if (toiletProducts.length === 0) toiletProducts.push(createDefaultProduct('toilet', 'toilet-all', 'موديل افتراضي - قواعد تواليت', 'Default Model - Toilets'));
-    if (mirrorProducts.length === 0) mirrorProducts.push(createDefaultProduct('mirror', 'mirror-all', 'موديل افتراضي - مرايا ليد', 'Default Model - LED Mirrors'));
-    if (accessoryProducts.length === 0) accessoryProducts.push(createDefaultProduct('accessory', 'accessory-all', 'موديل افتراضي - إكسسوارات', 'Default Model - Accessories'));
+    if (porcelainProducts.length === 0) porcelainProducts = defaultPorcelain;
+    if (toiletProducts.length === 0) toiletProducts = defaultToilets;
+    if (mirrorProducts.length === 0) mirrorProducts = defaultMirrors;
+    if (accessoryProducts.length === 0) accessoryProducts = defaultAccessories;
 
     const translations = {
       ar: {
@@ -1180,11 +1186,11 @@
         .replace(/وحدة حمام/g, "Bathroom Vanity Unit")
         .replace(/حوض ديكور بيضاوي فوق الرخام/g, "Oval Countertop Basin")
         .replace(/حوض ديكور/g, "Decorative Basin")
-        .replace(/موديل افتراضي - أحواض بورسلين/g, "Default Model - Porcelain Basins")
+        .replace(/حوض بورسلين فاخر/g, "Luxury Porcelain Basin")
         .replace(/حوض بورسلين/g, "Porcelain Basin")
-        .replace(/موديل افتراضي - قواعد تواليت/g, "Default Model - Toilets")
-        .replace(/موديل افتراضي - مرايا ليد/g, "Default Model - LED Mirrors")
-        .replace(/موديل افتراضي - إكسسوارات/g, "Default Model - Accessories")
+        .replace(/قاعدة تواليت سيراميك معلقة/g, "Wall Hung Ceramic Toilet")
+        .replace(/مرآة ليد تاتش مضيئة/g, "Touch LED Mirror")
+        .replace(/طقم إكسسوارات حمام ستانلس/g, "Bathroom Stainless Accessory Set")
         .replace(/كابينة شاور/g, "Shower Cabin")
         .replace(/قاعدة تواليت/g, "Toilet Bowl")
         .replace(/مرآة ليد/g, "LED Mirror")
