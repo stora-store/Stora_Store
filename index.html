@@ -49,11 +49,7 @@
       animation: whatsappPulse 2s infinite; border-radius: 50%;
     }
     [dir="ltr"] .floating-whatsapp { left: auto; right: 25px; }
-    .floating-whatsapp img {
-      width: 100%; height: 100%; object-fit: contain; border-radius: 50%;
-      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
-      transition: transform 0.3s ease;
-    }
+    .floating-whatsapp img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45); transition: transform 0.3s ease; }
     .floating-whatsapp:hover img { transform: scale(1.1); }
 
     @keyframes whatsappPulse {
@@ -62,254 +58,87 @@
       100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
     }
 
-    header {
-      background: #ffffff; box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04); position: sticky; top: 0; z-index: 100;
-    }
-    .header-container {
-      max-width: 1300px; margin: 0 auto; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap;
-    }
+    header { background: #ffffff; box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04); position: sticky; top: 0; z-index: 100; }
+    .header-container { max-width: 1300px; margin: 0 auto; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap; }
     .logo-box { display: flex; align-items: center; gap: 14px; text-decoration: none; cursor: pointer; }
     .logo-img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
     .brand-title { font-size: 1.35rem; font-weight: 800; color: var(--primary); line-height: 1.1; }
     .brand-sub { font-size: 0.72rem; color: var(--gold-dark); font-weight: 700; }
 
     .search-box-header { flex: 1; max-width: 360px; position: relative; }
-    .search-input {
-      width: 100%; padding: 9px 18px 9px 40px; border: 2px solid var(--border); border-radius: 30px;
-      font-size: 0.9rem; outline: none; transition: all 0.2s; font-family: 'Cairo', sans-serif;
-    }
+    .search-input { width: 100%; padding: 9px 18px 9px 40px; border: 2px solid var(--border); border-radius: 30px; font-size: 0.9rem; outline: none; transition: all 0.2s; font-family: 'Cairo', sans-serif; }
     .search-input:focus { border-color: var(--gold); }
     .search-icon { position: absolute; top: 50%; left: 14px; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
 
     .header-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .action-btn {
-      background: transparent; color: var(--primary); border: 2px solid var(--border); padding: 7px 12px;
-      border-radius: 30px; cursor: pointer; font-size: 0.82rem; font-weight: 800; transition: all 0.2s;
-    }
+    .action-btn { background: transparent; color: var(--primary); border: 2px solid var(--border); padding: 7px 12px; border-radius: 30px; cursor: pointer; font-size: 0.82rem; font-weight: 800; transition: all 0.2s; }
     .action-btn:hover { border-color: var(--gold); background: var(--gold-light); color: var(--gold-dark); }
 
-    .cart-btn {
-      background: var(--primary); color: #fff; border: none; padding: 8px 16px; border-radius: 30px;
-      cursor: pointer; font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 8px;
-    }
+    .cart-btn { background: var(--primary); color: #fff; border: none; padding: 8px 16px; border-radius: 30px; cursor: pointer; font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
     .cart-badge { background: var(--gold); color: #111827; border-radius: 50%; padding: 1px 7px; font-size: 0.8rem; font-weight: 800; }
 
     .hero-banner-wrap { max-width: 1300px; margin: 15px auto 0; padding: 0 20px; }
     .banner-card { border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); background: #0f172a; position: relative; }
-    
-    .slider-container {
-      position: relative; width: 100%; height: 380px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #0f172a;
-    }
-    @media (max-width: 768px) { .slider-container { height: 260px; } }
-
+    .slider-container { position: relative; width: 100%; height: 380px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #0f172a; }
     .slider-track { display: flex; width: 100%; height: 100%; transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
-    .slide-item {
-      min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; flex-shrink: 0;
-    }
-    .slide-item img {
-      width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.9);
-      animation: kenBurns 8s infinite alternate ease-in-out;
-    }
-    @keyframes kenBurns {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.08); }
-    }
+    .slide-item { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; flex-shrink: 0; }
+    .slide-item img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.9); }
 
-    .kohler-overlay {
-      position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.4) 100%);
-      z-index: 10; display: flex; flex-direction: column; justify-content: space-between; padding: 25px; pointer-events: none;
-    }
+    .kohler-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.4) 100%); z-index: 10; display: flex; flex-direction: column; justify-content: space-between; padding: 25px; pointer-events: none; }
     .kohler-top { display: flex; align-items: center; gap: 12px; }
     .kohler-logo { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--gold); object-fit: cover; background: #fff; }
-    .kohler-brand { color: #fff; font-weight: 900; font-size: 1.1rem; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-
+    .kohler-brand { color: #fff; font-weight: 900; font-size: 1.1rem; }
     .kohler-bottom { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 10px; }
-    .kohler-title { color: #fff; font-size: 1.5rem; font-weight: 900; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+    .kohler-title { color: #fff; font-size: 1.5rem; font-weight: 900; }
     .kohler-badge-tag { background: var(--gold); color: #111827; padding: 6px 16px; border-radius: 30px; font-weight: 900; font-size: 0.82rem; }
 
-    .slider-arrow {
-      position: absolute; top: 50%; transform: translateY(-50%); background: rgba(31, 41, 55, 0.7);
-      color: white; border: 2px solid rgba(197, 155, 39, 0.8); width: 42px; height: 42px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 15; font-size: 1.2rem;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .slider-arrow:hover { background: var(--primary); transform: translateY(-50%) scale(1.1); }
-    .slider-arrow.prev { right: 20px; }
-    .slider-arrow.next { left: 20px; }
-
     .master-switch-wrap { max-width: 1300px; margin: 30px auto 0; padding: 0 20px; }
-    .master-switch {
-      display: flex; background: #ffffff; border-radius: 20px; padding: 12px; max-width: 1250px;
-      margin: 0 auto 20px; gap: 12px; overflow-x: auto; scrollbar-width: thin;
-      box-shadow: 0 10px 30px rgba(197, 155, 39, 0.12); border: 2px solid rgba(197, 155, 39, 0.4);
-    }
-    .switch-btn {
-      flex: 1; min-width: 120px; padding: 10px; border: 2px solid var(--border); 
-      background: linear-gradient(to bottom, #ffffff, #f8fafc); border-radius: 14px;
-      font-weight: 800; font-size: 0.8rem; cursor: pointer; color: var(--text-muted); 
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; white-space: nowrap;
-    }
-    .switch-btn:hover { background: var(--gold-light); color: var(--gold-dark); border-color: var(--gold); transform: translateY(-4px); }
-    .switch-btn.active { background: linear-gradient(135deg, var(--primary), #111827); color: #ffffff; border-color: var(--gold); transform: translateY(-4px); }
+    .master-switch { display: flex; background: #ffffff; border-radius: 20px; padding: 12px; max-width: 1250px; margin: 0 auto 20px; gap: 12px; overflow-x: auto; box-shadow: 0 10px 30px rgba(197, 155, 39, 0.12); border: 2px solid rgba(197, 155, 39, 0.4); }
+    .switch-btn { flex: 1; min-width: 120px; padding: 10px; border: 2px solid var(--border); background: #ffffff; border-radius: 14px; font-weight: 800; font-size: 0.8rem; cursor: pointer; color: var(--text-muted); transition: all 0.3s; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; white-space: nowrap; }
+    .switch-btn:hover, .switch-btn.active { background: var(--gold-light); color: var(--gold-dark); border-color: var(--gold); }
+    .switch-btn.active { background: linear-gradient(135deg, var(--primary), #111827); color: #fff; }
 
     .categories-filter-wrap { max-width: 1300px; margin: 15px auto; padding: 0 20px; text-align: center; }
     .section-title { font-size: 1.65rem; font-weight: 900; color: var(--primary); margin-bottom: 6px; }
     .section-desc { color: var(--text-muted); margin-bottom: 25px; font-size: 0.95rem; }
 
     .filter-pills { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
-    .filter-btn {
-      background: #ffffff; border: 2px solid var(--border); padding: 9px 20px; border-radius: 30px;
-      font-weight: 800; font-size: 0.88rem; color: var(--text); cursor: pointer; transition: all 0.2s;
-    }
+    .filter-btn { background: #ffffff; border: 2px solid var(--border); padding: 9px 20px; border-radius: 30px; font-weight: 800; font-size: 0.88rem; color: var(--text); cursor: pointer; transition: all 0.2s; }
     .filter-btn:hover, .filter-btn.active { border-color: var(--gold); background: var(--gold-light); color: var(--gold-dark); }
 
     .catalog-container { max-width: 1300px; margin: 0 auto; padding: 0 20px 40px; }
     .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 22px; }
 
-    .card {
-      background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border);
-      overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow); transition: transform 0.2s; position: relative;
-    }
+    .card { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow); transition: transform 0.2s; position: relative; }
     .card:hover { transform: translateY(-4px); }
     .card-img-wrapper { position: relative; width: 100%; height: 240px; background: #f1f5f9; cursor: pointer; overflow: hidden; }
     .card-img { width: 100%; height: 100%; object-fit: cover; }
-    
+    .bestseller-badge { position: absolute; top: 10px; right: 10px; background: #f59e0b; color: #fff; font-size: 0.7rem; padding: 3px 10px; border-radius: 20px; font-weight: 800; z-index: 2; }
+    .new-badge { position: absolute; top: 10px; right: 10px; background: #3b82f6; color: #fff; font-size: 0.7rem; padding: 3px 10px; border-radius: 20px; font-weight: 800; z-index: 2; }
+
     .card-body { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
     .product-title { font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 10px; cursor: pointer; }
-    .badge-info {
-      background: var(--gold-light); border: 1px solid #fde68a; color: var(--gold-dark);
-      padding: 6px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 800; margin-bottom: 12px; text-align: center;
-    }
-
-    .card-footer {
-      margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-    }
+    .card-footer { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
     .price-container { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .price-value { font-size: 1.2rem; font-weight: 900; color: #059669; }
     .currency { font-size: 0.75rem; color: var(--text-muted); font-weight: 700; }
-    
-    .view-details-btn {
-      background: var(--primary); color: white; border: none; padding: 8px 14px; border-radius: 8px;
-      cursor: pointer; font-weight: 700; font-size: 0.85rem; transition: background 0.2s;
-    }
-    .view-details-btn:hover { background: var(--primary-hover); }
+    .view-details-btn { background: var(--primary); color: white; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 0.85rem; }
 
-    .detail-modal {
-      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); z-index: 2500;
-      display: none; align-items: center; justify-content: center; padding: 20px;
-    }
-    .detail-modal.open { display: flex; }
-    .detail-content {
-      background: #ffffff; width: 100%; max-width: 800px; border-radius: 16px; padding: 25px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.25); position: relative; max-height: 90vh; overflow-y: auto;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 25px;
-    }
-    @media (max-width: 768px) { .detail-content { grid-template-columns: 1fr; } }
-    .detail-close { position: absolute; top: 15px; left: 20px; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--text-muted); z-index: 5; }
-    .detail-gallery img { width: 100%; height: 300px; object-fit: cover; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 10px; }
-    .specs-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 12px; font-size: 0.85rem; margin-bottom: 15px; }
-    .specs-box ul { padding-inline-start: 20px; margin-top: 5px; }
-    .specs-box li { margin-bottom: 4px; font-weight: 700; color: var(--text-muted); }
-
-    .size-btn-group { display: flex; gap: 8px; margin-top: 5px; }
-    .size-btn {
-      flex: 1; padding: 8px 12px; background: #ffffff; border: 2px solid var(--border);
-      border-radius: 10px; font-weight: 800; font-size: 0.9rem; color: var(--primary);
-      cursor: pointer; transition: all 0.2s ease; text-align: center;
-    }
-    .size-btn.active { background: var(--primary); color: #ffffff; border-color: var(--primary); }
-
-    .qty-modal-row {
-      display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px;
-    }
-    .qty-controls { display: flex; align-items: center; gap: 10px; }
-    .qty-btn {
-      width: 30px; height: 30px; background: #ffffff; border: 1px solid var(--border); border-radius: 6px;
-      font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--primary);
-    }
-    .qty-display { font-size: 1rem; font-weight: 800; min-width: 25px; text-align: center; }
-
-    .add-to-cart-modal-btn {
-      width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 10px;
-      font-weight: 800; font-size: 1rem; cursor: pointer; text-align: center;
-    }
-    .whatsapp-inquire-btn {
-      width: 100%; background: #25d366; color: white; border: none; padding: 12px; border-radius: 10px;
-      font-weight: 800; font-size: 1rem; cursor: pointer; text-align: center; display: block; text-decoration: none; margin-top: 10px;
-    }
-
-    .admin-modal {
-      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); z-index: 4000;
-      display: none; align-items: center; justify-content: center; padding: 20px;
-    }
-    .admin-modal.open { display: flex; }
-    .admin-content {
-      background: #ffffff; width: 100%; max-width: 750px; border-radius: 16px; padding: 30px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3); position: relative; max-height: 90vh; overflow-y: auto;
-    }
-    .admin-form-group { margin-bottom: 15px; }
-    .admin-form-group label { display: block; font-weight: 800; font-size: 0.88rem; color: var(--primary); margin-bottom: 5px; }
-    .admin-form-group input, .admin-form-group select, .admin-form-group textarea {
-      width: 100%; padding: 10px 14px; border: 2px solid var(--border); border-radius: 8px; font-family: 'Cairo', sans-serif; font-size: 0.9rem; outline: none;
-    }
-    .admin-submit-btn { background: #059669; color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: 900; font-size: 1rem; cursor: pointer; }
-
-    footer {
-      background-color: #1f2937; color: #cbd5e1; padding: 40px 20px 20px; border-top: 3px solid var(--gold);
-    }
-    .footer-container {
-      max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; margin-bottom: 30px;
-    }
-    .footer-col h4 { color: #ffffff; font-size: 1.05rem; font-weight: 800; margin-bottom: 15px; border-bottom: 2px solid var(--gold); padding-bottom: 6px; width: fit-content; }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-col ul li a, .footer-col p { color: #cbd5e1; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; cursor: pointer; }
-    .footer-col ul li a:hover { color: var(--gold); }
-    .footer-bottom {
-      max-width: 1300px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;
-      display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; font-size: 0.85rem; color: #94a3b8;
-    }
-
-    .info-modal {
-      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); z-index: 3000;
-      display: none; align-items: center; justify-content: center; padding: 20px;
-    }
-    .info-modal.open { display: flex; }
-    .info-modal-content {
-      background: #ffffff; width: 100%; max-width: 650px; border-radius: 16px; padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; max-height: 85vh; overflow-y: auto;
-    }
+    .admin-modal, .info-modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); z-index: 2500; display: none; align-items: center; justify-content: center; padding: 20px; }
+    .admin-modal.open, .info-modal.open { display: flex; }
+    .admin-content, .info-modal-content { background: #ffffff; width: 100%; max-width: 600px; border-radius: 16px; padding: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.25); position: relative; max-height: 90vh; overflow-y: auto; }
     .info-modal-close { position: absolute; top: 15px; left: 20px; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--text-muted); }
 
-    .cart-drawer {
-      position: fixed; top: 0; left: -420px; width: 100%; max-width: 390px; height: 100vh;
-      background: white; box-shadow: 4px 0 25px rgba(0,0,0,0.18); z-index: 1000; display: flex; flex-direction: column; transition: all 0.3s;
-    }
-    .cart-drawer.open { left: 0; }
-    .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999; display: none; }
-    .cart-overlay.open { display: block; }
+    .admin-form-group { margin-bottom: 15px; }
+    .admin-form-group label { display: block; font-weight: 800; font-size: 0.88rem; color: var(--primary); margin-bottom: 5px; }
+    .admin-form-group input, .admin-form-group select, .admin-form-group textarea { width: 100%; padding: 10px 14px; border: 2px solid var(--border); border-radius: 8px; font-family: 'Cairo', sans-serif; font-size: 0.9rem; outline: none; }
+    .admin-submit-btn { background: #059669; color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: 900; font-size: 1rem; cursor: pointer; }
+
+    footer { background-color: #1f2937; color: #cbd5e1; padding: 40px 20px 20px; border-top: 3px solid var(--gold); text-align: center; }
+    .footer-bottom { font-size: 0.85rem; color: #94a3b8; }
   </style>
 </head>
 <body oncontextmenu="return false;">
-
-  <a href="https://wa.me/201039727479" target="_blank" class="floating-whatsapp" title="تواصل عبر واتساب">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-  </a>
-
-  <div class="top-bar">
-    <div class="top-bar-inner">
-      <div class="contact-links">
-        <span class="contact-item">🚚 شحن لكافة المحافظات - توصيل لحد البيت</span>
-      </div>
-      <div class="contact-links">
-        <a class="policy-link" onclick="openModal('aboutModal')">من نحن؟</a>
-        <a class="policy-link" onclick="openModal('whyModal')">لماذا Stora Store؟</a>
-        <a class="policy-link" onclick="openModal('termsModal')">الشروط والأحكام</a>
-        <a class="policy-link" onclick="openModal('shippingModal')">سياسة الشحن</a>
-      </div>
-    </div>
-  </div>
 
   <header>
     <div class="header-container">
@@ -320,41 +149,14 @@
           <span class="brand-sub">STORA STORE • BATHROOM LUXURY</span>
         </div>
       </a>
-
       <div class="search-box-header">
         <span class="search-icon">🔍</span>
         <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن موديل، مقاس، أو منتج..." oninput="handleSearch()">
       </div>
-
-      <div class="header-actions">
-        <button class="action-btn" onclick="toggleCurrency()">💵 <span id="currencyBtnText">USD ($)</span></button>
-        <button class="action-btn" onclick="toggleLanguage()">🌐 <span id="langBtnText">English</span></button>
-        <button class="cart-btn" onclick="toggleCart()">🛒 <span id="cartBtnText">العربة</span> <span class="cart-badge" id="cartBadge">0</span></button>
-      </div>
     </div>
   </header>
 
-  <section class="hero-banner-wrap">
-    <div class="banner-card">
-      <div class="slider-container">
-        <div class="slider-track" id="sliderTrack"></div>
-      </div>
-      <button class="slider-arrow prev" onclick="moveSlide(-1)">&#10094;</button>
-      <button class="slider-arrow next" onclick="moveSlide(1)">&#10095;</button>
-
-      <div class="kohler-overlay">
-        <div class="kohler-top">
-          <img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png" alt="Logo" class="kohler-logo">
-          <span class="kohler-brand">STORA STORE • LUXURY</span>
-        </div>
-        <div class="kohler-bottom">
-          <h2 class="kohler-title">أرقى تجهيزات الحمامات العصرية</h2>
-          <div class="kohler-badge-tag">🚚 شحن لكافة المحافظات - توصيل لحد البيت</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <!-- الأقسام الرئيسية -->
   <div class="master-switch-wrap">
     <div class="master-switch">
       <button class="switch-btn active" onclick="setMainMode('units')">وحدات الحمام</button>
@@ -370,249 +172,58 @@
   </div>
 
   <main class="catalog-container">
-    <div class="products-grid" id="productsGrid"></div>
+    <div class="products-grid" id="productsGrid">جاري تحميل المنتجات...</div>
   </main>
 
-  <div class="detail-modal" id="productDetailModal" onclick="closeProductModal(event)">
-    <div class="detail-content" onclick="event.stopPropagation()">
-      <button class="detail-close" onclick="closeProductModalDirect()">&times;</button>
-      <div>
-        <div class="detail-gallery">
-          <img id="modalMainImg" src="" alt="Product">
-        </div>
-      </div>
-      <div class="detail-info">
-        <h2 id="modalTitle" style="font-size: 1.3rem; font-weight: 800; margin-bottom: 8px;"></h2>
-        <div class="price-container" id="modalPriceContainer" style="margin-bottom: 10px;"></div>
-        <div class="specs-box" id="modalSpecs"></div>
-        <div id="modalSizeSection" style="margin-bottom: 12px;"></div>
-        
-        <div class="qty-modal-row">
-          <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">الكمية المطلوبة:</span>
-          <div class="qty-controls">
-            <button class="qty-btn" onclick="changeModalQty(-1)">-</button>
-            <span class="qty-display" id="modalQtyVal">1</span>
-            <button class="qty-btn" onclick="changeModalQty(1)">+</button>
-          </div>
-        </div>
-
-        <button class="add-to-cart-modal-btn" onclick="addModalToCart()">🛒 اضف للسله</button>
-        <a id="modalWhatsappBtn" href="#" target="_blank" class="whatsapp-inquire-btn">💬 اطلب عبر الواتساب مباشرة</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- لوحة الأدمن المتقدمة -->
+  <!-- لوحة الأدمن -->
   <div class="admin-modal" id="adminModal">
     <div class="admin-content">
       <button class="info-modal-close" onclick="closeAdminModal()">&times;</button>
-      <h3 style="font-size: 1.15rem; font-weight: 900; margin-bottom: 15px; color: var(--primary);">⚙️ لوحة تحكم الأدمن المتقدمة</h3>
-
-      <div style="background:#f8fafc; padding:15px; border-radius:12px; border:1px solid var(--border); margin-bottom:20px;">
-        <h4 style="font-size:1rem; font-weight:900; margin-bottom:10px; color:var(--primary);">➕ إضافة موديل جديد</h4>
-        
-        <div class="admin-form-group">
-          <label>كود المنتج (ID):</label>
-          <input type="text" id="newId" placeholder="مثال: UN-MB-30">
-        </div>
-
-        <div class="admin-form-group">
-          <label>اسم المنتج (عربي):</label>
-          <input type="text" id="newTitleAr" placeholder="مثال: وحدة حمام خشبية فاخرة">
-        </div>
-
-        <div class="admin-form-group">
-          <label>شارة المنتج (الحالة):</label>
-          <select id="newBadgeStatus">
-            <option value="new">🆕 جديد / New</option>
-            <option value="bestseller">🔥 الأكثر طلباً</option>
-            <option value="none">✨ بدون شارة</option>
-            <option value="soldout">❌ نفذ بالكامل</option>
-          </select>
-        </div>
-
-        <div class="admin-form-group">
-          <label>القسم الرئيسي:</label>
-          <select id="newCategoryMode">
-            <option value="units">وحدات الحمام (Units)</option>
-            <option value="basins">أحواض ديكور (Basins)</option>
-            <option value="porcelain">أحواض بورسلين (Porcelain)</option>
-            <option value="showers">كبائن شاور (Showers)</option>
-            <option value="toilets">قواعد تواليت (Toilets)</option>
-            <option value="mirrors">مرايا ليد (Mirrors)</option>
-            <option value="mixers">خلاطات مياه (Mixers)</option>
-            <option value="accessories">إكسسوارات (Accessories)</option>
-            <option value="stainless">أحواض ستانلس (Stainless)</option>
-          </select>
-        </div>
-
-        <div class="admin-form-group">
-          <label>سعر مقاس 60 سم (أو السعر الأساسي):</label>
-          <input type="number" id="price60" placeholder="6800">
-        </div>
-        <div class="admin-form-group">
-          <label>سعر مقاس 80 سم (اختياري):</label>
-          <input type="number" id="price80" placeholder="7900">
-        </div>
-        <div class="admin-form-group">
-          <label>سعر مقاس 100 سم (اختياري):</label>
-          <input type="number" id="price100" placeholder="10200">
-        </div>
-
-        <div class="admin-form-group">
-          <label>رابط الصورة الرئيسية:</label>
-          <input type="text" id="newImage" placeholder="https://res.cloudinary.com/...">
-        </div>
-
-        <div class="admin-form-group">
-          <label>المواصفات الخاصة (كل نقطة في سطر):</label>
-          <textarea id="newSpecs" rows="4">مصنوع من ألواح بورديوم عالية الكثافة ومقاومة تامة للمياه والرطوبة
-أدراج ومفصلات مزودة بنظام الإغلاق السلس والصامت (Soft Close).</textarea>
-        </div>
-
-        <button class="admin-submit-btn" onclick="saveProductToGitHub()">💾 حفظ الموديل ورفعه على GitHub</button>
+      <h3 style="font-weight: 800; margin-bottom: 15px;">⚙️ لوحة تحكم الأدمن (حفظ تلقائي على GitHub)</h3>
+      <div class="admin-form-group">
+        <label>القسم المستهدف للإضافة:</label>
+        <select id="targetCategory">
+          <option value="units">وحدات الحمام (Units)</option>
+          <option value="basins">أحواض ديكور (Basins)</option>
+          <option value="porcelain">أحواض بورسلين (Porcelain)</option>
+          <option value="showers">كبائن شاور (Showers)</option>
+          <option value="toilets">قواعد تواليت (Toilets)</option>
+          <option value="mirrors">مرايا ليد (Mirrors)</option>
+          <option value="mixers">خلاطات مياه (Mixers)</option>
+          <option value="accessories">إكسسوارات (Accessories)</option>
+          <option value="stainless">أحواض ستانلس (Stainless)</option>
+        </select>
       </div>
-    </div>
-  </div>
-
-  <div class="info-modal" id="aboutModal"><div class="info-modal-content"><button class="info-modal-close" onclick="closeModal('aboutModal')">&times;</button><h3 style="font-weight:800; margin-bottom:15px; border-bottom:2px solid var(--gold); padding-bottom:8px;">من نحن؟</h3><p>نحن في <strong>ستورا ستور (Stora Store)</strong> متخصصون في تقديم أرقى وأحدث تجهيزات الحمامات والمطابخ الفاخرة.</p></div></div>
-  <div class="info-modal" id="whyModal"><div class="info-modal-content"><button class="info-modal-close" onclick="closeModal('whyModal')">&times;</button><h3 style="font-weight:800; margin-bottom:15px; border-bottom:2px solid var(--gold); padding-bottom:8px;">لماذا Stora Store؟</h3><p>• خامات مطابقة لأعلى معايير المتانة ومقاومة الرطوبة والمياه.</p><p>• تصاميم عصرية تناسب أحدث صيحات الديكور الحديث.</p></div></div>
-  <div class="info-modal" id="termsModal"><div class="info-modal-content"><button class="info-modal-close" onclick="closeModal('termsModal')">&times;</button><h3 style="font-weight:800; margin-bottom:15px; border-bottom:2px solid var(--gold); padding-bottom:8px;">الشروط والأحكام</h3><p>1. كافة المنتجات المعروضة مطابقة للمواصفات القياسية والأسعار قابلة للتحديث المستمر.</p></div></div>
-  <div class="info-modal" id="shippingModal"><div class="info-modal-content"><button class="info-modal-close" onclick="closeModal('shippingModal')">&times;</button><h3 style="font-weight:800; margin-bottom:15px; border-bottom:2px solid var(--gold); padding-bottom:8px;">سياسة الشحن والتوصيل</h3><p>• نوفر خدمة الشحن السريع والآمن لكافة المحافظات من البيت للبيت.</p></div></div>
-
-  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-  <div class="cart-drawer" id="cartDrawer">
-    <div style="padding:16px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
-      <h3>عربة طلباتك</h3>
-      <button onclick="toggleCart()" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
-    </div>
-    <div id="cartItemsContainer" style="padding:15px; flex:1; overflow-y:auto;"></div>
-    <div style="padding:16px; border-top:1px solid var(--border); background:#f8fafc;">
-      <button onclick="submitOrder()" style="width:100%; background:#25d366; color:white; border:none; padding:12px; border-radius:8px; font-weight:800; cursor:pointer;">📲 إرسال الطلب عبر واتساب</button>
+      <div class="admin-form-group">
+        <label>اسم المنتج:</label>
+        <input type="text" id="newTitleAr" placeholder="مثال: وحدة حمام فاخرة">
+      </div>
+      <div class="admin-form-group">
+        <label>السعر:</label>
+        <input type="number" id="singlePrice" placeholder="5000">
+      </div>
+      <button class="admin-submit-btn" onclick="saveProductToGitHub()">💾 حفظ ورفع التعديل على GitHub</button>
     </div>
   </div>
 
   <footer>
-    <div class="footer-container">
-      <div class="footer-col">
-        <h4>التسوق</h4>
-        <ul>
-          <li><a onclick="setMainMode('units')">الرئيسية</a></li>
-          <li><a onclick="setMainMode('units')">الأقسام</a></li>
-          <li><a onclick="setMainMode('units')">جميع المنتجات</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>خدمة العملاء</h4>
-        <ul>
-          <li><a onclick="openModal('aboutModal')">من نحن؟</a></li>
-          <li><a onclick="openModal('whyModal')">لماذا Stora Store؟</a></li>
-          <li><a onclick="openModal('termsModal')">الشروط والأحكام</a></li>
-          <li><a onclick="openModal('shippingModal')">سياسة الشحن</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>فروعنا</h4>
-        <ul>
-          <li>📍 القاهرة</li>
-          <li style="margin-top:6px;">📍 الإسكندرية</li>
-          <li style="margin-top:6px;">📍 المنصورة</li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>تواصل معنا</h4>
-        <ul>
-          <li><a href="https://wa.me/201039727479" target="_blank" style="color:#25d366; font-weight:800;">💬 واتساب خدمة العملاء</a></li>
-          <li><a href="https://www.instagram.com/storastore2007?igsh=MTFnZ2Fkenp1OGlqag==" target="_blank">Instagram</a></li>
-          <li><a href="https://www.facebook.com/share/19TKZKVozC/" target="_blank">Facebook</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      ستورا ستور™ 2026 — جميع الحقوق محفوظة
-    </div>
+    <div class="footer-bottom">ستورا ستور™ 2026 — جميع الحقوق محفوظة</div>
   </footer>
 
   <script>
-    // المنتجات الـ 50+ الأصلية مدمجة بالكامل لضمان السلاسة الفورية
-    let unitProducts = [
-      { id: "UN-MB-30", type: "unit", category: "wood", titleAr: "وحدة حمام خشبية فاخرة #30", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790424241/ID_UN-MB-30.jpg", sizes: [60, 80, 100], prices: { 60: 6800, 80: 7900, 100: 10200 }, selectedSize: 60, specTag: "مقاس 60-80-100 سم", badge: "bestseller", customSpecs: "مصنوع من ألواح بورديوم عالية الكثافة ومقاومة تامة للمياه والرطوبة\nأدراج ومفصلات مزودة بنظام الإغلاق السلس والصامت (Soft Close)." },
-      { id: "UN-MB-21", type: "unit", category: "wood", titleAr: "وحدة حمام خشبية فاخرة #21", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-21.png", sizes: [60, 80, 100], prices: { 60: 6800, 80: 7900, 100: 10200 }, selectedSize: 60, specTag: "مقاس 60-80-100 سم", badge: "none", customSpecs: "مصنوع من ألواح بورديوم عالية الكثافة ومقاومة تامة للمياه والرطوبة" }
-    ];
-
-    let basinProducts = [
-      { id: "BS-OV-04", type: "basin", category: "basin-all", titleAr: "حوض ديكور بيضاوي فوق الرخام BS-OV-04", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790249819/ID_BS-OV-04.png", price: 1850, specTag: "حوض ديكور مفرد فوق الرخام", badge: "bestseller", customSpecs: "سيراميك عالي اللمعان\nمقاوم للاتساخ وسهل التنظيف" }
-    ];
-
-    let porcelainProducts = [
-      { id: "BS-PR-06", type: "porcelain", category: "porcelain-all", titleAr: "حوض بورسلين فاخر BS-PR-06", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790459986/ID_BS-PR-06.png", price: 12000, specTag: "بورسلين نقي عالي الجودة", badge: "new", customSpecs: "بورسلين عالي الجودة" }
-    ];
-
-    let showerProducts = [
-      { id: "SH-80-BAN", type: "shower", category: "shower-all", titleAr: "كابينة شاور بقاعدة بانيو منخفض (80×80 سم)", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1789644886/80x80_Banio_low_.png", price: 9500, specTag: "80×80 سم | بانيو منخفض", badge: "bestseller", customSpecs: "زجاج سيكوريت مقسى سمك 10 مم" }
-    ];
-
-    let toiletProducts = [
-      { id: "TL-WCF-01", type: "toilet", category: "toilet-all", titleAr: "قاعدة تواليت سيراميك معلقة TL-WCF-01", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png", price: 4500, specTag: "قاعدة معلقة بغطاء هيدروليك", badge: "new", customSpecs: "ضمان مدى الحياة ضد عيوب الصناعة" }
-    ];
-
-    let mirrorProducts = [
-      { id: "MR-LED-01", type: "mirror", category: "mirror-all", titleAr: "مرآة ليد تاتش مضيئة MR-LED-01", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png", price: 2200, specTag: "مرآة ليد مقاومة للبخار", badge: "new", customSpecs: "مرآة ليد تاتش مضيئة" }
-    ];
-
-    let mixerProducts = [
-      { id: "MX-BAT-13", type: "mixer", category: "mixer-all", titleAr: "خلاط مياه فاخر MX-BAT-13", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790255683/ID_MX-BAT-13.png", price: 2400, specTag: "خلاط نحاس بقلب سيراميك", badge: "bestseller", customSpecs: "نحاس نقي 100%\nضمان 5 سنوات" }
-    ];
-
-    let accessoryProducts = [
-      { id: "AC-SET-01", type: "accessory", category: "accessory-all", titleAr: "طقم إكسسوارات حمام ستانلس AC-SET-01", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png", price: 1200, specTag: "إكسسوارات ستانلس 304", badge: "new", customSpecs: "ستانلس ستيل 304 متكامل" }
-    ];
-
-    let stainlessProducts = [
-      { id: "SS-304-07", type: "stainless", category: "stainless-all", titleAr: "حوض ستانلس 304 فاخر SS-304-07", image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790253301/ID_SS-304-07.png", price: 3200, specTag: "ستانلس 304 مقاوم للخدوش", badge: "bestseller", customSpecs: "ستانلس ستيل 304 نقي مقاوم للصدأ والخدوش" }
-    ];
-
+    let storeData = { units: [], basins: [], porcelain: [], showers: [], toilets: [], mirrors: [], mixers: [], accessories: [], stainless: [] };
     let mainMode = 'units';
     let searchQuery = '';
-    let currentLang = 'ar';
-    let currentCurrency = 'EGP';
-    const USD_RATE = 50.0;
-    let cart = [];
-    let currentSlideIdx = 0;
-    let slideInterval;
-    let activeModalProduct = null;
-    let modalSelectedSize = 60;
-    let modalQuantity = 1;
 
-    function initStore() {
-      renderCatalog();
-      initSlider();
-    }
-
-    function initSlider() {
-      const track = document.getElementById('sliderTrack');
-      if (!track) return;
-      const allProducts = [...unitProducts, ...basinProducts, ...porcelainProducts];
-      let slidesHTML = '';
-      allProducts.slice(0, 5).forEach((prod, index) => {
-        slidesHTML += `<div class="slide-item ${index === 0 ? 'active' : ''}"><img src="${prod.image}" alt="Banner"></div>`;
-      });
-      track.innerHTML = slidesHTML;
-      startSliderTimer();
-    }
-
-    function startSliderTimer() {
-      slideInterval = setInterval(() => { moveSlide(1); }, 5000);
-    }
-
-    function moveSlide(direction) {
-      const slides = document.querySelectorAll('.slide-item');
-      if (slides.length === 0) return;
-      slides[currentSlideIdx].classList.remove('active');
-      currentSlideIdx = (currentSlideIdx + direction + slides.length) % slides.length;
-      slides[currentSlideIdx].classList.add('active');
-      clearInterval(slideInterval);
-      startSliderTimer();
+    async function loadStoreProducts() {
+      try {
+        const response = await fetch('products.json');
+        storeData = await response.json();
+        renderCatalog();
+      } catch (error) {
+        console.error("فشل تحميل المنتجات:", error);
+        document.getElementById('productsGrid').innerText = "حدث خطأ في تحميل ملف المنتجات.";
+      }
     }
 
     function setMainMode(mode) {
@@ -622,52 +233,15 @@
       renderCatalog();
     }
 
-    function formatPrice(egpAmount) {
-      if (currentCurrency === 'USD') {
-        return { value: (egpAmount / USD_RATE).toFixed(0), symbol: '$' };
-      }
-      return { value: egpAmount.toLocaleString(), symbol: 'ج.م' };
-    }
-
-    function toggleCurrency() {
-      currentCurrency = currentCurrency === 'EGP' ? 'USD' : 'EGP';
-      document.getElementById('currencyBtnText').innerText = currentCurrency === 'EGP' ? 'USD ($)' : 'EGP (ج.م)';
-      renderCatalog();
-    }
-
-    function toggleLanguage() {
-      currentLang = currentLang === 'ar' ? 'en' : 'ar';
-      document.documentElement.lang = currentLang;
-      document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-      document.getElementById('langBtnText').innerText = currentLang === 'ar' ? 'English' : 'عربي';
-      document.getElementById('cartBtnText').innerText = currentLang === 'ar' ? 'العربة' : 'Cart';
-      renderCatalog();
-    }
-
-    function getActiveList() {
-      switch(mainMode) {
-        case 'units': return unitProducts;
-        case 'basins': return basinProducts;
-        case 'porcelain': return porcelainProducts;
-        case 'showers': return showerProducts;
-        case 'toilets': return toiletProducts;
-        case 'mirrors': return mirrorProducts;
-        case 'mixers': return mixerProducts;
-        case 'accessories': return accessoryProducts;
-        case 'stainless': return stainlessProducts;
-        default: return unitProducts;
-      }
-    }
-
     function renderCatalog() {
       const grid = document.getElementById("productsGrid");
       if (!grid) return;
       grid.innerHTML = "";
 
-      let listToDisplay = getActiveList();
+      let listToDisplay = storeData[mainMode] || [];
 
       if (searchQuery !== '') {
-        const allItems = [...unitProducts, ...basinProducts, ...porcelainProducts, ...showerProducts, ...toiletProducts, ...mirrorProducts, ...mixerProducts, ...accessoryProducts, ...stainlessProducts];
+        const allItems = [...storeData.units, ...storeData.basins, ...storeData.porcelain, ...storeData.showers, ...storeData.toilets, ...storeData.mirrors, ...storeData.mixers, ...storeData.accessories, ...storeData.stainless];
         listToDisplay = allItems.filter(item => item.titleAr && item.titleAr.toLowerCase().includes(searchQuery));
       }
 
@@ -677,28 +251,16 @@
       }
 
       listToDisplay.forEach(item => {
-        const rawPrice = item.type === 'unit' ? (item.prices?.[60] || 6800) : (item.price || 2000);
-        const formatted = formatPrice(rawPrice);
-        const specTagText = item.specTag || 'مقاس 60-80-100 سم';
-
-        let badgeHtml = '';
-        if (item.badge === 'bestseller') badgeHtml = `<span style="position:absolute; top:10px; right:10px; background:#f59e0b; color:#fff; font-size:0.7rem; padding:3px 10px; border-radius:20px; font-weight:800; z-index:2;">🔥 الأكثر طلباً</span>`;
-        else if (item.badge === 'new') badgeHtml = `<span style="position:absolute; top:10px; right:10px; background:#3b82f6; color:#fff; font-size:0.7rem; padding:3px 10px; border-radius:20px; font-weight:800; z-index:2;">🆕 جديد</span>`;
-
+        const rawPrice = item.price || (item.prices ? item.prices[Object.keys(item.prices)[0]] : 5000);
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
-          <div class="card-img-wrapper" onclick="openProductModal('${item.id}')">
-            ${badgeHtml}
-            <img src="${item.image || 'https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png'}" alt="${item.titleAr}" class="card-img">
-          </div>
+          <div class="card-img-wrapper"><img src="${item.image || 'https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png'}" alt="${item.titleAr}" class="card-img"></div>
           <div class="card-body">
-            <h3 class="product-title" onclick="openProductModal('${item.id}')">${item.titleAr}</h3>
-            <div style="font-size:0.75rem; color:var(--gold-dark); font-weight:800; margin-bottom:6px; text-align:center;">ID: ${item.id || 'N/A'}</div>
-            <div class="badge-info">${specTagText}</div>
+            <h3 class="product-title">${item.titleAr}</h3>
+            <div style="font-size:0.75rem; color:var(--gold-dark); font-weight:800; margin-bottom:6px;">ID: ${item.id || 'N/A'}</div>
             <div class="card-footer">
-              <div class="price-container"><span class="price-value">${formatted.value}</span> <span class="currency">${formatted.symbol}</span></div>
-              <button class="view-details-btn" onclick="openProductModal('${item.id}')">عرض التفاصيل والشراء</button>
+              <div class="price-container"><span class="price-value">${rawPrice.toLocaleString()}</span> <span class="currency">ج.م</span></div>
             </div>
           </div>
         `;
@@ -706,239 +268,84 @@
       });
     }
 
-    function openProductModal(id) {
-      const allItems = [...unitProducts, ...basinProducts, ...porcelainProducts, ...showerProducts, ...toiletProducts, ...mirrorProducts, ...mixerProducts, ...accessoryProducts, ...stainlessProducts];
-      const item = allItems.find(p => p.id === id);
-      if (!item) return;
-
-      activeModalProduct = item;
-      modalSelectedSize = item.selectedSize || (item.sizes ? item.sizes[0] : 60);
-      modalQuantity = 1;
-
-      document.getElementById('modalTitle').innerText = item.titleAr;
-      document.getElementById('modalMainImg').src = item.image || 'https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png';
-      
-      updateModalPriceAndSpecs();
-      document.getElementById('productDetailModal').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function updateModalPriceAndSpecs() {
-      const item = activeModalProduct;
-      let rawPrice = 0;
-      if (item.type === 'unit' && item.prices) {
-        rawPrice = item.prices[modalSelectedSize] || item.prices[60] || 6800;
-      } else {
-        rawPrice = item.price || 2000;
-      }
-
-      const formatted = formatPrice(rawPrice);
-      document.getElementById('modalPriceContainer').innerHTML = `<span class="price-value">${formatted.value}</span> <span class="currency">${formatted.symbol}</span>`;
-
-      const rawSpecs = item.customSpecs || "مطابق لأعلى معايير الجودة والمتانة.";
-      const specsList = rawSpecs.split('\n').map(l => `<li>${l}</li>`).join('');
-      document.getElementById('modalSpecs').innerHTML = `<p style="font-weight:800; margin-bottom:4px;">المواصفات الفنية:</p><ul>${specsList}</ul>`;
-
-      const sizeSec = document.getElementById('modalSizeSection');
-      if (item.type === 'unit') {
-        const sizes = item.sizes || [60, 80, 100];
-        sizeSec.innerHTML = `
-          <div style="font-size:0.82rem; font-weight:700; color:var(--text-muted); margin-bottom:5px;">اختر المقاس:</div>
-          <div class="size-btn-group">
-            ${sizes.map(sz => `<button class="size-btn ${modalSelectedSize === sz ? 'active' : ''}" onclick="setModalSize(${sz})">${sz} سم</button>`).join('')}
-          </div>
-        `;
-      } else {
-        sizeSec.innerHTML = '';
-      }
-
-      document.getElementById('modalQtyVal').innerText = modalQuantity;
-
-      const waText = encodeURIComponent(`مرحباً ستورا ستور، أود طلب هذا المنتج:\n- المنتج: ${item.titleAr}\n- الكود: ${item.id}\n- السعر: ${rawPrice} ج.م`);
-      document.getElementById('modalWhatsappBtn').href = `https://wa.me/201039727479?text=${waText}`;
-    }
-
-    function setModalSize(sz) {
-      modalSelectedSize = sz;
-      updateModalPriceAndSpecs();
-    }
-
-    function changeModalQty(delta) {
-      modalQuantity = Math.max(1, modalQuantity + delta);
-      document.getElementById('modalQtyVal').innerText = modalQuantity;
-    }
-
-    function addModalToCart() {
-      if (!activeModalProduct) return;
-      let rawPrice = activeModalProduct.type === 'unit' ? (activeModalProduct.prices?.[modalSelectedSize] || 6800) : (activeModalProduct.price || 2000);
-      let desc = activeModalProduct.type === 'unit' ? `مقاس: ${modalSelectedSize} سم` : '';
-
-      const existing = cart.find(ci => ci.id === activeModalProduct.id && ci.desc === desc);
-      if (existing) {
-        existing.qty += modalQuantity;
-      } else {
-        cart.push({
-          id: activeModalProduct.id,
-          title: activeModalProduct.titleAr,
-          desc: desc,
-          priceEgp: rawPrice,
-          qty: modalQuantity,
-          image: activeModalProduct.image
-        });
-      }
-
-      updateCartBadge();
-      closeProductModalDirect();
-      toggleCart(true);
-    }
-
-    function closeProductModalDirect() {
-      document.getElementById('productDetailModal').classList.remove('open');
-      document.body.style.overflow = 'auto';
-    }
-
-    function closeProductModal(e) {
-      if (e.target.id === 'productDetailModal') closeProductModalDirect();
-    }
-
-    function updateCartBadge() {
-      const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
-      document.getElementById("cartBadge").innerText = totalCount;
-      const container = document.getElementById("cartItemsContainer");
-
-      if (cart.length === 0) {
-        container.innerHTML = `<p style="text-align:center; color:#94a3b8; margin-top:20px;">العربة فارغة</p>`;
-        return;
-      }
-
-      container.innerHTML = "";
-      cart.forEach(item => {
-        const div = document.createElement("div");
-        div.style.cssText = "display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding:10px 0;";
-        div.innerHTML = `
-          <div>
-            <h4 style="font-size:0.9rem; font-weight:800;">${item.title}</h4>
-            <div style="font-size:0.75rem; color:var(--text-muted);">${item.desc}</div>
-            <div style="font-size:0.8rem; color:#059669; font-weight:bold;">${item.priceEgp} ج.م × ${item.qty}</div>
-          </div>
-          <button onclick="removeFromCart('${item.id}')" style="background:none; border:none; color:#ef4444; cursor:pointer; font-weight:bold;">حذف</button>
-        `;
-        container.appendChild(div);
-      });
-    }
-
-    function removeFromCart(id) {
-      cart = cart.filter(i => i.id !== id);
-      updateCartBadge();
-    }
-
-    function submitOrder() {
-      if (cart.length === 0) { alert("العربة فارغة"); return; }
-      let text = "طلب جديد من *ستورا ستور*:\n\n";
-      let total = 0;
-      cart.forEach((item, index) => {
-        total += (item.priceEgp * item.qty);
-        text += `${index + 1}. *${item.title}* (${item.desc}) - الكمية: ${item.qty} - السعر: ${item.priceEgp * item.qty} ج.م\n`;
-      });
-      text += `\nالإجمالي الكلي: ${total} ج.م`;
-      window.open(`https://wa.me/201039727479?text=${encodeURIComponent(text)}`, "_blank");
-    }
-
     function openAdminPanelDirect() {
       const passPrompt = prompt("أدخل كلمة مرور الأدمن:");
       if (passPrompt === 'admin123') {
         document.getElementById('adminModal').classList.add('open');
-      } else if (passPrompt !== null) { alert("كلمة المرور غير صحيحة!"); }
+      } else if (passPrompt !== null) {
+        alert("كلمة المرور غير صحيحة!");
+      }
     }
 
     function closeAdminModal() { document.getElementById('adminModal').classList.remove('open'); }
 
+    // دالة الحفظ التلقائي ورفع التعديلات مباشرة إلى مستودع GitHub
     async function saveProductToGitHub() {
-      const targetCategory = document.getElementById('newCategoryMode').value;
-      const customId = document.getElementById('newId').value.trim();
+      const targetCategory = document.getElementById('targetCategory').value;
       const title = document.getElementById('newTitleAr').value.trim();
-      const badgeStatus = document.getElementById('newBadgeStatus').value;
-      const p60 = parseFloat(document.getElementById('price60').value) || 6800;
-      const p80 = parseFloat(document.getElementById('price80').value) || 7900;
-      const p100 = parseFloat(document.getElementById('price100').value) || 10200;
-      const image = document.getElementById('newImage').value.trim() || 'https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png';
-      const specs = document.getElementById('newSpecs').value.trim();
+      const price = parseFloat(document.getElementById('singlePrice').value) || 2000;
 
-      if (!title) { alert("يرجى إدخال اسم المنتج بالعربي!"); return; }
-
-      const newProd = {
-        id: customId || ("MOD-" + Math.floor(Math.random() * 9000 + 1000)),
-        type: targetCategory === 'units' ? 'unit' : targetCategory.slice(0, -1),
-        titleAr: title,
-        badge: badgeStatus,
-        image: image,
-        customSpecs: specs
-      };
-
-      if (targetCategory === 'units') {
-        newProd.sizes = [60, 80, 100];
-        newProd.prices = { "60": p60, "80": p80, "100": p100 };
-        newProd.specTag = "مقاس 60-80-100 سم";
-        unitProducts.unshift(newProd);
-      } else {
-        newProd.price = p60;
-        newProd.specTag = "منتج فاخر عالي الجودة";
-        if(targetCategory === 'basins') basinProducts.unshift(newProd);
-        else if(targetCategory === 'porcelain') porcelainProducts.unshift(newProd);
-        else if(targetCategory === 'showers') showerProducts.unshift(newProd);
-        else if(targetCategory === 'toilets') toiletProducts.unshift(newProd);
-        else if(targetCategory === 'mirrors') mirrorProducts.unshift(newProd);
-        else if(targetCategory === 'mixers') mixerProducts.unshift(newProd);
-        else if(targetCategory === 'accessories') accessoryProducts.unshift(newProd);
-        else if(targetCategory === 'stainless') stainlessProducts.unshift(newProd);
+      if (!title) {
+        alert("يرجى إدخال اسم المنتج!");
+        return;
       }
 
-      // محاولة الحفظ برمجياً في GitHub API
-      const owner = "stora-store";
-      const repo = "Stora_Store";
+      const owner = "stora-store"; // حسابك على GitHub
+      const repo = "Stora_Store";  // اسم المستودع
       const path = "products.json";
-      const token = "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";[cite: 6]
+      const token = "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"; // رمز الـ Token الخاص بك[cite: 6]
+
       const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
 
       try {
         const getRes = await fetch(apiUrl, { headers: { "Authorization": `token ${token}` } });
-        if (getRes.ok) {
-          const fileData = await getRes.json();
-          let currentJson = JSON.parse(atob(fileData.content));
-          if (!currentJson[targetCategory]) currentJson[targetCategory] = [];
-          currentJson[targetCategory].unshift(newProd);
+        if (!getRes.ok) throw new Error("فشل الاتصال بـ GitHub API");
+        
+        const fileData = await getRes.json();
+        let currentJson = JSON.parse(atob(fileData.content));
 
-          await fetch(apiUrl, {
-            method: "PUT",
-            headers: { "Authorization": `token ${token}`, "Content-Type": "application/json" },
-            body: JSON.stringify({
-              message: "Add product via Admin Panel",
-              content: btoa(unescape(encodeURIComponent(JSON.stringify(currentJson, null, 2)))),
-              sha: fileData.sha
-            })
-          });
+        // إضافة المنتج الجديد للقسم المحدد
+        if (!currentJson[targetCategory]) currentJson[targetCategory] = [];
+        currentJson[targetCategory].unshift({
+          id: "MOD-" + Math.floor(Math.random() * 9000 + 1000),
+          type: targetCategory.slice(0, -1),
+          titleAr: title,
+          price: price,
+          image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png"
+        });
+
+        const putRes = await fetch(apiUrl, {
+          method: "PUT",
+          headers: {
+            "Authorization": `token ${token}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            message: "Add new product via Admin Panel",
+            content: btoa(unescape(encodeURIComponent(JSON.stringify(currentJson, null, 2)))),
+            sha: fileData.sha
+          })
+        });
+
+        if (putRes.ok) {
+          alert("تم حفظ ورفع الموديل على كود المستودع في GitHub بنجاح! سيتم تحديث المتجر خلال لحظات.");
+          closeAdminModal();
+          loadStoreProducts();
+        } else {
+          alert("فشل الرفع، تأكد من صحة رمز الـ Token.");
         }
       } catch (err) {
-        console.log("تمت الإضافة محلياً وسحبها بنجاح.");
+        console.error(err);
+        alert("حدث خطأ أثناء الاتصال: " + err.message);
       }
-
-      alert("تمت إضافة الموديل بنجاح!");
-      closeAdminModal();
-      renderCatalog();
     }
 
-    function openModal(id) { document.getElementById(id).classList.add('open'); }
-    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-    function toggleCart(open = false) {
-      document.getElementById('cartDrawer').classList.toggle('open', open);
-      document.getElementById('cartOverlay').classList.toggle('open', open);
-    }
     function handleSearch() {
       searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
       renderCatalog();
     }
 
-    window.onload = initStore;
+    window.onload = loadStoreProducts;
   </script>
 </body>
 </html>
