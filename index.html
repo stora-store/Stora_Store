@@ -96,6 +96,7 @@
     .catalog-container { max-width: 1300px; margin: 0 auto; padding: 0 20px 40px; }
     .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 22px; }
 
+    /* تصميم الكارت مطابق للصورة المرفقة */
     .card { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow); transition: transform 0.2s; position: relative; }
     .card:hover { transform: translateY(-4px); }
     .card-img-wrapper { position: relative; width: 100%; height: 240px; background: #f1f5f9; cursor: pointer; overflow: hidden; }
@@ -103,20 +104,25 @@
     
     .card-body { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
     .product-title { font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 6px; cursor: pointer; text-align: center; }
+    
     .badge-info { background: var(--gold-light); border: 1px solid #fde68a; color: var(--gold-dark); padding: 8px 10px; border-radius: 8px; font-size: 0.82rem; font-weight: 800; margin-bottom: 12px; text-align: center; }
     
     .card-footer { margin-top: auto; padding-top: 10px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
     .price-container { display: flex; align-items: center; gap: 4px; }
     .price-value { font-size: 1.15rem; font-weight: 900; color: #00b09b; }
     .currency { font-size: 0.75rem; color: var(--text-muted); font-weight: 700; }
-    .view-details-btn { background: #1e293b; color: #ffeb3b; border: none; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-weight: 900; font-size: 0.85rem; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+    
+    /* زر التفاصيل والشراء المطابق للصورة */
+    .view-details-btn { background: #1e293b; color: #ffeb3b; border: none; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-weight: 900; font-size: 0.85rem; transition: background 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
     .view-details-btn:hover { background: #111827; }
 
+    /* تفاصيل المودال المنبثق (Modal) */
     .detail-modal, .admin-modal, .info-modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); z-index: 2500; display: none; align-items: center; justify-content: center; padding: 20px; }
     .detail-modal.open, .admin-modal.open, .info-modal.open { display: flex; }
-    .detail-content { background: #ffffff; width: 100%; max-width: 800px; border-radius: 16px; padding: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.25); position: relative; max-height: 90vh; overflow-y: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .detail-content, .admin-content, .info-modal-content { background: #ffffff; width: 100%; max-width: 800px; border-radius: 16px; padding: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.25); position: relative; max-height: 90vh; overflow-y: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     @media (max-width: 768px) { .detail-content { grid-template-columns: 1fr; } }
     .detail-close, .info-modal-close { position: absolute; top: 15px; left: 20px; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--text-muted); z-index: 5; }
+    [dir="ltr"] .detail-close { left: auto; right: 20px; }
     
     .detail-gallery img { width: 100%; height: 280px; object-fit: cover; border-radius: 10px; border: 1px solid var(--border); }
     .specs-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 12px; font-size: 0.85rem; margin: 12px 0; }
@@ -131,12 +137,6 @@
     .add-to-cart-modal-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 800; font-size: 1rem; cursor: pointer; margin-bottom: 8px; }
     .whatsapp-order-btn { width: 100%; background: #25d366; color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 800; font-size: 1rem; cursor: pointer; display: block; text-align: center; text-decoration: none; }
 
-    .admin-content { background: #ffffff; width: 100%; max-width: 650px; border-radius: 16px; padding: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); position: relative; max-height: 90vh; overflow-y: auto; }
-    .admin-form-group { margin-bottom: 15px; }
-    .admin-form-group label { display: block; font-weight: 800; font-size: 0.88rem; color: var(--primary); margin-bottom: 5px; }
-    .admin-form-group input, .admin-form-group select, .admin-form-group textarea { width: 100%; padding: 10px 14px; border: 2px solid var(--border); border-radius: 8px; font-family: 'Cairo', sans-serif; font-size: 0.9rem; outline: none; }
-    .admin-submit-btn { background: #059669; color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: 900; font-size: 1rem; cursor: pointer; text-align: center; }
-
     footer { background-color: #1f2937; color: #cbd5e1; padding: 40px 20px 20px; border-top: 3px solid var(--gold); }
     .footer-container { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; margin-bottom: 30px; }
     .footer-col h4 { color: #ffffff; font-size: 1.05rem; font-weight: 800; margin-bottom: 15px; border-bottom: 2px solid var(--gold); padding-bottom: 6px; width: fit-content; }
@@ -144,6 +144,11 @@
     .footer-col ul li a, .footer-col p { color: #cbd5e1; text-decoration: none; font-size: 0.9rem; cursor: pointer; transition: color 0.2s; }
     .footer-col ul li a:hover { color: var(--gold); }
     .footer-bottom { max-width: 1300px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; font-size: 0.85rem; color: #94a3b8; }
+
+    .admin-form-group { margin-bottom: 15px; }
+    .admin-form-group label { display: block; font-weight: 800; font-size: 0.88rem; color: var(--primary); margin-bottom: 5px; }
+    .admin-form-group input, .admin-form-group select, .admin-form-group textarea { width: 100%; padding: 10px 14px; border: 2px solid var(--border); border-radius: 8px; font-family: 'Cairo', sans-serif; }
+    .admin-submit-btn { background: #059669; color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: 900; font-size: 1rem; cursor: pointer; }
 
     .cart-drawer { position: fixed; top: 0; left: -420px; width: 100%; max-width: 390px; height: 100vh; background: white; box-shadow: 4px 0 25px rgba(0,0,0,0.18); z-index: 1000; display: flex; flex-direction: column; transition: all 0.3s; }
     .cart-drawer.open { left: 0; }
@@ -157,6 +162,7 @@
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
   </a>
 
+  <!-- شريط الشحن العلوي -->
   <div class="top-bar">
     <div class="top-bar-inner">
       <div class="contact-links">
@@ -176,7 +182,7 @@
       <a class="logo-box" ondblclick="openAdminPanelDirect()" title="انقر نقراً مزدوجاً هنا لفتح لوحة الأدمن">
         <img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png" alt="لوجو ستورا ستور" class="logo-img">
         <div>
-          <h1 class="brand-title">ستورا ستور</h1>
+          <h1 class="brand-title" id="brandTitle">ستورا ستور</h1>
           <span class="brand-sub">STORA STORE • BATHROOM LUXURY</span>
         </div>
       </a>
@@ -194,6 +200,7 @@
     </div>
   </header>
 
+  <!-- البانر السينمائي (Slider) -->
   <section class="hero-banner-wrap">
     <div class="banner-card">
       <div class="slider-container">
@@ -215,6 +222,7 @@
     </div>
   </section>
 
+  <!-- الأقسام الرئيسية -->
   <div class="master-switch-wrap">
     <div class="master-switch">
       <button class="switch-btn active" onclick="setMainMode('units')">وحدات الحمام</button>
@@ -233,6 +241,7 @@
     <div class="products-grid" id="productsGrid">جاري تحميل المنتجات...</div>
   </main>
 
+  <!-- نافذة تفاصيل المنتج (Modal) المطابقة للطلب -->
   <div class="detail-modal" id="productDetailModal" onclick="closeProductModal(event)">
     <div class="detail-content" onclick="event.stopPropagation()">
       <button class="detail-close" onclick="closeProductModalDirect()">&times;</button>
@@ -263,92 +272,7 @@
     </div>
   </div>
 
-  <!-- لوحة الأدمن المتقدمة (مع بيانات احتياطية محلية إذا لم يتوفر ملف الـ json) -->
-  <div class="admin-modal" id="adminModal">
-    <div class="admin-content">
-      <button class="info-modal-close" onclick="closeAdminModal()">&times;</button>
-      <h3 style="font-size: 1.15rem; font-weight: 900; margin-bottom: 15px; color: var(--primary);">⚙️ لوحة تحكم الأدمن المتقدمة</h3>
-
-      <div style="background:#f8fafc; padding:15px; border-radius:12px; border:1px solid var(--border); margin-bottom:20px;">
-        <h4 style="font-size:1rem; font-weight:900; margin-bottom:12px; color:var(--primary);">➕ إضافة موديل جديد</h4>
-        
-        <div class="admin-form-group">
-          <label>كود المنتج (ID):</label>
-          <input type="text" id="newIdInput" placeholder="مثال: BS-PR-06">
-        </div>
-
-        <div class="admin-form-group">
-          <label>اسم المنتج (عربي):</label>
-          <input type="text" id="newTitleAr" placeholder="مثال: حوض بورسلين فاخر">
-        </div>
-
-        <div class="admin-form-group">
-          <label>شارة المنتج (الحالة):</label>
-          <select id="newBadgeStatus">
-            <option value="new">🆕 جديد / New</option>
-            <option value="bestseller">🔥 الأكثر طلباً</option>
-            <option value="none">✨ بدون شارة</option>
-            <option value="soldout">❌ نفذ بالكامل</option>
-          </select>
-        </div>
-
-        <div class="admin-form-group">
-          <label>القسم الرئيسي:</label>
-          <select id="targetCategory">
-            <option value="units">وحدات الحمام (Units)</option>
-            <option value="basins">أحواض ديكور (Basins)</option>
-            <option value="porcelain">أحواض بورسلين (Porcelain)</option>
-            <option value="showers">كبائن شاور (Showers)</option>
-            <option value="toilets">قواعد تواليت (Toilets)</option>
-            <option value="mirrors">مرايا ليد (Mirrors)</option>
-            <option value="mixers">خلاطات مياه (Mixers)</option>
-            <option value="accessories">إكسسوارات (Accessories)</option>
-            <option value="stainless">أحواض ستانلس (Stainless)</option>
-          </select>
-        </div>
-
-        <div class="admin-form-group">
-          <label>التصنيف الفرعي أو الوصف المختصر:</label>
-          <input type="text" id="newSpecTag" placeholder="مثال: بورسلين نقي عالي الجودة">
-        </div>
-
-        <div class="admin-form-group">
-          <label>السعر الأساسي للمنتج:</label>
-          <input type="number" id="price60" placeholder="12000">
-        </div>
-
-        <div class="admin-form-group">
-          <label>رابط الصورة الرئيسية:</label>
-          <input type="text" id="newImage" placeholder="https://res.cloudinary.com/...">
-        </div>
-
-        <div class="admin-form-group">
-          <label>المواصفات الخاصة (كل نقطة في سطر):</label>
-          <textarea id="newSpecs" rows="4">بورسلين عالي الجودة
-مقاوم للاتساخ وسهل التنظيف</textarea>
-        </div>
-
-        <button class="admin-submit-btn" onclick="saveProductToGitHub()">💾 حفظ الموديل ورفعه على GitHub</button>
-      </div>
-
-      <div style="margin-top:15px;">
-        <h4 style="font-size:0.95rem; font-weight:900; margin-bottom:8px; color:var(--primary);">📋 قائمة المنتجات للتعديل أو الحذف</h4>
-        <select id="adminFilterCat" onchange="renderAdminList()" style="width:100%; padding:8px; border:1px solid var(--border); border-radius:6px; margin-bottom:10px;">
-          <option value="units">وحدات الحمام</option>
-          <option value="basins">أحواض ديكور</option>
-          <option value="porcelain">أحواض بورسلين</option>
-          <option value="showers">كبائن شاور</option>
-          <option value="toilets">قواعد تواليت</option>
-          <option value="mirrors">مرايا ليد</option>
-          <option value="mixers">خلاطات مياه</option>
-          <option value="accessories">إكسسوارات</option>
-          <option value="stainless">أحواض ستانلس</option>
-        </select>
-        <div id="adminProductsContainer" style="max-height:180px; overflow-y:auto; border:1px solid var(--border); border-radius:6px; padding:8px;"></div>
-      </div>
-    </div>
-  </div>
-
+  <!-- النوافذ التعريفية -->
   <div class="info-modal" id="aboutModal">
     <div class="info-modal-content" style="display:block;">
       <button class="info-modal-close" onclick="closeModal('aboutModal')">&times;</button>
@@ -382,6 +306,46 @@
     </div>
   </div>
 
+  <!-- لوحة الأدمن للحفظ على GitHub API -->
+  <div class="admin-modal" id="adminModal">
+    <div class="admin-content" style="display:block;">
+      <button class="info-modal-close" onclick="closeAdminModal()">&times;</button>
+      <h3 style="font-weight: 800; margin-bottom: 15px;">⚙️ لوحة تحكم الأدمن (حفظ على GitHub)</h3>
+      <div class="admin-form-group">
+        <label>القسم المستهدف:</label>
+        <select id="targetCategory">
+          <option value="units">وحدات الحمام</option>
+          <option value="basins">أحواض ديكور</option>
+          <option value="porcelain">أحواض بورسلين</option>
+          <option value="showers">كبائن شاور</option>
+          <option value="toilets">قواعد تواليت</option>
+          <option value="mirrors">مرايا ليد</option>
+          <option value="mixers">خلاطات مياه</option>
+          <option value="accessories">إكسسوارات</option>
+          <option value="stainless">أحواض ستانلس</option>
+        </select>
+      </div>
+      <div class="admin-form-group">
+        <label>اسم المنتج:</label>
+        <input type="text" id="newTitleAr" placeholder="مثال: حوض بورسلين فاخر">
+      </div>
+      <div class="admin-form-group">
+        <label>السعر (ج.م):</label>
+        <input type="number" id="singlePrice" placeholder="12000">
+      </div>
+      <div class="admin-form-group">
+        <label>الوصف أو الشارة (مثل: بورسلين نقي عالي الجودة):</label>
+        <input type="text" id="newSpecTag" placeholder="بورسلين نقي عالي الجودة">
+      </div>
+      <div class="admin-form-group">
+        <label>رابط الصورة:</label>
+        <input type="text" id="newImage" placeholder="https://res.cloudinary.com/...">
+      </div>
+      <button class="admin-submit-btn" onclick="saveProductToGitHub()">💾 حفظ ورفع التعديل على GitHub</button>
+    </div>
+  </div>
+
+  <!-- عربة التسوق -->
   <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
   <div class="cart-drawer" id="cartDrawer">
     <div style="padding:16px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
@@ -394,6 +358,7 @@
     </div>
   </div>
 
+  <!-- الفوتر (Footer) -->
   <footer>
     <div class="footer-container">
       <div class="footer-col">
@@ -436,20 +401,7 @@
   </footer>
 
   <script>
-    // بيانات احتياطية محلية لضمان عمل الموقع فوراً حتى لو تأخر تحميل ملف products.json
-    let storeData = {
-      units: [
-        { id: "UN-MB-30", titleAr: "وحدة حمام خشبية فاخرة #30", price: 6800, image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790424241/ID_UN-MB-30.jpg", specTag: "مقاس 60-80-100 سم", badge: "bestseller", customSpecs: "مصنوع من ألواح بورديوم عالية الكثافة\nمقاوم تامة للمياه والرطوبة" }
-      ],
-      basins: [
-        { id: "BS-OV-04", titleAr: "حوض ديكور بيضاوي فوق الرخام", price: 1850, image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790249819/ID_BS-OV-04.png", specTag: "حوض ديكور مفرد فوق الرخام", badge: "bestseller", customSpecs: "سيراميك عالي اللمعان\nمقاوم للاتساخ وسهل التنظيف" }
-      ],
-      porcelain: [
-        { id: "BS-PR-06", titleAr: "حوض بورسلين فاخر BS-PR-06", price: 12000, image: "https://res.cloudinary.com/rh20s5aa/image/upload/v1790459986/ID_BS-PR-06.png", specTag: "بورسلين نقي عالي الجودة", badge: "new", customSpecs: "بورسلين نقي عالي الجودة\nمقاوم للاتساخ وسهل التنظيف" }
-      ],
-      showers: [], toilets: [], mirrors: [], mixers: [], accessories: [], stainless: []
-    };
-
+    let storeData = { units: [], basins: [], porcelain: [], showers: [], toilets: [], mirrors: [], mixers: [], accessories: [], stainless: [] };
     let mainMode = 'units';
     let searchQuery = '';
     let currentLang = 'ar';
@@ -464,23 +416,19 @@
     async function loadStoreProducts() {
       try {
         const response = await fetch('products.json');
-        if (response.ok) {
-          const remoteData = await response.json();
-          if (remoteData && Object.keys(remoteData).length > 0) {
-            storeData = remoteData;
-          }
-        }
+        storeData = await response.json();
+        renderCatalog();
+        initSlider();
       } catch (error) {
-        console.log("استخدام البيانات الاحتياطية المحلية نظراً لعدم توفر ملف الـ JSON خارجيز.");
+        console.error("فشل تحميل المنتجات:", error);
+        document.getElementById('productsGrid').innerText = "حدث خطأ في تحميل ملف المنتجات.";
       }
-      renderCatalog();
-      initSlider();
     }
 
     function initSlider() {
       const track = document.getElementById('sliderTrack');
       if (!track) return;
-      const allProducts = [...(storeData.units || []), ...(storeData.basins || []), ...(storeData.porcelain || [])];
+      const allProducts = [...(storeData.units || []), ...(storeData.basins || [])];
       let slidesHTML = '';
       allProducts.slice(0, 5).forEach((prod, index) => {
         slidesHTML += `<div class="slide-item ${index === 0 ? 'active' : ''}"><img src="${prod.image || 'https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png'}" alt="Banner"></div>`;
@@ -554,15 +502,10 @@
         const formatted = formatPrice(rawPrice);
         const specTagText = item.specTag || 'منتج عالي الجودة';
 
-        let badgeHtml = '';
-        if (item.badge === 'bestseller') badgeHtml = `<span style="position:absolute; top:10px; right:10px; background:#f59e0b; color:#fff; font-size:0.7rem; padding:3px 10px; border-radius:20px; font-weight:800; z-index:2;">🔥 الأكثر طلباً</span>`;
-        else if (item.badge === 'new') badgeHtml = `<span style="position:absolute; top:10px; right:10px; background:#3b82f6; color:#fff; font-size:0.7rem; padding:3px 10px; border-radius:20px; font-weight:800; z-index:2;">🆕 جديد</span>`;
-
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
           <div class="card-img-wrapper" onclick="openProductDetail('${item.id}', '${mainMode}')">
-            ${badgeHtml}
             <img src="${item.image || 'https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png'}" alt="${item.titleAr}" class="card-img">
           </div>
           <div class="card-body">
@@ -582,12 +525,10 @@
       });
     }
 
+    // فتح تفاصيل المنتج عند النقر على زر "عرض التفاصيل والشراء"
     function openProductDetail(id, category) {
-      let item = null;
-      for (let cat in storeData) {
-        const found = (storeData[cat] || []).find(p => p.id === id);
-        if (found) { item = found; break; }
-      }
+      const items = storeData[category] || [];
+      const item = items.find(p => p.id === id);
       if (!item) return;
 
       activeModalProduct = item;
@@ -607,6 +548,7 @@
 
       document.getElementById('modalQtyVal').innerText = modalQuantity;
 
+      // ربط زر الواتساب المباشر بالمنتج المحدد
       const waText = encodeURIComponent(`مرحباً ستورا ستور، أود طلب هذا المنتج:\n- المنتج: ${item.titleAr}\n- الكود: ${item.id}\n- السعر: ${rawPrice} ج.م`);
       document.getElementById('modalWhatsappBtn').href = `https://wa.me/201039727479?text=${waText}`;
 
@@ -626,6 +568,7 @@
       document.getElementById('modalQtyVal').innerText = modalQuantity;
     }
 
+    // إضافة المنتج إلى العربة من داخل نافذة التفاصيل
     function addModalToCart() {
       if (!activeModalProduct) return;
       const rawPrice = activeModalProduct.price || (activeModalProduct.prices ? activeModalProduct.prices[Object.keys(activeModalProduct.prices)[0]] : 5000);
@@ -699,7 +642,6 @@
       const passPrompt = prompt("أدخل كلمة مرور الأدمن:");
       if (passPrompt === 'admin123') {
         document.getElementById('adminModal').classList.add('open');
-        renderAdminList();
       } else if (passPrompt !== null) {
         alert("كلمة المرور غير صحيحة!");
       }
@@ -707,34 +649,16 @@
 
     function closeAdminModal() { document.getElementById('adminModal').classList.remove('open'); }
 
-    function renderAdminList() {
-      const cat = document.getElementById('adminFilterCat').value;
-      const container = document.getElementById('adminProductsContainer');
-      const items = storeData[cat] || [];
-      if (items.length === 0) {
-        container.innerHTML = "<p style='font-size:0.8rem; text-align:center; color:var(--text-muted);'>لا توجد منتجات</p>";
-        return;
-      }
-      container.innerHTML = items.map(p => `
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:5px 0; border-bottom:1px solid var(--border); font-size:0.82rem;">
-          <span>${p.titleAr} (${p.price || p.prices?.[60] || 0} ج.م)</span>
-          <button onclick="deleteProductFromGitHub('${cat}', '${p.id}')" style="background:#ef4444; color:#fff; border:none; padding:2px 8px; border-radius:4px; cursor:pointer; font-size:0.75rem;">حذف</button>
-        </div>
-      `).join('');
-    }
-
+    // الحفظ التلقائي في مستودع GitHub عبر الـ API
     async function saveProductToGitHub() {
       const targetCategory = document.getElementById('targetCategory').value;
-      const customId = document.getElementById('newIdInput').value.trim();
       const title = document.getElementById('newTitleAr').value.trim();
-      const badgeStatus = document.getElementById('newBadgeStatus').value;
+      const price = parseFloat(document.getElementById('singlePrice').value) || 2000;
       const specTag = document.getElementById('newSpecTag').value.trim() || 'منتج عالي الجودة';
-      const price = parseFloat(document.getElementById('price60').value) || 5000;
       const image = document.getElementById('newImage').value.trim() || 'https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png';
-      const specs = document.getElementById('newSpecs').value.trim();
 
       if (!title) {
-        alert("يرجى إدخال اسم المنتج بالعربي!");
+        alert("يرجى إدخال اسم المنتج!");
         return;
       }
 
@@ -753,19 +677,15 @@
         let currentJson = JSON.parse(atob(fileData.content));
 
         if (!currentJson[targetCategory]) currentJson[targetCategory] = [];
-        
-        const newProd = {
-          id: customId || ("MOD-" + Math.floor(Math.random() * 9000 + 1000)),
+        currentJson[targetCategory].unshift({
+          id: "MOD-" + Math.floor(Math.random() * 9000 + 1000),
           type: targetCategory.slice(0, -1),
           titleAr: title,
-          badge: badgeStatus,
-          specTag: specTag,
           price: price,
+          specTag: specTag,
           image: image,
-          customSpecs: specs
-        };
-
-        currentJson[targetCategory].unshift(newProd);
+          customSpecs: "مطابق لأعلى معايير المتانة ومقاومة الرطوبة والمياه."
+        });
 
         const putRes = await fetch(apiUrl, {
           method: "PUT",
@@ -774,14 +694,14 @@
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            message: "Add product via Admin Panel",
+            message: "Add new product via Admin Panel",
             content: btoa(unescape(encodeURIComponent(JSON.stringify(currentJson, null, 2)))),
             sha: fileData.sha
           })
         });
 
         if (putRes.ok) {
-          alert("تم حفظ الموديل ورفعه على GitHub بنجاح! سيتم تحديث المتجر للزوار خلال لحظات.");
+          alert("تم حفظ ورفع الموديل على GitHub بنجاح! سيتم تحديث المتجر للزوار خلال لحظات.");
           closeAdminModal();
           loadStoreProducts();
         } else {
@@ -790,46 +710,6 @@
       } catch (err) {
         console.error(err);
         alert("حدث خطأ أثناء الاتصال: " + err.message);
-      }
-    }
-
-    async function deleteProductFromGitHub(category, id) {
-      if (!confirm("هل أنت متأكد من حذف هذا المنتج؟")) return;
-
-      const owner = "stora-store";
-      const repo = "Stora_Store";
-      const path = "products.json";
-      const token = "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";[cite: 6]
-      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-
-      try {
-        const getRes = await fetch(apiUrl, { headers: { "Authorization": `token ${token}` } });
-        if (!getRes.ok) throw new Error("فشل الاتصال");
-        
-        const fileData = await getRes.json();
-        let currentJson = JSON.parse(atob(fileData.content));
-
-        currentJson[category] = currentJson[category].filter(p => p.id !== id);
-
-        const putRes = await fetch(apiUrl, {
-          method: "PUT",
-          headers: { "Authorization": `token ${token}`, "Content-Type": "application/json" },
-          body: JSON.stringify({
-            message: "Delete product via Admin Panel",
-            content: btoa(unescape(encodeURIComponent(JSON.stringify(currentJson, null, 2)))),
-            sha: fileData.sha
-          })
-        });
-
-        if (putRes.ok) {
-          alert("تم حذف المنتج وتحديث المستودع بنجاح!");
-          loadStoreProducts();
-          renderAdminList();
-        } else {
-          alert("فشل الحذف");
-        }
-      } catch (err) {
-        alert("خطأ: " + err.message);
       }
     }
 
