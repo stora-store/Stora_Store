@@ -6,7 +6,7 @@
   <title>ستورا ستور | Stora Store - الفخامة والتجهيزات العصرية</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   
-  <!-- مكتبات فايربيس السحابية -->
+  <!-- مكتبات فايربيس السحابية النسخة المستقرة -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
@@ -26,13 +26,11 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
     body { background-color: var(--bg); color: var(--text); padding-bottom: 70px; }
 
-    /* شريط علوي راقي */
     .top-bar {
       background: #0b0f19; color: #cbd5e1; font-size: 0.8rem; padding: 8px 20px;
       text-align: center; border-bottom: 1px solid rgba(197, 155, 39, 0.3); font-weight: 700;
     }
 
-    /* الهيدر الرئيسي الفاخر */
     header {
       background: #ffffff; box-shadow: 0 2px 15px rgba(0,0,0,0.04); position: sticky; top: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center; padding: 12px 20px;
@@ -43,7 +41,6 @@
     .brand-title { font-size: 1.2rem; font-weight: 900; color: var(--primary); line-height: 1.1; }
     .admin-trigger { background: var(--gold); border: none; padding: 6px 14px; border-radius: 20px; font-weight: 800; font-size: 0.8rem; cursor: pointer; color: #111827; box-shadow: 0 2px 8px rgba(197, 155, 39, 0.3); }
 
-    /* القائمة الجانبية المنسدلة (Side Menu Drawer) */
     .side-menu-drawer {
       position: fixed; top: 0; right: -320px; width: 100%; max-width: 300px; height: 100vh;
       background: white; box-shadow: -4px 0 25px rgba(0,0,0,0.18); z-index: 3000; display: flex; flex-direction: column; transition: all 0.3s;
@@ -59,7 +56,6 @@
     }
     .side-menu-item:hover { background: var(--gold-light); color: var(--gold-dark); }
 
-    /* البانر السينمائي الفاخر */
     .hero-banner-wrap { max-width: 1300px; margin: 15px auto 0; padding: 0 20px; }
     .banner-card { border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); background: #0f172a; position: relative; height: 240px; display: flex; align-items: flex-end; padding: 20px; }
     .banner-card::before {
@@ -71,7 +67,6 @@
     .banner-title { font-size: 1.3rem; font-weight: 900; text-shadow: 0 2px 8px rgba(0,0,0,0.8); margin-bottom: 5px; }
     .banner-tag { background: var(--gold); color: #111827; padding: 4px 12px; border-radius: 20px; font-weight: 900; font-size: 0.75rem; width: fit-content; display: inline-block; }
 
-    /* كتالوج المنتجات */
     .catalog-container { max-width: 1300px; margin: 25px auto; padding: 0 20px; }
     .section-title-wrap { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-right: 4px solid var(--gold); padding-right: 10px; }
     .section-title { font-size: 1.3rem; font-weight: 900; color: var(--primary); }
@@ -93,19 +88,16 @@
     .currency { font-size: 0.7rem; color: var(--text-muted); font-weight: 700; }
     .del-product-btn { background: #ef4444; color: white; border: none; padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
 
-    /* الفوتر الراقي */
     footer { background: #111827; color: #94a3b8; padding: 30px 20px; margin-top: 50px; text-align: center; border-top: 3px solid var(--gold); }
     .footer-brand { color: #fff; font-size: 1.2rem; font-weight: 900; margin-bottom: 8px; }
     .footer-desc { font-size: 0.85rem; max-width: 500px; margin: 0 auto 15px; line-height: 1.5; }
 
-    /* شريط التنقل السفلي */
     .bottom-nav-bar {
       position: fixed; bottom: 0; left: 0; width: 100%; background: #ffffff; border-top: 1px solid var(--border);
       display: flex; justify-content: space-around; align-items: center; padding: 8px 0; z-index: 1500; box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
     }
     .bottom-nav-item { background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 0.75rem; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 3px; }
 
-    /* لوحة تحكم الأدمن */
     .admin-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 4000; display: none; align-items: center; justify-content: center; padding: 15px; }
     .admin-content { background: #ffffff; width: 100%; max-width: 500px; border-radius: 16px; padding: 25px; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
     .form-group { margin-bottom: 12px; }
@@ -116,10 +108,8 @@
 </head>
 <body>
 
-  <!-- شريط علوي -->
   <div class="top-bar">🚚 شحن وتوصيل فوري لكافة المحافظات - ضمان حقيقي مدى الحياة</div>
 
-  <!-- الهيدر الفاخر -->
   <header>
     <div style="display: flex; align-items: center; gap: 12px;">
       <button class="menu-toggle-btn" onclick="toggleSideMenu()">☰</button>
@@ -133,7 +123,6 @@
     <button class="admin-trigger" onclick="openAdminModal()">⚙️ لوحة الأدمن</button>
   </header>
 
-  <!-- القائمة الجانبية المنسدلة -->
   <div class="side-menu-overlay" id="sideMenuOverlay" onclick="toggleSideMenu()"></div>
   <div class="side-menu-drawer" id="sideMenuDrawer">
     <div class="side-menu-header">
@@ -151,7 +140,6 @@
     </div>
   </div>
 
-  <!-- البانر السينمائي الفاخر -->
   <section class="hero-banner-wrap">
     <div class="banner-card">
       <img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt="Hero Banner">
@@ -162,7 +150,6 @@
     </div>
   </section>
 
-  <!-- كتالوج المنتجات السحابي -->
   <main class="catalog-container">
     <div class="section-title-wrap">
       <h2 class="section-title">المنتجات المعروضة سحابياً (تحديث لحظي)</h2>
@@ -172,14 +159,12 @@
     </div>
   </main>
 
-  <!-- الفوتر الراقي -->
   <footer>
     <div class="footer-brand">Stora Store • ستورا ستور</div>
     <p class="footer-desc">وجهتك الأولى لتجهيزات الحمامات والمطابخ الفاخرة. خامات عالية المتانة، مقاومة تامة للمياه، وتصميمات عالمية.</p>
     <p style="font-size: 0.75rem; color: #64748b;">جميع الحقوق محفوظة © 2026</p>
   </footer>
 
-  <!-- لوحة تحكم الأدمن -->
   <div class="admin-modal" id="adminModal">
     <div class="admin-content">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
@@ -196,7 +181,6 @@
     </div>
   </div>
 
-  <!-- شريط التنقل السفلي -->
   <nav class="bottom-nav-bar">
     <button class="bottom-nav-item" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><span>🏠</span>الرئيسية</button>
     <button class="bottom-nav-item" onclick="toggleSideMenu()"><span>📂</span>الأقسام</button>
@@ -204,7 +188,6 @@
   </nav>
 
   <script>
-    // إعدادات فايربيس السحابية الخاصة بمشروعك
     const firebaseConfig = {
       apiKey: "AIzaSyB7XZt7O1_7K8g6m8DoJe3XTUOTsSS6aQk",
       authDomain: "stora-store-app.firebaseapp.com",
@@ -214,16 +197,16 @@
       appId: "1:365287319114:web:abcdef123456789"
     };
 
-    firebase.initializeApp(firebaseConfig);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
     const db = firebase.firestore();
 
-    // القائمة الجانبية
     function toggleSideMenu() {
       document.getElementById('sideMenuDrawer').classList.toggle('open');
       document.getElementById('sideMenuOverlay').classList.toggle('open');
     }
 
-    // جلب المنتجات وعرضها لحظياً (Real-time Listener)
     db.collection("stora_store_products").onSnapshot((snapshot) => {
       const grid = document.getElementById('productsGrid');
       grid.innerHTML = "";
@@ -254,9 +237,10 @@
           </div>
         `;
       });
+    }, (error) => {
+      console.error("خطأ في الاتصال بقاعدة البيانات: ", error);
     });
 
-    // حفظ المنتج في السحابة
     function saveProductToCloud() {
       const id = document.getElementById('pId').value.trim();
       const title = document.getElementById('pTitle').value.trim();
@@ -269,7 +253,11 @@
       }
 
       db.collection("stora_store_products").doc(id).set({
-        id, title, price, image, createdAt: new Date()
+        id: id,
+        title: title,
+        price: price,
+        image: image,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
       }).then(() => {
         alert("تم الحفظ في السحابة وظهر فوراً لجميع العملاء!");
         closeAdminModal();
@@ -277,13 +265,15 @@
         document.getElementById('pTitle').value = "";
         document.getElementById('pPrice').value = "";
         document.getElementById('pImage').value = "";
-      }).catch(err => alert("خطأ في الحفظ: " + err.message));
+      }).catch(err => {
+        alert("خطأ في الحفظ بالسحابة: " + err.message);
+        console.error(err);
+      });
     }
 
-    // حذف منتج من السحابة
     function deleteProduct(id) {
-      if (confirm("هل تريد حذف هذا المنتج؟")) {
-        db.collection("stora_store_products").doc(id).delete();
+      if (confirm("هل تريد حذف هذا المنتج من السحابة؟")) {
+        db.collection("stora_store_products").doc(id).delete().catch(err => alert("خطأ في الحذف: " + err.message));
       }
     }
 
