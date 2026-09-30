@@ -24,7 +24,7 @@
       --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
-    body { background-color: var(--bg); color: var(--text); padding-bottom: 90px; }
+    body { background-color: var(--bg); color: var(--text); padding-bottom: 90px; transition: direction 0.3s ease; }
 
     /* الشريط الإعلاني الأحمر المتحرك */
     .red-announcement-bar {
@@ -45,19 +45,6 @@
       display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;
     }
 
-    .store-controls { display: flex; gap: 10px; align-items: center; }
-
-    #google_translate_element { display: inline-block; }
-    #google_translate_element select {
-      background: #1e293b !important; color: #fff !important; border: 1px solid var(--gold) !important;
-      padding: 4px 12px !important; border-radius: 6px !important; font-size: 0.78rem !important;
-      font-weight: 800 !important; cursor: pointer !important; outline: none !important; font-family: 'Cairo' !important;
-    }
-    .goog-te-banner-frame, .goog-te-gadget span { display: none !important; }
-    body { top: 0 !important; }
-    .goog-logo-link { display: none !important; }
-    .goog-te-gadget { color: transparent !important; font-size: 0px; }
-
     header {
       background: #ffffff; box-shadow: 0 2px 15px rgba(0,0,0,0.04); position: sticky; top: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; gap: 15px;
@@ -66,7 +53,6 @@
     .logo-box { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
     .logo-img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
     
-    /* تمييز اسم المتجر باللون الذهبي المميز */
     .brand-title { font-size: 1.2rem; font-weight: 900; color: var(--gold); line-height: 1.1; }
     
     .header-search-box { flex: 1; max-width: 350px; position: relative; }
@@ -276,7 +262,7 @@
       100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
     }
 
-    /* الشريط السفلي الثابت والظاهر بوضوح */
+    /* الشريط السفلي الثابت */
     .bottom-nav-bar {
       position: fixed; bottom: 0; left: 0; width: 100%; background: #ffffff; border-top: 2px solid var(--gold);
       display: flex; justify-content: space-around; align-items: center; padding: 8px 0; z-index: 2500; box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
@@ -310,10 +296,7 @@
   </div>
 
   <div class="top-bar">
-    <span>🚚 شحن وتوصيل فوري لحد باب البيت لكافة المحافظات - ضمان حقيقي مدى الحياة</span>
-    <div class="store-controls">
-      <div id="google_translate_element"></div>
-    </div>
+    <span id="topBarDelivery">🚚 شحن وتوصيل فوري لحد باب البيت لكافة المحافظات - ضمان حقيقي مدى الحياة</span>
   </div>
 
   <header>
@@ -339,7 +322,7 @@
     </div>
 
     <div class="header-actions">
-      <button class="cart-btn-top" onclick="toggleCartDrawer()">🛒 السلة (<span id="cartCount">0</span>)</button>
+      <button class="cart-btn-top" onclick="toggleCartDrawer()">🛒 <span id="cartBtnText">السلة</span> (<span id="cartCount">0</span>)</button>
     </div>
   </header>
 
@@ -350,41 +333,41 @@
       </video>
       <div class="banner-content">
         <img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt="Logo" class="banner-logo-img">
-        <h2 class="banner-title-luxury">اختبر الفخامة المطلقة</h2>
+        <h2 class="banner-title-luxury" id="heroMainTitle">اختبر الفخامة المطلقة</h2>
         <div class="banner-typing-container">
-          <div class="banner-fade-text">✨ اكتشف تشكيلتنا المختارة بعناية من أحدث تجهيزات الحمامات والمطابخ العصرية الفاخرة ✨</div>
+          <div class="banner-fade-text" id="heroSubText">✨ اكتشف تشكيلتنا المختارة بعناية من أحدث تجهيزات الحمامات والمطابخ العصرية الفاخرة ✨</div>
         </div>
-        <a href="#" onclick="scrollToCategories(); return false;" class="banner-shop-btn">تسوق الآن</a>
+        <a href="#" onclick="scrollToCategories(); return false;" class="banner-shop-btn" id="shopNowBtn">تسوق الآن</a>
       </div>
     </div>
   </section>
 
   <div class="categories-bar-wrapper">
-    <div class="categories-bar">
-      <div class="cat-item active" onclick="filterCategory('all', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name">الكل</span></div>
-      <div class="cat-item" onclick="filterCategory('الأكثر مبيعا', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name">الأكثر مبيعاً ⭐</span></div>
-      <div class="cat-item" onclick="filterCategory('جديد', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name">وصل حديثاً ✨</span></div>
-      <div class="cat-item" onclick="filterCategory('وحدات حمام', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name">وحدات الحمام</span></div>
-      <div class="cat-item" onclick="filterCategory('أحواض ديكور', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name">أحواض ديكور</span></div>
-      <div class="cat-item" onclick="filterCategory('أحواض بورسلين', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name">أحواض بورسلين</span></div>
-      <div class="cat-item" onclick="filterCategory('كبائن شاور', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name">كبائن شاور</span></div>
-      <div class="cat-item" onclick="filterCategory('قواعد تواليت', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name">قواعد تواليت</span></div>
-      <div class="cat-item" onclick="filterCategory('مرايا ليد', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name">مرايا ليد</span></div>
-      <div class="cat-item" onclick="filterCategory('خلاطات مياه', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name">خلاطات مياه</span></div>
-      <div class="cat-item" onclick="filterCategory('إكسسوارات', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name">إكسسوارات</span></div>
-      <div class="cat-item" onclick="filterCategory('أحواض ستانلس', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name">أحواض ستانلس</span></div>
+    <div class="categories-bar" id="categoriesBarContainer">
+      <div class="cat-item active" onclick="filterCategory('all', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="all">الكل</span></div>
+      <div class="cat-item" onclick="filterCategory('الأكثر مبيعا', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="الأكثر مبيعا">الأكثر مبيعاً ⭐</span></div>
+      <div class="cat-item" onclick="filterCategory('جديد', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="جديد">وصل حديثاً ✨</span></div>
+      <div class="cat-item" onclick="filterCategory('وحدات حمام', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="وحدات حمام">وحدات الحمام</span></div>
+      <div class="cat-item" onclick="filterCategory('أحواض ديكور', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="أحواض ديكور">أحواض ديكور</span></div>
+      <div class="cat-item" onclick="filterCategory('أحواض بورسلين', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="أحواض بورسلين">أحواض بورسلين</span></div>
+      <div class="cat-item" onclick="filterCategory('كبائن شاور', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="كبائن شاور">كبائن شاور</span></div>
+      <div class="cat-item" onclick="filterCategory('قواعد تواليت', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="قواعد تواليت">قواعد تواليت</span></div>
+      <div class="cat-item" onclick="filterCategory('مرايا ليد', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="مرايا ليد">مرايا ليد</span></div>
+      <div class="cat-item" onclick="filterCategory('خلاطات مياه', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="خلاطات مياه">خلاطات مياه</span></div>
+      <div class="cat-item" onclick="filterCategory('إكسسوارات', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="إكسسوارات">إكسسوارات</span></div>
+      <div class="cat-item" onclick="filterCategory('أحواض ستانلس', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="أحواض ستانلس">أحواض ستانلس</span></div>
     </div>
   </div>
 
   <div class="side-menu-overlay" id="sideMenuOverlay" onclick="toggleSideMenu()"></div>
   <div class="side-menu-drawer" id="sideMenuDrawer">
     <div class="side-menu-header">
-      <h3>🗂 القائمة الرئيسية</h3>
+      <h3 id="sideMenuTitle">🗂 القائمة الرئيسية</h3>
       <button onclick="toggleSideMenu()" style="background:none; border:none; color:#fff; font-size:1.4rem; cursor:pointer;">&times;</button>
     </div>
     <div class="side-menu-items">
-      <div class="side-menu-item" onclick="toggleSideMenu()">🏠 الرئيسية</div>
-      <div class="side-menu-item" onclick="toggleSubMenu(event)">📂 الأقسام <span>▼</span></div>
+      <div class="side-menu-item" onclick="toggleSideMenu()">🏠 <span id="menuHome">الرئيسية</span></div>
+      <div class="side-menu-item" onclick="toggleSubMenu(event)">📂 <span id="menuCategories">الأقسام</span> <span>▼</span></div>
       <div class="sub-menu-dropdown" id="subMenuDropdown">
         <div class="sub-menu-item" onclick="selectSubMenu('وحدات حمام')">🗄️ وحدات الحمام</div>
         <div class="sub-menu-item" onclick="selectSubMenu('أحواض ديكور')">✨ أحواض ديكور</div>
@@ -396,26 +379,39 @@
         <div class="sub-menu-item" onclick="selectSubMenu('إكسسوارات')">🔩 إكسسوارات</div>
         <div class="sub-menu-item" onclick="selectSubMenu('أحواض ستانلس')">✨ أحواض ستانلس</div>
       </div>
-      <div class="side-menu-item" onclick="filterCategory('جديد', null); toggleSideMenu();">✨ وصل حديثاً</div>
-      <div class="side-menu-item" onclick="filterCategory('الأكثر مبيعا', null); toggleSideMenu();">⭐ الأكثر مبيعاً</div>
+      <div class="side-menu-item" onclick="filterCategory('جديد', null); toggleSideMenu();">✨ <span id="menuNew">وصل حديثاً</span></div>
+      <div class="side-menu-item" onclick="filterCategory('الأكثر مبيعا', null); toggleSideMenu();">⭐ <span id="menuTop">الأكثر مبيعاً</span></div>
+      
+      <!-- إعدادات الضبط (الغة والعملة) داخل القائمة الجانبية -->
+      <div style="padding: 15px 20px; background: #f1f5f9; border-top: 1px solid var(--border); margin-top: 10px;">
+        <p style="font-size: 0.85rem; font-weight: 900; margin-bottom: 8px; color: var(--primary);">⚙️️ إعدادات المتجر (Settings)</p>
+        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 8px;">
+          <span style="font-size: 0.8rem; font-weight: 800;">اللغة:</span>
+          <button onclick="toggleAppLanguage()" id="sideLangBtn" style="background:var(--primary); color:#fff; border:none; padding:4px 10px; border-radius:6px; font-size:0.75rem; font-weight:800; cursor:pointer;">English</button>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <span style="font-size: 0.8rem; font-weight: 800;">العملة:</span>
+          <button onclick="toggleAppCurrency()" id="sideCurrBtn" style="background:var(--gold); color:#111; border:none; padding:4px 10px; border-radius:6px; font-size:0.75rem; font-weight:900; cursor:pointer;">USD ($)</button>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="side-menu-overlay" id="cartOverlay" onclick="toggleCartDrawer()"></div>
   <div class="cart-drawer" id="cartDrawer">
     <div class="cart-header">
-      <h3>🛒 عربة التسوق الخاصة بك</h3>
+      <h3 id="cartDrawerTitle">🛒 عربة التسوق الخاصة بك</h3>
       <button onclick="toggleCartDrawer()" style="background:none; border:none; color:#fff; font-size:1.4rem; cursor:pointer;">&times;</button>
     </div>
     <div class="cart-body" id="cartItemsList">
-      <p style="text-align:center; color:var(--text-muted); padding:30px;">عربة التسوق فارغة حالياً.</p>
+      <p id="cartEmptyText" style="text-align:center; color:var(--text-muted); padding:30px;">عربة التسوق فارغة حالياً.</p>
     </div>
     <div class="cart-footer-box">
       <div style="display:flex; justify-content:space-between; margin-bottom:12px; font-weight:900; font-size:1.1rem;">
-        <span>الإجمالي:</span>
+        <span id="cartTotalLabel">الإجمالي:</span>
         <span><span id="cartTotal">0 ج.م</span></span>
       </div>
-      <button onclick="checkoutWhatsApp()" style="background:#25d366; color:#fff; border:none; padding:12px; width:100%; border-radius:8px; font-weight:900; cursor:pointer;">💬 إتمام الطلب عبر الواتساب</button>
+      <button onclick="checkoutWhatsApp()" id="checkoutBtn" style="background:#25d366; color:#fff; border:none; padding:12px; width:100%; border-radius:8px; font-weight:900; cursor:pointer;">💬 إتمام الطلب عبر الواتساب</button>
     </div>
   </div>
 
@@ -445,19 +441,19 @@
   <nav class="bottom-nav-bar">
     <button class="bottom-nav-item active" onclick="filterCategory('all', null)">
       <span class="bottom-nav-icon">🏠</span>
-      <span>الرئيسية</span>
+      <span id="navHome">الرئيسية</span>
     </button>
     <button class="bottom-nav-item" onclick="scrollToCategories()">
       <span class="bottom-nav-icon">📂</span>
-      <span>الأقسام</span>
+      <span id="navCategories">الأقسام</span>
     </button>
     <button class="bottom-nav-item" onclick="toggleCartDrawer()">
       <span class="bottom-nav-icon">🛒</span>
-      <span>السلة</span>
+      <span id="navCart">السلة</span>
     </button>
-    <button class="bottom-nav-item" onclick="openGenericModal('من نحن؟', 'aboutText')">
+    <button class="bottom-nav-item" onclick="toggleSideMenu()">
       <span class="bottom-nav-icon">⚙️</span>
-      <span>الضبط</span>
+      <span id="navSettings">الضبط</span>
     </button>
   </nav>
 
@@ -509,19 +505,6 @@
     <div class="footer-bottom">ستورا ستور™ 2026 — جميع الحقوق محفوظة</div>
   </footer>
 
-  <!-- سكربت أداة ترجـمة جوجل المستقرة -->
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'ar',
-        includedLanguages: 'ar,en',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
-      }, 'google_translate_element');
-    }
-  </script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyB7XZt7O1_7K8g6m8DoJe3XTUOTsSS6aQk",
@@ -539,9 +522,133 @@
     let allProducts = [];
     let currentFilter = 'all';
     let cart = [];
+    let currentCurrency = 'EGP';
+    let currentLang = 'ar';
+    const usdRate = 50;
+
+    // قاموس الترجمة الداخلي (Dictionary)
+    const dict = {
+      ar: {
+        title: "ستورا ستور | Stora Store - الفخامة والتجهيزات العصرية",
+        topDelivery: "🚚 شحن وتوصيل فوري لحد باب البيت لكافة المحافظات - ضمان حقيقي مدى الحياة",
+        searchPlaceholder: "ابحث عن الموديل أو الكود (ID)...",
+        about: "من نحن؟",
+        why: "لماذا ستورا ستور؟",
+        terms: "الشروط والأحكام",
+        shipping: "سياسة الشحن",
+        return: "الاستبدال والاسترجاع",
+        cartText: "السلة",
+        heroTitle: "اختبر الفخامة المطلقة",
+        heroSub: "✨ اكتشف تشكيلتنا المختارة بعناية من أحدث تجهيزات الحمامات والمطابخ العصرية الفاخرة ✨",
+        shopBtn: "تسوق الآن",
+        all: "الكل",
+        topSales: "الأكثر مبيعاً ⭐",
+        newArrival: "وصل حديثاً ✨",
+        sectionAll: "جميع المنتجات",
+        navHome: "الرئيسية",
+        navCategories: "الأقسام",
+        navCart: "السلة",
+        navSettings: "الضبط",
+        menuTitle: "🗂 القائمة الرئيسية",
+        cartDrawerTitle: "🛒 عربة التسوق الخاصة بك",
+        cartEmpty: "عربة التسوق فارغة حالياً.",
+        total: "الإجمالي:",
+        checkout: "💬 إتمام الطلب عبر الواتساب",
+        sideLangBtn: "English",
+        sideCurrBtn: currentCurrency === 'EGP' ? 'USD ($)' : 'ج.م (EGP)'
+      },
+      en: {
+        title: "Stora Store - Luxury & Modern Fixtures",
+        topDelivery: "🚚 Instant shipping to all governorates - Lifetime real warranty",
+        searchPlaceholder: "Search by model or ID...",
+        about: "About Us",
+        why: "Why Stora Store?",
+        terms: "Terms & Conditions",
+        shipping: "Shipping Policy",
+        return: "Return & Exchange",
+        cartText: "Cart",
+        heroTitle: "Experience Absolute Luxury",
+        heroSub: "✨ Discover our carefully curated collection of modern bathroom and kitchen fixtures ✨",
+        shopBtn: "Shop Now",
+        all: "All",
+        topSales: "Best Sellers ⭐",
+        newArrival: "New Arrivals ✨",
+        sectionAll: "All Products",
+        navHome: "Home",
+        navCategories: "Categories",
+        navCart: "Cart",
+        navSettings: "Settings",
+        menuTitle: "🗂 Main Menu",
+        cartDrawerTitle: "🛒 Your Shopping Cart",
+        cartEmpty: "Your shopping cart is empty.",
+        total: "Total:",
+        checkout: "💬 Checkout via WhatsApp",
+        sideLangBtn: "العربية",
+        sideCurrBtn: currentCurrency === 'EGP' ? 'USD ($)' : 'ج.م (EGP)'
+      }
+    };
+
+    function toggleAppLanguage() {
+      currentLang = currentLang === 'ar' ? 'en' : 'ar';
+      const root = document.getElementById('htmlRoot');
+      if (currentLang === 'en') {
+        root.setAttribute('dir', 'ltr');
+        root.setAttribute('lang', 'en');
+      } else {
+        root.setAttribute('dir', 'rtl');
+        root.setAttribute('lang', 'ar');
+      }
+      updateDictionaryUI();
+      renderProducts();
+      updateCartUI();
+    }
+
+    function toggleAppCurrency() {
+      currentCurrency = currentCurrency === 'EGP' ? 'USD' : 'EGP';
+      updateDictionaryUI();
+      renderProducts();
+      updateCartUI();
+    }
+
+    function updateDictionaryUI() {
+      const t = dict[currentLang];
+      document.getElementById('pageTitle').innerText = t.title;
+      document.getElementById('topBarDelivery').innerText = t.topDelivery;
+      document.getElementById('searchInput').placeholder = t.searchPlaceholder;
+      document.getElementById('cartBtnText').innerText = t.cartText;
+      document.getElementById('heroMainTitle').innerText = t.heroTitle;
+      document.getElementById('heroSubText').innerText = t.heroSub;
+      document.getElementById('shopNowBtn').innerText = t.shopBtn;
+      document.getElementById('sectionTitle').innerText = currentFilter === 'all' ? t.sectionAll : currentFilter;
+      
+      document.getElementById('navHome').innerText = t.navHome;
+      document.getElementById('navCategories').innerText = t.navCategories;
+      document.getElementById('navCart').innerText = t.navCart;
+      document.getElementById('navSettings').innerText = t.navSettings;
+      document.getElementById('sideMenuTitle').innerText = t.menuTitle;
+      document.getElementById('cartDrawerTitle').innerText = t.cartDrawerTitle;
+      document.getElementById('cartTotalLabel').innerText = t.total;
+      document.getElementById('checkoutBtn').innerText = t.checkout;
+      
+      document.getElementById('sideLangBtn').innerText = t.sideLangBtn;
+      document.getElementById('sideCurrBtn').innerText = currentCurrency === 'EGP' ? 'USD ($)' : 'ج.م (EGP)';
+
+      // ترجمة أسماء الأقسام الأفقية
+      document.querySelectorAll('.cat-name').forEach(span => {
+        let catKey = span.getAttribute('data-cat');
+        if (catKey === 'all') span.innerText = t.all;
+        else if (catKey === 'الأكثر مبيعا') span.innerText = t.topSales;
+        else if (catKey === 'جديد') span.innerText = t.newArrival;
+      });
+    }
 
     function formatPrice(amount) {
-      return `${Number(amount).toLocaleString()} ج.م`;
+      if (currentCurrency === 'USD') {
+        let converted = (amount / usdRate).toFixed(2);
+        return `$${converted}`;
+      } else {
+        return `${Number(amount).toLocaleString()} ج.م`;
+      }
     }
 
     let storeTexts = {
@@ -747,11 +854,14 @@
         element.classList.add('active');
       } else {
         document.querySelectorAll('.cat-item').forEach(item => {
-          if (item.getAttribute('onclick') && item.getAttribute('onclick').includes(`'${cat}'`)) { item.classList.add('active'); }
+          if (item.getAttribute('onclick') && item.getAttribute('onclick'].includes(`'${cat}'`)) { item.classList.add('active'); }
         });
       }
       const sTitle = document.getElementById('sectionTitle');
-      if (sTitle) sTitle.innerText = cat === 'all' ? 'جميع المنتجات' : `${cat}`;
+      if (sTitle) {
+        if (cat === 'all') sTitle.innerText = dict[currentLang].sectionAll;
+        else sTitle.innerText = cat;
+      }
       renderProducts();
       window.scrollTo({ top: 400, behavior: 'smooth' });
     }
@@ -846,7 +956,7 @@
       }
       updateCartUI();
       document.getElementById('productModal').style.display = 'none';
-      alert("تمت إضافة المنتج إلى عربة التسوق بنجاح! 🛒");
+      alert(currentLang === 'ar' ? "تمت إضافة المنتج إلى عربة التسوق بنجاح! 🛒" : "Product added to cart successfully! 🛒");
     }
 
     function removeFromCart(cartItemId) {
@@ -863,7 +973,7 @@
       if (!list) return;
       list.innerHTML = "";
       if (cart.length === 0) {
-        list.innerHTML = `<p style="text-align:center; color:var(--text-muted); padding:30px;">عربة التسوق فارغة حالياً.</p>`;
+        list.innerHTML = `<p style="text-align:center; color:var(--text-muted); padding:30px;">${dict[currentLang].cartEmpty}</p>`;
         if (countSpan) countSpan.innerText = 0;
         if (totalSpan) totalSpan.innerText = formatPrice(0);
         return;
@@ -877,7 +987,7 @@
             <img src="${item.image}" alt="">
             <div style="flex:1;">
               <h4 style="font-size:0.82rem; font-weight:800; color:var(--primary);">${item.title}</h4>
-              <p style="font-size:0.75rem; color:var(--text-muted);">الكمية: ${item.qty} × ${formatPrice(item.price)}</p>
+              <p style="font-size:0.75rem; color:var(--text-muted);">${currentLang==='ar'?'الكمية':'Qty'}: ${item.qty} × ${formatPrice(item.price)}</p>
             </div>
             <button onclick="removeFromCart('${item.cartItemId}')" style="background:none; border:none; color:#ef4444; font-weight:900; cursor:pointer;">&times;</button>
           </div>
@@ -888,14 +998,14 @@
     }
 
     function checkoutWhatsApp() {
-      if (cart.length === 0) { alert("عربة التسوق فارغة!"); return; }
-      let msg = "مرحباً ستورا ستور، أود إتمام الطلب التالي:\n\n";
+      if (cart.length === 0) { alert(currentLang==='ar'?"عربة التسوق فارغة!":"Cart is empty!"); return; }
+      let msg = currentLang==='ar' ? "مرحباً ستورا ستور، أود إتمام الطلب التالي:\n\n" : "Hello Stora Store, I would like to complete the following order:\n\n";
       let total = 0;
       cart.forEach((item, index) => {
-        msg += `${index + 1}. ${item.title}\nالكمية: ${item.qty} | الإجمالي: ${formatPrice(item.price * item.qty)}\n-------------------\n`;
+        msg += `${index + 1}. ${item.title}\n${currentLang==='ar'?'الكمية':'Qty'}: ${item.qty} | ${currentLang==='ar'?'الإجمالي':'Total'}: ${formatPrice(item.price * item.qty)}\n-------------------\n`;
         total += (item.price * item.qty);
       });
-      msg += `\nالإجمالي الكلي: ${formatPrice(total)}\nفي انتظار تأكيد الطلب.`;
+      msg += `\n${currentLang==='ar'?'الإجمالي الكلي':'Grand Total'}: ${formatPrice(total)}\n${currentLang==='ar'?'في انتظار تأكيد الطلب.':'Waiting for order confirmation.'}`;
       window.open(`https://wa.me/201039727479?text=${encodeURIComponent(msg)}`, '_blank');
     }
   </script>
