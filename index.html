@@ -24,11 +24,10 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
     
-    /* منع التمدد الأفقي وثبات التنسيق تماماً على الجوال */
     html, body {
       background-color: var(--bg);
       color: var(--text);
-      padding-bottom: 90px;
+      padding-bottom: 50px;
       max-width: 100%;
       overflow-x: hidden;
     }
@@ -37,9 +36,8 @@
     [dir="rtl"] body { text-align: right; }
 
     .red-announcement-bar {
-      background: #dc2626; color: #fff; font-size: 0.85rem; font-weight: 900;
-      padding: 7px 15px; text-align: center; overflow: hidden; white-space: nowrap; box-shadow: inset 0 2px 5px rgba(0,0,0,0.15);
-      width: 100%;
+      background: #dc2626; color: #fff; font-size: 0.78rem; font-weight: 900;
+      padding: 6px 10px; text-align: center; overflow: hidden; white-space: nowrap; width: 100%;
     }
     .red-announcement-bar span {
       display: inline-block; animation: marquee 16s linear infinite;
@@ -50,65 +48,63 @@
     }
 
     .top-bar {
-      background: #0b0f19; color: #cbd5e1; font-size: 0.8rem; padding: 8px 20px;
+      background: #0b0f19; color: #cbd5e1; font-size: 0.75rem; padding: 6px 15px;
       text-align: center; border-bottom: 1px solid rgba(197, 155, 39, 0.3); font-weight: 700;
     }
 
     header {
       background: #ffffff; box-shadow: 0 2px 15px rgba(0,0,0,0.04); position: sticky; top: 0; z-index: 100;
-      display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; gap: 15px; width: 100%;
+      display: flex; flex-direction: column; padding: 10px 15px; gap: 10px; width: 100%;
     }
-    .menu-toggle-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--primary); }
-    .logo-box { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
-    .logo-img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
+    .header-main-row {
+      display: flex; justify-content: space-between; align-items: center; width: 100%; gap: 10px;
+    }
+    .menu-toggle-btn { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--primary); padding: 4px; }
+    .logo-box { display: flex; align-items: center; gap: 8px; text-decoration: none; flex-shrink: 0; }
+    .logo-img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
     
-    .brand-title { font-size: 1.25rem; font-weight: 900; color: var(--primary); line-height: 1.1; }
-    .brand-sub { font-size: 0.68rem; color: var(--gold); font-weight: 800; letter-spacing: 0.5px; }
+    .brand-title { font-size: 1.1rem; font-weight: 900; color: var(--primary); line-height: 1.1; }
+    .brand-sub { font-size: 0.58rem; color: var(--gold); font-weight: 800; letter-spacing: 0.5px; }
     
-    .header-search-box { flex: 1; max-width: 350px; position: relative; }
+    .header-search-box { width: 100%; position: relative; }
     .header-search-box input {
-      width: 100%; padding: 8px 15px; border: 2px solid var(--border); border-radius: 20px; font-size: 0.85rem; outline: none; font-family: 'Cairo'; transition: border-color 0.2s;
+      width: 100%; padding: 7px 14px; border: 2px solid var(--border); border-radius: 20px; font-size: 0.82rem; outline: none; font-family: 'Cairo'; transition: border-color 0.2s;
     }
     .header-search-box input:focus { border-color: var(--gold); }
 
-    .header-links-desktop { display: flex; gap: 14px; align-items: center; }
-    .header-link { font-size: 0.8rem; font-weight: 800; color: var(--text); cursor: pointer; text-decoration: none; transition: color 0.2s; }
-    .header-link:hover { color: var(--gold); }
-    @media (max-width: 1100px) { .header-links-desktop { display: none; } }
-
-    .header-actions { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
-    .cart-btn-top, .lang-btn-top { background: var(--primary); color: #fff; border: none; padding: 6px 14px; border-radius: 20px; font-weight: 800; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .header-actions { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
+    .cart-btn-top, .lang-btn-top { background: var(--primary); color: #fff; border: none; padding: 5px 10px; border-radius: 15px; font-weight: 800; font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; gap: 4px; }
     .lang-btn-top { background: var(--gold); color: #111827; }
 
-    .hero-banner-wrap { width: 100%; margin: 0 auto 20px; padding: 0; }
+    .hero-banner-wrap { width: 100%; margin: 0 auto 15px; padding: 0; }
     .banner-card {
       border-radius: 0; overflow: hidden; box-shadow: var(--shadow); background: #0b0f19;
-      position: relative; height: 520px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; padding: 35px; border-bottom: 2px solid rgba(197, 155, 39, 0.5); width: 100%;
+      position: relative; height: 420px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 20px; border-bottom: 2px solid rgba(197, 155, 39, 0.5); width: 100%;
     }
     .banner-card video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.95) contrast(1.05); }
     .banner-card::before {
       content: ""; position: absolute; inset: 0; background: radial-gradient(circle, rgba(11,15,25,0.7) 0%, rgba(11,15,25,0.4) 100%); z-index: 1;
     }
-    .banner-content { position: relative; z-index: 2; color: #fff; display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 950px; width: 100%; }
+    .banner-content { position: relative; z-index: 2; color: #fff; display: flex; flex-direction: column; align-items: center; gap: 10px; max-width: 950px; width: 100%; }
     
     .banner-logo-img {
-      width: 110px; height: 110px; object-fit: contain; filter: drop-shadow(0 6px 15px rgba(0,0,0,0.9));
+      width: 85px; height: 85px; object-fit: contain; filter: drop-shadow(0 6px 15px rgba(0,0,0,0.9));
       margin-bottom: 2px; animation: fadeInLogo 1.2s ease-in-out;
     }
     @keyframes fadeInLogo { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
 
     .banner-title-luxury {
-      font-size: 2.4rem; font-weight: 900; color: #fef9ed; text-shadow: 0 3px 12px rgba(0,0,0,0.95);
+      font-size: 1.8rem; font-weight: 900; color: #fef9ed; text-shadow: 0 3px 12px rgba(0,0,0,0.95);
       letter-spacing: 0.5px; margin-bottom: 2px;
     }
     
     .banner-typing-container {
-      min-height: 95px; display: flex; flex-direction: column; gap: 10px; align-items: center; justify-content: center; width: 100%;
+      min-height: 75px; display: flex; flex-direction: column; gap: 8px; align-items: center; justify-content: center; width: 100%;
     }
     .banner-fade-text {
-      font-size: 1.1rem; font-weight: 800; color: #ffffff; text-shadow: 0 2px 8px rgba(0,0,0,0.95);
-      letter-spacing: 0.4px; line-height: 1.5; background: rgba(0, 0, 0, 0.45); padding: 6px 20px; border-radius: 8px; width: fit-content;
+      font-size: 0.92rem; font-weight: 800; color: #ffffff; text-shadow: 0 2px 8px rgba(0,0,0,0.95);
+      letter-spacing: 0.4px; line-height: 1.4; background: rgba(0, 0, 0, 0.45); padding: 5px 15px; border-radius: 8px; width: fit-content;
       animation: fadeInOut 5s infinite;
     }
     @keyframes fadeInOut {
@@ -120,51 +116,51 @@
 
     .banner-shop-btn {
       background: linear-gradient(135deg, #c59b27 0%, #9e791b 100%); color: #111827; border: none;
-      padding: 12px 36px; border-radius: 25px; font-weight: 900; font-size: 0.95rem; cursor: pointer;
-      box-shadow: 0 6px 20px rgba(197, 155, 39, 0.5); transition: transform 0.2s; margin-top: 10px; text-decoration: none; display: inline-block;
+      padding: 10px 28px; border-radius: 20px; font-weight: 900; font-size: 0.88rem; cursor: pointer;
+      box-shadow: 0 6px 20px rgba(197, 155, 39, 0.5); transition: transform 0.2s; margin-top: 5px; text-decoration: none; display: inline-block;
     }
     .banner-shop-btn:hover { transform: scale(1.05); }
 
     .categories-bar-wrapper {
-      max-width: 1400px; margin: 15px auto; padding: 0 20px;
+      max-width: 1400px; margin: 10px auto; padding: 0 15px;
       display: flex; justify-content: center; width: 100%;
     }
     .categories-bar {
-      background: #ffffff; border: 2px solid var(--gold); border-radius: 16px;
-      display: flex; gap: 15px; overflow-x: auto; padding: 12px 20px; scrollbar-width: none; align-items: center;
+      background: #ffffff; border: 2px solid var(--gold); border-radius: 14px;
+      display: flex; gap: 12px; overflow-x: auto; padding: 10px 15px; scrollbar-width: none; align-items: center;
       box-shadow: 0 4px 15px rgba(197, 155, 39, 0.15); width: fit-content; max-width: 100%;
     }
     .categories-bar::-webkit-scrollbar { display: none; }
     .cat-item {
-      display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; min-width: 85px; transition: transform 0.2s;
+      display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer; min-width: 75px; transition: transform 0.2s;
     }
     .cat-item:hover { transform: translateY(-3px); }
     .cat-circle {
-      width: 55px; height: 55px; border-radius: 50%; border: 2px solid var(--border); overflow: hidden;
+      width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--border); overflow: hidden;
       display: flex; align-items: center; justify-content: center; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       transition: all 0.2s;
     }
-    .cat-item.active .cat-circle { border-color: var(--gold); box-shadow: 0 0 14px rgba(197, 155, 39, 0.6); background: var(--primary); }
-    .cat-item.active { border-radius: 12px; padding: 4px; background: rgba(197, 155, 39, 0.08); }
+    .cat-item.active .cat-circle { border-color: var(--gold); box-shadow: 0 0 12px rgba(197, 155, 39, 0.6); background: var(--primary); }
+    .cat-item.active { border-radius: 10px; padding: 3px; background: rgba(197, 155, 39, 0.08); }
     .cat-circle img { width: 100%; height: 100%; object-fit: cover; }
-    .cat-name { font-size: 0.75rem; font-weight: 800; color: var(--text); text-align: center; white-space: nowrap; }
+    .cat-name { font-size: 0.7rem; font-weight: 800; color: var(--text); text-align: center; white-space: nowrap; }
     .cat-item.active .cat-name { color: var(--primary); font-weight: 900; }
 
     .side-menu-drawer {
-      position: fixed; top: 0; width: 100%; max-width: 300px; height: 100vh;
+      position: fixed; top: 0; width: 100%; max-width: 280px; height: 100vh;
       background: white; box-shadow: -4px 0 25px rgba(0,0,0,0.18); z-index: 3000; display: flex; flex-direction: column; transition: all 0.3s;
     }
-    [dir="rtl"] .side-menu-drawer { right: -320px; }
+    [dir="rtl"] .side-menu-drawer { right: -300px; }
     [dir="rtl"] .side-menu-drawer.open { right: 0; }
-    [dir="ltr"] .side-menu-drawer { left: -320px; }
+    [dir="ltr"] .side-menu-drawer { left: -300px; }
     [dir="ltr"] .side-menu-drawer.open { left: 0; }
 
     .side-menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2999; display: none; }
     .side-menu-overlay.open { display: block; }
-    .side-menu-header { padding: 16px; background: var(--primary); color: #fff; display: flex; justify-content: space-between; align-items: center; font-weight: 800; }
+    .side-menu-header { padding: 14px; background: var(--primary); color: #fff; display: flex; justify-content: space-between; align-items: center; font-weight: 800; }
     .side-menu-items { flex: 1; overflow-y: auto; padding: 10px 0; }
     .side-menu-item {
-      padding: 12px 20px; border-bottom: 1px solid var(--border); font-weight: 800; font-size: 0.9rem;
+      padding: 11px 18px; border-bottom: 1px solid var(--border); font-weight: 800; font-size: 0.85rem;
       color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; text-decoration: none;
     }
     .side-menu-item:hover { background: var(--gold-light); color: var(--gold-dark); }
@@ -176,153 +172,149 @@
     [dir="ltr"] .sub-menu-dropdown { padding-left: 15px; }
     .sub-menu-dropdown.open { display: block; }
     .sub-menu-item {
-      padding: 10px 20px; font-size: 0.82rem; font-weight: 800; color: var(--text-muted); cursor: pointer; border-bottom: 1px solid #edf2f7;
+      padding: 9px 18px; font-size: 0.8rem; font-weight: 800; color: var(--text-muted); cursor: pointer; border-bottom: 1px solid #edf2f7;
     }
     .sub-menu-item:hover { color: var(--gold-dark); background: var(--gold-light); }
 
     .cart-drawer {
-      position: fixed; top: 0; width: 100%; max-width: 330px; height: 100vh;
+      position: fixed; top: 0; width: 100%; max-width: 320px; height: 100vh;
       background: white; box-shadow: 4px 0 25px rgba(0,0,0,0.18); z-index: 3500; display: flex; flex-direction: column; transition: all 0.3s;
     }
-    [dir="rtl"] .cart-drawer { left: -350px; }
+    [dir="rtl"] .cart-drawer { left: -330px; }
     [dir="rtl"] .cart-drawer.open { left: 0; }
-    [dir="ltr"] .cart-drawer { right: -350px; }
+    [dir="ltr"] .cart-drawer { right: -330px; }
     [dir="ltr"] .cart-drawer.open { right: 0; }
 
-    .cart-header { padding: 16px; background: var(--primary); color: #fff; display: flex; justify-content: space-between; align-items: center; font-weight: 800; }
-    .cart-body { flex: 1; overflow-y: auto; padding: 15px; }
-    .cart-item { display: flex; gap: 10px; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 10px; align-items: center; }
-    .cart-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
-    .cart-footer-box { padding: 15px; border-top: 1px solid var(--border); background: #f8fafc; }
+    .cart-header { padding: 14px; background: var(--primary); color: #fff; display: flex; justify-content: space-between; align-items: center; font-weight: 800; }
+    .cart-body { flex: 1; overflow-y: auto; padding: 12px; }
+    .cart-item { display: flex; gap: 8px; margin-bottom: 10px; border-bottom: 1px solid var(--border); padding-bottom: 8px; align-items: center; }
+    .cart-item img { width: 55px; height: 55px; object-fit: cover; border-radius: 6px; }
+    .cart-footer-box { padding: 12px; border-top: 1px solid var(--border); background: #f8fafc; }
 
-    .generic-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 5000; display: none; align-items: center; justify-content: center; padding: 15px; }
-    .generic-modal-content { background: #fff; width: 100%; max-width: 600px; border-radius: 16px; padding: 30px; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; text-align: center; }
-    .generic-modal-logo { width: 65px; height: 65px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); margin: 0 auto 15px; display: block; }
-    .generic-modal-title { font-size: 1.25rem; font-weight: 900; color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid var(--gold); padding-bottom: 8px; display: inline-block; }
-    .generic-modal-body { font-size: 0.95rem; line-height: 1.8; color: var(--text-muted); white-space: pre-line; }
+    .generic-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 5000; display: none; align-items: center; justify-content: center; padding: 12px; }
+    .generic-modal-content { background: #fff; width: 100%; max-width: 550px; border-radius: 14px; padding: 25px; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; text-align: center; }
+    .generic-modal-logo { width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); margin: 0 auto 12px; display: block; }
+    .generic-modal-title { font-size: 1.15rem; font-weight: 900; color: var(--primary); margin-bottom: 12px; border-bottom: 2px solid var(--gold); padding-bottom: 6px; display: inline-block; }
+    .generic-modal-body { font-size: 0.9rem; line-height: 1.7; color: var(--text-muted); white-space: pre-line; }
     [dir="rtl"] .generic-modal-body { text-align: right; }
     [dir="ltr"] .generic-modal-body { text-align: left; }
 
-    .product-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 4000; display: none; align-items: center; justify-content: center; padding: 15px; }
-    .product-modal-content { background: #fff; width: 100%; max-width: 800px; border-radius: 16px; padding: 25px; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; flex-wrap: wrap; gap: 20px; position: relative; }
-    .modal-img-col { flex: 1; min-width: 260px; display: flex; flex-direction: column; gap: 10px; }
-    .modal-main-img { width: 100%; height: 260px; object-fit: cover; border-radius: 10px; border: 1px solid var(--border); }
-    .sub-imgs-row { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; }
-    .sub-thumb { width: 50px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); cursor: pointer; }
+    .product-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 4000; display: none; align-items: center; justify-content: center; padding: 12px; }
+    .product-modal-content { background: #fff; width: 100%; max-width: 750px; border-radius: 14px; padding: 20px; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; flex-wrap: wrap; gap: 15px; position: relative; }
+    .modal-img-col { flex: 1; min-width: 240px; display: flex; flex-direction: column; gap: 8px; }
+    .modal-main-img { width: 100%; height: 230px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); }
+    .sub-imgs-row { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+    .sub-thumb { width: 45px; height: 45px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); cursor: pointer; }
     .sub-thumb:hover { border-color: var(--gold); }
     
-    .modal-info-col { flex: 1.2; min-width: 280px; display: flex; flex-direction: column; gap: 10px; }
-    .size-btn { border: 2px solid var(--border); background: #fff; padding: 6px 14px; border-radius: 8px; font-weight: 800; font-size: 0.8rem; cursor: pointer; }
+    .modal-info-col { flex: 1.2; min-width: 250px; display: flex; flex-direction: column; gap: 8px; }
+    .size-btn { border: 2px solid var(--border); background: #fff; padding: 5px 12px; border-radius: 6px; font-weight: 800; font-size: 0.78rem; cursor: pointer; }
     .size-btn.active { border-color: var(--primary); background: var(--primary); color: #fff; }
 
-    .catalog-container { max-width: 1400px; margin: 25px auto; padding: 0 20px; width: 100%; }
-    .section-title-wrap { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
-    [dir="rtl"] .section-title-wrap { border-right: 4px solid var(--gold); padding-right: 12px; }
-    [dir="ltr"] .section-title-wrap { border-left: 4px solid var(--gold); padding-left: 12px; }
+    .catalog-container { max-width: 1400px; margin: 20px auto; padding: 0 15px; width: 100%; }
+    .section-title-wrap { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+    [dir="rtl"] .section-title-wrap { border-right: 4px solid var(--gold); padding-right: 10px; }
+    [dir="ltr"] .section-title-wrap { border-left: 4px solid var(--gold); padding-left: 10px; }
     
-    .section-title { font-size: 1.35rem; font-weight: 900; color: var(--primary); }
-    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; width: 100%; }
+    .section-title { font-size: 1.2rem; font-weight: 900; color: var(--primary); }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 15px; width: 100%; }
 
     .card {
-      background: var(--card-bg); border-radius: 16px; border: 1.5px solid var(--border);
+      background: var(--card-bg); border-radius: 14px; border: 1.5px solid var(--border);
       overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow); transition: transform 0.2s; position: relative;
     }
-    .card:hover { transform: translateY(-4px); }
+    .card:hover { transform: translateY(-3px); }
     
     .badge-discount-ribbon {
-      position: absolute; top: 18px; background: #dc2626; color: #fff;
-      font-size: 0.72rem; font-weight: 900; padding: 5px 38px; z-index: 15;
+      position: absolute; top: 15px; background: #dc2626; color: #fff;
+      font-size: 0.68rem; font-weight: 900; padding: 4px 32px; z-index: 15;
       box-shadow: 0 2px 6px rgba(0,0,0,0.25); text-align: center; letter-spacing: 0.5px;
     }
-    [dir="rtl"] .badge-discount-ribbon { left: -34px; transform: rotate(-45deg); }
-    [dir="ltr"] .badge-discount-ribbon { right: -34px; transform: rotate(45deg); }
+    [dir="rtl"] .badge-discount-ribbon { left: -30px; transform: rotate(-45deg); }
+    [dir="ltr"] .badge-discount-ribbon { right: -30px; transform: rotate(45deg); }
 
     .badge-status-pill {
-      position: absolute; top: 12px; background: #2563eb; color: #fff;
-      font-size: 0.7rem; font-weight: 800; padding: 4px 12px; border-radius: 20px; z-index: 15;
+      position: absolute; top: 10px; background: #2563eb; color: #fff;
+      font-size: 0.68rem; font-weight: 800; padding: 3px 10px; border-radius: 20px; z-index: 15;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
-    [dir="rtl"] .badge-status-pill { right: 12px; }
-    [dir="ltr"] .badge-status-pill { left: 12px; }
+    [dir="rtl"] .badge-status-pill { right: 10px; }
+    [dir="ltr"] .badge-status-pill { left: 10px; }
     
-    .card-img-wrap { width: 100%; height: 210px; background: #f1f5f9; position: relative; overflow: hidden; }
+    .card-img-wrap { width: 100%; height: 190px; background: #f1f5f9; position: relative; overflow: hidden; }
     .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
     
-    .card-body { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
-    .product-title { font-size: 0.98rem; font-weight: 900; color: var(--primary); margin-bottom: 4px; font-family: 'Cairo', sans-serif; line-height: 1.3; }
-    .product-id { font-size: 0.75rem; color: #9e791b; font-weight: 800; margin-bottom: 10px; font-family: 'Cairo', sans-serif; }
-    
-    .card-feature-box {
-      border: 1.5px solid #fde68a; background: #fffbeb; border-radius: 10px;
-      padding: 8px; text-align: center; font-size: 0.82rem; font-weight: 900; color: #9e791b;
-      margin-bottom: 12px; font-family: 'Cairo', sans-serif;
-    }
+    .card-body { padding: 12px; display: flex; flex-direction: column; flex-grow: 1; }
+    .product-title { font-size: 0.92rem; font-weight: 900; color: var(--primary); margin-bottom: 4px; font-family: 'Cairo', sans-serif; line-height: 1.3; }
+    .product-id { font-size: 0.72rem; color: #9e791b; font-weight: 800; margin-bottom: 8px; font-family: 'Cairo', sans-serif; }
 
-    .card-price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 10px; border-top: 1px solid var(--border); }
+    /* صف السعر وزر التفاصيل الكبير والبارز بدون صندوق المواصفات الخارجي */
+    .card-price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 10px; border-top: 1px solid var(--border); gap: 8px; }
     
     .price-group-vertical { display: flex; flex-direction: column; gap: 1px; }
     .price-line-current { display: flex; align-items: baseline; gap: 4px; }
-    .price-value-green { font-size: 1.25rem; font-weight: 900; color: #059669; font-family: 'Cairo', sans-serif; }
+    .price-value-green { font-size: 1.1rem; font-weight: 900; color: #059669; font-family: 'Cairo', sans-serif; }
     
     .price-old-red-small {
-      font-size: 0.75rem; font-weight: 800; color: #dc2626; text-decoration: line-through; font-family: 'Cairo', sans-serif;
+      font-size: 0.7rem; font-weight: 800; color: #dc2626; text-decoration: line-through; font-family: 'Cairo', sans-serif;
     }
 
     .details-btn {
-      background: #1e293b; color: #fff; border: none; padding: 9px 16px; border-radius: 10px;
-      font-weight: 900; font-size: 0.8rem; cursor: pointer; text-align: center; font-family: 'Cairo', sans-serif; transition: background 0.2s;
-      line-height: 1.2; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background: #1e293b; color: #fff; border: none; padding: 10px 14px; border-radius: 10px;
+      font-weight: 900; font-size: 0.78rem; cursor: pointer; text-align: center; font-family: 'Cairo', sans-serif; transition: background 0.2s, transform 0.2s;
+      line-height: 1.3; box-shadow: 0 4px 12px rgba(30, 41, 59, 0.25); flex-grow: 1;
     }
-    .details-btn:hover { background: var(--gold-dark); color: #fff; }
+    .details-btn:hover { background: var(--gold-dark); color: #fff; transform: scale(1.02); }
 
     .whatsapp-float {
-      position: fixed; bottom: 85px; width: 60px; height: 60px;
+      position: fixed; bottom: 65px; width: 50px; height: 50px;
       background: rgba(37, 211, 102, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center;
       z-index: 2000; box-shadow: 0 0 20px rgba(37, 211, 102, 0.3); animation: pulse-whatsapp 2s infinite; text-decoration: none;
     }
-    [dir="rtl"] .whatsapp-float { right: 20px; }
-    [dir="ltr"] .whatsapp-float { left: 20px; }
+    [dir="rtl"] .whatsapp-float { right: 15px; }
+    [dir="ltr"] .whatsapp-float { left: 15px; }
 
     .whatsapp-inner {
-      width: 50px; height: 50px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;
+      width: 40px; height: 40px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;
     }
-    .whatsapp-inner svg { width: 30px; height: 30px; fill: #ffffff; }
+    .whatsapp-inner svg { width: 22px; height: 22px; fill: #ffffff; }
     @keyframes pulse-whatsapp {
       0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
-      70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+      70% { transform: scale(1); box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
       100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
     }
 
     .bottom-nav-bar {
       position: fixed; bottom: 0; left: 0; width: 100%; background: #ffffff; border-top: 2px solid var(--gold);
-      display: flex; justify-content: space-around; align-items: center; padding: 8px 0; z-index: 2500; box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+      display: flex; justify-content: space-around; align-items: center; padding: 4px 0; z-index: 2500; box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+      height: 50px;
     }
-    .bottom-nav-item { background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 0.75rem; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; transition: color 0.2s; }
+    .bottom-nav-item { background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 0.7rem; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 1px; text-decoration: none; transition: color 0.2s; }
     .bottom-nav-item:hover, .bottom-nav-item.active { color: var(--gold-dark); }
-    .bottom-nav-icon { font-size: 1.2rem; }
+    .bottom-nav-icon { font-size: 1.05rem; }
 
-    footer { background: #0b0f19; color: #94a3b8; padding: 40px 20px 80px; margin-top: 60px; border-top: 3px solid var(--gold); font-family: 'Cairo', sans-serif; width: 100%; }
+    footer { background: #0b0f19; color: #94a3b8; padding: 25px 15px 15px; margin-top: 25px; margin-bottom: 0; border-top: 3px solid var(--gold); font-family: 'Cairo', sans-serif; width: 100%; }
     [dir="rtl"] footer { direction: rtl; text-align: right; }
     [dir="ltr"] footer { direction: ltr; text-align: left; }
 
-    .footer-container { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 30px; width: 100%; }
+    .footer-container { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 15px; width: 100%; }
     @media (max-width: 768px) { .footer-container { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 480px) { .footer-container { grid-template-columns: 1fr; } }
     
-    .footer-col h3 { color: #fff; font-size: 1rem; font-weight: 900; margin-bottom: 15px; position: relative; padding-bottom: 8px; }
+    .footer-col h3 { color: #fff; font-size: 0.95rem; font-weight: 900; margin-bottom: 10px; position: relative; padding-bottom: 5px; }
     [dir="rtl"] .footer-col h3 { text-align: right; }
     [dir="ltr"] .footer-col h3 { text-align: left; }
     
-    .footer-col h3::after { content: ''; position: absolute; bottom: 0; width: 40px; height: 2px; background: var(--gold); }
+    .footer-col h3::after { content: ''; position: absolute; bottom: 0; width: 35px; height: 2px; background: var(--gold); }
     [dir="rtl"] .footer-col h3::after { right: 0; }
     [dir="ltr"] .footer-col h3::after { left: 0; }
     
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; padding: 0; }
-    .footer-links li a { color: #cbd5e1; text-decoration: none; font-size: 0.85rem; font-weight: 700; transition: color 0.2s; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 8px; padding: 0; }
+    .footer-links li a { color: #cbd5e1; text-decoration: none; font-size: 0.8rem; font-weight: 700; transition: color 0.2s; display: flex; align-items: center; gap: 6px; cursor: pointer; }
     .footer-links li a:hover { color: var(--gold); }
     
-    .social-icon-svg { width: 18px; height: 18px; fill: currentColor; vertical-align: middle; }
-    .footer-bottom { text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px; font-size: 0.8rem; color: #64748b; }
+    .social-icon-svg { width: 16px; height: 16px; fill: currentColor; vertical-align: middle; }
+    .footer-bottom { text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 10px; font-size: 0.75rem; color: #64748b; margin-bottom: 0; }
   </style>
 </head>
 <body id="htmlRoot">
@@ -336,32 +328,26 @@
   </div>
 
   <header>
-    <div style="display: flex; align-items: center; gap: 12px;">
-      <button class="menu-toggle-btn" onclick="toggleSideMenu()">☰</button>
-      <a class="logo-box" href="#">
-        <img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt="Logo" class="logo-img">
-        <div>
-          <h1 class="brand-title" id="brandTitle">ستورا ستور</h1>
-          <span class="brand-sub" id="brandSub">STORA STORE • BATHROOM LUXURY</span>
-        </div>
-      </a>
+    <div class="header-main-row">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <button class="menu-toggle-btn" onclick="toggleSideMenu()">☰</button>
+        <a class="logo-box" href="#">
+          <img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt="Logo" class="logo-img">
+          <div>
+            <h1 class="brand-title" id="brandTitle">ستورا ستور</h1>
+            <span class="brand-sub" id="brandSub">STORA STORE</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="header-actions">
+        <button class="lang-btn-top" onclick="toggleLanguage()" id="langBtn">🌐 En</button>
+        <button class="cart-btn-top" onclick="toggleCartDrawer()">🛒 <span id="cartBtnText">السلة</span> (<span id="cartCount">0</span>)</button>
+      </div>
     </div>
 
     <div class="header-search-box">
       <input type="text" id="searchInput" placeholder="ابحث عن الموديل أو الكود (ID)..." oninput="handleSearch(this.value)">
-    </div>
-
-    <div class="header-links-desktop">
-      <a class="header-link" onclick="openGenericModal('من نحن؟', 'aboutText')" id="navAbout">من نحن؟</a>
-      <a class="header-link" onclick="openGenericModal('لماذا ستورا ستور؟', 'whyText')" id="navWhy">لماذا ستورا ستور؟</a>
-      <a class="header-link" onclick="openGenericModal('الشروط والأحكام', 'termsText')" id="navTerms">الشروط والأحكام</a>
-      <a class="header-link" onclick="openGenericModal('سياسة الشحن', 'shippingText')" id="navShipping">سياسة الشحن</a>
-      <a class="header-link" onclick="openGenericModal('سياسة الاستبدال والاسترجاع', 'returnText')" id="navReturns">الاستبدال والاسترجاع</a>
-    </div>
-
-    <div class="header-actions">
-      <button class="lang-btn-top" onclick="toggleLanguage()" id="langBtn">🌐 English</button>
-      <button class="cart-btn-top" onclick="toggleCartDrawer()">🛒 <span id="cartBtnText">السلة</span> (<span id="cartCount">0</span>)</button>
     </div>
   </header>
 
@@ -394,7 +380,7 @@
       <div class="cat-item" onclick="filterCategory('مرايا ليد', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="مرايا ليد">مرايا ليد</span></div>
       <div class="cat-item" onclick="filterCategory('خلاطات مياه', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="خلاطات مياه">خلاطات مياه</span></div>
       <div class="cat-item" onclick="filterCategory('إكسسوارات', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="إكسسوارات">إكسسوارات</span></div>
-      <div class="cat-item" onclick="filterCategory('أحواض ستانلس', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="أحواض ستانلس">أحواض ستانلس</span></div>
+      <div class="cat-item" onclick="filterCategory('أحواض ستانلس', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="أحواض ستانلس">أحواض ستانلس</span></div>
     </div>
   </div>
 
@@ -420,6 +406,11 @@
       </div>
       <div class="side-menu-item" onclick="filterCategory('جديد', null); toggleSideMenu();" id="menuNew">✨ وصل حديثاً</div>
       <div class="side-menu-item" onclick="filterCategory('الأكثر مبيعا', null); toggleSideMenu();" id="menuBest">⭐ الأكثر مبيعاً</div>
+      <div class="side-menu-item" onclick="openGenericModal('من نحن؟', 'aboutText'); toggleSideMenu();" id="menuAbout">ℹ️ من نحن؟</div>
+      <div class="side-menu-item" onclick="openGenericModal('لماذا ستورا ستور؟', 'whyText'); toggleSideMenu();" id="menuWhy">⭐ لماذا ستورا ستور؟</div>
+      <div class="side-menu-item" onclick="openGenericModal('الشروط والأحكام', 'termsText'); toggleSideMenu();" id="menuTerms">📄 الشروط والأحكام</div>
+      <div class="side-menu-item" onclick="openGenericModal('سياسة الشحن', 'shippingText'); toggleSideMenu();" id="menuShipping">🚚 سياسة الشحن</div>
+      <div class="side-menu-item" onclick="openGenericModal('سياسة الاستبدال والاسترجاع', 'returnText'); toggleSideMenu();" id="menuReturns">📦 الاستبدال والاسترجاع</div>
       <div class="side-menu-item" onclick="filterCategory('offers', null); toggleSideMenu();" id="menuOffers" style="background: #fef2f2; color: #dc2626; border-top: 2px solid var(--border);">
         🔥 عروضنا (الخصومات)
       </div>
@@ -558,7 +549,7 @@
         brandTitle: "ستورا ستور",
         topBar: "🚚 شحن وتوصيل فوري لحد باب البيت لكافة المحافظات - ضمان حقيقي مدى الحياة",
         announcement: "🔥 عروض حصرية لفترة محدودة - إمكانية التقسيط المريح وخيارات الدفع الآمنة متاحة الآن!",
-        brandSub: "STORA STORE • BATHROOM LUXURY",
+        brandSub: "STORA STORE",
         searchPlaceholder: "ابحث عن الموديل أو الكود (ID)...",
         navAbout: "من نحن؟",
         navWhy: "لماذا ستورا ستور؟",
@@ -566,7 +557,7 @@
         navShipping: "سياسة الشحن",
         navReturns: "الاستبدال والاسترجاع",
         cartBtn: "السلة",
-        langBtn: "🌐 English",
+        langBtn: "🌐 En",
         bannerTitle: "تجربة الفخامة المطلقة",
         bannerSubtitle: "✨ اكتشف تشكيلتنا المختارة بعناية من أحدث تجهيزات الحمامات والمطابخ العصرية الفاخرة ✨",
         bannerBtn: "تسوق الآن",
@@ -603,7 +594,7 @@
         brandTitle: "Stora Store",
         topBar: "🚚 Immediate shipping and door-to-door delivery to all governorates - Real lifetime warranty",
         announcement: "🔥 Exclusive offers for a limited time - Easy installments and secure payment options available now!",
-        brandSub: "STORA STORE • BATHROOM LUXURY",
+        brandSub: "STORA STORE",
         searchPlaceholder: "Search model or code (ID)...",
         navAbout: "About Us",
         navWhy: "Why Stora Store?",
@@ -699,11 +690,6 @@
       document.getElementById('announcementText').innerText = t.announcement;
       document.getElementById('brandSub').innerText = t.brandSub;
       document.getElementById('searchInput').placeholder = t.searchPlaceholder;
-      document.getElementById('navAbout').innerText = t.navAbout;
-      document.getElementById('navWhy').innerText = t.navWhy;
-      document.getElementById('navTerms').innerText = t.navTerms;
-      document.getElementById('navShipping').innerText = t.navShipping;
-      document.getElementById('navReturns').innerText = t.navReturns;
       document.getElementById('cartBtnText').innerText = t.cartBtn;
       document.getElementById('langBtn').innerText = t.langBtn;
       document.getElementById('bannerTitle').innerText = t.bannerTitle;
@@ -716,6 +702,11 @@
       document.getElementById('menuNew').innerText = t.menuNew;
       document.getElementById('menuBest').innerText = t.menuBest;
       document.getElementById('menuOffers').innerText = t.menuOffers;
+      document.getElementById('menuAbout').innerText = "ℹ️ " + t.navAbout;
+      document.getElementById('menuWhy').innerText = "⭐ " + t.navWhy;
+      document.getElementById('menuTerms').innerText = "📄 " + t.navTerms;
+      document.getElementById('menuShipping').innerText = "🚚 " + t.navShipping;
+      document.getElementById('menuReturns').innerText = "📦 " + t.navReturns;
 
       document.getElementById('cartHeaderTitle').innerText = t.cartHeaderTitle;
       document.getElementById('cartEmptyText').innerText = t.cartEmptyText;
@@ -847,8 +838,7 @@
         `;
 
         let displayTitle = currentLang === 'en' ? (p.titleEn || p.title) : (p.titleAr || p.title);
-        let featureBoxContent = (p.category === 'وحدات حمام' || (p.sizes && p.sizes.length > 1)) ? (currentLang === 'ar' ? `حوض ديكور مفرد فوق الرخام` : `Single Countertop Basin`) : (currentLang === 'ar' ? (p.specsAr || p.specs || '') : (p.specsEn || p.specs || ''));
-        if(featureBoxContent.length > 35) featureBoxContent = featureBoxContent.substring(0, 35) + '...';
+        let detailsBtnText = currentLang === 'ar' ? 'عرض التفاصيل والشراء' : 'View Details & Buy';
 
         grid.innerHTML += `
           <div class="card">
@@ -858,10 +848,9 @@
             <div class="card-body">
               <h3 class="product-title">${displayTitle}</h3>
               <div class="product-id">ID: ${p.id}</div>
-              <div class="card-feature-box">${featureBoxContent}</div>
               <div class="card-price-row">
                 ${priceHtml}
-                <button class="details-btn" onclick='openProductModal("${p.id}")'>${currentLang === 'ar' ? 'عرض التفاصيل<br>والشراء' : 'View Details<br>& Buy'}</button>
+                <button class="details-btn" onclick='openProductModal("${p.id}")'>${detailsBtnText}</button>
               </div>
             </div>
           </div>
@@ -969,8 +958,7 @@
         `;
 
         let displayTitle = currentLang === 'en' ? (p.titleEn || p.title) : (p.titleAr || p.title);
-        let featureBoxContent = (p.category === 'وحدات حمام' || (p.sizes && p.sizes.length > 1)) ? (currentLang === 'ar' ? `حوض ديكور مفرد فوق الرخام` : `Single Countertop Basin`) : (currentLang === 'ar' ? (p.specsAr || p.specs || '') : (p.specsEn || p.specs || ''));
-        if(featureBoxContent.length > 35) featureBoxContent = featureBoxContent.substring(0, 35) + '...';
+        let detailsBtnText = currentLang === 'ar' ? 'عرض التفاصيل والشراء' : 'View Details & Buy';
 
         grid.innerHTML += `
           <div class="card">
@@ -980,10 +968,9 @@
             <div class="card-body">
               <h3 class="product-title">${displayTitle}</h3>
               <div class="product-id">ID: ${p.id}</div>
-              <div class="card-feature-box">${featureBoxContent}</div>
               <div class="card-price-row">
                 ${priceHtml}
-                <button class="details-btn" onclick='openProductModal("${p.id}")'>${currentLang === 'ar' ? 'عرض التفاصيل<br>والشراء' : 'View Details<br>& Buy'}</button>
+                <button class="details-btn" onclick='openProductModal("${p.id}")'>${detailsBtnText}</button>
               </div>
             </div>
           </div>
@@ -1015,6 +1002,16 @@
     let selectedQty = 1;
     let currentModalProduct = null;
 
+    function formatSpecsToList(specsText) {
+      if (!specsText) return currentLang === 'ar' ? '<ul><li>خامات عالية المتانة، مقاومة تامة للمياه والرطوبة.</li></ul>' : '<ul><li>High durability materials, fully resistant to water and moisture.</li></ul>';
+      let lines = specsText.split('\n').map(l => l.trim()).filter(l => l);
+      if (lines.length === 0) return '';
+      let listHtml = '<ul>';
+      lines.forEach(line => { listHtml += `<li>${line}</li>`; });
+      listHtml += '</ul>';
+      return listHtml;
+    }
+
     function openProductModal(id) {
       const p = allProducts.find(item => item.id === id);
       if (!p) return;
@@ -1037,33 +1034,34 @@
       const container = document.getElementById('modalContainer');
 
       let displayTitle = currentLang === 'en' ? (p.titleEn || p.title) : (p.titleAr || p.title);
-      let displaySpecs = currentLang === 'ar' ? (p.specsAr || p.specs || 'خامات عالية المتانة، مقاومة تامة للمياه والرطوبة.') : (p.specsEn || p.specs || 'High durability materials, fully resistant to water and moisture.');
+      let rawSpecs = currentLang === 'ar' ? (p.specsAr || p.specs || 'خامات عالية المتانة، مقاومة تامة للمياه والرطوبة.') : (p.specsEn || p.specs || 'High durability materials, fully resistant to water and moisture.');
+      let displaySpecs = formatSpecsToList(rawSpecs);
 
       container.innerHTML = `
-        <button onclick="closeProductModal()" style="position:absolute; top:15px; left:15px; background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+        <button onclick="closeProductModal()" style="position:absolute; top:12px; left:12px; background:none; border:none; font-size:1.4rem; cursor:pointer;">&times;</button>
         <div class="modal-img-col">
           <img src="${selectedSizeObj.image || p.image}" class="modal-main-img" id="modalMainImg" alt="">
           <div class="sub-imgs-row"><img src="${p.image}" class="sub-thumb" onclick="document.getElementById('modalMainImg').src='${p.image}'" alt="">${subImgsHtml}</div>
         </div>
         <div class="modal-info-col">
-          <h2 style="font-size:1.1rem; font-weight:900; color:var(--primary);">${displayTitle}</h2>
-          <div style="display:flex; align-items:center; gap:10px;">
-            ${p.discount ? `<span style="font-size:1rem; font-weight:800; color:#dc2626; text-decoration:line-through;">${formatPrice(basePrice)}</span>` : ''}
-            <span style="font-size:1.3rem; font-weight:900; color:#059669;"><span id="modalPrice">${formatPrice(finalPrice)}</span></span>
+          <h2 style="font-size:1.05rem; font-weight:900; color:var(--primary);">${displayTitle}</h2>
+          <div style="display:flex; align-items:center; gap:8px;">
+            ${p.discount ? `<span style="font-size:0.9rem; font-weight:800; color:#dc2626; text-decoration:line-through;">${formatPrice(basePrice)}</span>` : ''}
+            <span style="font-size:1.2rem; font-weight:900; color:#059669;"><span id="modalPrice">${formatPrice(finalPrice)}</span></span>
           </div>
-          <p style="font-size:0.75rem; color:#dc2626; background:#fef2f2; padding:6px; border-radius:6px; font-weight:800;">${currentLang === 'ar' ? `⚠️ متبقي ${randomStock} قطع فقط - سارع بالحجز!` : `⚠️ Only ${randomStock} pieces left - Hurry up!`}</p>
-          <div style="font-size:0.85rem; font-weight:800; margin-top:5px;">${currentLang === 'ar' ? 'المواصفات الفنية الخاصة:' : 'Technical Specifications:'}</div>
-          <p style="font-size:0.80rem; color:var(--text-muted); line-height:1.4;">${displaySpecs}</p>
-          ${sizes.length > 1 ? `<div style="margin-top:8px;"><p style="font-size:0.85rem; font-weight:800; margin-bottom:5px;">${currentLang === 'ar' ? 'اختر المقاس المطلوب:' : 'Select Required Size:'}</p><div style="display:flex; gap:8px; flex-wrap:wrap;">${sizesHtml}</div></div>` : ''}
-          <div style="display:flex; align-items:center; gap:12px; margin-top:10px;">
-            <span style="font-size:0.85rem; font-weight:800;">${currentLang === 'ar' ? 'الكمية المطلوبة:' : 'Quantity:'}</span>
-            <div style="display:flex; align-items:center; border:1px solid var(--border); border-radius:8px; overflow:hidden;">
-              <button onclick="changeQty(-1)" style="padding:6px 12px; background:#f1f5f9; border:none; cursor:pointer; font-weight:900;">-</button>
-              <span id="qtyDisplay" style="padding:6px 15px; font-weight:900;">1</span>
-              <button onclick="changeQty(1)" style="padding:6px 12px; background:#f1f5f9; border:none; cursor:pointer; font-weight:900;">+</button>
+          <p style="font-size:0.72rem; color:#dc2626; background:#fef2f2; padding:5px; border-radius:6px; font-weight:800;">${currentLang === 'ar' ? `⚠️ متبقي ${randomStock} قطع فقط - سارع بالحجز!` : `⚠️ Only ${randomStock} pieces left - Hurry up!`}</p>
+          <div style="font-size:0.82rem; font-weight:800; margin-top:4px;">${currentLang === 'ar' ? 'المواصفات الفنية الخاصة:' : 'Technical Specifications:'}</div>
+          <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.4; text-align: right;" dir="${currentLang==='ar'?'rtl':'ltr'}">${displaySpecs}</div>
+          ${sizes.length > 1 ? `<div style="margin-top:6px;"><p style="font-size:0.82rem; font-weight:800; margin-bottom:4px;">${currentLang === 'ar' ? 'اختر المقاس المطلوب:' : 'Select Required Size:'}</p><div style="display:flex; gap:6px; flex-wrap:wrap;">${sizesHtml}</div></div>` : ''}
+          <div style="display:flex; align-items:center; gap:10px; margin-top:8px;">
+            <span style="font-size:0.82rem; font-weight:800;">${currentLang === 'ar' ? 'الكمية المطلوبة:' : 'Quantity:'}</span>
+            <div style="display:flex; align-items:center; border:1px solid var(--border); border-radius:6px; overflow:hidden;">
+              <button onclick="changeQty(-1)" style="padding:5px 10px; background:#f1f5f9; border:none; cursor:pointer; font-weight:900;">-</button>
+              <span id="qtyDisplay" style="padding:5px 12px; font-weight:900;">1</span>
+              <button onclick="changeQty(1)" style="padding:5px 10px; background:#f1f5f9; border:none; cursor:pointer; font-weight:900;">+</button>
             </div>
           </div>
-          <button onclick="addCurrentToCart(${p.discount || 0})" style="background:var(--primary); color:#fff; border:none; padding:12px; border-radius:10px; font-weight:900; margin-top:10px; cursor:pointer;">🛒 ${currentLang === 'ar' ? 'أضف للسلة' : 'Add to Cart'}</button>
+          <button onclick="addCurrentToCart(${p.discount || 0})" style="background:var(--primary); color:#fff; border:none; padding:10px; border-radius:8px; font-weight:900; margin-top:8px; cursor:pointer;">🛒 ${currentLang === 'ar' ? 'أضف للسلة' : 'Add to Cart'}</button>
         </div>
       `;
       modal.style.display = 'flex';
@@ -1123,7 +1121,7 @@
       if (!list) return;
       list.innerHTML = "";
       if (cart.length === 0) {
-        list.innerHTML = `<p style="text-align:center; color:var(--text-muted); padding:30px;">${translations[currentLang].cartEmptyText}</p>`;
+        list.innerHTML = `<p style="text-align:center; color:var(--text-muted); padding:25px;">${translations[currentLang].cartEmptyText}</p>`;
         if (countSpan) countSpan.innerText = 0;
         if (totalSpan) totalSpan.innerText = formatPrice(0);
         return;
@@ -1136,10 +1134,10 @@
           <div class="cart-item">
             <img src="${item.image}" alt="">
             <div style="flex:1;">
-              <h4 style="font-size:0.82rem; font-weight:800; color:var(--primary);">${item.title}</h4>
-              <p style="font-size:0.75rem; color:var(--text-muted);">${currentLang === 'ar' ? 'الكمية' : 'Qty'}: ${item.qty} × ${formatPrice(item.price)}</p>
+              <h4 style="font-size:0.8rem; font-weight:800; color:var(--primary);">${item.title}</h4>
+              <p style="font-size:0.72rem; color:var(--text-muted);">${currentLang === 'ar' ? 'الكمية' : 'Qty'}: ${item.qty} × ${formatPrice(item.price)}</p>
             </div>
-            <button onclick="removeFromCart('${item.cartItemId}')" style="background:none; border:none; color:#ef4444; font-weight:900; cursor:pointer;">&times;</button>
+            <button onclick="removeFromCart('${item.cartItemId}')" style="background:none; border:none; color:#ef4444; font-weight:900; cursor:pointer; font-size:1rem;">&times;</button>
           </div>
         `;
       });
