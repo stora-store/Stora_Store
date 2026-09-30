@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" id="htmlRoot">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ستورا ستور | Stora Store</title>
+  <title id="pageTitle">ستورا ستور | Stora Store</title>
   
-  <!-- منع التحديد المزعج وسلاسة اللمس (Native Feel) -->
   <style>
     * {
       -webkit-tap-highlight-color: transparent;
-      -webkit-touch-callout: none;
-      user-select: none;
       box-sizing: border-box;
     }
 
@@ -20,13 +17,14 @@
       background-color: #f9fafb;
       color: #111;
       overflow-x: hidden;
+      transition: direction 0.3s ease;
     }
 
-    /* الشريط العلوي المنظم والفاخر */
+    /* الشريط العلوي */
     .top-bar {
       background: #111;
       color: #fff;
-      padding: 8px 15px;
+      padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -35,39 +33,31 @@
       gap: 10px;
     }
 
-    .top-bar-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .top-bar-left {
+    .top-bar-controls {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    /* تنسيق أداة العملات والترجمة لمنع التداخل */
-    .currency-select, .goog-te-combo {
-      background-color: #222 !important;
-      color: #fff !important;
-      border: 1px solid #c5a059 !important;
-      padding: 4px 8px;
+    /* أزرار التحكم اليدوية للغة والعملة (تصميم فاخر وثابت) */
+    .custom-select-btn {
+      background: #222;
+      color: #fff;
+      border: 1px solid #c5a059;
+      padding: 5px 12px;
       border-radius: 6px;
       font-size: 12px;
-      outline: none;
       cursor: pointer;
+      font-family: 'Cairo', sans-serif;
+      transition: all 0.3s;
     }
 
-    /* إخفاء شريط جوجل المزعج أعلى الصفحة */
-    body > .skiptranslate, .goog-te-banner-frame {
-      display: none !important;
-    }
-    body {
-      top: 0px !important;
+    .custom-select-btn:hover {
+      background: #c5a059;
+      color: #111;
     }
 
-    /* شريط التنقل الرئيسي */
+    /* شريط المتجر الرئيسي */
     .main-header {
       background: #fff;
       box-shadow: 0 2px 10px rgba(0,0,0,0.05);
@@ -121,7 +111,7 @@
       font-size: 0.9rem;
     }
 
-    /* قسم الترحيب الرئيسي */
+    /* قسم الـ Hero الواجهة */
     .hero-section {
       background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('hero-bg.jpg') center/cover;
       height: 350px;
@@ -146,46 +136,37 @@
       opacity: 0.9;
     }
 
-    /* التجاوب مع اللغات (LTR / RTL) تلقائياً */
-    [dir="ltr"] .main-header {
+    /* التجاوب الديناميكي لترتيب الهيدر حسب الاتجاه */
+    html[dir="ltr"] .main-header {
       flex-direction: row-reverse;
-    }
-    [dir="ltr"] .nav-links {
-      direction: ltr;
     }
   </style>
 </head>
 <body>
 
-  <!-- الشريط العلوي للإعلانات، العملات، والترجمة -->
+  <!-- الشريط العلوي للإعلانات وأزرار التحكم -->
   <div class="top-bar">
-    <div class="top-bar-right">
-      <span>🚚 شحن وتوصيل فوري لجميع المحافظات - ضمان حقيقي مدى الحياة</span>
-    </div>
-    <div class="top-bar-left">
-      <!-- اختيار العملة -->
-      <select class="currency-select" id="currencySelect">
-        <option value="EGP">ج.م (EGP)</option>
-        <option value="USD">$ (USD)</option>
-      </select>
-
-      <!-- زر ترجمة جوجل -->
-      <div id="google_translate_element"></div>
+    <div id="announcementText">🚚 شحن وتوصيل فوري لجميع المحافظات - ضمان حقيقي مدى الحياة</div>
+    <div class="top-bar-controls">
+      <!-- زر تبديل العملة -->
+      <button class="custom-select-btn" id="currencyBtn" onclick="toggleCurrency()">EGP (ج.م)</button>
+      <!-- زر تبديل اللغة -->
+      <button class="custom-select-btn" id="langBtn" onclick="toggleLanguage()">English</button>
     </div>
   </div>
 
   <!-- شريط المتجر الرئيسي -->
   <header class="main-header">
     <button class="cart-btn" onclick="openCart()">
-      🛒 السلة (<span id="cartCount">0</span>)
+      🛒 <span id="cartText">السلة</span> (<span id="cartCount">0</span>)
     </button>
 
-    <ul class="nav-links">
-      <li><a href="#">الرئيسية</a></li>
-      <li><a href="#">من نحن؟</a></li>
-      <li><a href="#">لماذا ستورا ستور؟</a></li>
-      <li><a href="#">الشروط والأحكام</a></li>
-      <li><a href="#">سياسة الشحن</a></li>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#" class="nav-home">الرئيسية</a></li>
+      <li><a href="#" class="nav-about">من نحن؟</a></li>
+      <li><a href="#" class="nav-why">لماذا ستورا ستور؟</a></li>
+      <li><a href="#" class="nav-terms">الشروط والأحكام</a></li>
+      <li><a href="#" class="nav-shipping">سياسة الشحن</a></li>
     </ul>
 
     <div class="logo-area">
@@ -196,50 +177,88 @@
 
   <!-- قسم الـ Hero الواجهة -->
   <section class="hero-section">
-    <h1>أهلاً بك في ستورا ستور</h1>
-    <p>وجهتك الأولى لأحدث وأرقى وحدات الحمام والتجهيزات العصرية بجودة عالمية.</p>
+    <h1 id="heroTitle">أهلاً بك في ستورا ستور</h1>
+    <p id="heroDesc">وجهتك الأولى لأحدث وأرقى وحدات الحمام والتجهيزات العصرية بجودة عالمية.</p>
   </section>
 
-  <!-- سكربت إدارة الاتجاهات (RTL / LTR) والترجمة -->
-  <script type="text/javascript">
-    // دالة تهيئة ترجمة جوجل
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'ar',
-        includedLanguages: 'ar,en',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-      }, 'google_translate_element');
-    }
-  </script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
+  <!-- سكربت التحكم باللغة والاتجاه والعملات بشكل يدوي نظيف وثابت -->
   <script>
-    // تغيير اتجاه الصفحة بناءً على اللغة المختارة
-    function checkLanguageDirection() {
-      const selectCombo = document.querySelector('.goog-te-combo');
-      if (selectCombo) {
-        selectCombo.addEventListener('change', (e) => {
-          const lang = e.target.value;
-          const htmlTag = document.documentElement;
-          if (lang === 'en') {
-            htmlTag.setAttribute('dir', 'ltr');
-            htmlTag.setAttribute('lang', 'en');
-          } else {
-            htmlTag.setAttribute('dir', 'rtl');
-            htmlTag.setAttribute('lang', 'ar');
-          }
-        });
+    let currentLang = 'ar';
+    let currentCurrency = 'EGP';
+
+    const translations = {
+      ar: {
+        pageTitle: "ستورا ستور | Stora Store",
+        announcement: "🚚 شحن وتوصيل فوري لجميع المحافظات - ضمان حقيقي مدى الحياة",
+        cart: "السلة",
+        home: "الرئيسية",
+        about: "من نحن؟",
+        why: "لماذا ستورا ستور؟",
+        terms: "الشروط والأحكام",
+        shipping: "سياسة الشحن",
+        heroTitle: "أهلاً بك في ستورا ستور",
+        heroDesc: "وجهتك الأولى لأحدث وأرقى وحدات الحمام والتجهيزات العصرية بجودة عالمية.",
+        langBtnText: "English"
+      },
+      en: {
+        pageTitle: "Stora Store",
+        announcement: "🚚 Fast shipping to all governorates - Lifetime real warranty",
+        cart: "Cart",
+        home: "Home",
+        about: "About Us",
+        why: "Why Stora Store?",
+        terms: "Terms & Conditions",
+        shipping: "Shipping Policy",
+        heroTitle: "Welcome to Stora Store",
+        heroDesc: "Your premier destination for the latest and finest modern bathroom units with world-class quality.",
+        langBtnText: "العربية"
       }
+    };
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'ar' ? 'en' : 'ar';
+      const root = document.getElementById('htmlRoot');
+      
+      if (currentLang === 'en') {
+        root.setAttribute('dir', 'ltr');
+        root.setAttribute('lang', 'en');
+      } else {
+        root.setAttribute('dir', 'rtl');
+        root.setAttribute('lang', 'ar');
+      }
+
+      updateTexts();
     }
 
-    // مراقبة تحميل أداة الترجمة لتطبيق خاصية الاتجاه
-    const observer = new MutationObserver(() => {
-      checkLanguageDirection();
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
+    function updateTexts() {
+      const t = translations[currentLang];
+      document.getElementById('pageTitle').innerText = t.pageTitle;
+      document.getElementById('announcementText').innerText = t.announcement;
+      document.getElementById('cartText').innerText = t.cart;
+      document.getElementById('heroTitle').innerText = t.heroTitle;
+      document.getElementById('heroDesc').innerText = t.heroDesc;
+      document.getElementById('langBtn').innerText = t.langBtnText;
+
+      document.querySelector('.nav-home').innerText = t.home;
+      document.querySelector('.nav-about').innerText = t.about;
+      document.querySelector('.nav-why').innerText = t.why;
+      document.querySelector('.nav-terms').innerText = t.terms;
+      document.querySelector('.nav-shipping').innerText = t.shipping;
+    }
+
+    function toggleCurrency() {
+      currentCurrency = currentCurrency === 'EGP' ? 'USD' : 'EGP';
+      const btn = document.getElementById('currencyBtn');
+      if (currentCurrency === 'USD') {
+        btn.innerText = "USD ($)";
+      } else {
+        btn.innerText = "EGP (ج.م)";
+      }
+      // يمكنك هنا إضافة دالة تحديث أسعار المنتجات في المتجر بناءً على العملة
+    }
 
     function openCart() {
-      alert("سلة التسوق تعمل بكفاءة!");
+      alert(currentLang === 'ar' ? "سلة التسوق تعمل بكفاءة!" : "Shopping cart is working efficiently!");
     }
   </script>
 
