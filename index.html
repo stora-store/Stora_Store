@@ -82,26 +82,26 @@
     .cart-btn-top, .lang-btn-top { background: var(--primary); color: #fff; border: none; padding: 5px 10px; border-radius: 15px; font-weight: 800; font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; gap: 4px; }
     .lang-btn-top { background: var(--gold); color: #111827; }
 
-    .hero-banner-wrap { width: 100%; margin: 0 auto 15px; padding: 0; }
+    .hero-banner-wrap { width: 100%; margin: 0 auto 20px; padding: 0; }
     .banner-card {
       border-radius: 0; overflow: hidden; box-shadow: var(--shadow); background: #0b0f19;
-      position: relative; height: 420px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; padding: 20px; border-bottom: 2px solid rgba(197, 155, 39, 0.5); width: 100%;
+      position: relative; height: 500px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 30px; border-bottom: 3px solid rgba(197, 155, 39, 0.6); width: 100%;
     }
-    .banner-card video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.95) contrast(1.05); }
+    .banner-card video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9) contrast(1.05); }
     .banner-card::before {
-      content: ""; position: absolute; inset: 0; background: radial-gradient(circle, rgba(11,15,25,0.7) 0%, rgba(11,15,25,0.4) 100%); z-index: 1;
+      content: ""; position: absolute; inset: 0; background: radial-gradient(circle, rgba(11,15,25,0.6) 0%, rgba(11,15,25,0.85) 100%); z-index: 1;
     }
-    .banner-content { position: relative; z-index: 2; color: #fff; display: flex; flex-direction: column; align-items: center; gap: 10px; max-width: 950px; width: 100%; }
+    .banner-content { position: relative; z-index: 2; color: #fff; display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: 1100px; width: 100%; }
     
     .banner-logo-img {
-      width: 85px; height: 85px; object-fit: contain; filter: drop-shadow(0 6px 15px rgba(0,0,0,0.9));
+      width: 95px; height: 95px; object-fit: contain; filter: drop-shadow(0 6px 15px rgba(0,0,0,0.9));
       margin-bottom: 2px; animation: fadeInLogo 1.2s ease-in-out;
     }
     @keyframes fadeInLogo { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
 
     .banner-title-luxury {
-      font-size: 1.8rem; font-weight: 900; color: #fef9ed; text-shadow: 0 3px 12px rgba(0,0,0,0.95);
+      font-size: 2.1rem; font-weight: 900; color: #fef9ed; text-shadow: 0 4px 15px rgba(0,0,0,0.95);
       letter-spacing: 0.5px; margin-bottom: 2px;
     }
     
@@ -109,8 +109,8 @@
       min-height: 75px; display: flex; flex-direction: column; gap: 8px; align-items: center; justify-content: center; width: 100%;
     }
     .banner-fade-text {
-      font-size: 0.92rem; font-weight: 800; color: #ffffff; text-shadow: 0 2px 8px rgba(0,0,0,0.95);
-      letter-spacing: 0.4px; line-height: 1.4; background: rgba(0, 0, 0, 0.45); padding: 5px 15px; border-radius: 8px; width: fit-content;
+      font-size: 1rem; font-weight: 800; color: #ffffff; text-shadow: 0 2px 8px rgba(0,0,0,0.95);
+      letter-spacing: 0.4px; line-height: 1.4; background: rgba(0, 0, 0, 0.5); padding: 8px 20px; border-radius: 10px; width: fit-content;
       animation: fadeInOut 5s infinite;
     }
     @keyframes fadeInOut {
@@ -122,8 +122,8 @@
 
     .banner-shop-btn {
       background: linear-gradient(135deg, #c59b27 0%, #9e791b 100%); color: #111827; border: none;
-      padding: 10px 28px; border-radius: 20px; font-weight: 900; font-size: 0.88rem; cursor: pointer;
-      box-shadow: 0 6px 20px rgba(197, 155, 39, 0.5); transition: transform 0.2s; margin-top: 5px; text-decoration: none; display: inline-block;
+      padding: 12px 32px; border-radius: 25px; font-weight: 900; font-size: 0.95rem; cursor: pointer;
+      box-shadow: 0 6px 20px rgba(197, 155, 39, 0.5); transition: transform 0.2s; margin-top: 8px; text-decoration: none; display: inline-block;
     }
     .banner-shop-btn:hover { transform: scale(1.05); }
 
@@ -152,7 +152,6 @@
     .cat-name { font-size: 0.7rem; font-weight: 800; color: var(--text); text-align: center; white-space: nowrap; }
     .cat-item.active .cat-name { color: var(--primary); font-weight: 900; }
 
-    /* تنسيق الفلاتر الفرعية */
     .sub-cat-btn {
       background: #f1f5f9; border: none; padding: 6px 14px; border-radius: 8px;
       font-weight: 800; font-size: 0.78rem; cursor: pointer; color: var(--text-muted); transition: all 0.2s; white-space: nowrap;
@@ -385,29 +384,29 @@
 
   <div class="categories-bar-wrapper">
     <div class="categories-bar" id="categoriesBarContainer">
-      <div class="cat-item active" onclick="filterCategory('all', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="all">الكل</span></div>
-      <div class="cat-item" onclick="filterCategory('الأكثر مبيعا', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="الأكثر مبيعا">الأكثر مبيعاً ⭐</span></div>
-      <div class="cat-item" onclick="filterCategory('جديد', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="جديد">وصل حديثاً ✨</span></div>
-      <div class="cat-item" onclick="filterCategory('وحدات حمام', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="وحدات حمام">وحدات الحمام</span></div>
-      <div class="cat-item" onclick="filterCategory('أحواض ديكور', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="أحواض ديكور">أحواض ديكور</span></div>
-      <div class="cat-item" onclick="filterCategory('أحواض بورسلين', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="أحواض بورسلين">أحواض بورسلين</span></div>
-      <div class="cat-item" onclick="filterCategory('كبائن شاور', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="كبائن شاور">كبائن شاور</span></div>
-      <div class="cat-item" onclick="filterCategory('قواعد تواليت', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="قواعد تواليت">قواعد تواليت</span></div>
-      <div class="cat-item" onclick="filterCategory('مرايا ليد', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="مرايا ليد">مرايا ليد</span></div>
-      <div class="cat-item" onclick="filterCategory('خلاطات مياه', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="خلاطات مياه">خلاطات مياه</span></div>
-      <div class="cat-item" onclick="filterCategory('إكسسوارات', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="إكسسوارات">إكسسوارات</span></div>
-      <div class="cat-item" onclick="filterCategory('أحواض ستانلس', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="أحواض ستانلس">أحواض ستانلس</span></div>
+      <div class="cat-item active" onclick="filterCategory('all', this)"><div class="cat-circle"><img id="catImg_all" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="all">الكل</span></div>
+      <div class="cat-item" onclick="filterCategory('الأكثر مبيعا', this)"><div class="cat-circle"><img id="catImg_best" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="الأكثر مبيعا">الأكثر مبيعاً ⭐</span></div>
+      <div class="cat-item" onclick="filterCategory('جديد', this)"><div class="cat-circle"><img id="catImg_new" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="جديد">وصل حديثاً ✨</span></div>
+      <div class="cat-item" onclick="filterCategory('وحدات حمام', this)"><div class="cat-circle"><img id="catImg_وحدات حمام" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="وحدات حمام">وحدات الحمام</span></div>
+      <div class="cat-item" onclick="filterCategory('أحواض ديكور', this)"><div class="cat-circle"><img id="catImg_أحواض ديكور" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="أحواض ديكور">أحواض ديكور</span></div>
+      <div class="cat-item" onclick="filterCategory('أحواض بورسلين', this)"><div class="cat-circle"><img id="catImg_أحواض بورسلين" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="أحواض بورسلين">أحواض بورسلين</span></div>
+      <div class="cat-item" onclick="filterCategory('كبائن شاور', this)"><div class="cat-circle"><img id="catImg_كبائن شاور" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="كبائن شاور">كبائن شاور</span></div>
+      <div class="cat-item" onclick="filterCategory('قواعد تواليت', this)"><div class="cat-circle"><img id="catImg_قواعد تواليت" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="قواعد تواليت">قواعد تواليت</span></div>
+      <div class="cat-item" onclick="filterCategory('مرايا ليد', this)"><div class="cat-circle"><img id="catImg_مرايا ليد" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="مرايا ليد">مرايا ليد</span></div>
+      <div class="cat-item" onclick="filterCategory('خلاطات مياه', this)"><div class="cat-circle"><img id="catImg_خلاطات مياه" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="خلاطات مياه">خلاطات مياه</span></div>
+      <div class="cat-item" onclick="filterCategory('إكسسوارات', this)"><div class="cat-circle"><img id="catImg_إكسسوارات" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="إكسسوارات">إكسسوارات</span></div>
+      <div class="cat-item" onclick="filterCategory('أحواض ستانلس', this)"><div class="cat-circle"><img id="catImg_أحواض ستانلس" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="أحواض ستانلس">أحواض ستانلس</span></div>
     </div>
   </div>
 
-  <!-- شريط الفلاتر الفرعية (يظهر عند اختيار وحدات الحمام) -->
+  <!-- شريط الفلاتر الفرعية مع ترجمة الكلمات -->
   <div id="subCategoryBarWrapper" style="display: none; max-width: 1400px; margin: 10px auto; padding: 0 15px; justify-content: center;">
     <div style="display: flex; gap: 8px; overflow-x: auto; padding: 6px; background: #fff; border-radius: 10px; border: 1px solid var(--border);">
-      <button class="sub-cat-btn active" onclick="filterSubCategory('all', this)">الكل</button>
-      <button class="sub-cat-btn" onclick="filterSubCategory('خشبي', this)">🪵 خشبي</button>
-      <button class="sub-cat-btn" onclick="filterSubCategory('رخامي', this)">🏛️ رخامي</button>
-      <button class="sub-cat-btn" onclick="filterSubCategory('ألوان', this)">🎨 ألوان</button>
-      <button class="sub-cat-btn" onclick="filterSubCategory('مستورد', this)">✨ مستورد</button>
+      <button class="sub-cat-btn active" onclick="filterSubCategory('all', this)" id="subAllBtn">الكل</button>
+      <button class="sub-cat-btn" onclick="filterSubCategory('خشبي', this)" id="subWoodBtn">🪵 خشبي</button>
+      <button class="sub-cat-btn" onclick="filterSubCategory('رخامي', this)" id="subMarbleBtn">🏛️ رخامي</button>
+      <button class="sub-cat-btn" onclick="filterSubCategory('ألوان', this)" id="subColorsBtn">🎨 ألوان</button>
+      <button class="sub-cat-btn" onclick="filterSubCategory('مستورد', this)" id="subImportedBtn">✨ مستورد</button>
     </div>
   </div>
 
@@ -433,7 +432,7 @@
       </div>
       <div class="side-menu-item" onclick="filterCategory('جديد', null); toggleSideMenu();" id="menuNew">✨ وصل حديثاً</div>
       <div class="side-menu-item" onclick="filterCategory('الأكثر مبيعا', null); toggleSideMenu();" id="menuBest">⭐ الأكثر مبيعاً</div>
-      <div class="side-menu-item" onclick="openGenericModal('من نحن؟', 'aboutText'); toggleSideMenu();" id="menuAbout">ℹ️ من نحن؟</div>
+      <div class="side-menu-item" onclick="openGenericModal('من نحن؟', 'aboutText'); toggleSideMenu();" id="menuAbout">ℹ️️ من نحن؟</div>
       <div class="side-menu-item" onclick="openGenericModal('لماذا ستورا ستور؟', 'whyText'); toggleSideMenu();" id="menuWhy">⭐ لماذا ستورا ستور؟</div>
       <div class="side-menu-item" onclick="openGenericModal('الشروط والأحكام', 'termsText'); toggleSideMenu();" id="menuTerms">📄 الشروط والأحكام</div>
       <div class="side-menu-item" onclick="openGenericModal('سياسة الشحن', 'shippingText'); toggleSideMenu();" id="menuShipping">🚚 سياسة الشحن</div>
@@ -615,7 +614,12 @@
         branch1: "📍 القاهرة",
         branch2: "📍 الإسكندرية",
         branch3: "📍 المنصورة",
-        footerCopy: "ستورا ستور™ 2026 — جميع الحقوق محفوظة"
+        footerCopy: "ستورا ستور™ 2026 — جميع الحقوق محفوظة",
+        subAll: "الكل",
+        subWood: "🪵 خشبي",
+        subMarble: "🏛️ رخامي",
+        subColors: "🎨 ألوان",
+        subImported: "✨ مستورد"
       },
       en: {
         pageTitle: "Stora Store",
@@ -660,7 +664,12 @@
         branch1: "📍 Cairo",
         branch2: "📍 Alexandria",
         branch3: "📍 Mansoura",
-        footerCopy: "Stora Store™ 2026 — All Rights Reserved"
+        footerCopy: "Stora Store™ 2026 — All Rights Reserved",
+        subAll: "All",
+        subWood: "🪵 Wooden",
+        subMarble: "🏛️ Marble",
+        subColors: "🎨 Colors",
+        subImported: "✨ Imported"
       }
     };
 
@@ -724,6 +733,12 @@
       document.getElementById('bannerSubtitle').innerText = t.bannerSubtitle;
       document.getElementById('bannerBtn').innerText = t.bannerBtn;
       
+      document.getElementById('subAllBtn').innerText = t.subAll;
+      document.getElementById('subWoodBtn').innerText = t.subWood;
+      document.getElementById('subMarbleBtn').innerText = t.subMarble;
+      document.getElementById('subColorsBtn').innerText = t.subColors;
+      document.getElementById('subImportedBtn').innerText = t.subImported;
+
       document.getElementById('menuHeaderTitle').innerText = t.menuHeaderTitle;
       document.getElementById('menuHome').innerText = t.menuHome;
       document.getElementById('menuCats').innerText = t.menuCats;
@@ -850,7 +865,7 @@
         else sTitle.innerText = categoryNamesMap[cat] ? categoryNamesMap[cat][currentLang] : cat;
       }
       renderProducts();
-      window.scrollTo({ top: 400, behavior: 'smooth' });
+      window.scrollTo({ top: 450, behavior: 'smooth' });
     }
 
     function filterSubCategory(subCat, btn) {
@@ -972,8 +987,39 @@
     db.collection("stora_store_products").onSnapshot((snapshot) => {
       allProducts = [];
       snapshot.forEach((doc) => { allProducts.push(doc.data()); });
+      updateCategoryThumbnails();
       renderProducts();
     });
+
+    function updateCategoryThumbnails() {
+      const categories = [
+        'وحدات حمام', 'أحواض ديكور', 'أحواض بورسلين', 'كبائن شاور', 
+        'قواعد تواليت', 'مرايا ليد', 'خلاطات مياه', 'إكسسوارات', 'أحواض ستانلس'
+      ];
+
+      categories.forEach(cat => {
+        const found = allProducts.find(p => p.category === cat && p.image);
+        const imgEl = document.getElementById(`catImg_${cat}`);
+        if (imgEl && found) {
+          imgEl.src = found.image;
+        }
+      });
+
+      if (allProducts.length > 0 && allProducts[0].image) {
+        const imgAll = document.getElementById('catImg_all');
+        if(imgAll) imgAll.src = allProducts[0].image;
+      }
+      const best = allProducts.find(p => p.badge === 'الأكثر مبيعا' && p.image);
+      if(best) {
+        const imgBest = document.getElementById('catImg_best');
+        if(imgBest) imgBest.src = best.image;
+      }
+      const newest = allProducts.find(p => p.badge === 'جديد' && p.image);
+      if(newest) {
+        const imgNew = document.getElementById('catImg_new');
+        if(imgNew) imgNew.src = newest.image;
+      }
+    }
 
     function renderProducts() {
       const grid = document.getElementById('productsGrid');
