@@ -23,7 +23,15 @@
       --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
-    body { background-color: var(--bg); color: var(--text); padding-bottom: 90px; }
+    
+    /* منع التمدد الأفقي وثبات التنسيق تماماً على الجوال */
+    html, body {
+      background-color: var(--bg);
+      color: var(--text);
+      padding-bottom: 90px;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
 
     [dir="ltr"] body { text-align: left; }
     [dir="rtl"] body { text-align: right; }
@@ -31,6 +39,7 @@
     .red-announcement-bar {
       background: #dc2626; color: #fff; font-size: 0.85rem; font-weight: 900;
       padding: 7px 15px; text-align: center; overflow: hidden; white-space: nowrap; box-shadow: inset 0 2px 5px rgba(0,0,0,0.15);
+      width: 100%;
     }
     .red-announcement-bar span {
       display: inline-block; animation: marquee 16s linear infinite;
@@ -47,7 +56,7 @@
 
     header {
       background: #ffffff; box-shadow: 0 2px 15px rgba(0,0,0,0.04); position: sticky; top: 0; z-index: 100;
-      display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; gap: 15px;
+      display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; gap: 15px; width: 100%;
     }
     .menu-toggle-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--primary); }
     .logo-box { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
@@ -75,13 +84,13 @@
     .banner-card {
       border-radius: 0; overflow: hidden; box-shadow: var(--shadow); background: #0b0f19;
       position: relative; height: 520px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; padding: 35px; border-bottom: 2px solid rgba(197, 155, 39, 0.5);
+      text-align: center; padding: 35px; border-bottom: 2px solid rgba(197, 155, 39, 0.5); width: 100%;
     }
     .banner-card video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.95) contrast(1.05); }
     .banner-card::before {
       content: ""; position: absolute; inset: 0; background: radial-gradient(circle, rgba(11,15,25,0.7) 0%, rgba(11,15,25,0.4) 100%); z-index: 1;
     }
-    .banner-content { position: relative; z-index: 2; color: #fff; display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 950px; }
+    .banner-content { position: relative; z-index: 2; color: #fff; display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 950px; width: 100%; }
     
     .banner-logo-img {
       width: 110px; height: 110px; object-fit: contain; filter: drop-shadow(0 6px 15px rgba(0,0,0,0.9));
@@ -118,7 +127,7 @@
 
     .categories-bar-wrapper {
       max-width: 1400px; margin: 15px auto; padding: 0 20px;
-      display: flex; justify-content: center;
+      display: flex; justify-content: center; width: 100%;
     }
     .categories-bar {
       background: #ffffff; border: 2px solid var(--gold); border-radius: 16px;
@@ -206,13 +215,13 @@
     .size-btn { border: 2px solid var(--border); background: #fff; padding: 6px 14px; border-radius: 8px; font-weight: 800; font-size: 0.8rem; cursor: pointer; }
     .size-btn.active { border-color: var(--primary); background: var(--primary); color: #fff; }
 
-    .catalog-container { max-width: 1400px; margin: 25px auto; padding: 0 20px; }
+    .catalog-container { max-width: 1400px; margin: 25px auto; padding: 0 20px; width: 100%; }
     .section-title-wrap { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
     [dir="rtl"] .section-title-wrap { border-right: 4px solid var(--gold); padding-right: 12px; }
     [dir="ltr"] .section-title-wrap { border-left: 4px solid var(--gold); padding-left: 12px; }
     
     .section-title { font-size: 1.35rem; font-weight: 900; color: var(--primary); }
-    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; width: 100%; }
 
     .card {
       background: var(--card-bg); border-radius: 16px; border: 1.5px solid var(--border);
@@ -292,11 +301,11 @@
     .bottom-nav-item:hover, .bottom-nav-item.active { color: var(--gold-dark); }
     .bottom-nav-icon { font-size: 1.2rem; }
 
-    footer { background: #0b0f19; color: #94a3b8; padding: 40px 20px 80px; margin-top: 60px; border-top: 3px solid var(--gold); font-family: 'Cairo', sans-serif; }
+    footer { background: #0b0f19; color: #94a3b8; padding: 40px 20px 80px; margin-top: 60px; border-top: 3px solid var(--gold); font-family: 'Cairo', sans-serif; width: 100%; }
     [dir="rtl"] footer { direction: rtl; text-align: right; }
     [dir="ltr"] footer { direction: ltr; text-align: left; }
 
-    .footer-container { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 30px; }
+    .footer-container { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 30px; width: 100%; }
     @media (max-width: 768px) { .footer-container { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 480px) { .footer-container { grid-template-columns: 1fr; } }
     
@@ -503,21 +512,13 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h3 id="footerCol2">فروعنا</h3>
-        <ul class="footer-links">
-          <li><a href="#" id="branch1" target="_blank">📍 القاهرة</a></li>
-          <li><a href="#" id="branch2" target="_blank">📍 الإسكندرية</a></li>
-          <li><a href="#" id="branch3" target="_blank">📍 المنصورة</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
         <h3 id="footerCol3">خدمة العملاء</h3>
         <ul class="footer-links">
           <li><a onclick="openGenericModal('من نحن؟', 'aboutText')" id="fServ1">من نحن؟</a></li>
           <li><a onclick="openGenericModal('لماذا ستورا ستور؟', 'whyText')" id="fServ2">لماذا ستورا ستور؟</a></li>
           <li><a onclick="openGenericModal('الشروط والأحكام', 'termsText')" id="fServ3">الشروط والأحكام</a></li>
           <li><a onclick="openGenericModal('سياسة الشحن', 'shippingText')" id="fServ4">سياسة الشحن</a></li>
-          <li><a onclick="openGenericLink" id="fServ5">الاستبدال والاسترجاع</a></li>
+          <li><a onclick="openGenericModal('سياسة الاستبدال والاسترجاع', 'returnText')" id="fServ5">الاستبدال والاسترجاع</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -883,11 +884,6 @@
         }
 
         if (data.announcementAr || data.announcementEn) {
-          if (!storeTexts.announcement) storeTexts.announcement = {};
-          storeTexts.announcement = {
-            ar: data.announcementAr || data.announcement || '',
-            en: data.announcementEn || ''
-          };
           let currentAnnouncementText = currentLang === 'en' ? (data.announcementEn || data.announcementAr || '') : (data.announcementAr || data.announcement || '');
           translations[currentLang].announcement = currentAnnouncementText;
           document.getElementById('announcementText').innerText = currentAnnouncementText;
@@ -908,7 +904,7 @@
         if(document.getElementById('footerTtLi')) document.getElementById('footerTtLi').style.display = data.showTt !== false ? 'block' : 'none';
 
         if (data.aboutAr) storeTexts.aboutText.ar = data.aboutAr;
-        if (data.aboutEn) storeTexts.aboutEn = data.aboutEn;
+        if (data.aboutEn) storeTexts.aboutText.en = data.aboutEn;
         if (data.whyAr) storeTexts.whyText.ar = data.whyAr;
         if (data.whyEn) storeTexts.whyText.en = data.whyEn;
         if (data.termsAr) storeTexts.termsText.ar = data.termsAr;
