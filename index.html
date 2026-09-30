@@ -35,6 +35,12 @@
     [dir="ltr"] body { text-align: left; }
     [dir="rtl"] body { text-align: right; }
 
+    img {
+      -webkit-user-drag: none;
+      user-select: none;
+      pointer-events: auto;
+    }
+
     .red-announcement-bar {
       background: #dc2626; color: #fff; font-size: 0.78rem; font-weight: 900;
       padding: 6px 10px; text-align: center; overflow: hidden; white-space: nowrap; width: 100%;
@@ -146,6 +152,15 @@
     .cat-name { font-size: 0.7rem; font-weight: 800; color: var(--text); text-align: center; white-space: nowrap; }
     .cat-item.active .cat-name { color: var(--primary); font-weight: 900; }
 
+    /* تنسيق الفلاتر الفرعية */
+    .sub-cat-btn {
+      background: #f1f5f9; border: none; padding: 6px 14px; border-radius: 8px;
+      font-weight: 800; font-size: 0.78rem; cursor: pointer; color: var(--text-muted); transition: all 0.2s; white-space: nowrap;
+    }
+    .sub-cat-btn.active {
+      background: var(--gold); color: #111827; box-shadow: 0 2px 8px rgba(197, 155, 39, 0.4);
+    }
+
     .side-menu-drawer {
       position: fixed; top: 0; width: 100%; max-width: 280px; height: 100vh;
       background: white; box-shadow: -4px 0 25px rgba(0,0,0,0.18); z-index: 3000; display: flex; flex-direction: column; transition: all 0.3s;
@@ -229,6 +244,7 @@
       position: absolute; top: 15px; background: #dc2626; color: #fff;
       font-size: 0.68rem; font-weight: 900; padding: 4px 32px; z-index: 15;
       box-shadow: 0 2px 6px rgba(0,0,0,0.25); text-align: center; letter-spacing: 0.5px;
+      pointer-events: none;
     }
     [dir="rtl"] .badge-discount-ribbon { left: -30px; transform: rotate(-45deg); }
     [dir="ltr"] .badge-discount-ribbon { right: -30px; transform: rotate(45deg); }
@@ -237,18 +253,18 @@
       position: absolute; top: 10px; background: #2563eb; color: #fff;
       font-size: 0.68rem; font-weight: 800; padding: 3px 10px; border-radius: 20px; z-index: 15;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      pointer-events: none;
     }
     [dir="rtl"] .badge-status-pill { right: 10px; }
     [dir="ltr"] .badge-status-pill { left: 10px; }
     
-    .card-img-wrap { width: 100%; height: 190px; background: #f1f5f9; position: relative; overflow: hidden; }
+    .card-img-wrap { width: 100%; height: 190px; background: #f1f5f9; position: relative; overflow: hidden; cursor: pointer; }
     .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
     
     .card-body { padding: 12px; display: flex; flex-direction: column; flex-grow: 1; }
     .product-title { font-size: 0.92rem; font-weight: 900; color: var(--primary); margin-bottom: 4px; font-family: 'Cairo', sans-serif; line-height: 1.3; }
     .product-id { font-size: 0.72rem; color: #9e791b; font-weight: 800; margin-bottom: 8px; font-family: 'Cairo', sans-serif; }
 
-    /* صف السعر وزر التفاصيل الكبير والبارز بدون صندوق المواصفات الخارجي */
     .card-price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 10px; border-top: 1px solid var(--border); gap: 8px; }
     
     .price-group-vertical { display: flex; flex-direction: column; gap: 1px; }
@@ -317,7 +333,7 @@
     .footer-bottom { text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 10px; font-size: 0.75rem; color: #64748b; margin-bottom: 0; }
   </style>
 </head>
-<body id="htmlRoot">
+<body id="htmlRoot" oncontextmenu="return false;">
 
   <div class="red-announcement-bar" id="redAnnouncementBar">
     <span id="announcementText">🔥 عروض حصرية لفترة محدودة - إمكانية التقسيط المريح وخيارات الدفع الآمنة متاحة الآن!</span>
@@ -381,6 +397,17 @@
       <div class="cat-item" onclick="filterCategory('خلاطات مياه', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="خلاطات مياه">خلاطات مياه</span></div>
       <div class="cat-item" onclick="filterCategory('إكسسوارات', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="إكسسوارات">إكسسوارات</span></div>
       <div class="cat-item" onclick="filterCategory('أحواض ستانلس', this)"><div class="cat-circle"><img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="أحواض ستانلس">أحواض ستانلس</span></div>
+    </div>
+  </div>
+
+  <!-- شريط الفلاتر الفرعية (يظهر عند اختيار وحدات الحمام) -->
+  <div id="subCategoryBarWrapper" style="display: none; max-width: 1400px; margin: 10px auto; padding: 0 15px; justify-content: center;">
+    <div style="display: flex; gap: 8px; overflow-x: auto; padding: 6px; background: #fff; border-radius: 10px; border: 1px solid var(--border);">
+      <button class="sub-cat-btn active" onclick="filterSubCategory('all', this)">الكل</button>
+      <button class="sub-cat-btn" onclick="filterSubCategory('خشبي', this)">🪵 خشبي</button>
+      <button class="sub-cat-btn" onclick="filterSubCategory('رخامي', this)">🏛️ رخامي</button>
+      <button class="sub-cat-btn" onclick="filterSubCategory('ألوان', this)">🎨 ألوان</button>
+      <button class="sub-cat-btn" onclick="filterSubCategory('مستورد', this)">✨ مستورد</button>
     </div>
   </div>
 
@@ -540,6 +567,7 @@
 
     let allProducts = [];
     let currentFilter = 'all';
+    let currentSubFilter = 'all';
     let cart = [];
     let currentLang = 'ar';
 
@@ -796,6 +824,42 @@
       return `${Number(amount).toLocaleString()} ${currentLang === 'ar' ? 'ج.م' : 'EGP'}`;
     }
 
+    function filterCategory(cat, element) {
+      currentFilter = cat;
+      currentSubFilter = 'all';
+
+      const subBar = document.getElementById('subCategoryBarWrapper');
+      if (cat === 'وحدات حمام') {
+        subBar.style.display = 'flex';
+      } else {
+        subBar.style.display = 'none';
+      }
+
+      document.querySelectorAll('.cat-item').forEach(item => item.classList.remove('active'));
+      if (element) {
+        element.classList.add('active');
+      } else {
+        document.querySelectorAll('.cat-item').forEach(item => {
+          if (item.getAttribute('onclick') && item.getAttribute('onclick').includes(`'${cat}'`)) { item.classList.add('active'); }
+        });
+      }
+      const sTitle = document.getElementById('sectionTitle');
+      if (sTitle) {
+        if (cat === 'all') sTitle.innerText = translations[currentLang].sectionTitleAll;
+        else if (cat === 'offers') sTitle.innerText = translations[currentLang].sectionTitleOffers;
+        else sTitle.innerText = categoryNamesMap[cat] ? categoryNamesMap[cat][currentLang] : cat;
+      }
+      renderProducts();
+      window.scrollTo({ top: 400, behavior: 'smooth' });
+    }
+
+    function filterSubCategory(subCat, btn) {
+      currentSubFilter = subCat;
+      document.querySelectorAll('.sub-cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderProducts();
+    }
+
     function handleSearch(query) {
       const q = query.trim().toLowerCase();
       const grid = document.getElementById('productsGrid');
@@ -844,7 +908,7 @@
           <div class="card">
             ${discountRibbon}
             ${statusPill}
-            <div class="card-img-wrap"><img src="${p.image || 'https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png'}" alt=""></div>
+            <div class="card-img-wrap" onclick='openProductModal("${p.id}")'><img src="${p.image || 'https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png'}" alt=""></div>
             <div class="card-body">
               <h3 class="product-title">${displayTitle}</h3>
               <div class="product-id">ID: ${p.id}</div>
@@ -927,6 +991,10 @@
         filtered = allProducts.filter(p => p.category === currentFilter);
       }
 
+      if (currentFilter === 'وحدات حمام' && currentSubFilter !== 'all') {
+        filtered = filtered.filter(p => p.subCategory === currentSubFilter);
+      }
+
       if (filtered.length === 0) {
         grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); padding:30px;">${currentLang === 'ar' ? 'لا توجد منتجات مضافة في هذا القسم بعد.' : 'No products added in this category yet.'}</p>`;
         return;
@@ -964,7 +1032,7 @@
           <div class="card">
             ${discountRibbon}
             ${statusPill}
-            <div class="card-img-wrap"><img src="${p.image || 'https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png'}" alt=""></div>
+            <div class="card-img-wrap" onclick='openProductModal("${p.id}")'><img src="${p.image || 'https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png'}" alt=""></div>
             <div class="card-body">
               <h3 class="product-title">${displayTitle}</h3>
               <div class="product-id">ID: ${p.id}</div>
@@ -976,26 +1044,6 @@
           </div>
         `;
       });
-    }
-
-    function filterCategory(cat, element) {
-      currentFilter = cat;
-      document.querySelectorAll('.cat-item').forEach(item => item.classList.remove('active'));
-      if (element) {
-        element.classList.add('active');
-      } else {
-        document.querySelectorAll('.cat-item').forEach(item => {
-          if (item.getAttribute('onclick') && item.getAttribute('onclick').includes(`'${cat}'`)) { item.classList.add('active'); }
-        });
-      }
-      const sTitle = document.getElementById('sectionTitle');
-      if (sTitle) {
-        if (cat === 'all') sTitle.innerText = translations[currentLang].sectionTitleAll;
-        else if (cat === 'offers') sTitle.innerText = translations[currentLang].sectionTitleOffers;
-        else sTitle.innerText = categoryNamesMap[cat] ? categoryNamesMap[cat][currentLang] : cat;
-      }
-      renderProducts();
-      window.scrollTo({ top: 400, behavior: 'smooth' });
     }
 
     let selectedSizeObj = null;
