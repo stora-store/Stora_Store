@@ -24,7 +24,7 @@
       --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
-    body { background-color: var(--bg); color: var(--text); padding-bottom: 80px; }
+    body { background-color: var(--bg); color: var(--text); padding-bottom: 90px; }
 
     /* الشريط الإعلاني الأحمر المتحرك */
     .red-announcement-bar {
@@ -46,10 +46,6 @@
     }
 
     .store-controls { display: flex; gap: 10px; align-items: center; }
-    .store-select {
-      background: #1e293b; color: #fff; border: 1px solid var(--gold); padding: 4px 12px;
-      border-radius: 6px; font-size: 0.78rem; font-weight: 800; cursor: pointer; outline: none; font-family: 'Cairo';
-    }
 
     #google_translate_element { display: inline-block; }
     #google_translate_element select {
@@ -69,7 +65,9 @@
     .menu-toggle-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--primary); }
     .logo-box { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
     .logo-img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
-    .brand-title { font-size: 1.2rem; font-weight: 900; color: var(--primary); line-height: 1.1; }
+    
+    /* تمييز اسم المتجر باللون الذهبي المميز */
+    .brand-title { font-size: 1.2rem; font-weight: 900; color: var(--gold); line-height: 1.1; }
     
     .header-search-box { flex: 1; max-width: 350px; position: relative; }
     .header-search-box input {
@@ -278,7 +276,16 @@
       100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
     }
 
-    footer { background: #0b0f19; color: #94a3b8; padding: 40px 20px 20px; margin-top: 60px; border-top: 3px solid var(--gold); font-family: 'Cairo', sans-serif; }
+    /* الشريط السفلي الثابت والظاهر بوضوح */
+    .bottom-nav-bar {
+      position: fixed; bottom: 0; left: 0; width: 100%; background: #ffffff; border-top: 2px solid var(--gold);
+      display: flex; justify-content: space-around; align-items: center; padding: 8px 0; z-index: 2500; box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+    }
+    .bottom-nav-item { background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 0.75rem; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; transition: color 0.2s; }
+    .bottom-nav-item:hover, .bottom-nav-item.active { color: var(--gold-dark); }
+    .bottom-nav-icon { font-size: 1.2rem; }
+
+    footer { background: #0b0f19; color: #94a3b8; padding: 40px 20px 80px; margin-top: 60px; border-top: 3px solid var(--gold); font-family: 'Cairo', sans-serif; }
     .footer-container { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 30px; text-align: right; }
     @media (max-width: 768px) { .footer-container { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 480px) { .footer-container { grid-template-columns: 1fr; } }
@@ -293,12 +300,6 @@
     .social-icon-svg { width: 18px; height: 18px; fill: currentColor; vertical-align: middle; }
 
     .footer-bottom { text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px; font-size: 0.8rem; color: #64748b; }
-
-    .bottom-nav-bar {
-      position: fixed; bottom: 0; left: 0; width: 100%; background: #ffffff; border-top: 1px solid var(--border);
-      display: flex; justify-content: space-around; align-items: center; padding: 8px 0; z-index: 1500; box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-    }
-    .bottom-nav-item { background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 0.75rem; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 3px; }
   </style>
 </head>
 <body id="htmlRoot">
@@ -312,10 +313,6 @@
     <span>🚚 شحن وتوصيل فوري لحد باب البيت لكافة المحافظات - ضمان حقيقي مدى الحياة</span>
     <div class="store-controls">
       <div id="google_translate_element"></div>
-      <select id="currencySelect" class="store-select" onchange="changeCurrency(this.value)">
-        <option value="EGP">ج.م (EGP)</option>
-        <option value="USD">$ (USD)</option>
-      </select>
     </div>
   </div>
 
@@ -416,7 +413,7 @@
     <div class="cart-footer-box">
       <div style="display:flex; justify-content:space-between; margin-bottom:12px; font-weight:900; font-size:1.1rem;">
         <span>الإجمالي:</span>
-        <span><span id="cartTotal">0</span></span>
+        <span><span id="cartTotal">0 ج.م</span></span>
       </div>
       <button onclick="checkoutWhatsApp()" style="background:#25d366; color:#fff; border:none; padding:12px; width:100%; border-radius:8px; font-weight:900; cursor:pointer;">💬 إتمام الطلب عبر الواتساب</button>
     </div>
@@ -443,6 +440,26 @@
       <p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">جاري تحميل المنتجات...</p>
     </div>
   </main>
+
+  <!-- الشريط السفلي الثابت (Bottom Navigation Bar) -->
+  <nav class="bottom-nav-bar">
+    <button class="bottom-nav-item active" onclick="filterCategory('all', null)">
+      <span class="bottom-nav-icon">🏠</span>
+      <span>الرئيسية</span>
+    </button>
+    <button class="bottom-nav-item" onclick="scrollToCategories()">
+      <span class="bottom-nav-icon">📂</span>
+      <span>الأقسام</span>
+    </button>
+    <button class="bottom-nav-item" onclick="toggleCartDrawer()">
+      <span class="bottom-nav-icon">🛒</span>
+      <span>السلة</span>
+    </button>
+    <button class="bottom-nav-item" onclick="openGenericModal('من نحن؟', 'aboutText')">
+      <span class="bottom-nav-icon">⚙️</span>
+      <span>الضبط</span>
+    </button>
+  </nav>
 
   <a href="https://wa.me/201039727479" target="_blank" class="whatsapp-float" title="تواصل عبر الواتساب" id="whatsappFloatBtn">
     <div class="whatsapp-inner">
@@ -522,22 +539,9 @@
     let allProducts = [];
     let currentFilter = 'all';
     let cart = [];
-    let currentCurrency = 'EGP';
-    const usdRate = 50;
-
-    function changeCurrency(curr) {
-      currentCurrency = curr;
-      renderProducts();
-      updateCartUI();
-    }
 
     function formatPrice(amount) {
-      if (currentCurrency === 'USD') {
-        let converted = (amount / usdRate).toFixed(2);
-        return `$${converted}`;
-      } else {
-        return `${Number(amount).toLocaleString()} ج.م`;
-      }
+      return `${Number(amount).toLocaleString()} ج.م`;
     }
 
     let storeTexts = {
@@ -645,7 +649,6 @@
         if (wfBtn) wfBtn.href = `https://wa.me/${wa}`;
         if (fWaLink) fWaLink.href = `https://wa.me/${wa}`;
 
-        // التحكم الفوري بإظهار أو إخفاء الشريط الأحمر
         const redBar = document.getElementById('redAnnouncementBar');
         if (redBar) {
           redBar.style.display = data.showAnnouncement !== false ? 'block' : 'none';
