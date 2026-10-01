@@ -6,6 +6,9 @@
   <title id="pageTitle">ستورا ستور</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   
+  <!-- ربط ملف الـ Manifest لضمان عمل واكتشاف التطبيق لتثبيته -->
+  <link rel="manifest" href="manifest.json">
+  
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
@@ -43,7 +46,7 @@
 
     .red-announcement-bar {
       background: #dc2626; color: #fff; font-size: 0.78rem; font-weight: 900;
-      padding: 6px 10px; text-align: center; overflow: hidden; white-space: nowrap; width: 100%;
+      padding: 6px 10px; text-align: center; overflow: hidden; white-space: nowrap; width: 100%; display: none;
     }
     .red-announcement-bar span {
       display: inline-block; animation: marquee 16s linear infinite;
@@ -56,7 +59,15 @@
     .top-bar {
       background: #0b0f19; color: #cbd5e1; font-size: 0.75rem; padding: 6px 15px;
       text-align: center; border-bottom: 1px solid rgba(197, 155, 39, 0.3); font-weight: 700;
+      display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap;
     }
+
+    .install-app-btn {
+      background: var(--gold); color: #111827; border: none; padding: 3px 10px; border-radius: 12px;
+      font-weight: 900; font-size: 0.7rem; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;
+      box-shadow: 0 2px 8px rgba(197, 155, 39, 0.4); transition: transform 0.2s;
+    }
+    .install-app-btn:hover { transform: scale(1.05); }
 
     header {
       background: #ffffff; box-shadow: 0 2px 15px rgba(0,0,0,0.04); position: sticky; top: 0; z-index: 100;
@@ -257,8 +268,9 @@
     [dir="rtl"] .badge-status-pill { right: 10px; }
     [dir="ltr"] .badge-status-pill { left: 10px; }
     
-    .card-img-wrap { width: 100%; height: 190px; background: #f1f5f9; position: relative; overflow: hidden; cursor: pointer; }
-    .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .card-img-wrap { width: 100%; height: 190px; background: #f8fafc; position: relative; overflow: hidden; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 8px; }
+    .card-img-wrap img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s; }
+    .card-img-wrap:hover img { transform: scale(1.04); }
     
     .card-body { padding: 12px; display: flex; flex-direction: column; flex-grow: 1; }
     .product-title { font-size: 0.92rem; font-weight: 900; color: var(--primary); margin-bottom: 4px; font-family: 'Cairo', sans-serif; line-height: 1.3; }
@@ -335,11 +347,12 @@
 <body id="htmlRoot" oncontextmenu="return false;">
 
   <div class="red-announcement-bar" id="redAnnouncementBar">
-    <span id="announcementText">🔥 عروض حصرية لفترة محدودة - إمكانية التقسيط المريح وخيارات الدفع الآمنة متاحة الآن!</span>
+    <span id="announcementText"></span>
   </div>
 
   <div class="top-bar">
     <span id="topBarText">🚚 شحن وتوصيل فوري لحد باب البيت لكافة المحافظات - ضمان حقيقي مدى الحياة</span>
+    <button id="installAppBtn" class="install-app-btn" onclick="installDesktopApp()">💻 تثبيت التطبيق</button>
   </div>
 
   <header>
@@ -399,7 +412,6 @@
     </div>
   </div>
 
-  <!-- شريط الفلاتر الفرعية مع ترجمة الكلمات -->
   <div id="subCategoryBarWrapper" style="display: none; max-width: 1400px; margin: 10px auto; padding: 0 15px; justify-content: center;">
     <div style="display: flex; gap: 8px; overflow-x: auto; padding: 6px; background: #fff; border-radius: 10px; border: 1px solid var(--border);">
       <button class="sub-cat-btn active" onclick="filterSubCategory('all', this)" id="subAllBtn">الكل</button>
@@ -432,7 +444,7 @@
       </div>
       <div class="side-menu-item" onclick="filterCategory('جديد', null); toggleSideMenu();" id="menuNew">✨ وصل حديثاً</div>
       <div class="side-menu-item" onclick="filterCategory('الأكثر مبيعا', null); toggleSideMenu();" id="menuBest">⭐ الأكثر مبيعاً</div>
-      <div class="side-menu-item" onclick="openGenericModal('من نحن؟', 'aboutText'); toggleSideMenu();" id="menuAbout">ℹ️️ من نحن؟</div>
+      <div class="side-menu-item" onclick="openGenericModal('من نحن؟', 'aboutText'); toggleSideMenu();" id="menuAbout">ℹ من نحن؟</div>
       <div class="side-menu-item" onclick="openGenericModal('لماذا ستورا ستور؟', 'whyText'); toggleSideMenu();" id="menuWhy">⭐ لماذا ستورا ستور؟</div>
       <div class="side-menu-item" onclick="openGenericModal('الشروط والأحكام', 'termsText'); toggleSideMenu();" id="menuTerms">📄 الشروط والأحكام</div>
       <div class="side-menu-item" onclick="openGenericModal('سياسة الشحن', 'shippingText'); toggleSideMenu();" id="menuShipping">🚚 سياسة الشحن</div>
@@ -569,13 +581,35 @@
     let currentSubFilter = 'all';
     let cart = [];
     let currentLang = 'ar';
+    let globalSettings = {};
+
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const installBtn = document.getElementById('installAppBtn');
+      if (installBtn) installBtn.style.display = 'inline-flex';
+    });
+
+    function installDesktopApp() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            document.getElementById('installAppBtn').style.display = 'none';
+          }
+          deferredPrompt = null;
+        });
+      } else {
+        alert(currentLang === 'ar' ? 'التطبيقات مثبتة مسبقاً أو أن المتصفح لا يدعم التثبيت المباشر. يمكنك استخدام خيار "إضافة إلى الشاشة الرئيسية" من قائمة المتصفح.' : 'App already installed or browser does not support direct installation.');
+      }
+    }
 
     const translations = {
       ar: {
         pageTitle: "ستورا ستور",
         brandTitle: "ستورا ستور",
         topBar: "🚚 شحن وتوصيل فوري لحد باب البيت لكافة المحافظات - ضمان حقيقي مدى الحياة",
-        announcement: "🔥 عروض حصرية لفترة محدودة - إمكانية التقسيط المريح وخيارات الدفع الآمنة متاحة الآن!",
         brandSub: "STORA STORE",
         searchPlaceholder: "ابحث عن الموديل أو الكود (ID)...",
         navAbout: "من نحن؟",
@@ -619,13 +653,13 @@
         subWood: "🪵 خشبي",
         subMarble: "🏛️ رخامي",
         subColors: "🎨 ألوان",
-        subImported: "✨ مستورد"
+        subImported: "✨ مستورد",
+        installBtnText: "💻 تثبيت التطبيق"
       },
       en: {
         pageTitle: "Stora Store",
         brandTitle: "Stora Store",
         topBar: "🚚 Immediate shipping and door-to-door delivery to all governorates - Real lifetime warranty",
-        announcement: "🔥 Exclusive offers for a limited time - Easy installments and secure payment options available now!",
         brandSub: "STORA STORE",
         searchPlaceholder: "Search model or code (ID)...",
         navAbout: "About Us",
@@ -669,7 +703,8 @@
         subWood: "🪵 Wooden",
         subMarble: "🏛️ Marble",
         subColors: "🎨 Colors",
-        subImported: "✨ Imported"
+        subImported: "✨ Imported",
+        installBtnText: "💻 Install App"
       }
     };
 
@@ -724,7 +759,6 @@
       document.getElementById('pageTitle').innerText = t.pageTitle;
       document.getElementById('brandTitle').innerText = t.brandTitle;
       document.getElementById('topBarText').innerText = t.topBar;
-      document.getElementById('announcementText').innerText = t.announcement;
       document.getElementById('brandSub').innerText = t.brandSub;
       document.getElementById('searchInput').placeholder = t.searchPlaceholder;
       document.getElementById('cartBtnText').innerText = t.cartBtn;
@@ -732,6 +766,7 @@
       document.getElementById('bannerTitle').innerText = t.bannerTitle;
       document.getElementById('bannerSubtitle').innerText = t.bannerSubtitle;
       document.getElementById('bannerBtn').innerText = t.bannerBtn;
+      document.getElementById('installAppBtn').innerText = t.installBtnText;
       
       document.getElementById('subAllBtn').innerText = t.subAll;
       document.getElementById('subWoodBtn').innerText = t.subWood;
@@ -780,6 +815,9 @@
       document.getElementById('fShop3').innerText = t.sectionTitleAll;
       document.getElementById('footerCopy').innerText = t.footerCopy;
 
+      // تحديث نص الشريط الأحمر بناءً على اللغة المتاحة
+      updateAnnouncementBarText();
+
       document.querySelectorAll('.cat-name').forEach(span => {
         let catKey = span.getAttribute('data-cat');
         if (categoryNamesMap[catKey]) {
@@ -795,6 +833,20 @@
       }
 
       renderProducts();
+    }
+
+    function updateAnnouncementBarText() {
+      const redBar = document.getElementById('redAnnouncementBar');
+      const announcementSpan = document.getElementById('announcementText');
+      
+      let textToShow = currentLang === 'en' ? (globalSettings.announcementEn || globalSettings.announcementAr || '') : (globalSettings.announcementAr || '');
+      
+      if (globalSettings.showAnnouncement === true && textToShow.trim() !== '') {
+        announcementSpan.innerText = textToShow;
+        redBar.style.display = 'block';
+      } else {
+        redBar.style.display = 'none';
+      }
     }
 
     function toggleSideMenu() {
@@ -939,48 +991,39 @@
 
     db.collection("stora_store_settings").doc("general").onSnapshot((doc) => {
       if (doc.exists) {
-        const data = doc.data();
-        let wa = data.waNum || "201039727479";
+        globalSettings = doc.data();
+        let wa = globalSettings.waNum || "201039727479";
         const wfBtn = document.getElementById('whatsappFloatBtn');
         const fWaLink = document.getElementById('footerWaLink');
         if (wfBtn) wfBtn.href = `https://wa.me/${wa}`;
         if (fWaLink) fWaLink.href = `https://wa.me/${wa}`;
 
-        const redBar = document.getElementById('redAnnouncementBar');
-        if (redBar) {
-          redBar.style.display = data.showAnnouncement !== false ? 'block' : 'none';
-        }
+        updateAnnouncementBarText();
 
-        if (data.announcementAr || data.announcementEn) {
-          let currentAnnouncementText = currentLang === 'en' ? (data.announcementEn || data.announcementAr || '') : (data.announcementAr || data.announcement || '');
-          translations[currentLang].announcement = currentAnnouncementText;
-          document.getElementById('announcementText').innerText = currentAnnouncementText;
-        }
-
-        if (data.branch1) document.getElementById('branch1').href = data.branch1;
-        if (data.branch2) document.getElementById('branch2').href = data.branch2;
-        if (data.branch3) document.getElementById('branch3').href = data.branch3;
+        if (globalSettings.branch1) document.getElementById('branch1').href = globalSettings.branch1;
+        if (globalSettings.branch2) document.getElementById('branch2').href = globalSettings.branch2;
+        if (globalSettings.branch3) document.getElementById('branch3').href = globalSettings.branch3;
         
-        if (data.igLink) document.getElementById('footerIgLink').href = data.igLink;
-        if (data.fbLink) document.getElementById('footerFbLink').href = data.fbLink;
-        if (data.emailVal) { document.getElementById('footerEmailLink').href = `mailto:${data.emailVal}`; document.getElementById('footerEmailLink').innerText = data.emailVal; }
-        if (data.ttLink) document.getElementById('footerTtLink').href = data.ttLink;
+        if (globalSettings.igLink) document.getElementById('footerIgLink').href = globalSettings.igLink;
+        if (globalSettings.fbLink) document.getElementById('footerFbLink').href = globalSettings.fbLink;
+        if (globalSettings.emailVal) { document.getElementById('footerEmailLink').href = `mailto:${globalSettings.emailVal}`; document.getElementById('footerEmailLink').innerText = globalSettings.emailVal; }
+        if (globalSettings.ttLink) document.getElementById('footerTtLink').href = globalSettings.ttLink;
 
-        if(document.getElementById('footerIgLi')) document.getElementById('footerIgLi').style.display = data.showIg !== false ? 'block' : 'none';
-        if(document.getElementById('footerFbLi')) document.getElementById('footerFbLi').style.display = data.showFb !== false ? 'block' : 'none';
-        if(document.getElementById('footerEmailLi')) document.getElementById('footerEmailLi').style.display = data.showEmail !== false ? 'block' : 'none';
-        if(document.getElementById('footerTtLi')) document.getElementById('footerTtLi').style.display = data.showTt !== false ? 'block' : 'none';
+        if(document.getElementById('footerIgLi')) document.getElementById('footerIgLi').style.display = globalSettings.showIg !== false ? 'block' : 'none';
+        if(document.getElementById('footerFbLi')) document.getElementById('footerFbLi').style.display = globalSettings.showFb !== false ? 'block' : 'none';
+        if(document.getElementById('footerEmailLi')) document.getElementById('footerEmailLi').style.display = globalSettings.showEmail !== false ? 'block' : 'none';
+        if(document.getElementById('footerTtLi')) document.getElementById('footerTtLi').style.display = globalSettings.showTt !== false ? 'block' : 'none';
 
-        if (data.aboutAr) storeTexts.aboutText.ar = data.aboutAr;
-        if (data.aboutEn) storeTexts.aboutText.en = data.aboutEn;
-        if (data.whyAr) storeTexts.whyText.ar = data.whyAr;
-        if (data.whyEn) storeTexts.whyText.en = data.whyEn;
-        if (data.termsAr) storeTexts.termsText.ar = data.termsAr;
-        if (data.termsEn) storeTexts.termsText.en = data.termsEn;
-        if (data.shippingAr) storeTexts.shippingText.ar = data.shippingAr;
-        if (data.shippingEn) storeTexts.shippingText.en = data.shippingEn;
-        if (data.returnAr) storeTexts.returnText.ar = data.returnAr;
-        if (data.returnEn) storeTexts.returnText.en = data.returnEn;
+        if (globalSettings.aboutAr) storeTexts.aboutText.ar = globalSettings.aboutAr;
+        if (globalSettings.aboutEn) storeTexts.aboutText.en = globalSettings.aboutEn;
+        if (globalSettings.whyAr) storeTexts.whyText.ar = globalSettings.whyAr;
+        if (globalSettings.whyEn) storeTexts.whyText.en = globalSettings.whyEn;
+        if (globalSettings.termsAr) storeTexts.termsText.ar = globalSettings.termsAr;
+        if (globalSettings.termsEn) storeTexts.termsText.en = globalSettings.termsEn;
+        if (globalSettings.shippingAr) storeTexts.shippingText.ar = globalSettings.shippingAr;
+        if (globalSettings.shippingEn) storeTexts.shippingText.en = globalSettings.shippingEn;
+        if (globalSettings.returnAr) storeTexts.returnText.ar = globalSettings.returnAr;
+        if (globalSettings.returnEn) storeTexts.returnText.en = globalSettings.returnEn;
       }
     });
 
@@ -1244,7 +1287,7 @@
       let msg = currentLang === 'ar' ? "مرحباً ستورا ستور، أود إتمام الطلب التالي:\n\n" : "Hello Stora Store, I would like to complete the following order:\n\n";
       let total = 0;
       cart.forEach((item, index) => {
-        msg += `${index + 1}. ${item.title}\n${currentLang === 'ar' ? 'الكمية' : 'Qty'}: ${item.qty} | ${currentLang === 'ar' ? 'الإجمالي' : 'Total'}: ${formatPrice(item.price * item.qty)}\n-------------------\n`;
+        msg += `${index + 1}. اللقب: ${item.title}\n${currentLang === 'ar' ? 'الكمية' : 'Qty'}: ${item.qty} | ${currentLang === 'ar' ? 'الإجمالي' : 'Total'}: ${formatPrice(item.price * item.qty)}\n-------------------\n`;
         total += (item.price * item.qty);
       });
       msg += `\n${currentLang === 'ar' ? 'الإجمالي الكلي' : 'Grand Total'}: ${formatPrice(total)}\n${currentLang === 'ar' ? 'في انتظار تأكيد الطلب.' : 'Waiting for order confirmation.'}`;
