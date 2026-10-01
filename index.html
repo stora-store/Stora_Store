@@ -139,13 +139,12 @@
     }
     .banner-shop-btn:hover { transform: scale(1.05); }
 
-    /* حاوية الأقسام وتقسيمها لإطارين منفصلين */
+    /* حاوية الأقسام */
     .categories-bar-wrapper {
       max-width: 1400px; margin: 15px auto; padding: 0 15px;
       display: flex; justify-content: center; align-items: center; width: 100%; gap: 15px; flex-wrap: wrap;
     }
     
-    /* الإطار الخارجي المنفصل للأكثر مبيعا ووصل حديثا */
     .highlight-frame-group {
       background: linear-gradient(135deg, #fef9ed 0%, #fffdf5 100%);
       border: 2.5px solid var(--gold);
@@ -157,7 +156,41 @@
       box-shadow: 0 6px 20px rgba(197, 155, 39, 0.2);
     }
 
-    /* الإطار الخارجي المنفصل لباقي الأقسام */
+    /* إضافة مؤشر السهم المتحرك للفت الانتباه لوجود أقسام أخرى بالموبايل */
+    .scrollable-container-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      max-width: 100%;
+    }
+    .scrollable-container-wrapper::after {
+      content: "‹";
+      position: absolute;
+      left: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--gold);
+      color: #111827;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      animation: bounce-arrow 1.5s infinite;
+      pointer-events: none;
+      z-index: 10;
+    }
+    [dir="ltr"] .scrollable-container-wrapper::after { content: "›"; left: auto; right: 6px; }
+
+    @keyframes bounce-arrow {
+      0%, 100% { transform: translateY(-50%) translateX(0); }
+      50% { transform: translateY(-50%) translateX(-4px); }
+    }
+
     .normal-frame-group {
       background: #ffffff;
       border: 2px solid var(--border);
@@ -170,7 +203,9 @@
       align-items: center;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
       max-width: 100%;
+      padding-left: 35px; /* مساحة لكي لا يختفي عنصر تحت سهم التنبيه */
     }
+    [dir="ltr"] .normal-frame-group { padding-left: 12px; padding-right: 35px; }
     .normal-frame-group::-webkit-scrollbar { display: none; }
 
     .cat-item {
@@ -187,24 +222,42 @@
       display: flex; align-items: center; justify-content: center; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       transition: all 0.2s;
     }
-    .cat-item.active .cat-circle { border-color: var(--gold); box-shadow: 0 0 12px rgba(197, 155, 39, 0.6); background: var(--primary); }
-    .cat-item.active { border-color: var(--primary); background: rgba(17, 24, 39, 0.04); }
+    
+    /* جعل القسم المختار (Active) غامق ومميز بغض النظر أين كان (أكثر مبيعا أو جديد أو قسم عادي) */
+    .cat-item.active {
+      background: var(--primary) !important;
+      border-color: var(--primary) !important;
+      box-shadow: 0 4px 15px rgba(17, 24, 39, 0.3);
+    }
+    .cat-item.active .cat-circle {
+      border-color: var(--gold) !important;
+      background: var(--primary) !important;
+    }
+    .cat-item.active .cat-name {
+      color: #ffffff !important;
+      font-weight: 900 !important;
+    }
+
     .cat-circle img { width: 100%; height: 100%; object-fit: cover; }
     
     .cat-name { font-size: 0.72rem; font-weight: 900; color: var(--text); text-align: center; white-space: nowrap; }
-    .cat-item.active .cat-name { color: var(--primary); font-weight: 900; }
 
+    /* الإطار المخصص للأكثر مبيعا ووصل حديثا عندما يكونان غير مفعلين */
     .cat-item.highlight-cat {
       background: linear-gradient(135deg, rgba(197, 155, 39, 0.15) 0%, rgba(158, 121, 27, 0.25) 100%);
       border: 2px solid var(--gold);
       border-radius: 12px;
       padding: 6px 10px;
     }
+    .cat-item.highlight-cat.active {
+      background: var(--primary) !important;
+      border-color: var(--primary) !important;
+    }
     .cat-item.highlight-cat .cat-circle {
       border: 2px solid var(--gold);
       box-shadow: 0 0 10px rgba(197, 155, 39, 0.4);
     }
-    .cat-item.highlight-cat .cat-name {
+    .cat-item.highlight-cat:not(.active) .cat-name {
       color: var(--gold-dark);
       font-weight: 900;
       font-size: 0.75rem;
@@ -457,25 +510,25 @@
     </div>
   </section>
 
-  <!-- تقسيم الأقسام: إطار خارجي مستقل للأكثر مبيعا ووصل حديثا، وإطار منفصل لباقي الأقسام -->
+  <!-- تقسيم الأقسام مع سهم تنبيهي لوجود أقسام أخرى على الجوال -->
   <div class="categories-bar-wrapper">
-    <!-- الإطار الأول: الأكثر مبيعا ووصل حديثا -->
     <div class="highlight-frame-group">
       <div class="cat-item highlight-cat active" onclick="filterCategory('الأكثر مبيعا', this)"><div class="cat-circle"><img id="catImg_best" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="الأكثر مبيعا">الأكثر مبيعاً ⭐</span></div>
       <div class="cat-item highlight-cat" onclick="filterCategory('جديد', this)"><div class="cat-circle"><img id="catImg_new" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="جديد">وصل حديثاً ✨</span></div>
     </div>
 
-    <!-- الإطار الثاني: باقي الأقسام -->
-    <div class="normal-frame-group">
-      <div class="cat-item" onclick="filterCategory('وحدات حمام', this)"><div class="cat-circle"><img id="catImg_وحدات حمام" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="وحدات حمام">وحدات الحمام</span></div>
-      <div class="cat-item" onclick="filterCategory('أحواض ديكور', this)"><div class="cat-circle"><img id="catImg_أحواض ديكور" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="أحواض ديكور">أحواض ديكور</span></div>
-      <div class="cat-item" onclick="filterCategory('أحواض بورسلين', this)"><div class="cat-circle"><img id="catImg_أحواض بورسلين" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="أحواض بورسلين">أحواض بورسلين</span></div>
-      <div class="cat-item" onclick="filterCategory('كبائن شاور', this)"><div class="cat-circle"><img id="catImg_كبائن شاور" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="كبائن شاور">كبائن شاور</span></div>
-      <div class="cat-item" onclick="filterCategory('قواعد تواليت', this)"><div class="cat-circle"><img id="catImg_قواعد تواليت" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="قواعد تواليت">قواعد تواليت</span></div>
-      <div class="cat-item" onclick="filterCategory('مرايا ليد', this)"><div class="cat-circle"><img id="catImg_مرايا ليد" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="مرايا ليد">مرايا ليد</span></div>
-      <div class="cat-item" onclick="filterCategory('خلاطات مياه', this)"><div class="cat-circle"><img id="catImg_خلاطات مياه" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="خلاطات مياه">خلاطات مياه</span></div>
-      <div class="cat-item" onclick="filterCategory('إكسسوارات', this)"><div class="cat-circle"><img id="catImg_إكسسوارات" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="إكسسوارات">إكسسوارات</span></div>
-      <div class="cat-item" onclick="filterCategory('أحواض ستانلس', this)"><div class="cat-circle"><img id="catImg_أحواض ستانلس" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="أحواض ستانلس">أحواض ستانلس</span></div>
+    <div class="scrollable-container-wrapper">
+      <div class="normal-frame-group">
+        <div class="cat-item" onclick="filterCategory('وحدات حمام', this)"><div class="cat-circle"><img id="catImg_وحدات حمام" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="وحدات حمام">وحدات الحمام</span></div>
+        <div class="cat-item" onclick="filterCategory('أحواض ديكور', this)"><div class="cat-circle"><img id="catImg_أحواض ديكور" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="أحواض ديكور">أحواض ديكور</span></div>
+        <div class="cat-item" onclick="filterCategory('أحواض بورسلين', this)"><div class="cat-circle"><img id="catImg_أحواض بورسلين" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="أحواض بورسلين">أحواض بورسلين</span></div>
+        <div class="cat-item" onclick="filterCategory('كبائن شاور', this)"><div class="cat-circle"><img id="catImg_كبائن شاور" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="كبائن شاور">كبائن شاور</span></div>
+        <div class="cat-item" onclick="filterCategory('قواعد تواليت', this)"><div class="cat-circle"><img id="catImg_قواعد تواليت" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="قواعد تواليت">قواعد تواليت</span></div>
+        <div class="cat-item" onclick="filterCategory('مرايا ليد', this)"><div class="cat-circle"><img id="catImg_مرايا ليد" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="مرايا ليد">مرايا ليد</span></div>
+        <div class="cat-item" onclick="filterCategory('خلاطات مياه', this)"><div class="cat-circle"><img id="catImg_خلاطات مياه" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="خلاطات مياه">خلاطات مياه</span></div>
+        <div class="cat-item" onclick="filterCategory('إكسسوارات', this)"><div class="cat-circle"><img id="catImg_إكسسوارات" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="إكسسوارات">إكسسوارات</span></div>
+        <div class="cat-item" onclick="filterCategory('أحواض ستانلس', this)"><div class="cat-circle"><img id="catImg_أحواض ستانلس" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="أحواض ستانلس">أحواض ستانلس</span></div>
+      </div>
     </div>
   </div>
 
