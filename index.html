@@ -139,7 +139,6 @@
     }
     .banner-shop-btn:hover { transform: scale(1.05); }
 
-    /* حاوية الأقسام */
     .categories-bar-wrapper {
       max-width: 1400px; margin: 15px auto; padding: 0 15px;
       display: flex; justify-content: center; align-items: center; width: 100%; gap: 15px; flex-wrap: wrap;
@@ -156,7 +155,6 @@
       box-shadow: 0 6px 20px rgba(197, 155, 39, 0.2);
     }
 
-    /* إضافة مؤشر السهم المتحرك للفت الانتباه لوجود أقسام أخرى بالموبايل */
     .scrollable-container-wrapper {
       position: relative;
       display: flex;
@@ -203,7 +201,7 @@
       align-items: center;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
       max-width: 100%;
-      padding-left: 35px; /* مساحة لكي لا يختفي عنصر تحت سهم التنبيه */
+      padding-left: 35px;
     }
     [dir="ltr"] .normal-frame-group { padding-left: 12px; padding-right: 35px; }
     .normal-frame-group::-webkit-scrollbar { display: none; }
@@ -223,7 +221,6 @@
       transition: all 0.2s;
     }
     
-    /* جعل القسم المختار (Active) غامق ومميز بغض النظر أين كان (أكثر مبيعا أو جديد أو قسم عادي) */
     .cat-item.active {
       background: var(--primary) !important;
       border-color: var(--primary) !important;
@@ -239,10 +236,8 @@
     }
 
     .cat-circle img { width: 100%; height: 100%; object-fit: cover; }
-    
     .cat-name { font-size: 0.72rem; font-weight: 900; color: var(--text); text-align: center; white-space: nowrap; }
 
-    /* الإطار المخصص للأكثر مبيعا ووصل حديثا عندما يكونان غير مفعلين */
     .cat-item.highlight-cat {
       background: linear-gradient(135deg, rgba(197, 155, 39, 0.15) 0%, rgba(158, 121, 27, 0.25) 100%);
       border: 2px solid var(--gold);
@@ -326,10 +321,12 @@
 
     .product-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 4000; display: none; align-items: center; justify-content: center; padding: 12px; }
     .product-modal-content { background: #fff; width: 100%; max-width: 750px; border-radius: 14px; padding: 20px; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; flex-wrap: wrap; gap: 15px; position: relative; }
+    
+    /* ضبط نسب عرض الصور بدون تكبير مبالغ فيه (object-fit: contain مع تقليل الزوم) */
     .modal-img-col { flex: 1; min-width: 240px; display: flex; flex-direction: column; gap: 8px; }
-    .modal-main-img { width: 100%; height: 230px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); }
+    .modal-main-img { width: 100%; height: 230px; object-fit: contain; border-radius: 8px; border: 1px solid var(--border); background: #f8fafc; padding: 5px; }
     .sub-imgs-row { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
-    .sub-thumb { width: 45px; height: 45px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); cursor: pointer; }
+    .sub-thumb { width: 45px; height: 45px; object-fit: contain; border-radius: 6px; border: 1px solid var(--border); cursor: pointer; background: #f8fafc; padding: 2px; }
     .sub-thumb:hover { border-color: var(--gold); }
     
     .modal-info-col { flex: 1.2; min-width: 250px; display: flex; flex-direction: column; gap: 8px; }
@@ -368,9 +365,10 @@
     [dir="rtl"] .badge-status-pill { right: 10px; }
     [dir="ltr"] .badge-status-pill { left: 10px; }
     
-    .card-img-wrap { width: 100%; height: 190px; background: #f8fafc; position: relative; overflow: hidden; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 8px; }
+    /* ضبط حاوية الصورة الرئيسية في الكارت لتكون مريحة وبدون زوم مبالغ فيه */
+    .card-img-wrap { width: 100%; height: 190px; background: #f8fafc; position: relative; overflow: hidden; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 10px; }
     .card-img-wrap img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s; }
-    .card-img-wrap:hover img { transform: scale(1.04); }
+    .card-img-wrap:hover img { transform: scale(1.02); }
     
     .card-body { padding: 12px; display: flex; flex-direction: column; flex-grow: 1; }
     .product-title { font-size: 0.92rem; font-weight: 900; color: var(--primary); margin-bottom: 4px; font-family: 'Cairo', sans-serif; line-height: 1.3; }
@@ -510,7 +508,6 @@
     </div>
   </section>
 
-  <!-- تقسيم الأقسام مع سهم تنبيهي لوجود أقسام أخرى على الجوال -->
   <div class="categories-bar-wrapper">
     <div class="highlight-frame-group">
       <div class="cat-item highlight-cat active" onclick="filterCategory('الأكثر مبيعا', this)"><div class="cat-circle"><img id="catImg_best" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="الأكثر مبيعا">الأكثر مبيعاً ⭐</span></div>
@@ -552,7 +549,7 @@
       <div class="side-menu-item" onclick="goHome(event)" id="menuHome">🏠 الرئيسية</div>
       <div class="side-menu-item" onclick="toggleSubMenu(event)"><span id="menuCats">📂 الأقسام</span> <span>▼</span></div>
       <div class="sub-menu-dropdown" id="subMenuDropdown">
-        <div class="sub-menu-item" onclick="selectSubMenu('وحدات حمام')">🗄️ وحدات الحمام</div>
+        <div class="sub-menu-item" onclick="selectSubMenu('وحدات حمام')">🗄️️ وحدات الحمام</div>
         <div class="sub-menu-item" onclick="selectSubMenu('أحواض ديكور')">✨ أحواض ديكور</div>
         <div class="sub-menu-item" onclick="selectSubMenu('أحواض بورسلين')">🍽 أحواض بورسلين</div>
         <div class="sub-menu-item" onclick="selectSubMenu('كبائن شاور')">🚿 كبائن شاور</div>
@@ -568,6 +565,7 @@
       <div class="side-menu-item" onclick="openGenericModal('لماذا ستورا ستور؟', 'whyText'); toggleSideMenu();" id="menuWhy">⭐ لماذا ستورا ستور؟</div>
       <div class="side-menu-item" onclick="openGenericModal('الشروط والأحكام', 'termsText'); toggleSideMenu();" id="menuTerms">📄 الشروط والأحكام</div>
       <div class="side-menu-item" onclick="openGenericModal('سياسة الشحن', 'shippingText'); toggleSideMenu();" id="menuShipping">🚚 سياسة الشحن</div>
+      <div class="side-menu-item" onclick="openGenericModal('سياسة الدفع وطرقه', 'paymentText'); toggleSideMenu();" id="menuPayment" style="background: var(--gold-light); color: var(--gold-dark); font-weight: 900;">💳 سياسة الدفع (كاش، انستاباي، محافظ)</div>
       <div class="side-menu-item" onclick="openGenericModal('سياسة الاستبدال والاسترجاع', 'returnText'); toggleSideMenu();" id="menuReturns">📦 الاستبدال والاسترجاع</div>
       <div class="side-menu-item" onclick="filterCategory('offers', null); toggleSideMenu();" id="menuOffers" style="background: #fef2f2; color: #dc2626; border-top: 2px solid var(--border);">
         🔥 عروضنا (الخصومات)
@@ -585,6 +583,7 @@
       <p style="text-align:center; color:var(--text-muted); padding:30px;" id="cartEmptyText">عربة التسوق فارغة حالياً.</p>
     </div>
     <div class="cart-footer-box">
+      <div style="font-size:0.75rem; font-weight:800; color:var(--text-muted); margin-bottom:6px;" id="paymentMethodsLabel">طرق الدفع المتاحة: كاش 💵، انستاباي 📱، محافظ إلكترونية 💳</div>
       <div style="display:flex; justify-content:space-between; margin-bottom:12px; font-weight:900; font-size:1.1rem;">
         <span id="cartTotalLabel">الإجمالي:</span>
         <span><span id="cartTotal">0 ج.م</span></span>
@@ -668,7 +667,8 @@
           <li><a onclick="openGenericModal('لماذا ستورا ستور؟', 'whyText')" id="fServ2">لماذا ستورا ستور؟</a></li>
           <li><a onclick="openGenericModal('الشروط والأحكام', 'termsText')" id="fServ3">الشروط والأحكام</a></li>
           <li><a onclick="openGenericModal('سياسة الشحن', 'shippingText')" id="fServ4">سياسة الشحن</a></li>
-          <li><a onclick="openGenericModal('سياسة الاستبدال والاسترجاع', 'returnText')" id="fServ5">الاستبدال والاسترجاع</a></li>
+          <li><a onclick="openGenericModal('سياسة الدفع وطرقه', 'paymentText')" id="fServPayment">سياسة وطرق الدفع</a></li>
+          <li><a onclick="openGenericModal('سياسة الاستبدال والاسترجاع', 'returnText')" id="fServ5">سياسة الاستبدال والاسترجاع</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -743,6 +743,7 @@
         navWhy: "لماذا ستورا ستور؟",
         navTerms: "الشروط والأحكام",
         navShipping: "سياسة الشحن",
+        navPayment: "سياسة الدفع (كاش، انستاباي، محافظ)",
         navReturns: "الاستبدال والاسترجاع",
         cartBtn: "السلة",
         langBtn: "🌐 En",
@@ -796,6 +797,7 @@
         navWhy: "Why Stora Store?",
         navTerms: "Terms & Conditions",
         navShipping: "Shipping Policy",
+        navPayment: "Payment Policy (Cash, InstaPay, Wallets)",
         navReturns: "Return Policy",
         cartBtn: "Cart",
         langBtn: "🌐 عربي",
@@ -872,6 +874,10 @@
         ar: "نقدم خدمة الشحن والتوصيل الفوري لحد باب البيت لكافة محافظات الجمهورية.\n\nتختلف تكلفة وسرعة الشحن حسب المحافظة، ويتم التنسيق الكامل مع العملاء قبل خروج الشحنة.",
         en: "We offer immediate shipping and door-to-door delivery to all governorates.\n\nShipping cost and speed vary by governorate, fully coordinated before shipment."
       },
+      paymentText: {
+        ar: "طرق الدفع المتاحة في ستورا ستور:\n• الدفع نقداً عند الاستلام (كاش).\n• التحويل اللحظي عبر انستاباي (InstaPay).\n• التحويل عبر المحافظ الإلكترونية المعتمدة.",
+        en: "Available payment methods at Stora Store:\n• Cash on Delivery.\n• InstaPay Instant Transfer.\n• Approved E-Wallets."
+      },
       returnText: {
         ar: "1. يحق للعميل استبدال أو استرجاع المنتج خلال 14 يوم من تاريخ الاستلام بشرط أن يكون بحالته الأصلية.\n2. يتم معاينة المنتج من قبل الفنيين قبل قبول الاسترجاع.\n3. تكلفة الشحن الخاصة بالاستبدال تتحملها الشركة في حال وجود عيب صناعة.",
         en: "1. The customer may exchange or return the product within 14 days in original condition.\n2. Product is inspected by technicians prior to return acceptance.\n3. Exchange shipping cost is covered by the company in case of manufacturing defects."
@@ -920,6 +926,7 @@
       document.getElementById('menuWhy').innerText = "⭐ " + t.navWhy;
       document.getElementById('menuTerms').innerText = "📄 " + t.navTerms;
       document.getElementById('menuShipping').innerText = "🚚 " + t.navShipping;
+      document.getElementById('menuPayment').innerText = "💳 " + t.navPayment;
       document.getElementById('menuReturns').innerText = "📦 " + t.navReturns;
 
       document.getElementById('cartHeaderTitle').innerText = t.cartHeaderTitle;
@@ -945,6 +952,7 @@
       document.getElementById('fServ2').innerText = t.navWhy;
       document.getElementById('fServ3').innerText = t.navTerms;
       document.getElementById('fServ4').innerText = t.navShipping;
+      document.getElementById('fServPayment').innerText = t.navPayment;
       document.getElementById('fServ5').innerText = t.navReturns;
       document.getElementById('fShop1').innerText = t.navHome;
       document.getElementById('fShop2').innerText = t.navCatsTab;
@@ -1132,7 +1140,12 @@
 
     db.collection("stora_store_products").onSnapshot((snapshot) => {
       allProducts = [];
-      snapshot.forEach((doc) => { allProducts.push(doc.data()); });
+      snapshot.forEach((doc) => { 
+        let data = doc.data();
+        if(!data.createdAt) data.createdAt = 0;
+        allProducts.push(data); 
+      });
+      allProducts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
       updateCategoryThumbnails();
       renderProducts();
     });
@@ -1305,6 +1318,10 @@
       let rawSpecs = currentLang === 'ar' ? (p.specsAr || p.specs || 'خامات عالية المتانة، مقاومة تامة للمياه والرطوبة.') : (p.specsEn || p.specs || 'High durability materials, fully resistant to water and moisture.');
       let displaySpecs = formatSpecsToList(rawSpecs);
 
+      let discountDisplayHtml = p.discount ? `
+        <span id="modalOldPrice" style="font-size:0.9rem; font-weight:800; color:#dc2626; text-decoration:line-through;">${formatPrice(basePrice)}</span>
+      ` : `<span id="modalOldPrice" style="display:none;"></span>`;
+
       container.innerHTML = `
         <button onclick="closeProductModal()" style="position:absolute; top:12px; left:12px; background:none; border:none; font-size:1.4rem; cursor:pointer;">&times;</button>
         <div class="modal-img-col">
@@ -1314,13 +1331,13 @@
         <div class="modal-info-col">
           <h2 style="font-size:1.05rem; font-weight:900; color:var(--primary);">${displayTitle}</h2>
           <div style="display:flex; align-items:center; gap:8px;">
-            ${p.discount ? `<span style="font-size:0.9rem; font-weight:800; color:#dc2626; text-decoration:line-through;">${formatPrice(basePrice)}</span>` : ''}
+            ${discountDisplayHtml}
             <span style="font-size:1.2rem; font-weight:900; color:#059669;"><span id="modalPrice">${formatPrice(finalPrice)}</span></span>
           </div>
           <p style="font-size:0.72rem; color:#dc2626; background:#fef2f2; padding:5px; border-radius:6px; font-weight:800;">${currentLang === 'ar' ? `⚠️ متبقي ${randomStock} قطع فقط - سارع بالحجز!` : `⚠️ Only ${randomStock} pieces left - Hurry up!`}</p>
           <div style="font-size:0.82rem; font-weight:800; margin-top:4px;">${currentLang === 'ar' ? 'المواصفات الفنية الخاصة:' : 'Technical Specifications:'}</div>
           <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.4; text-align: right;" dir="${currentLang==='ar'?'rtl':'ltr'}">${displaySpecs}</div>
-          ${sizes.length > 1 ? `<div style="margin-top:6px;"><p style="font-size:0.82rem; font-weight:800; margin-bottom:4px;">${currentLang === 'ar' ? 'اختر المقاس المطلوب:' : 'Select Required Size:'}</p><div style="display:flex; gap:6px; flex-wrap:wrap;">${sizesHtml}</div></div>` : ''}
+          ${sizes.length > 1 ? `<div style="margin-top:6px;"><p style="font-size:0.82rem; font-weight:800; margin-bottom:4px;">${currentLang === 'ar' ? 'اختر المقاس المطلوب:' : 'Select Required Size:'}</p><div style="display:flex; gap:6px; flex-wrap:wrap;" id="modalSizesContainer">${sizesHtml}</div></div>` : ''}
           <div style="display:flex; align-items:center; gap:10px; margin-top:8px;">
             <span style="font-size:0.82rem; font-weight:800;">${currentLang === 'ar' ? 'الكمية المطلوبة:' : 'Quantity:'}</span>
             <div style="display:flex; align-items:center; border:1px solid var(--border); border-radius:6px; overflow:hidden;">
@@ -1340,8 +1357,18 @@
       document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById('modalMainImg').src = sizeObj.image || currentModalProduct.image;
-      let finalP = discountPct ? Math.round(sizeObj.price * (1 - discountPct / 100)) : sizeObj.price;
+      
+      let baseP = sizeObj.price;
+      let finalP = discountPct ? Math.round(baseP * (1 - discountPct / 100)) : baseP;
+      
       document.getElementById('modalPrice').innerText = formatPrice(finalP);
+      let oldPriceEl = document.getElementById('modalOldPrice');
+      if (discountPct && discountPct > 0) {
+        oldPriceEl.innerText = formatPrice(baseP);
+        oldPriceEl.style.display = 'inline';
+      } else {
+        oldPriceEl.style.display = 'none';
+      }
     }
 
     function changeQty(val) {
