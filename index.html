@@ -322,7 +322,6 @@
     .product-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 4000; display: none; align-items: center; justify-content: center; padding: 12px; }
     .product-modal-content { background: #fff; width: 100%; max-width: 750px; border-radius: 14px; padding: 20px; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; flex-wrap: wrap; gap: 15px; position: relative; }
     
-    /* ضبط نسب عرض الصور بدون تكبير مبالغ فيه (object-fit: contain مع تقليل الزوم) */
     .modal-img-col { flex: 1; min-width: 240px; display: flex; flex-direction: column; gap: 8px; }
     .modal-main-img { width: 100%; height: 230px; object-fit: contain; border-radius: 8px; border: 1px solid var(--border); background: #f8fafc; padding: 5px; }
     .sub-imgs-row { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
@@ -332,6 +331,37 @@
     .modal-info-col { flex: 1.2; min-width: 250px; display: flex; flex-direction: column; gap: 8px; }
     .size-btn { border: 2px solid var(--border); background: #fff; padding: 5px 12px; border-radius: 6px; font-weight: 800; font-size: 0.78rem; cursor: pointer; }
     .size-btn.active { border-color: var(--primary); background: var(--primary); color: #fff; }
+
+    /* تنسيقات قسم منتجات ذات صلة الجديد */
+    .related-products-section {
+      margin-top: 15px;
+      padding-top: 12px;
+      border-top: 2px solid var(--border);
+      width: 100%;
+    }
+    .related-products-grid {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-top: 6px;
+    }
+    .related-card {
+      min-width: 110px;
+      max-width: 110px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px;
+      text-align: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .related-card:hover { transform: translateY(-2px); border-color: var(--gold); }
+    .related-card img { width: 100%; height: 75px; object-fit: contain; border-radius: 4px; background: #fff; }
+    .related-card h5 { font-size: 0.7rem; font-weight: 800; color: var(--primary); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .related-card p { font-size: 0.65rem; color: #059669; font-weight: 900; }
 
     .catalog-container { max-width: 1400px; margin: 20px auto; padding: 0 15px; width: 100%; }
     .section-title-wrap { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
@@ -365,7 +395,6 @@
     [dir="rtl"] .badge-status-pill { right: 10px; }
     [dir="ltr"] .badge-status-pill { left: 10px; }
     
-    /* ضبط حاوية الصورة الرئيسية في الكارت لتكون مريحة وبدون زوم مبالغ فيه */
     .card-img-wrap { width: 100%; height: 190px; background: #f8fafc; position: relative; overflow: hidden; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 10px; }
     .card-img-wrap img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s; }
     .card-img-wrap:hover img { transform: scale(1.02); }
@@ -549,7 +578,7 @@
       <div class="side-menu-item" onclick="goHome(event)" id="menuHome">🏠 الرئيسية</div>
       <div class="side-menu-item" onclick="toggleSubMenu(event)"><span id="menuCats">📂 الأقسام</span> <span>▼</span></div>
       <div class="sub-menu-dropdown" id="subMenuDropdown">
-        <div class="sub-menu-item" onclick="selectSubMenu('وحدات حمام')">🗄️️ وحدات الحمام</div>
+        <div class="sub-menu-item" onclick="selectSubMenu('وحدات حمام')">🗄 وحدات الحمام</div>
         <div class="sub-menu-item" onclick="selectSubMenu('أحواض ديكور')">✨ أحواض ديكور</div>
         <div class="sub-menu-item" onclick="selectSubMenu('أحواض بورسلين')">🍽 أحواض بورسلين</div>
         <div class="sub-menu-item" onclick="selectSubMenu('كبائن شاور')">🚿 كبائن شاور</div>
@@ -1322,6 +1351,40 @@
         <span id="modalOldPrice" style="font-size:0.9rem; font-weight:800; color:#dc2626; text-decoration:line-through;">${formatPrice(basePrice)}</span>
       ` : `<span id="modalOldPrice" style="display:none;"></span>`;
 
+      // منطق جلب منتجات ذات صلة الذكي بناءً على الـ area
+      let relatedHtml = '';
+      let relatedProducts = allProducts.filter(item => {
+        if (item.id === p.id) return false;
+        
+        let currentArea = p.area || (p.category === 'أحواض ستانلس' ? 'kitchen' : 'bathroom');
+        let itemArea = item.area || (item.category === 'أحواض ستانلس' ? 'kitchen' : 'bathroom');
+
+        if (currentArea === 'kitchen') {
+          return itemArea === 'kitchen' || itemArea === 'both';
+        } else if (currentArea === 'bathroom') {
+          return itemArea === 'bathroom' || itemArea === 'both';
+        } else {
+          return true;
+        }
+      });
+
+      if (relatedProducts.length > 0) {
+        let cardsList = relatedProducts.slice(0, 5).map(rp => `
+          <div class="related-card" onclick="openProductModal('${rp.id}')">
+            <img src="${rp.image}" alt="">
+            <h5>${currentLang === 'en' ? (rp.titleEn || rp.title) : (rp.titleAr || rp.title)}</h5>
+            <p>${formatPrice(rp.price)}</p>
+          </div>
+        `).join('');
+
+        relatedHtml = `
+          <div class="related-products-section">
+            <h4 style="font-size:0.85rem; font-weight:900; color:var(--primary);">${currentLang === 'ar' ? '🔗 منتجات ذات صلة قد تعجبك:' : '🔗 Related Products:'}</h4>
+            <div class="related-products-grid">${cardsList}</div>
+          </div>
+        `;
+      }
+
       container.innerHTML = `
         <button onclick="closeProductModal()" style="position:absolute; top:12px; left:12px; background:none; border:none; font-size:1.4rem; cursor:pointer;">&times;</button>
         <div class="modal-img-col">
@@ -1347,6 +1410,7 @@
             </div>
           </div>
           <button onclick="addCurrentToCart(${p.discount || 0})" style="background:var(--primary); color:#fff; border:none; padding:10px; border-radius:8px; font-weight:900; margin-top:8px; cursor:pointer;">🛒 ${currentLang === 'ar' ? 'أضف للسلة' : 'Add to Cart'}</button>
+          ${relatedHtml}
         </div>
       `;
       modal.style.display = 'flex';
