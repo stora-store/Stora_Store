@@ -1,110 +1,368 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" id="htmlRoot">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- وسوم التحسين لمُحركات البحث (SEO) -->
-  <title id="pageTitle">ستورا ستور | أفضل خلاطات ومستلزمات المطابخ والحمامات في مصر</title>
-  <meta name="description" content="تسوق أحدث خلاطات المطابخ والحمامات والإكسسوارات بضمان وأفضل الأسعار في مصر. تصفح تشكيلة واسعة من المنتجات عالية الجودة لدى ستورا ستور.">
-  <meta name="keywords" content="خلاطات مطبخ, خلاطات حمام, ستورا ستور, مستلزمات تشطيب, خلاطات مياه في مصر">
-  <link rel="canonical" href="https://storastore.net/">
-
-  <!-- Open Graph للمشاركة على السوشيال ميديا -->
-  <meta property="og:title" content="ستورا ستور | أفضل خلاطات ومستلزمات المطابخ والحمامات">
-  <meta property="og:description" content="اكتشف تشكيلة مميزة من خلاطات المطابخ والحمامات بأعلى جودة وأفضل الأسعار.">
-  <meta property="og:url" content="https://storastore.net/">
-  <meta property="og:type" content="website">
-
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="manifest" href="manifest.json">
-  
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-
-  <style>
-    :root {
-      --primary: #111827;
-      --gold: #c59b27;
-      --gold-dark: #9e791b;
-      --gold-light: #fef9ed;
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --text: #1e293b;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-      --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    html, body {
-      background-color: var(--bg);
-      color: var(--text);
-      padding-bottom: 50px;
-      max-width: 100%;
-      overflow-x: hidden;
-    }
+    <!-- وسوم التحسين لمُحركات البحث (SEO) -->
+    <title>ستورا ستور | أفضل خلاطات ومستلزمات المطابخ والحمامات في مصر</title>
+    <meta name="description" content="تسوق أحدث خلاطات المطابخ والحمامات والإكسسوارات بضمان وأفضل الأسعار في مصر. تصفح تشكيلة واسعة من المنتجات عالية الجودة لدى ستورا ستور.">
+    <meta name="keywords" content="خلاطات مطبخ, خلاطات حمام, ستورا ستور, مستلزمات تشطيب, خلاطات مياه في مصر">
+    <link rel="canonical" href="https://storastore.net/">
 
-    [dir="ltr"] body { text-align: left; }
-    [dir="rtl"] body { text-align: right; }
+    <!-- Open Graph للمشاركة على السوشيال ميديا -->
+    <meta property="og:title" content="ستورا ستور | أفضل خلاطات ومستلزمات المطابخ والحمامات">
+    <meta property="og:description" content="اكتشف تشكيلة مميزة من خلاطات المطابخ والحمامات بأعلى جودة وأفضل الأسعار.">
+    <meta property="og:url" content="https://storastore.net/">
+    <meta property="og:type" content="website">
 
-    img { -webkit-user-drag: none; user-select: none; pointer-events: auto; }
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
-    .red-announcement-bar {
-      background: #dc2626; color: #fff; font-size: 0.78rem; font-weight: 900;
-      padding: 6px 10px; text-align: center; overflow: hidden; white-space: nowrap; width: 100%; display: none;
-    }
-    .red-announcement-bar span { display: inline-block; animation: marquee 16s linear infinite; }
-    @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --white: #ffffff;
+            --gray: #e0e0e0;
+        }
 
-    .top-bar {
-      background: #0b0f19; color: #cbd5e1; font-size: 0.75rem; padding: 6px 15px;
-      text-align: center; border-bottom: 1px solid rgba(197, 155, 39, 0.3); font-weight: 700;
-      display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
 
-    .install-app-btn {
-      background: var(--gold); color: #111827; border: none; padding: 3px 10px; border-radius: 12px;
-      font-weight: 900; font-size: 0.7rem; cursor: pointer; display: none; align-items: center; gap: 4px;
-      box-shadow: 0 2px 8px rgba(197, 155, 39, 0.4); transition: transform 0.2s;
-    }
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+        }
 
-    header {
-      background: #ffffff; box-shadow: 0 2px 15px rgba(0,0,0,0.04); position: sticky; top: 0; z-index: 100;
-      display: flex; flex-direction: column; padding: 10px 15px; gap: 10px; width: 100%;
-    }
-    .header-main-row { display: flex; justify-content: space-between; align-items: center; width: 100%; gap: 10px; }
-    .menu-toggle-btn { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--primary); padding: 4px; }
-    
-    .logo-box { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
-    .logo-img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
-    .brand-text-col { display: flex; flex-direction: column; justify-content: center; gap: 1px; }
-    .brand-title { font-size: 0.95rem; font-weight: 900; color: var(--primary); line-height: 1.2; }
-    .brand-sub { font-size: 0.95rem; color: var(--gold); font-weight: 900; letter-spacing: 0.5px; line-height: 1.2; }
-    
-    .header-search-box { width: 100%; position: relative; }
-    .header-search-box input {
-      width: 100%; padding: 7px 14px; border: 2px solid var(--border); border-radius: 20px; font-size: 0.82rem; outline: none; font-family: 'Cairo';
-    }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
 
-    .header-actions { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
-    .cart-btn-top, .lang-btn-top { background: var(--primary); color: #fff; border: none; padding: 5px 10px; border-radius: 15px; font-weight: 800; font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; gap: 4px; }
-    .lang-btn-top { background: var(--gold); color: #111827; }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
 
-    .catalog-container { max-width: 1400px; margin: 20px auto; padding: 0 15px; width: 100%; }
-    .section-title-wrap { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-right: 4px solid var(--gold); padding-right: 10px; }
-    .section-title { font-size: 1.2rem; font-weight: 900; color: var(--primary); }
-    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 15px; width: 100%; }
+        /* تصفية الأقسام */
+        .categories-filter {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
 
-    .card {
-      background: var(--card-bg); border-radius: 14px; border: 1.5px solid var(--border);
-      overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow); position: relative;
-    }
-    .card-img-wrap { width: 100%; height: 190px; background: #f8fafc; position: relative; overflow: hidden; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 10px; }
-    .card-img-wrap img { width: 100%; height: 100%; object-fit: contain; }
-    .card-body { padding: 12px; display: flex; flex-direction: column; flex-grow: 1; }
-    .product-title { font-size: 0.92rem; font-weight: 900; color: var(--primary); margin-bottom: 4px; }
-    .product-id { font-size: 0.72rem; color: #9e791b; font-weight: 800; margin-bottom: 8px; }
-    .card-price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 10px; border-top: 1px solid var(--border); }
-    .price-value-green { font-size: 1.1rem; font-weight: 900; color: #059669; }
-    .
+        .filter-btn {
+            background-color: var(--white);
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--accent-color);
+            color: var(--white);
+        }
+
+        /* شبكة المنتجات */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: var(--gray);
+        }
+
+        .product-info {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+        }
+
+        .product-price {
+            color: #e74c3c;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-area-badge {
+            display: inline-block;
+            background: #eef2f7;
+            color: var(--primary-color);
+            padding: 4px 10px;
+            font-size: 12px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            align-self: flex-start;
+        }
+
+        .details-btn {
+            background-color: var(--accent-color);
+            color: var(--white);
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            margin-top: auto;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .details-btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* نافذة التفاصيل والمنتجات ذات الصلة */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close-modal {
+            float: left;
+            font-size: 24px;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+
+        .related-section {
+            margin-top: 30px;
+            border-top: 1px solid var(--gray);
+            padding-top: 20px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .related-card {
+            background: var(--bg-color);
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .related-card img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>ستورا ستور - Stora Store</h1>
+    </header>
+
+    <div class="container">
+        <!-- أزرار التصنيف الفوري -->
+        <div class="categories-filter">
+            <button class="filter-btn active" onclick="filterProducts('all')">الكل</button>
+            <button class="filter-btn" onclick="filterProducts('Kitchen')">مطبخ</button>
+            <button class="filter-btn" onclick="filterProducts('Bathroom')">حمام</button>
+            <button class="filter-btn" onclick="filterProducts('Both')">كلاهما</button>
+        </div>
+
+        <!-- عرض المنتجات -->
+        <div id="productsGrid" class="products-grid">
+            <!-- يتم تحميل المنتجات ديناميكياً عبر الجافاسكريبت -->
+        </div>
+    </div>
+
+    <!-- نافذة تفاصيل المنتج -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+            
+            <div class="related-section">
+                <h3>منتجات ذات صلة بنفس القسم:</h3>
+                <div id="relatedGrid" class="related-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // إعدادات اتصال فايربيس الخاصة بمتجرك
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        let allProducts = [];
+        let currentFilter = 'all';
+
+        async function loadProducts() {
+            try {
+                const snapshot = await db.collection("products").get();
+                allProducts = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderProducts(allProducts);
+            } catch (error) {
+                console.error("خطأ في جلب المنتجات: ", error);
+            }
+        }
+
+        function renderProducts(products) {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+
+            const filtered = currentFilter === 'all' 
+                ? products 
+                : products.filter(p => p.pArea === currentFilter);
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '<p style="text-align:center; grid-column:1/-1;">لا توجد منتجات في هذا القسم حالياً.</p>';
+                return;
+            }
+
+            filtered.forEach(product => {
+                const areaText = product.pArea === 'Kitchen' ? 'مطبخ' : product.pArea === 'Bathroom' ? 'حمام' : product.pArea === 'Both' ? 'مطبخ وحمام' : 'غير مصنف';
+                
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${product.imageUrl || 'https://via.placeholder.com/260'}" alt="${product.name}" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-price">${product.price} ج.م</div>
+                        <span class="product-area-badge">${areaText}</span>
+                        <button class="details-btn" onclick="openProductModal('${product.id}')">عرض التفاصيل</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterProducts(area) {
+            currentFilter = area;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderProducts(allProducts);
+        }
+
+        function openProductModal(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) return;
+
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <h2>${product.name}</h2>
+                <img src="${product.imageUrl}" style="max-width:100%; height:250px; object-fit:contain; margin-bottom:15px;">
+                <p><strong>السعر:</strong> ${product.price} ج.م</p>
+                <p><strong>الوصف:</strong> ${product.description || 'لا يوجد وصف متاح.'}</p>
+            `;
+
+            // عرض المنتجات ذات الصلة بناءً على pArea
+            const relatedGrid = document.getElementById('relatedGrid');
+            relatedGrid.innerHTML = '';
+
+            const related = allProducts.filter(p => p.pArea === product.pArea && p.id !== product.id).slice(0, 4);
+            
+            if (related.length > 0) {
+                related.forEach(rel => {
+                    const relCard = document.createElement('div');
+                    relCard.className = 'related-card';
+                    relCard.onclick = () => openProductModal(rel.id);
+                    relCard.innerHTML = `
+                        <img src="${rel.imageUrl || 'https://via.placeholder.com/150'}" alt="${rel.name}">
+                        <p style="font-size:12px; margin:5px 0 0 0; font-weight:bold;">${rel.name}</p>
+                    `;
+                    relatedGrid.appendChild(relCard);
+                });
+            } else {
+                relatedGrid.innerHTML = '<p style="font-size:14px; color:#7f8c8d;">لا توجد منتجات مرتبطة في نفس القسم حالياً.</p>';
+            }
+
+            document.getElementById('productModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('productModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        loadProducts();
+    </script>
+</body>
+</html>
