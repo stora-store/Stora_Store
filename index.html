@@ -1319,8 +1319,7 @@
           <div class="card">
             ${discountRibbon}
             ${statusPill}
-            <div class="card-img-wrap" onclick='openProductModal("${p.id}")'><img src="${p.image || 'https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png'}" alt=""></div>
-            <div class="card-body">
+<div class="card-img-wrap" onclick='openProductModal("${p.id}")'><img src="${optimizeCloudinaryUrl(p.image) || 'https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png'}" alt=""></div>            <div class="card-body">
               <h3 class="product-title">${displayTitle}</h3>
               <div class="product-id">ID: ${p.id}</div>
               <div class="card-price-row">
