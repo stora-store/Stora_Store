@@ -765,7 +765,10 @@
 
     if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
     const db = firebase.firestore();
-
+    function optimizeCloudinaryUrl(url) {
+      if (!url || !url.includes('res.cloudinary.com')) return url;
+      return url.replace('/upload/', '/upload/f_auto,q_auto,w_500/');
+    }
     let allProducts = [];
     let currentFilter = 'الأكثر مبيعا';
     let currentSubFilter = 'all';
