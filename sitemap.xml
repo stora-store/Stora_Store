@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- الصفحة الرئيسية لمتجرك -->
+  <url>
+    <loc>https://storastore.net/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- صفحة لوحة التحكم أو صفحات أخرى هامة إن وجدت -->
+  <url>
+    <loc>https://storastore.net/admin.html</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- يمكنك إضافة منتجاتك هنا بنفس الطريقة مستقبلاً -->
+  <!-- 
+  <url>
+    <loc>https://storastore.net/product.html?id=1</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  -->
+</urlset>
