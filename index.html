@@ -256,8 +256,10 @@
     }
     .cat-item:hover { transform: translateY(-3px); border-color: var(--gold); }
     
+    /* تثبيت أبعاد الأيقونات لتكون 70 × 70 بكسل بدقة */
     .cat-circle {
-      width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--border); overflow: hidden;
+      width: 70px !important; height: 70px !important; min-width: 70px !important; min-height: 70px !important;
+      border-radius: 50%; border: 2px solid var(--border); overflow: hidden;
       display: flex; align-items: center; justify-content: center; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       transition: all 0.2s;
     }
@@ -435,7 +437,20 @@
     [dir="rtl"] .badge-status-pill { right: 10px; }
     [dir="ltr"] .badge-status-pill { left: 10px; }
     
-    .card-img-wrap { width: 100%; height: 190px; background: #f8fafc; position: relative; overflow: hidden; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 10px; }
+    /* تثبيت أبعاد صور المنتجات لتكون 298 × 298 بكسل بدقة مع الحفاظ على تناسب الصور المستطيلة */
+    .card-img-wrap { 
+      width: 100% !important; 
+      height: 298px !important; 
+      min-height: 298px !important; 
+      background: #f8fafc; 
+      position: relative; 
+      overflow: hidden; 
+      cursor: pointer; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      padding: 10px; 
+    }
     .card-img-wrap img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s; }
     .card-img-wrap:hover img { transform: scale(1.02); }
     
@@ -1319,7 +1334,8 @@
           <div class="card">
             ${discountRibbon}
             ${statusPill}
-<div class="card-img-wrap" onclick='openProductModal("${p.id}")'><img src="${optimizeCloudinaryUrl(p.image) || 'https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png'}" alt=""></div>            <div class="card-body">
+            <div class="card-img-wrap" onclick='openProductModal("${p.id}")'><img src="${optimizeCloudinaryUrl(p.image) || 'https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png'}" alt=""></div>
+            <div class="card-body">
               <h3 class="product-title">${displayTitle}</h3>
               <div class="product-id">ID: ${p.id}</div>
               <div class="card-price-row">
@@ -1393,7 +1409,6 @@
         <span id="modalOldPrice" style="font-size:0.9rem; font-weight:800; color:#dc2626; text-decoration:line-through;">${formatPrice(basePrice)}</span>
       ` : `<span id="modalOldPrice" style="display:none;"></span>`;
 
-      // منطق جلب منتجات ذات صلة الذكي بناءً على الـ area
       let relatedHtml = '';
       let relatedProducts = allProducts.filter(item => {
         if (item.id === p.id) return false;
@@ -1563,7 +1578,6 @@
     };
   </script>
   <script>
-    // كود تحميل وتشغيل الفيديو بذكاء عندما يظهر على الشاشة
     document.addEventListener("DOMContentLoaded", function() {
       const video = document.getElementById("heroVideo");
       if (!video) return;
@@ -1583,7 +1597,5 @@
       observer.observe(video);
     });
   </script>
-  
 </body>
-  
 </html>
