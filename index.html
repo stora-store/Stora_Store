@@ -10,6 +10,12 @@
   <meta name="keywords" content="خلاطات مطبخ, خلاطات حمام, ستورا ستور, مستلزمات تشطيب, خلاطات مياه في مصر">
   <link rel="canonical" href="https://storastore.net/">
 
+  <!-- تحسين سرعة التحميل الأولي (Preconnect & DNS Prefetch) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://res.cloudinary.com">
+  <link rel="preconnect" href="https://www.gstatic.com">
+
   <!-- Open Graph للمشاركة على السوشيال ميديا -->
   <meta property="og:title" content="ستورا ستور | أفضل خلاطات ومستلزمات المطابخ والحمامات">
   <meta property="og:description" content="اكتشف تشكيلة مميزة من خلاطات المطابخ والحمامات بأعلى جودة وأفضل الأسعار.">
@@ -41,7 +47,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-6CMZ6GYSQP');
   </script>
 
@@ -49,8 +54,8 @@
   
   <link rel="manifest" href="manifest.json">
   
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js" defer></script>
 
   <style>
     :root {
@@ -149,9 +154,8 @@
     
     .banner-logo-img {
       width: 130px; height: 130px; object-fit: contain; filter: drop-shadow(0 6px 20px rgba(0,0,0,0.9));
-      margin-bottom: 4px; animation: fadeInLogo 1.2s ease-in-out;
+      margin-bottom: 4px;
     }
-    @keyframes fadeInLogo { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
 
     .banner-title-luxury {
       font-size: 2.1rem; font-weight: 900; color: #fef9ed; text-shadow: 0 4px 15px rgba(0,0,0,0.95);
@@ -164,13 +168,6 @@
     .banner-fade-text {
       font-size: 1rem; font-weight: 800; color: #ffffff; text-shadow: 0 2px 8px rgba(0,0,0,0.95);
       letter-spacing: 0.4px; line-height: 1.4; background: rgba(0, 0, 0, 0.65); padding: 8px 20px; border-radius: 10px; width: fit-content;
-      animation: fadeInOut 5s infinite;
-    }
-    @keyframes fadeInOut {
-      0% { opacity: 0; transform: translateY(10px); }
-      20% { opacity: 1; transform: translateY(0); }
-      80% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(-10px); }
     }
 
     .banner-shop-btn {
@@ -219,16 +216,10 @@
       font-weight: 900;
       font-size: 1.1rem;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-      animation: bounce-arrow 1.5s infinite;
       pointer-events: none;
       z-index: 10;
     }
     [dir="ltr"] .scrollable-container-wrapper::after { content: "›"; left: auto; right: 6px; }
-
-    @keyframes bounce-arrow {
-      0%, 100% { transform: translateY(-50%) translateX(0); }
-      50% { transform: translateY(-50%) translateX(-4px); }
-    }
 
     .normal-frame-group {
       background: #ffffff;
@@ -311,7 +302,7 @@
 
     .side-menu-drawer {
       position: fixed; top: 0; width: 100%; max-width: 280px; height: 100vh;
-      background: white; box-shadow: -4px 0 25px rgba(0,0,0,0.18); z-index: 3000; display: flex; flex-direction: column; transition: all 0.3s;
+      background: white; box-shadow: -4px 0 25px rgba(0,0,0,0.18); z-index: 3000; display: flex; flex-direction: column; transition: transform 0.3s ease;
     }
     [dir="rtl"] .side-menu-drawer { right: -300px; }
     [dir="rtl"] .side-menu-drawer.open { right: 0; }
@@ -341,7 +332,7 @@
 
     .cart-drawer {
       position: fixed; top: 0; width: 100%; max-width: 320px; height: 100vh;
-      background: white; box-shadow: 4px 0 25px rgba(0,0,0,0.18); z-index: 3500; display: flex; flex-direction: column; transition: all 0.3s;
+      background: white; box-shadow: 4px 0 25px rgba(0,0,0,0.18); z-index: 3500; display: flex; flex-direction: column; transition: transform 0.3s ease;
     }
     [dir="rtl"] .cart-drawer { left: -330px; }
     [dir="rtl"] .cart-drawer.open { left: 0; }
@@ -557,7 +548,7 @@
       <div style="display: flex; align-items: center; gap: 8px;">
         <button class="menu-toggle-btn" onclick="toggleSideMenu()">☰</button>
         <a class="logo-box" href="#" onclick="goHome(event)">
-          <img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt="Logo" class="logo-img">
+          <img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt="Logo" class="logo-img" fetchpriority="high" loading="eager">
           <div class="brand-text-col">
             <h1 class="brand-title" id="brandTitle">ستورا ستور</h1>
             <span class="brand-sub" id="brandSub">STORA STORE</span>
@@ -578,11 +569,11 @@
 
   <section class="hero-banner-wrap">
     <div class="banner-card">
-<video id="heroVideo" muted loop playsinline preload="none" poster="https://res.cloudinary.com/rh20s5aa/video/upload/so_0/v1790692766/Stora_Paner.jpg">
-  <source src="https://github.com/stora-store/Stora_Store/raw/main/intro/Stora_Paner.mp4">
-</video>
+      <video id="heroVideo" muted loop playsinline preload="none" poster="https://res.cloudinary.com/rh20s5aa/video/upload/so_0/v1790692766/Stora_Paner.jpg">
+        <source src="https://github.com/stora-store/Stora_Store/raw/main/intro/Stora_Paner.mp4" type="video/mp4">
+      </video>
       <div class="banner-content">
-        <img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt="Logo" class="banner-logo-img">
+        <img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt="Logo" class="banner-logo-img" loading="lazy">
         <h2 class="banner-title-luxury" id="bannerTitle">الفخامة… بلا حدود</h2>
         <div class="banner-typing-container">
           <div class="banner-fade-text" id="bannerSubtitle">✨ اكتشف تشكيلتنا المختارة بعناية من أحدث تجهيزات الحمامات والمطابخ العصرية الفاخرة ✨</div>
@@ -594,21 +585,21 @@
 
   <div class="categories-bar-wrapper">
     <div class="highlight-frame-group">
-      <div class="cat-item highlight-cat active" onclick="filterCategory('الأكثر مبيعا', this)"><div class="cat-circle"><img id="catImg_best" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="الأكثر مبيعا">الأكثر مبيعاً ⭐</span></div>
-      <div class="cat-item highlight-cat" onclick="filterCategory('جديد', this)"><div class="cat-circle"><img id="catImg_new" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="جديد">وصل حديثاً ✨</span></div>
+      <div class="cat-item highlight-cat active" onclick="filterCategory('الأكثر مبيعا', this)"><div class="cat-circle"><img id="catImg_best" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt="" loading="lazy"></div><span class="cat-name" data-cat="الأكثر مبيعا">الأكثر مبيعاً ⭐</span></div>
+      <div class="cat-item highlight-cat" onclick="filterCategory('جديد', this)"><div class="cat-circle"><img id="catImg_new" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt="" loading="lazy"></div><span class="cat-name" data-cat="جديد">وصل حديثاً ✨</span></div>
     </div>
 
     <div class="scrollable-container-wrapper">
       <div class="normal-frame-group">
-        <div class="cat-item" onclick="filterCategory('وحدات حمام', this)"><div class="cat-circle"><img id="catImg_وحدات حمام" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="وحدات حمام">وحدات الحمام</span></div>
-        <div class="cat-item" onclick="filterCategory('أحواض ديكور', this)"><div class="cat-circle"><img id="catImg_أحواض ديكور" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="أحواض ديكور">أحواض ديكور</span></div>
-        <div class="cat-item" onclick="filterCategory('أحواض بورسلين', this)"><div class="cat-circle"><img id="catImg_أحواض بورسلين" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="أحواض بورسلين">أحواض بورسلين</span></div>
-        <div class="cat-item" onclick="filterCategory('كبائن شاور', this)"><div class="cat-circle"><img id="catImg_كبائن شاور" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="كبائن شاور">كبائن شاور</span></div>
-        <div class="cat-item" onclick="filterCategory('قواعد تواليت', this)"><div class="cat-circle"><img id="catImg_قواعد تواليت" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="قواعد تواليت">قواعد تواليت</span></div>
-        <div class="cat-item" onclick="filterCategory('مرايا ليد', this)"><div class="cat-circle"><img id="catImg_مرايا ليد" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="مرايا ليد">مرايا ليد</span></div>
-        <div class="cat-item" onclick="filterCategory('خلاطات مياه', this)"><div class="cat-circle"><img id="catImg_خلاطات مياه" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="خلاطات مياه">خلاطات مياه</span></div>
-        <div class="cat-item" onclick="filterCategory('إكسسوارات', this)"><div class="cat-circle"><img id="catImg_إكسسوارات" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt=""></div><span class="cat-name" data-cat="إكسسوارات">إكسسوارات</span></div>
-        <div class="cat-item" onclick="filterCategory('أحواض ستانلس', this)"><div class="cat-circle"><img id="catImg_أحواض ستانلس" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt=""></div><span class="cat-name" data-cat="أحواض ستانلس">أحواض ستانلس</span></div>
+        <div class="cat-item" onclick="filterCategory('وحدات حمام', this)"><div class="cat-circle"><img id="catImg_وحدات حمام" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt="" loading="lazy"></div><span class="cat-name" data-cat="وحدات حمام">وحدات الحمام</span></div>
+        <div class="cat-item" onclick="filterCategory('أحواض ديكور', this)"><div class="cat-circle"><img id="catImg_أحواض ديكور" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt="" loading="lazy"></div><span class="cat-name" data-cat="أحواض ديكور">أحواض ديكور</span></div>
+        <div class="cat-item" onclick="filterCategory('أحواض بورسلين', this)"><div class="cat-circle"><img id="catImg_أحواض بورسلين" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt="" loading="lazy"></div><span class="cat-name" data-cat="أحواض بورسلين">أحواض بورسلين</span></div>
+        <div class="cat-item" onclick="filterCategory('كبائن شاور', this)"><div class="cat-circle"><img id="catImg_كبائن شاور" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt="" loading="lazy"></div><span class="cat-name" data-cat="كبائن شاور">كبائن شاور</span></div>
+        <div class="cat-item" onclick="filterCategory('قواعد تواليت', this)"><div class="cat-circle"><img id="catImg_قواعد تواليت" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt="" loading="lazy"></div><span class="cat-name" data-cat="قواعد تواليت">قواعد تواليت</span></div>
+        <div class="cat-item" onclick="filterCategory('مرايا ليد', this)"><div class="cat-circle"><img id="catImg_مرايا ليد" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt="" loading="lazy"></div><span class="cat-name" data-cat="مرايا ليد">مرايا ليد</span></div>
+        <div class="cat-item" onclick="filterCategory('خلاطات مياه', this)"><div class="cat-circle"><img id="catImg_خلاطات مياه" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt="" loading="lazy"></div><span class="cat-name" data-cat="خلاطات مياه">خلاطات مياه</span></div>
+        <div class="cat-item" onclick="filterCategory('إكسسوارات', this)"><div class="cat-circle"><img id="catImg_إكسسوارات" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png" alt="" loading="lazy"></div><span class="cat-name" data-cat="إكسسوارات">إكسسوارات</span></div>
+        <div class="cat-item" onclick="filterCategory('أحواض ستانلس', this)"><div class="cat-circle"><img id="catImg_أحواض ستانلس" src="https://res.cloudinary.com/rh20s5aa/image/upload/v1790347270/ID_UN-MB-27.png" alt="" loading="lazy"></div><span class="cat-name" data-cat="أحواض ستانلس">أحواض ستانلس</span></div>
       </div>
     </div>
   </div>
@@ -683,7 +674,7 @@
   <div class="generic-modal" id="genericModal" onclick="closeGenericModal(event)">
     <div class="generic-modal-content">
       <button onclick="document.getElementById('genericModal').style.display='none'" style="position:absolute; top:15px; left:15px; background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
-      <img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png" alt="Logo" class="generic-modal-logo">
+      <img src="https://res.cloudinary.com/rh20s5aa/image/upload/v1789581596/stora_store.png" alt="Logo" class="generic-modal-logo" loading="lazy">
       <h3 class="generic-modal-title" id="genericModalTitle">عنوان الصفحة</h3>
       <div class="generic-modal-body" id="genericModalBody">محتوى المعلومات...</div>
     </div>
@@ -766,7 +757,6 @@
     </div>
     <div class="footer-bottom" id="footerCopy">ستورا ستور™ 2026 — جميع الحقوق محفوظة</div>
   </footer>
-
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyB7XZt7O1_7K8g6m8DoJe3XTUOTsSS6aQk",
@@ -1334,7 +1324,7 @@
           <div class="card">
             ${discountRibbon}
             ${statusPill}
-            <div class="card-img-wrap" onclick='openProductModal("${p.id}")'><img src="${optimizeCloudinaryUrl(p.image) || 'https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png'}" alt=""></div>
+            <div class="card-img-wrap" onclick='openProductModal("${p.id}")'><img src="${optimizeCloudinaryUrl(p.image) || 'https://res.cloudinary.com/rh20s5aa/image/upload/v1790702423/PNG_logo.png'}" alt="" loading="lazy"></div>
             <div class="card-body">
               <h3 class="product-title">${displayTitle}</h3>
               <div class="product-id">ID: ${p.id}</div>
@@ -1393,7 +1383,7 @@
       let finalPrice = p.discount ? Math.round(basePrice * (1 - p.discount / 100)) : basePrice;
 
       let subImages = p.subImages ? p.subImages.split(',').map(s => s.trim()).filter(s => s) : [];
-      let subImgsHtml = subImages.map(imgUrl => `<img src="${imgUrl}" class="sub-thumb" onclick="document.getElementById('modalMainImg').src='${imgUrl}'" alt="">`).join('');
+      let subImgsHtml = subImages.map(imgUrl => `<img src="${imgUrl}" class="sub-thumb" onclick="document.getElementById('modalMainImg').src='${imgUrl}'" alt="" loading="lazy">`).join('');
 
       let sizesHtml = sizes.length > 1 ? sizes.map((s, idx) => `<button class="size-btn ${idx === 0 ? 'active' : ''}" onclick='selectSize(${JSON.stringify(s)}, this, ${p.discount || 0})'>${s.name}</button>`).join('') : '';
 
@@ -1428,7 +1418,7 @@
       if (relatedProducts.length > 0) {
         let cardsList = relatedProducts.slice(0, 5).map(rp => `
           <div class="related-card" onclick="openProductModal('${rp.id}')">
-            <img src="${rp.image}" alt="">
+            <img src="${rp.image}" alt="" loading="lazy">
             <h5>${currentLang === 'en' ? (rp.titleEn || rp.title) : (rp.titleAr || rp.title)}</h5>
             <p>${formatPrice(rp.price)}</p>
           </div>
@@ -1446,7 +1436,7 @@
         <button onclick="closeProductModal()" style="position:absolute; top:12px; left:12px; background:none; border:none; font-size:1.4rem; cursor:pointer;">&times;</button>
         <div class="modal-img-col">
           <img src="${selectedSizeObj.image || p.image}" class="modal-main-img" id="modalMainImg" alt="">
-          <div class="sub-imgs-row"><img src="${p.image}" class="sub-thumb" onclick="document.getElementById('modalMainImg').src='${p.image}'" alt="">${subImgsHtml}</div>
+          <div class="sub-imgs-row"><img src="${p.image}" class="sub-thumb" onclick="document.getElementById('modalMainImg').src='${p.image}'" alt="" loading="lazy">${subImgsHtml}</div>
         </div>
         <div class="modal-info-col">
           <h2 style="font-size:1.05rem; font-weight:900; color:var(--primary);">${displayTitle}</h2>
@@ -1548,7 +1538,7 @@
         totalPrice += (item.price * item.qty);
         list.innerHTML += `
           <div class="cart-item">
-            <img src="${item.image}" alt="">
+            <img src="${item.image}" alt="" loading="lazy">
             <div style="flex:1;">
               <h4 style="font-size:0.8rem; font-weight:800; color:var(--primary);">${item.title}</h4>
               <p style="font-size:0.72rem; color:var(--text-muted);">${currentLang === 'ar' ? 'الكمية' : 'Qty'}: ${item.qty} × ${formatPrice(item.price)}</p>
@@ -1592,7 +1582,7 @@
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.2 });
+      }, { threshold: 0.1 });
 
       observer.observe(video);
     });
